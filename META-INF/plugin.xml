@@ -1,14 +1,14 @@
 <!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
 <idea-plugin url="http://code.google.com/p/idea-nginx/">
 
-    <id>ideanginx</id>
-    <name>nginx Support</name>
+    <id>ideanginx9</id>
+    <name>nginx Support 9</name>
     <version>0.0.4</version>
     <vendor url="http://code.google.com/p/idea-nginx/" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
     <![CDATA[
-        nginx server support<br>
+        nginx server support for IDEA 9 (Maia)<br>
         Runs/reloads configuration/stops nginx server from IDEA.<br>
         Configuration file syntax highlighting, auto-completion and inspections.
     ]]>

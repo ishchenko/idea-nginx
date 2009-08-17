@@ -40,7 +40,7 @@ public class PlatformDependentToolsInstaller implements ApplicationComponent {
 
         ComponentConfig config = new ComponentConfig();
 
-        IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(PluginId.getId("ideanginx"));
+        IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(PluginId.getId("ideanginx9"));
 
         config.interfaceClass = PlatformDependentTools.class.getName();
         if (SystemInfo.isLinux) {
