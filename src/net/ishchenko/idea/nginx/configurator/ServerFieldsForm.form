@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="net.ishchenko.idea.nginx.configurator.ServerFieldsForm">
+  <grid id="27dc6" binding="panel" layout-manager="FormLayout">
+    <rowspec value="center:d:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="fill:max(d;4px):noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:d:grow"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none">
+      <title-color color="-16777216"/>
+    </border>
+    <children>
+      <component id="e2118" class="javax.swing.JTextField" binding="nameField">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="e14e3" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.servername"/>
+        </properties>
+      </component>
+      <component id="5ea70" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.executable"/>
+        </properties>
+      </component>
+      <component id="563ab" class="com.intellij.openapi.ui.ComponentWithBrowseButton" binding="executableField" custom-create="true">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="fdb28" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.configuration"/>
+        </properties>
+      </component>
+      <component id="7be39" class="com.intellij.openapi.ui.ComponentWithBrowseButton" binding="configurationField" custom-create="true">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="e9dd8" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.globals"/>
+        </properties>
+      </component>
+      <component id="3f7b2" class="javax.swing.JTextField" binding="globalsField">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="910a" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.pidpath"/>
+        </properties>
+      </component>
+      <component id="55197" class="com.intellij.openapi.ui.ComponentWithBrowseButton" binding="pidField" custom-create="true">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+    </children>
+  </grid>
+</form>
