@@ -1,0 +1,6 @@
+
+<p><b>syntax:</b> <i>proxy_connect_timeout timeout_in_seconds</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive assigns a timeout for the connection to the proxyserver. This is not the time until the server returns the pages, this is the  proxy_read_timeout  statement. If your proxyserver is up, but hanging (e.g. it does not have enough threads to process your request so it puts you in the pool of connections to deal with later), then this statement will not help as the connection to the server has been made. It is necessary to keep in mind that this time out cannot be more than 75 seconds.
+</p>
+<br><i>Module: NginxHttpProxyModule</i>

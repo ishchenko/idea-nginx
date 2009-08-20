@@ -1,0 +1,10 @@
+
+<p><b>syntax:</b> <i>xml_entities &lt;path&gt;</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Specifies the DTD file which describes symbolic elements (xml entities). This file is compiled at the stage of configuration. For technical reasons it's not possible to specify entities in the XML being processed, therefore they are ignored, but this specially assigned file is used instead. In this file it is not necessary to describe structure of processed XML, it is sufficient only to declare necessary symbolic elements, for example:
+</p>
+<pre>
+  &lt;! ENTITY of nbsp “&#xa0; “&gt;
+</pre>
+<br><i>Module: NginxHttpXsltModule</i>

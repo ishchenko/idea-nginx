@@ -1,0 +1,8 @@
+
+<p><b>syntax:</b> <i>msie_padding [on|off] </i>
+</p><p><b>default:</b> <i>msie_padding on</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive enables or disables the the msie_padding feature for MSIE browsers. When this is enabled nginx will pad the size of the response headers up to 512 bytes for responses with status codes of more than 400.
+This prevents activating the "friendly" http error pages feature of the relevant browsers, so as to not hide the possibly more informative error pages.
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

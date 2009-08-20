@@ -1,0 +1,53 @@
+
+<p><b>syntax:</b> <i>location [=|~|~*|^~]  /uri/ { ... }</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>server</i>
+</p><p>This directive allows different configurations depending on the URI. It can be configured using both literal strings and regular expressions. To use regular expressions, you must use the a prefix:
+</p>
+<ol><li>  <code>~*</code> for case insensitive matching
+</li><li>  <code>~</code> for case sensitive matching
+</li></ol>
+<p>To determine which <i>location</i> directive matches a particular query, the literal strings are checked first. Literal strings match the beginning portion of the query and are case-sensitive - the most specific match will be used (see below on how nginx determines this). Afterwards, regular expressions are checked in the order defined in the configuration file. The first regular expression to match the query will stop the search. If no regular expression matches are found, the result from the literal string search is used.
+</p><p>There are two ways to modify this behavior. The first is to use the prefix "=", which matches an exact query only. If the query matches, then searching stops and the request is handled immediately. For example, if the request "/" occurs frequently, then using "location = /" will expedite the processing of this request.
+</p><p>The second is to use the prefix <code>^~</code>. This prefix is used with a literal string and tells nginx to not check regular expressions if the path provided is a match. For instance, "location <code>^~</code> /images/" would halt searching if the query begins with /images/ - all regular expression directives would not be checked.
+</p><p>To summarize, the order in which directives are checked is as follows:
+</p>
+<ol><li>  Directives with the <code>=</code> prefix that match the query exactly. If found, searching stops.
+</li><li>  All remaining directives with conventional strings. If this match used the <code>^~</code> prefix, searching stops.
+</li><li>  Regular expressions, in the order they are defined in the configuration file.
+</li><li>  If #3 yielded a match, that result is used. Otherwise, the match from #2 is used.
+</li></ol>
+<p>It is important to know that nginx does the comparison against decoded URIs. For example, if you wish to match "/images/%20/test", then you must use "/images/ /test" to determine the location.
+</p><p>Example:
+</p><p></p>
+<pre class="code"><span class="kw3">location</span>  = / <span class="br0">&#123;</span>
+  <span class="co1"># matches the query / only.</span>
+  <span class="br0">&#91;</span> configuration A <span class="br0">&#93;</span>
+<span class="br0">&#125;</span>
+<span class="kw3">location</span>  / <span class="br0">&#123;</span>
+  <span class="co1"># matches any query, since all queries begin with /, but regular</span>
+  <span class="co1"># expressions and any longer conventional blocks will be</span>
+  <span class="co1"># matched first.</span>
+  <span class="br0">&#91;</span> configuration B <span class="br0">&#93;</span>
+<span class="br0">&#125;</span>
+<span class="kw3">location</span> ^~ /images/ <span class="br0">&#123;</span>
+  <span class="co1"># matches any query beginning with /images/ and halts searching,</span>
+  <span class="co1"># so regular expressions will not be checked.</span>
+  <span class="br0">&#91;</span> configuration C <span class="br0">&#93;</span>
+<span class="br0">&#125;</span>
+<span class="kw3">location</span> ~* \.<span class="br0">&#40;</span>gif|jpg|jpeg<span class="br0">&#41;</span>$ <span class="br0">&#123;</span>
+  <span class="co1"># matches any request ending in gif, jpg, or jpeg. However, all</span>
+  <span class="co1"># requests to the /images/ directory will be handled by</span>
+  <span class="co1"># Configuration C.   </span>
+  <span class="br0">&#91;</span> configuration D <span class="br0">&#93;</span>
+<span class="br0">&#125;</span></pre>
+<p>Example requests:
+</p>
+<ul><li>  / -&gt; configuration A
+</li><li> /documents/document.html -&gt; configuration B
+</li><li> /images/1.gif -&gt; configuration C
+</li><li> /documents/1.jpg -&gt; configuration D
+</li></ul>
+<p>Note that you could define these 4 configurations in any order and the results would remain the same.  While nested locations are allowed by the configuration file parser, their use is discouraged and may produce unexpected results.
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

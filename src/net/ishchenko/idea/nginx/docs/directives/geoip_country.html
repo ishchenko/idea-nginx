@@ -1,0 +1,13 @@
+
+<p><b>syntax:</b> <i>geoip_country path/to/db.dat;</i>
+</p><p><b>default:</b> none
+</p><p><b>context:</b> <i>http</i>
+</p><p>The directive indicates the path to the .dat file used for determining the visitor's country from the IP-address of the client. When set the module makes available the following variables:
+</p>
+<ul><li> $geoip_country_code; - two-letter country code, for example, "RU", "US".
+</li><li> $geoip_country_code3; - three-letter country code, for example, "RUS", "USA".
+</li><li> $geoip_country_name; - the name of the country, for example, "Russian Federation", "United States".
+</li></ul>
+<p>If you only need the country's name, you can just set the geoip_country database(1.1M), while the geoip_city database is much bigger(43M) and all the databses will be cached in memory.
+</p>
+<br><i>Module: NginxHttpGeoIPModule</i>

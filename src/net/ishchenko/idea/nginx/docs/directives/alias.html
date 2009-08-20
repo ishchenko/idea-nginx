@@ -1,0 +1,16 @@
+
+<p><b>syntax:</b> <i>alias file-path|directory-path;</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>location</i>
+</p><p>This directive assigns a path to be used for the indicated location.  Note that it may look similar to
+the <code>root</code> directive, but the document root doesn't change, just the file system path used for the request.
+</p><p>For example:
+</p><p></p>
+<pre class="code"><span class="kw3">location</span>  /i/ <span class="br0">&#123;</span>
+  <span class="kw3">alias</span>  /spool/w3/images/;
+<span class="br0">&#125;</span></pre>
+<p>The request "/i/top.gif" will return the file "/spool/w3/images/top.gif".
+</p><p>It is possible to use variables in the replacement path.
+</p><p>The <code>alias</code> directive cannot be used inside a regex-specified <code>location</code>. If you need to do this you must use a combination of <code>rewrite</code> and <code>root</code>.
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

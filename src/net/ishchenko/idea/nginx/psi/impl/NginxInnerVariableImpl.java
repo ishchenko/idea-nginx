@@ -2,9 +2,12 @@ package net.ishchenko.idea.nginx.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
 import net.ishchenko.idea.nginx.annotator.NginxElementVisitor;
 import net.ishchenko.idea.nginx.psi.NginxInnerVariable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.NonNls;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,4 +30,12 @@ public class NginxInnerVariableImpl extends NginxElementImpl implements NginxInn
         }
     }
 
+    @Override
+    public String getName() {
+        return getText().substring(1);
+    }
+
+    public PsiElement setName(@NonNls String name) throws IncorrectOperationException {
+        throw new IncorrectOperationException();
+    }
 }

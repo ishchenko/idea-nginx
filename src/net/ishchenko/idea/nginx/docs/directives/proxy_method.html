@@ -1,0 +1,12 @@
+
+<p><b>syntax:</b> <i>proxy_method [method] </i>
+</p><p><b>default:</b> <i>None</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Used to allow the proxying of additional HTTP methods.
+</p><p>Note: at this time, Nginx only appears to allow a single instance of this directive and it only accepts a single argument (method) so it's not clear how useful this might be for proxying to things like Subversion.
+</p><p>Example:
+</p><p></p>
+<pre class="code">  <span class="kw21">proxy_method</span> PROPFIND;</pre>
+<p><br />
+</p>
+<br><i>Module: NginxHttpProxyModule</i>

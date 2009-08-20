@@ -1,0 +1,51 @@
+
+<p><b>syntax:</b> <i>if (condition) { ... }</i>
+</p><p><b>default:</b> <i>none</i>
+</p><p><b>context:</b> <i>server, location</i>
+</p><p>Checks the truth of a condition.  If the condition evaluates to true, then the</p><p>They can be assigned as the condition:
+</p>
+<ul><li> the name of variable; false values are: empty string "", or any string starting with "0";
+</li><li> the comparison of variable with the line with using the <code>=</code> and <code>!=</code> operators;
+</li><li> pattern matching with regular expressions using the symbols <code>~*</code> and <code>~</code>:
+</li><li> <code>~</code> is case-sensitive match
+</li><li> <code>~*</code> specifies a case-insensitive match (firefox matches FireFox)
+</li><li> <code>!~</code> and <code>!~*</code> mean the opposite, "doesn't match"
+</li><li> checking for the existence of a file using the <code>-f</code> and <code>!-f</code> operators;
+</li><li> checking existence of a directory using the <code>-d</code> and <code>!-d</code> operators;
+</li><li> checking existence of a file, directory or symbolic link using the <code>-e</code> and <code>!-e</code> operators;
+</li><li> checking whether a file is executable using the <code>-x</code> and <code>!-x</code> operators.
+</li></ul>
+<p>Parts of the regular expressions can be in parentheses, whose value can then later be accessed in the <code>$1</code> to <code>$9</code> variables.
+</p><p>Examples of use:
+</p><p></p>
+<pre class="code"><span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$http_user_agent</span> ~ MSIE<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw22">rewrite</span>  ^<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>$  /msie/$<span class="nu0">1</span>  <span class="kw22">break</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$http_cookie</span> ~* <span class="st0">&quot;id=([^;] +)(?:;|$)&quot;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw22">set</span>  <span class="re0">$id</span>  $<span class="nu0">1</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$request_method</span> = POST <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw22">return</span> <span class="nu0">405</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw22">if</span> <span class="br0">&#40;</span>!-f <span class="re0">$request_filename</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw22">break</span>;
+  <span class="kw21">proxy_pass</span>  <span class="kw3">http</span>://<span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$slow</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw3">limit_rate</span>  10k;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$invalid_referer</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw22">return</span>   <span class="nu0">403</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$args</span> ^~ post=<span class="nu0">140</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+  <span class="kw22">rewrite</span> ^ <span class="kw3">http</span>://example.com/ permanent;
+<span class="br0">&#125;</span></pre>
+<p>The value of the built-in variable <code>$invalid_referer</code> is given by the directive valid_referers.
+</p>
+<br><i>Module: NginxHttpRewriteModule</i>

@@ -1,0 +1,7 @@
+
+<p><b>syntax:</b> <i>proxy_cache zone_name;</i>
+</p><p><b>default:</b> <i>None</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive sets name of zone for caching. One zone can be used in different places. The cache honors backend's Cache-Control, Expires, and etc since version 0.7.48.  The cache depends on proxy buffers, and will not work if proxy_buffers is set to off.
+</p>
+<br><i>Module: NginxHttpProxyModule</i>

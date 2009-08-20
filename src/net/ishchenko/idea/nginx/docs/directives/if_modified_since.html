@@ -1,0 +1,11 @@
+
+<p><b>syntax:</b> <i>if_modified_since [off|exact|before]</i>
+</p><p><b>default:</b> <i>if_modified_since exact</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>The directive (0.7.24) defines how to compare time of file modification and time in request header "If-Modified-Since":
+</p>
+<ul><li> off — don't check "If-Modified-Since" request header (0.7.34);
+</li><li> exact — exact match;
+</li><li> before — file modification time should be less than time in "If-Modified-Since" request header.
+</li></ul>
+<br><i>Module: NginxHttpCoreModule</i>

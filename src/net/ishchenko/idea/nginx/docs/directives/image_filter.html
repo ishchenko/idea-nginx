@@ -1,0 +1,19 @@
+
+<p><b>Syntax:</b> <i>image_filter (test|size|resize width height|crop width height)</i>
+</p><p><b>Default:</b> <i>none</i> 
+</p><p><b>Context:</b> <i>location</i>
+</p><p>Specifies the type of transformation to apply to the image, one of the below:
+</p>
+<ul><li> test: checking that the response is indeed an image format JPEG, GIF or PNG. Otherwise, an error 415.
+</li></ul>
+<ul><li> size: Gives information about the image in JSON format. For example,
+</li></ul>
+<pre>{ &quot;img&quot;&nbsp;: { &quot;width&quot;: 100, &quot;height&quot;: 100, &quot;type&quot;: &quot;gif&quot; } }</pre>
+<p>Or if an error occurs,
+</p>
+<pre>{}</pre>
+<ul><li> resize: proportionally reduces the image to a specified size.
+</li></ul>
+<ul><li> crop: proportionally reduces the image to a specified size and trims extra edge.
+</li></ul>
+<br><i>Module: NginxHttpImageFilterModule</i>

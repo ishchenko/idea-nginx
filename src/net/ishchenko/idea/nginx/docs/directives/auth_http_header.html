@@ -1,0 +1,11 @@
+
+<p><b>syntax:</b> <i>auth_http_header</i> <i><b>header value</b></i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>mail, server</i>
+</p><p>With this directive you can add a HTTP header and value during the identification process. This makes it possible to use a shared secret to ensure that the request was answered by nginx.
+</p><p>For example:
+</p>
+<pre>
+auth_http_header X-NGX-Auth-Key &quot;secret_string&quot;;
+</pre>
+<br><i>Module: NginxMailAuthModule</i>

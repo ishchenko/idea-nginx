@@ -1,0 +1,17 @@
+
+<p><b>syntax:</b> <i>open_log_file_cache max=N [inactive=time]  [min_uses=N]  [valid=time]  | off</i>
+</p><p><b>default:</b> <i>open_log_file_cache off</i>
+</p><p><b>context:</b> <i>http</i> <i>server</i> <i>location</i>
+</p><p>The directive sets the cache, which stores file descriptors of frequently used logs with variable in path.
+</p><p>Directive options:
+</p>
+<ul><li> max - maximal number of descriptors in the cache, with overflow Least Recently Used is removed (LRU);
+</li><li> inactive - sets the time after which descriptor without hits during this time are removed; default is 10 seconds;
+</li><li> min_uses - sets the minimum number of file usage within the time specified in parameter <i>inactive</i>, after which the file descriptor will be put in the cache; default is 1;
+</li><li> valid - sets the time until it will be checked if file still exists under same name; default is 60 seconds;
+</li><li> off - disables the cache.
+</li></ul>
+<p>Example:
+</p>
+<pre class="code"><span class="kw18">open_log_file_cache</span> max=<span class="nu0">1000</span> inactive=20s min_uses=<span class="nu0">2</span> valid=1m;</pre>
+<br><i>Module: NginxHttpLogModule</i>

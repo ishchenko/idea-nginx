@@ -1,0 +1,8 @@
+
+<p><b>Syntax:</b> <i>daemon on | off</i>
+</p><p><b>Default:</b> <i>on</i>
+</p><p></p>
+<pre class="code"><span class="kw1">daemon</span>  off;</pre>
+<p>Do not use the daemon or master_process directives in a production mode; these options are used for development only. You can use <code>daemon off</code> safely in production mode with runit/daemontools, however you can't do a graceful upgrade. <code>master_process off</code> should never be used in production.
+</p>
+<br><i>Module: NginxHttpMainModule</i>

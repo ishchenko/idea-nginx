@@ -53,11 +53,7 @@ public class NginxLogTab extends AdditionalTabComponent {
         console = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
         console.addMessageFilter(new NginxConsoleFilter(project));
         console.attachToProcess(processHandler);
-        try {
-            readerThread = new ReaderThread(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        readerThread = new ReaderThread(file);
 
     }
 
@@ -195,7 +191,7 @@ public class NginxLogTab extends AdditionalTabComponent {
         }
 
 
-        public ReaderThread(File file) throws IOException {
+        public ReaderThread(File file) {
 
             isRunning = false;
             try {

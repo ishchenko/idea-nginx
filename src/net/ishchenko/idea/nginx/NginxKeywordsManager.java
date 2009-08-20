@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by IntelliJ IDEA.
@@ -81,8 +82,11 @@ public class NginxKeywordsManager implements ApplicationComponent {
     // inner variables like $host
     private Set<String> variables = new HashSet<String>();
 
+    private static Pattern COMPLEX_VARIABLES_PATTERN = Pattern.compile("(?:(?:arg)|(?:http)|(?:cookie)|(?:upstream_http))_\\w+");
+
     //keyword -> [flags, flags, ...]
     private Map<String, List<Set<String>>> ambiguousKeywords = new HashMap<String, List<Set<String>>>();
+    private final String ANY_CONTEXT_FLAG = "NGX_ANY_CONF";
 
     public void initComponent() {
 
@@ -143,13 +147,13 @@ public class NginxKeywordsManager implements ApplicationComponent {
     }
 
     public boolean checkCanResideInMainContext(String string) {
-        return doCheckFlag(string, "NGX_MAIN_CONF");
+        return doCheckFlag(string, "NGX_MAIN_CONF") || doCheckFlag(string, ANY_CONTEXT_FLAG);
     }
 
     public boolean checkCanHaveParentContext(String directive, String context) {
 
         //checking if directive can reside anywhere
-        if (doCheckFlag(directive, "NGX_ANY_CONF")) {
+        if (doCheckFlag(directive, ANY_CONTEXT_FLAG)) {
             return true;
         }
 
@@ -193,7 +197,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
         Set<String> result = new HashSet<String>();
         for (Map.Entry<String, Set<String>> entry : keywords.entrySet()) {
             for (String flag : flags) {
-                if (entry.getValue().contains(flag)) {
+                if (entry.getValue().contains(flag) || entry.getValue().contains(ANY_CONTEXT_FLAG)) {
                     result.add(entry.getKey());
                 }
             }
@@ -212,6 +216,9 @@ public class NginxKeywordsManager implements ApplicationComponent {
         return result;
     }
 
+    public boolean isValidInnerVariable(String name) {
+        return variables.contains(name) || COMPLEX_VARIABLES_PATTERN.matcher(name).matches();
+    }
 
     private boolean doCheckFlag(String directive, String flag) {
         Set<String> flags = keywords.get(directive);

@@ -16,13 +16,12 @@
 
 package net.ishchenko.idea.nginx;
 
-import com.intellij.codeInsight.completion.*;
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementPresentation;
-import com.intellij.codeInsight.lookup.LookupElementRenderer;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.lookup.LookupItem;
 import com.intellij.psi.PsiElement;
 import net.ishchenko.idea.nginx.psi.*;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -34,14 +33,14 @@ import java.util.*;
  */
 public class NginxCompletionContributor extends CompletionContributor {
 
-    private List<NginxLookupElement> allLookupElements = new ArrayList<NginxLookupElement>();
-    private Map<String, Set<NginxLookupElement>> contextToDirectiveNameElements = new HashMap<String, Set<NginxLookupElement>>();
-    private List<NginxLookupElement> mainContextDirectiveNameElements = new ArrayList<NginxLookupElement>();
+    private List<LookupItem> allLookupElements = new ArrayList<LookupItem>();
+    private Map<String, Set<LookupItem>> contextToDirectiveNameElements = new HashMap<String, Set<LookupItem>>();
+    private List<LookupItem> mainContextDirectiveNameElements = new ArrayList<LookupItem>();
 
-    private static List<NginxLookupElement> booleanVariants = new ArrayList<NginxLookupElement>();
+    private static List<LookupItem> booleanVariants = new ArrayList<LookupItem>();
     {
-        booleanVariants.add(new NginxLookupElement("on"));
-        booleanVariants.add(new NginxLookupElement("off"));
+        booleanVariants.add(new LookupItem<String>("on", "on"));
+        booleanVariants.add(new LookupItem<String>("off", "off"));
     }
 
     private NginxKeywordsManager keywords;
@@ -51,20 +50,20 @@ public class NginxCompletionContributor extends CompletionContributor {
         this.keywords = keywords;
 
         for (String keyword : keywords.getKeywords()) {
-            allLookupElements.add(new NginxLookupElement(keyword));
+            allLookupElements.add(new LookupItem<String>(keyword, keyword));
         }
 
         Map<String, Set<String>> contextToDirectives = keywords.getContextToDirectiveListMappings();
         for (Map.Entry<String, Set<String>> entry : contextToDirectives.entrySet()) {
-            Set<NginxLookupElement> directives = new HashSet<NginxLookupElement>();
+            Set<LookupItem> directives = new HashSet<LookupItem>();
             for (String directive : entry.getValue()) {
-                directives.add(new NginxLookupElement(directive));
+                directives.add(new LookupItem<String>(directive, directive));
             }
             contextToDirectiveNameElements.put(entry.getKey(), directives);
         }
 
         for (String directive : keywords.getDirectivesThatCanResideInMainContext()) {
-            mainContextDirectiveNameElements.add(new NginxLookupElement(directive));
+            mainContextDirectiveNameElements.add(new LookupItem<String>(directive, directive));
         }
 
     }
@@ -109,20 +108,20 @@ public class NginxCompletionContributor extends CompletionContributor {
 
         NginxContext context = where.getDirective().getParentContext();
         if (context == null) {
-            for (NginxLookupElement mainContextElement : mainContextDirectiveNameElements) {
+            for (LookupItem mainContextElement : mainContextDirectiveNameElements) {
                 result.addElement(mainContextElement);
             }
         } else {
             String contextName = context.getDirective().getNameString();
-            Set<NginxLookupElement> elementsForContext = contextToDirectiveNameElements.get(contextName);
+            Set<LookupItem> elementsForContext = contextToDirectiveNameElements.get(contextName);
             if (elementsForContext == null) {
                 //parent directive might be unknown. suggest all.
-                for (NginxLookupElement nginxLookupElement : allLookupElements) {
-                    result.addElement(nginxLookupElement);
+                for (LookupItem LookupItem : allLookupElements) {
+                    result.addElement(LookupItem);
                 }
             } else {
-                for (NginxLookupElement nginxLookupElement : elementsForContext) {
-                    result.addElement(nginxLookupElement);
+                for (LookupItem LookupItem : elementsForContext) {
+                    result.addElement(LookupItem);
                 }
             }
         }
@@ -131,7 +130,7 @@ public class NginxCompletionContributor extends CompletionContributor {
 
     private void suggestValue(CompletionResultSet result, NginxDirectiveValue where) {
         if (keywords.checkBooleanKeyword(where.getDirective().getNameString())) {
-            for (NginxLookupElement booleanVariant : booleanVariants) {
+            for (LookupItem booleanVariant : booleanVariants) {
                 result.addElement(booleanVariant);
             }
         }
@@ -140,39 +139,9 @@ public class NginxCompletionContributor extends CompletionContributor {
     private void suggestVariable(CompletionResultSet result) {
 
         for (String variable : keywords.getVariables()) {
-            result.addElement(new NginxLookupElement(variable));
+            result.addElement(new LookupItem<String>(variable, variable));
         }
 
-    }
-
-    public static class NginxLookupElement extends LookupElement {
-
-        private String str;
-
-        public NginxLookupElement(String str) {
-            this.str = str;
-        }
-
-        public InsertHandler<? extends LookupElement> getInsertHandler() {
-            return null;
-        }
-
-        @NotNull
-        public String getLookupString() {
-            return str;
-        }
-
-        @NotNull
-        protected LookupElementRenderer<? extends LookupElement> getRenderer() {
-            return new SimpleLookupElementRenderer();
-        }
-
-    }
-
-    private static class SimpleLookupElementRenderer extends LookupElementRenderer {
-        public void renderElement(LookupElement element, LookupElementPresentation presentation) {
-            presentation.setItemText(element.getLookupString());
-        }
     }
 
 

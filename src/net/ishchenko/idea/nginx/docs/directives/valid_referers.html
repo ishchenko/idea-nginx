@@ -1,0 +1,15 @@
+
+<p><b>syntax:</b> <i>valid_referers [none|blocked|server_names]  ...</i>
+</p><p><b>default:</b> <i>none</i>
+</p><p><b>context:</b> <i>server, location</i>
+</p><p>This directive assigns a value of 0 or 1 to the variable <code>$invalid_referer</code> based on the contents of the <code>referer</code> header.  
+</p><p>You can use this to help reduce deep-linking from outside sites.  If <code>Referer</code> header is not accounted for in the list of <code>valid_referers</code>, then <code>$invalid_referer</code> will be set to 1 (see example above).
+</p><p>The parameters can be as follows:
+</p>
+<ul><li> <code>none</code> means the absence of "Referer" header.
+</li><li> <code>blocked</code> means masked <code>Referer</code> header by firewall, for example, "Referer: XXXXXXX".
+</li><li> server_names is a list of one or more servers. From version 0.5.33 onwards, * wildcards can be used in the server names.
+</li></ul>
+<p><br />
+</p>
+<br><i>Module: NginxHttpRefererModule</i>

@@ -1,0 +1,19 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>ssl_ciphers file</i>
+</p><p><b>default:</b> <i>ssl_ciphers ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP</i>
+</p><p><b>context:</b> <i>main, server</i>
+</p><p>Directive describes the permitted ciphers. Ciphers are assigned in the formats supported by OpenSSL, for example:
+</p><p></p>
+<pre class="code"><span class="kw31">ssl_ciphers</span>  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP;</pre>
+<p>Complete list can be looked with the following command:
+</p>
+<pre>
+openssl ciphers
+</pre>
+<br><i>Module: NginxHttpSslModule</i><hr>
+<p><b>syntax:</b> <i>ssl_ciphers file</i> <i><b>ciphers</b></i>
+</p><p><b>default:</b> <i>ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP</i>
+</p><p><b>context:</b> <i>mail, server</i>
+</p><p>Directive describes the permitted ciphers. Ciphers are assigned in the formats supported by OpenSSL.
+</p>
+<br><i>Module: NginxMailSslModule</i>

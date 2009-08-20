@@ -1,0 +1,13 @@
+
+<p><b>Syntax:</b> <i>debug_connection [ip | CIDR] </i>
+</p><p><b>Default:</b> <i>none</i>
+</p><p>Since 0.3.54 this option support CIDR address format
+</p><p>This option gives you the ability to write debug log only for the clients of this IP/NET. 
+</p><p>Several different directives are possible.
+</p><p>Example:
+</p>
+<pre class="code"><span class="kw1">error_log</span> /var/log/nginx/errors;
+<span class="kw2">events</span> <span class="br0">&#123;</span>
+  <span class="kw2">debug_connection</span>   <span class="nu0">192.168</span><span class="nu0">.1</span><span class="nu0">.1</span>;
+<span class="br0">&#125;</span></pre>
+<br><i>Module: NginxHttpEventsModule</i>

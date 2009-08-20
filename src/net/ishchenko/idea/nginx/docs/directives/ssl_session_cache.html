@@ -1,0 +1,32 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>ssl_session_cache off|none|builtin:size and/or shared:name:size</i>
+</p><p><b>default:</b> <i>ssl_session_cache off</i>
+</p><p><b>context:</b> <i>main, server</i>
+</p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br />The cache types are:
+</p>
+<ul><li> off -- Hard off: nginx says explicitly to a client that sessions can not reused.
+</li><li> none -- Soft off: nginx says to a client that session can be resued, but nginx actually never reuses them. This is workaround for some mail clients as ssl_session_cache may be used in mail proxy as well as in HTTP server.
+</li><li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions. Note: there appears to be a memory fragmentation issue using this method, please take that into consideration when using this. See "References" below.
+</li><li> shared -- the cache is shared between all worker processes. The size of cache is assigned in the bytes, 1 MB cache can contain about 4000 sessions. Each shared cache must have arbitrary name. Cache with the same name can be used in several virtual servers.
+</li></ul>
+<p>It is possible to use both types of cache simultaneously, for example:
+</p>
+<pre>
+  ssl_session_cache  builtin:1000  shared:SSL:10m;
+</pre>
+<p>However, the only shared cache usage without that builtin should be more effective.
+</p>
+<br><i>Module: NginxHttpSslModule</i><hr>
+<p><b>syntax:</b> <i>ssl_session_cache</i> <i><b>[builtin[<code></code>:size  [shared:name:size] </b></i>
+</p><p><b>default:</b> <i>builtin:20480</i>
+</p><p><b>context:</b> <i>mail, server</i>
+</p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br /> The cache types are:
+</p>
+<ul><li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions.
+</li><li> shared -- the cache is shared between all worker processes. The size of cache is assigned in the bytes, 1 MB cache can contain about 4000 sessions. Each shared cache must have arbitrary name. Cache with the same name can be used in several virtual servers.
+</li></ul>
+It is possible to use both types of cache simultaneously, for example:<pre>
+ssl_session_cache  builtin:1000  shared:SSL:10m;</pre>
+<p>However, the only shared cache usage without that builtin should be more effective.
+</p>
+<br><i>Module: NginxMailSslModule</i>

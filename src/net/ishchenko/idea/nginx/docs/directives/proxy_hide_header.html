@@ -1,0 +1,22 @@
+
+<p><b>syntax:</b> <i>proxy_hide_header the_header</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>nginx does not transfer the "Date", "Server", "X-Pad" and "X-Accel-..." header lines from the proxied server response. The <code>proxy_hide_header</code> directive allows to hide some additional header lines. But if on the contrary the header lines must be passed, then the <code>proxy_pass_header</code> should be used. For example if you want to hide the MS-OfficeWebserver and the AspNet-Version:
+</p><p></p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw21">proxy_hide_header</span> X-AspNet-Version;
+  <span class="kw21">proxy_hide_header</span> MicrosoftOfficeWebServer;
+<span class="br0">&#125;</span></pre>
+<p>This directive can also be very helpful when using X-Accel-Redirect. For example, you may have one set of backend servers which return the headers for a file download, which includes X-Accel-Redirect to the actual file, as well as the correct Content-Type. However, the Redirect URL points to a filleserver which hosts the actual file you wish to serve, and that server sends its own Content-Type header, which might be incorrect, and overrides the header sent by the original backend servers. You can avoid this by adding the proxy_hide_header directive to the fileserver. Example:
+</p><p></p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw21">proxy_pass</span> <span class="kw3">http</span>://backend_servers;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> /files/ <span class="br0">&#123;</span>
+  <span class="kw21">proxy_pass</span> <span class="kw3">http</span>://fileserver;
+  <span class="kw21">proxy_hide_header</span> Content-Type;
+<span class="br0">&#125;</span></pre>
+<p><br />
+</p>
+<br><i>Module: NginxHttpProxyModule</i>

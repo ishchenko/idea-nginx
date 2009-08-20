@@ -1,0 +1,10 @@
+
+<p><b>Syntax:</b> <i>user user [group] </i>
+</p><p><b>Default:</b> <i>nobody nobody</i>
+</p><p>If the master process is run as root, then nginx will setuid()/setgid() to USER/GROUP. If GROUP is not specified, then nginx uses the same name as USER. By default it's <code>nobody</code> user and <code>nobody</code> or <code>nogroup</code> group or the <code>--user=USER</code> and <code>--group=GROUP</code> from the <code>./configure</code> script.
+</p><p>Example:
+</p>
+<pre class="code"><span class="kw1">user</span> www users;</pre>
+<p><br />
+</p>
+<br><i>Module: NginxHttpMainModule</i>

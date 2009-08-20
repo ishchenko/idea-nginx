@@ -1,0 +1,13 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>ssl_certificate_key file</i>
+</p><p><b>default:</b> <i>ssl_certificate_key cert.pem</i>
+</p><p><b>context:</b> <i>main, server</i>
+</p><p>Indicates file with the secret key in PEM format for this virtual server. Since version 0.6.7 the filename path is relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory.
+</p>
+<br><i>Module: NginxHttpSslModule</i><hr>
+<p><b>syntax:</b> <i>ssl_certificate_key</i> <i><b>file</b></i>
+</p><p><b>default:</b> <i>cert.pem</i>
+</p><p><b>context:</b> <i>mail, server</i>
+</p><p>Indicates file with the secret key in PEM format for this virtual server.
+</p>
+<br><i>Module: NginxMailSslModule</i>

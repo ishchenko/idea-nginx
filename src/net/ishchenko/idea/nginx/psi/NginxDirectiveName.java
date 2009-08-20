@@ -16,13 +16,21 @@
 
 package net.ishchenko.idea.nginx.psi;
 
+import com.intellij.psi.PsiNamedElement;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Max
  * Date: 09.07.2009
  * Time: 21:03:39
  */
-public interface NginxDirectiveName extends NginxPsiElement {
+
+/**
+ * PsiNamedElement is implemented solely for quick documentation lookup purposes.
+ * Ctrl+q just won't work if PsiNamedElement is not implemented
+ */
+public interface NginxDirectiveName extends NginxPsiElement, PsiNamedElement {
 
     NginxDirective getDirective();
+
 }

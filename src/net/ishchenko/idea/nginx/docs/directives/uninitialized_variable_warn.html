@@ -1,0 +1,54 @@
+
+<p><b>syntax:</b> <i>uninitialized_variable_warn on|off</i>
+</p><p><b>default:</b> <i>uninitialized_variable_warn on</i>
+</p><p><b>context:</b> <i>http, server, location, if</i>
+</p><p>Enables or disables logging of warnings about noninitialized variables.
+</p><p>Internally, the rewrite directives are compiled at the time the configuration file is loaded into internal codes, usable during the request by the interpreter.
+</p><p>This interpreter is a simple stack virtual machine. For example, the directive:
+</p><p></p>
+<pre class="code"><span class="kw3">location</span> /download/ <span class="br0">&#123;</span>
+  <span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$forbidden</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw22">return</span>   <span class="nu0">403</span>;
+  <span class="br0">&#125;</span>
+  <span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$slow</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw3">limit_rate</span>  10k;
+  <span class="br0">&#125;</span>
+  <span class="kw22">rewrite</span>  ^/<span class="br0">&#40;</span>download/.*<span class="br0">&#41;</span>/media/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>\..*$  /$<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  <span class="kw22">break</span>;
+<span class="br0">&#125;</span></pre>
+<p>will be compiled into this sequence:
+</p>
+<pre>
+  variable $forbidden
+  checking to zero
+  recovery 403
+  completion of entire code
+  variable $slow
+  checking to zero
+  checkings of regular expression
+  copying &quot;/&quot;
+  copying $1
+  copying &quot;/mp3/&quot;
+  copying $2
+  copying &quot;..mpe&quot;
+  completion of regular expression
+  completion of entire sequence
+</pre>
+<p>Note that there is no</p><p>If $slow is true, then what's inside the "if" block is evaluated, and in this configuration limit_rate it is equal to 10k.
+</p><p>Directive:
+</p><p></p>
+<pre class="code">  <span class="kw22">rewrite</span>  ^/<span class="br0">&#40;</span>download/.*<span class="br0">&#41;</span>/media/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>\..*$  /$<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  <span class="kw22">break</span>;</pre>
+<p>It is possible to reduce the sequence, if in the regular expression we include the first slash inside the parentheses:
+</p><p></p>
+<pre class="code">  <span class="kw22">rewrite</span>  ^<span class="br0">&#40;</span>/download/.*<span class="br0">&#41;</span>/media/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>\..*$  $<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  <span class="kw22">break</span>;</pre>
+<p>then the sequence will appear like this:
+</p>
+<pre>
+  checking regular expression
+  copying $1
+  copying &quot;/mp3/&quot;
+  copying $2
+  copying &quot;..mpe&quot;
+  completion of regular expression
+  completion of entire code
+</pre>
+<br><i>Module: NginxHttpRewriteModule</i>

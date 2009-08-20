@@ -1,0 +1,16 @@
+
+<p><b>syntax:</b> <i>xclient</i> <i><b>on | off</b></i>
+</p><p><b>default:</b> <i>on</i>
+</p><p><b>context:</b> <i>mail, server</i>
+</p><p>With this directive you can enable or disable the command XCLIENT with the connection to SMTP backend. This allows the backend to enforce limitations on the client based on IP/HELO/LOGIN.
+</p><p>If xclient is enabled then nginx first transfers to the backend:
+</p>
+<pre>
+EHLO server_name
+</pre>
+<p>Then:
+</p>
+<pre>
+XCLIENT PROTO=ESMTP HELO=client_helo ADDR=client_ip LOGIN=authentificated_user NAME=[UNAVAILABLE] 
+</pre>
+<br><i>Module: NginxMailProxyModule</i>

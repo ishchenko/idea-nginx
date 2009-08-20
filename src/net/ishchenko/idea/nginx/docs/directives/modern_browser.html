@@ -1,0 +1,13 @@
+
+<p><b>syntax:</b> <i>modern_browser browser version|unlisted</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Directive assigns which version of the browser is to be considered as <b>modern</b>.<br />
+As browser you can assign the values msie, gecko (Mozilla-based browsers) opera, safari, konqueror.
+</p><p>Of versions it is possible to assign in size X, X.X, X.X.X, or X.X.X.X. maximum values for each of their sizes respectively - 4000, 4000.99, 4000.99.99, and 4000.99.99.99.
+</p><p>Special value "unlisted" indicates to consider modern browser, not described by the modern_browser and ancient_browser directives. <br />
+Otherwise the neperechislennyy browser will be considered become obsolete.<br />
+If the headers do not contain "User-agent", the browser is considered neperechislennym.
+</p><p><br />
+</p>
+<br><i>Module: NginxHttpBrowserModule</i>

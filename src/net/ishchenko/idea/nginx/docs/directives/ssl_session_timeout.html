@@ -1,0 +1,26 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>ssl_session_timeout time</i>
+</p><p><b>default:</b> <i>ssl_session_timeout 5m</i>
+</p><p><b>context:</b> <i>main, server</i>
+</p><p>Assigns the time during which the client can repeatedly use the parameters of the session, which is stored in the cache.
+</p><p>This module supports several nonstandard error codes which can be used for debugging with the aid of directive error_page:
+</p>
+<ul><li> 495 - error checking client certificate
+</li><li> 496 - client did not grant the required certificate
+</li><li> 497 - normal request was sent to HTTPS
+</li></ul>
+<p>Debugging is done after the request is completely dismantled and are accessible via variables such as $request_uri, $uri, $arg and others.  Built-in variables Module ngx_http_ssl_module supports several built-in variables:
+</p>
+<ul><li> $ssl_cipher returns the line of those utilized it is cipher for established SSL-connection
+</li><li> $ssl_client_serial returns the series number of client certificate for established SSL-connection
+</li><li> $ssl_client_s_dn returns line subject DN of client certificate for established SSL-connection
+</li><li> $ssl_client_i_dn returns line issuer DN of client certificate for established SSL-connection
+</li><li> $ssl_protocol returns the protocol of established SSL-connection
+</li></ul>
+<br><i>Module: NginxHttpSslModule</i><hr>
+<p><b>syntax:</b> <i>ssl_session_timeout</i> <i><b>time</b></i>
+</p><p><b>default:</b> <i>5m</i>
+</p><p><b>context:</b> <i>mail, server</i>
+</p><p>Assigns the time during which the client can repeatedly use the parameters of the session, which is stored in the cache.
+</p>
+<br><i>Module: NginxMailSslModule</i>

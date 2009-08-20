@@ -1,0 +1,10 @@
+
+<p><b>syntax:</b> <i>optimize_server_names [ on|off ] </i>
+</p><p><b>default:</b> <i>optimize_server_names on</i>
+</p><p><b>context:</b> <i>http, server</i>
+</p><p>Directive activates or deactivates optimization of host name checks for name-based virtual servers.
+</p><p>In particular, the check influences the name of the host used in redirects. If optimization is on, and all name-based servers listening on one address:port pair have identical configuration, then names are not checked during request execution and redirects use first server name.
+</p><p>If redirect must use host name passed by the client, then the optimization must be turned off.
+</p><p>Note: this directive is deprecated in nginx 0.7.x, use server_name_in_redirect instead.
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

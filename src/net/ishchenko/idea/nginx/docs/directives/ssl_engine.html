@@ -1,0 +1,18 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>Syntax:</b> <i>ssl_engine engine</i>
+</p><p><b>Default:</b> <i>system dependent</i>
+</p><p>Here you can set your preferred openssl engine if any available. You can figure out which one do you have with the commandline tool: <code>openssl engine -t</code>
+</p><p>For example:
+</p>
+<pre>
+$ openssl engine -t
+(cryptodev) BSD cryptodev engine
+  [ available ] 
+(dynamic) Dynamic engine loading support
+  [ unavailable ] 
+</pre>
+<br><i>Module: NginxHttpMainModule</i><hr>
+<p><b>syntax:</b> <i>ssl_engine</i>
+</p><p>This allows specifying the OpenSSL engine to use, like Padlock for example. It requires a more recent version of OpenSSL.
+</p>
+<br><i>Module: NginxHttpSslModule</i>

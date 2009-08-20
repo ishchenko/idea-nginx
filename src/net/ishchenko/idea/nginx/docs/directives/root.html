@@ -1,0 +1,13 @@
+
+<p><b>syntax:</b> <i>root path</i>
+</p><p><b>default:</b> <i>root html</i>
+</p><p><b>context:</b> <i>http, server, location, if in location</i>
+</p><p><b>root</b> specifies the document root for the requests. For example, with this configuration
+</p><p></p>
+<pre class="code"><span class="kw3">location</span>  /i/ <span class="br0">&#123;</span>
+  <span class="kw3">root</span>  /spool/w3;
+<span class="br0">&#125;</span></pre>
+<p>A request for "/i/top.gif" will return the file "/spool/w3/i/top.gif". You can use variables in the argument.
+</p><p><b>note:</b> Keep in mind that the root will still append the directory to the request so that a request for "/i/top.gif" will not look in "/spool/w3/top.gif" like might happen in an Apache-like alias configuration where the location match itself is dropped. Use the <code>alias</code> directive to achieve the Apache-like functionality.
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

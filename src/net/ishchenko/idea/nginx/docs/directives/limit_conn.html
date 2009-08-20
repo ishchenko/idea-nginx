@@ -1,0 +1,16 @@
+
+<p><b>syntax:</b> <i>limit_conn zone_name max_clients_per_ip</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Directive assigns the maximum number of simultaneous connections for one session.
+With exceeding of this number the request completes by the</p><p>For example, the directive:
+</p><p></p>
+<pre class="code"><span class="kw17">limit_zone</span>   one  <span class="re0">$binary_remote_addr</span>  10m;
+&nbsp;
+<span class="kw3">server</span> <span class="br0">&#123;</span>
+  <span class="kw3">location</span> /download/ <span class="br0">&#123;</span>
+  <span class="kw17">limit_conn</span>   one  <span class="nu0">1</span>;
+<span class="br0">&#125;</span></pre>
+<p>This allows not more than one simultaneous connection from one address.
+</p>
+<br><i>Module: NginxHttpLimitZoneModule</i>

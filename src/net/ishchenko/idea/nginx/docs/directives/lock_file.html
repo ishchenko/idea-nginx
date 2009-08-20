@@ -1,0 +1,9 @@
+
+<p><b>Syntax:</b> <i>lock_file file</i>
+</p><p><b>Default:</b> <i>compile-time option</i>
+</p><p></p>
+<pre class="code"><span class="kw1">lock_file</span>  /var/log/<span class="kw1">lock_file</span>;</pre>
+<p>nginx uses accept mutex to serialize accept() syscalls. If nginx is built by gcc, Intel C++, or SunPro C++ compilers on i386, amd64, sparc64, and ppc64, then nginx uses the atomic instructions to implement the mutex. In other cases the lock file would be used.
+</p><p><br />
+</p>
+<br><i>Module: NginxHttpMainModule</i>

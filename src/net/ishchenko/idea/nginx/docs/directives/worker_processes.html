@@ -1,0 +1,17 @@
+
+<p><b>Syntax:</b> <i>worker_processes number</i>
+</p><p><b>Default:</b> <i>1</i>
+</p><p>e.g.:
+</p>
+<pre class="code"><span class="kw1">worker_processes</span> <span class="nu0">5</span>;</pre>
+<p>nginx has the ability to use more than one worker process for several reasons:
+</p>
+<ol><li>  to use SMP
+</li><li>  to decrease latency when workers blockend on disk I/O
+</li><li>  to limit number of connections per process when select()/poll() is used
+</li></ol>
+<p>The <code>worker_processes</code> and <code>worker_connections</code> from the event sections allows you to calculate <code>maxclients</code> value:
+</p><p>max_clients = worker_processes * worker_connections
+</p><p><br />
+</p>
+<br><i>Module: NginxHttpMainModule</i>

@@ -1,0 +1,11 @@
+
+<p><b>syntax:</b> <i>dav_access user:permissions [users:permissions]  ...</i>
+</p><p><b>default:</b> <i>dav_access user:rw</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive assigns access rights for file and directories, for example:
+</p>
+<pre class="code"><span class="kw34">dav_access</span> <span class="kw1">user</span>:rw group:rw all:r;</pre>
+<p>If assigning any permissions for <code>groups</code> or <code>all</code>, then it's not necessary to indicate permissions for <code>user</code>:
+</p>
+<pre class="code"><span class="kw34">dav_access</span> group:rw all:r;</pre>
+<br><i>Module: NginxHttpDavModule</i>

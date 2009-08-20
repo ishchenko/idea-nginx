@@ -1,0 +1,9 @@
+
+<p><b>syntax:</b> <i>limit_rate_after time</i>
+</p><p><b>default:</b> <i>limit_rate_after 1m</i>
+</p><p><b>context:</b> <i>http, server, location, if in location</i>
+</p><p>The directive limits speed only after the first part was sent.
+</p><p></p>
+<pre class="code"><span class="kw3">limit_rate_after</span> 1m;
+<span class="kw3">limit_rate</span> 100k;</pre>
+<br><i>Module: NginxHttpCoreModule</i>

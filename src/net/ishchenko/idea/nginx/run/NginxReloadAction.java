@@ -101,7 +101,7 @@ public class NginxReloadAction extends AnAction {
         VirtualFile executableFile = LocalFileSystem.getInstance().findFileByPath(descriptor.getExecutablePath());
         PlatformDependentTools pdt = ApplicationManager.getApplication().getComponent(PlatformDependentTools.class);
         String[] testCommand = pdt.getTestCommand(descriptor);
-        int exitValue = runAndGetExitValue(testCommand, new File(executableFile.getParent().getPath()), console, project);
+        int exitValue = runAndGetExitValue(testCommand, new File(executableFile.getParent().getPath()), console);
 
         if (exitValue != 0) {
             throw new ReloadException(NginxBundle.message("run.validationfailed"));
@@ -114,7 +114,7 @@ public class NginxReloadAction extends AnAction {
         VirtualFile executableFile = LocalFileSystem.getInstance().findFileByPath(descriptor.getExecutablePath());
         PlatformDependentTools pdt = ApplicationManager.getApplication().getComponent(PlatformDependentTools.class);
         String[] reloadCommand = pdt.getReloadCommand(descriptor);
-        int exitValue = runAndGetExitValue(reloadCommand, new File(executableFile.getParent().getPath()), console, project);
+        int exitValue = runAndGetExitValue(reloadCommand, new File(executableFile.getParent().getPath()), console);
 
         if (exitValue != 0) {
             throw new ReloadException(NginxBundle.message("run.validationfailed"));
@@ -122,7 +122,7 @@ public class NginxReloadAction extends AnAction {
 
     }
 
-    private int runAndGetExitValue(String[] testCommand, File dir, final ConsoleView console, final Project project) throws IOException {
+    private int runAndGetExitValue(String[] testCommand, File dir, final ConsoleView console) throws IOException {
         ProcessBuilder builder = new ProcessBuilder();
         builder.command(testCommand);
         builder.directory(dir);

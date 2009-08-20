@@ -1,0 +1,28 @@
+
+<p><b>syntax:</b> <i>fastcgi_store [on | off | path] </i>
+</p><p><b>default:</b> <i>fastcgi_store off</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive sets the path in which upstream files are stored. The parameter "on" preserves files in accordance with path specified in directives <i>alias</i> or <i>root</i>. The parameter "off" forbids storing. Furthermore, the name of the path can be clearly assigned with the aid of the line with the variables:
+</p><p></p>
+<pre class="code"><span class="kw11">fastcgi_store</span>   /data/www<span class="re0">$original_uri</span>;</pre>
+<p>The time of modification for the file will be set to the date of "Last-Modified" header in the response. To be able to safe files in this directory it is necessary that the path is under the directory with temporary files, given by directive fastcgi_temp_path for the data location.
+</p><p>This directive can be used for creating the local copies for dynamic output of the backend which is not very often changed, for example:
+</p><p></p>
+<pre class="code"><span class="kw3">location</span> /images/ <span class="br0">&#123;</span>
+  <span class="kw3">root</span>                 /data/www;
+  <span class="kw3">error_page</span>           <span class="nu0">404</span> = /fetch<span class="re0">$uri</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> /fetch <span class="br0">&#123;</span>
+  <span class="kw3">internal</span>;
+&nbsp;
+  <span class="kw11">fastcgi_pass</span>           fastcgi://backend;
+  <span class="kw11">fastcgi_store</span>          on;
+  <span class="kw11">fastcgi_store_access</span>   <span class="kw1">user</span>:rw  group:rw  all:r;
+  <span class="kw11">fastcgi_temp_path</span>      /data/temp;
+&nbsp;
+  <span class="kw3">alias</span>                  /data/www;
+<span class="br0">&#125;</span></pre>
+<p>To be clear fastcgi_store is not a cache, it's rather mirror on demand.
+</p>
+<br><i>Module: NginxHttpFcgiModule</i>

@@ -1,0 +1,12 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>gzip_http_version 1.0|1.1</i>
+</p><p><b>default:</b> <i>gzip_http_version 1.1</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Turns gzip compression on or off depending on the HTTP request version.
+</p><p>When HTTP version 1.0 is used, the <i>Vary: Accept-Encoding</i> header is not set. As this can lead to proxy cache corruption, consider adding it with  add_header . Also note that the Content-Length header is not set when using either version. Keepalives will therefore be impossible with version 1.0, while for 1.1 it is handled by chunked transfers.
+</p><p><br />
+</p>
+<br><i>Module: NginxHttpGzipModule</i><hr>
+<p>See  NginxHttpGzipModule 
+</p>
+<br><i>Module: NginxHttpGzipStaticModule</i>

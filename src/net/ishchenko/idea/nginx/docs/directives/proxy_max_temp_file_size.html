@@ -1,0 +1,8 @@
+
+<p><b>syntax:</b> <i>proxy_max_temp_file_size size;</i>
+</p><p><b>default:</b> <i>proxy_max_temp_file_size 1G;</i>
+</p><p><b>context:</b> <i>http, server, location, if</i>
+</p><p>The maximum size of a temporary file when the content is larger than the proxy buffer.  If file is larger than this size, it will be served synchronously from upstream server rather than buffered to disk.
+</p><p>If proxy_max_temp_file_size is equal to zero, temporary files usage will be disabled.
+</p>
+<br><i>Module: NginxHttpProxyModule</i>

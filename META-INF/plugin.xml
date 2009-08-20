@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support 9</name>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <vendor url="http://code.google.com/p/idea-nginx/" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -15,6 +15,12 @@
     </description>
 
     <change-notes><![CDATA[
+        <b>0.0.5</b>
+        <ul>
+            <li>Quick documentation lookup support for directives and variables. Only for those that can be found at wiki.nginx.org.</li>
+            <li>$arg_&lt;PARAM&gt;, $http_&lt;PARAM&gt; and $cookie_&lt;PARAM&gt; are not highlighted as unknown anymore.</li>
+            <li>Warning when choosing nginx executable. Running "nginx -V" can be cancelled and default parameter values will be used.</li> 
+        </ul>
         <b>0.0.4</b>
         <ul>
             <li>Basic $variable support. Autocompletion and name checks are available. No checks for parent context and no support for variables in strings yet.</li>
@@ -48,10 +54,11 @@
         <lang.commenter language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCommenter"/>
         <lang.braceMatcher language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxBraceMatcher"/>
         <lang.foldingBuilder language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxFoldingBuilder"/>
+        <lang.documentationProvider language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxDocumentationProvider"/>
         <!--<lang.formatter language="nginx" implementationClass="net.ishchenko.idea.nginx.formatter.NginxFormattingModelBuilder"/>-->
         <annotator language="nginx" implementationClass="net.ishchenko.idea.nginx.annotator.NginxAnnotatingVisitor"/>
         <configurationType implementation="net.ishchenko.idea.nginx.run.NginxConfigurationType"/>
-        <completion.contributor implementation="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
+        <completion.contributor language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
         <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
     </extensions>
 

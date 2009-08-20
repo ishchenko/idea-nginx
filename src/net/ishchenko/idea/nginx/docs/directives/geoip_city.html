@@ -1,0 +1,16 @@
+
+<p><b>syntax:</b> <i>geoip_city path/to/db.dat;</i>
+</p><p><b>default:</b> none
+</p><p><b>context:</b> <i>http</i>
+</p><p>The directive indicates the path to the .dat file used for determining countries, regions and cities from IP-address of the client. When set the module makes available the following variables:
+</p>
+<ul><li> $geoip_city_country_code; - two-letter country code, for example, "RU", "US".
+</li><li> $geoip_city_country_code3; - three-letter country code, for example, "RUS", "USA".
+</li><li> $geoip_city_country_name; - the name of the country, for example, "Russian Federation", "United States".
+</li><li> $geoip_region; - the name of region (province, region, state, province, federal land, and the like), for example, "Moscow City", "DC".
+</li><li> $geoip_city; - the name of the city, for example, "Moscow", "Washington".
+</li><li> $geoip_postal_code; - postal code. 
+</li></ul>
+<p><br />
+</p>
+<br><i>Module: NginxHttpGeoIPModule</i>

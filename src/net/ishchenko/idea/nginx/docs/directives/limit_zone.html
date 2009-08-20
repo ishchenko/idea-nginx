@@ -1,0 +1,16 @@
+
+<p><b>syntax:</b> <i>limit_zone zone_name $variable memory_max_size</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>http</i>
+</p><p>Directive describes the zone, in which the session states are stored.<br />
+The numbers of sessions is determined by the assigned variable, it depends on the size of the used Variable and <b>memory_max_size</b> value.
+</p><p>Example of the use:
+</p><p></p>
+<pre class="code"><span class="kw17">limit_zone</span> one <span class="re0">$binary_remote_addr</span> 10m;</pre>
+<p>The address of client is used as the session.
+Notice that the variable <code>$binary_remote_addr</code> is used instead of <code>$remote_addr</code>.
+</p><p>The length of the values of the variable of <code>$remote_addr</code> can be from 7 to 15 bytes; therefore size state is equal to 32 or 64 bytes.
+</p><p>Length of all values of the variable of <code>$binary_remote_addr</code> is always 4 bytes and the size of the state is always 32 bytes.
+</p><p>When the zone size is 1M then it is possible to handle 32000 sessions with 32 bytes/session.
+</p>
+<br><i>Module: NginxHttpLimitZoneModule</i>

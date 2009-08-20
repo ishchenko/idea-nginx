@@ -79,7 +79,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
     public void visitInnerVariable(NginxInnerVariable node) {
 
         //should I cut $ in NginxInnerVariable itself?
-        if (!keywords.getVariables().contains(node.getText().substring(1))) {
+        if (!keywords.isValidInnerVariable(node.getName())) {
             holder.createWarningAnnotation(node, NginxBundle.message("annotator.variable.notexists", node.getText()));
         }
 

@@ -1,0 +1,7 @@
+
+<p><b>syntax:</b> <i>fastcgi_read_timeout time</i>
+</p><p><b>default:</b> <i>60</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Directive sets the amount of time for upstream to wait for a fastcgi process to send data.  Change this directive if you have long running fastcgi processes that do not produce output until they have finished processing.  If you are seeing an upstream timed out error in the error log, then increase this parameter to something more appropriate.
+</p>
+<br><i>Module: NginxHttpFcgiModule</i>

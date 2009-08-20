@@ -1,0 +1,13 @@
+
+<p><b>syntax:</b> <i>proxy_buffering on|off</i>
+</p><p><b>default:</b> <i>proxy_buffering on</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive activate response buffering of the proxied server.
+</p><p>If buffering is activated, then nginx assumes the answer of the proxied server as fast as possible, preserving it in the buffer, assigned by directive <code>proxy_buffer_size</code> and <code>proxy_buffers</code>.
+</p><p>If the response can not all be placed in memory, then parts of it will be written to disk.
+</p><p>If buffering is switched off, then the response is synchronously transferred to client immediately as it is received.
+</p><p>nginx do not attempt to count entire answer of the proxied server, maximum size of data, which nginx can accept from the server it is assigned by directive <code>proxy_buffer_size</code>.
+</p><p>For Comet applications based on long-polling it is important to set proxy_buffering to off, otherwise the asynchronous response is buffered and the Comet does not work.
+</p><p><br />
+</p>
+<br><i>Module: NginxHttpProxyModule</i>

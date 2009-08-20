@@ -1,0 +1,11 @@
+
+<p><b>Syntax:</b> <i>include file | *</i>
+</p><p><b>Default:</b> <i>none</i>
+</p><p>You can include any configuration files for what ever purpose you want.  
+</p><p>Since 0.4.4, the <code>include</code> directive also supports filename globbing:
+</p>
+<pre class="code"><span class="kw1">include</span> vhosts/*.conf;</pre>
+<p>Note that until version 0.6.7, paths are relative to what was specified to <code>configure</code> via the <code>--prefix=&lt;PATH&gt;</code> directive, which by default is <code>/usr/local/nginx</code>.  If you didn't set this when you compiled Nginx, then use absolute paths. 
+</p><p>Since version 0.6.7, paths are relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory.
+</p>
+<br><i>Module: NginxHttpMainModule</i>

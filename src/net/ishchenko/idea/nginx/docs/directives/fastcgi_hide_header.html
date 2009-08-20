@@ -1,0 +1,8 @@
+
+<p><b>syntax:</b> <i>fastcgi_hide_header name</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>By default, Nginx does not pass headers "Status" and "X-Accel-..." from the FastCGI process back to the client. 
+This directive can be used to hide other headers as well.
+</p><p>If the headers "Status" and "X-Accel-..." must be provided, then it is necessary to use directive fastcgi_pass_header to force them to be returned to the client.
+</p>
+<br><i>Module: NginxHttpFcgiModule</i>

@@ -1,0 +1,44 @@
+
+<p><b>syntax:</b> <i>geo [$ip_variable] $variable { ... }</i>
+</p><p><b>default:</b> none
+</p><p><b>context:</b> <i>http</i>
+</p><p>The directive describes the dependency of the value of a variable on the IP-address of a client. By default, the IP-address used for the lookup is $remote_addr, but since version 0.7.27 it is possible to specify which variable should be used.
+</p><p></p>
+<pre class="code"> <span class="kw12">geo</span>  <span class="re0">$arg_remote_addr</span> <span class="re0">$geo</span> <span class="br0">&#123;</span>
+   ...;
+ <span class="br0">&#125;</span></pre>
+<p>Addresses are assigned in the form CIDR. Furthermore, there are four special parameters:
+</p><p>Example of the description:
+</p>
+<ul><li> delete – deletes the specified network (0.7.23).
+</li><li> default - the value of variable, if the client address does not correspond to any assigned address. It is possible so to write instead of default 0.0.0.0/0.
+</li><li> include - text file with addresses and values information. Several files can be inluded like this.
+</li><li> proxy - specifies the address of proxy server (0.8.7+). NEED MORE DESCRIPTION...
+</li><li> ranges – specifies that the addresses specified are in the form of ranges (0.7.23). This directive must be the first.
+</li></ul>
+<p></p>
+<pre class="code"> <span class="kw12">geo</span>  <span class="re0">$country</span>  <span class="br0">&#123;</span>
+   default          no;
+   <span class="kw1">include</span>          conf/<span class="kw12">geo</span>.conf;
+   <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.0</span>/<span class="nu0">24</span>     us;
+   <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>/<span class="nu0">32</span>     ru;
+   <span class="nu0">10.1</span><span class="nu0">.0</span><span class="nu0">.0</span>/<span class="nu0">16</span>      ru;
+   <span class="nu0">192.168</span><span class="nu0">.1</span><span class="nu0">.0</span>/<span class="nu0">24</span>   uk;
+ <span class="br0">&#125;</span></pre>
+<p>In the file conf/geo.conf:
+</p>
+<pre class="code"> <span class="nu0">10.2</span><span class="nu0">.0</span><span class="nu0">.0</span>/<span class="nu0">16</span>      ru;
+ <span class="nu0">192.168</span><span class="nu0">.2</span><span class="nu0">.0</span>/<span class="nu0">24</span>   ru;</pre>
+<p>The value will be the the one with maximum agreement. For example, the IP address 127.0.0.1 will get the value "ru", but not "us".
+</p><p>Example with ranges:
+</p>
+<pre class="code"> <span class="kw12">geo</span>  <span class="re0">$country</span>  <span class="br0">&#123;</span>
+   ranges;
+   default                    no; 
+   <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.0</span><span class="nu0">-127.0</span><span class="nu0">.0</span><span class="nu0">.0</span>        us;
+   <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span><span class="nu0">-127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>        ru;
+   <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span><span class="nu0">-127.0</span><span class="nu0">.0</span><span class="nu0">.255</span>      us;
+   <span class="nu0">10.1</span><span class="nu0">.0</span><span class="nu0">.0</span><span class="nu0">-10.1</span><span class="nu0">.255</span><span class="nu0">.255</span>      ru;
+   <span class="nu0">192.168</span><span class="nu0">.1</span><span class="nu0">.0</span><span class="nu0">-192.168</span><span class="nu0">.1</span><span class="nu0">.255</span>  uk; 
+ <span class="br0">&#125;</span></pre>
+<br><i>Module: NginxHttpGeoModule</i>

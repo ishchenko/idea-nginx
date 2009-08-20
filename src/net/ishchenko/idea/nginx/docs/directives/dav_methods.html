@@ -1,0 +1,9 @@
+
+<p><b>syntax:</b> <i>dav_methods [off|put|delete|mkcol|copy|move]  ...</i>
+</p><p><b>default:</b> <i>dav_methods off</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive enables specified HTTP and WebDAV methods.  Setting it to <code>off</code> disables all methods, ignoring the remaining parameters.
+</p><p>For the PUT method the destination file must reside on the same partition as the directory where the temporary file is stored (given by directive <code>client_body_temp_path</code> in the <code>location</code> section). 
+</p><p>When a file is created using the PUT method it is possible to assign the modification date by setting the <code>Date</code> header.
+</p>
+<br><i>Module: NginxHttpDavModule</i>

@@ -1,0 +1,11 @@
+
+<p><b>syntax:</b> <i>fastcgi_store_access users:permissions [users:permission ...] </i>
+</p><p><b>default:</b> <i>fastcgi_store_access user:rw</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>This directive assigns the permissions for the created files and directories, for example:
+</p><p></p>
+<pre class="code"><span class="kw11">fastcgi_store_access</span>  <span class="kw1">user</span>:rw  group:rw  all:r;</pre>
+<p>If any rights for groups or all are assigned, then it is not necessary to assign rights for user:
+</p><p></p>
+<pre class="code"><span class="kw11">fastcgi_store_access</span>  group:rw  all:r;</pre>
+<br><i>Module: NginxHttpFcgiModule</i>

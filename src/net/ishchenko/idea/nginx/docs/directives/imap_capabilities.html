@@ -1,0 +1,16 @@
+
+<p><b>syntax:</b> <i>imap_capabilities</i> <i><b>"capability1" ["capability2" .. "capabilityN"] </b></i>
+</p><p><b>default:</b> <i>"IMAP4" "IMAP4rev1" "UIDPLUS"</i>
+</p><p><b>context:</b> <i>main, server</i>
+</p><p><br />
+With this directive you can set the list of IMAP protocol  extensions presented to the client upon issuing the IMAP command CAPABILITY. STARTTLS  is automatically added if you enable the  starttls  directive.
+</p><p>The current list of standardized IMAP expansions is published on www.iana.org.
+</p>
+<pre>
+mail {
+  imap_capabilities NAMESPACE SORT QUOTA;
+}
+</pre>
+<p>Will the defaults be also set, I haven't see this in the source?! (al 2007-05-11)
+</p>
+<br><i>Module: NginxMailCoreModule</i>

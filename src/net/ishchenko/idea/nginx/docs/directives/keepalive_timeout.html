@@ -1,0 +1,9 @@
+
+<p><b>syntax:</b> <i>keepalive_timeout [ time ] </i>
+</p><p><b>default:</b> <i>keepalive_timeout 75</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Directive assigns the timeout, for keep-alive connections with the client.
+</p><p>The second parameter assigns value in the line <code>Keep-Alive: timeout=time</code> in the header of response.
+</p><p>The parameters can differ from each other. Line <code>Keep-Alive: timeout=time</code> understands Mozilla and Konqueror. MSIE itself shuts keep-alive connection approximately after 60 seconds.
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

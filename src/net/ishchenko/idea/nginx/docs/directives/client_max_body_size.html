@@ -1,0 +1,9 @@
+
+<p><b>syntax:</b> <i>client_max_body_size size</i>
+</p><p><b>default:</b> <i>client_max_body_size 1m</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Directive assigns the maximum accepted body size of client request, indicated by the line <code>Content-Length</code> in the header of request.
+</p><p>If size is greater the given one, then the client gets the error "Request Entity Too Large" (413).
+</p><p>It is necessary to keep in mind that the browsers do not know how to correctly show this error.
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

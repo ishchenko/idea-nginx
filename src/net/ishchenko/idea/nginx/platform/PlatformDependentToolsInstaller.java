@@ -18,11 +18,11 @@ package net.ishchenko.idea.nginx.platform;
 
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
+import com.intellij.ide.plugins.cl.PluginClassLoader;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.components.ComponentConfig;
 import com.intellij.openapi.components.ex.ComponentManagerEx;
-import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.util.SystemInfo;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ public class PlatformDependentToolsInstaller implements ApplicationComponent {
 
         ComponentConfig config = new ComponentConfig();
 
-        IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(PluginId.getId("ideanginx9"));
+        IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(((PluginClassLoader)getClass().getClassLoader()).getPluginId());
 
         config.interfaceClass = PlatformDependentTools.class.getName();
         if (SystemInfo.isLinux) {

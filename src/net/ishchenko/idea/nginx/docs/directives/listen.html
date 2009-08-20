@@ -1,0 +1,62 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>listen address:port [ default [ backlog=num | rcvbuf=size | sndbuf=size | accept_filter=filter | deferred | bind | ssl ]   </i>
+</p><p><b>default:</b> <i>listen 80</i>
+</p><p><b>context:</b> <i>server</i>
+</p><p>The <i>listen</i> directive specifies the address and port accepted by the enclosing server {...}  block. It is possible to specify only an address, only a port, or a server name as the address.
+</p><p></p>
+<pre class="code"><span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8000</span>;
+<span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>;
+<span class="kw3">listen</span> <span class="nu0">8000</span>;
+<span class="kw3">listen</span> *:<span class="nu0">8000</span>;
+<span class="kw3">listen</span> localhost:<span class="nu0">8000</span>;</pre>
+<p>IPv6 address(0.7.36) are set in square brackets:
+</p>
+<pre class="code"><span class="kw3">listen</span>  <span class="br0">&#91;</span>::<span class="br0">&#93;</span>:<span class="nu0">8000</span>;
+<span class="kw3">listen</span>  <span class="br0">&#91;</span>fe80::<span class="nu0">1</span><span class="br0">&#93;</span>;</pre>
+<p>If only address is given, the default port is 80.
+</p><p>If the directive has the <i>default</i> parameter, then the enclosing server {...} block will be the default server for the address:port pair.  This is useful for name-based virtual hosting where you wish to specify the default server block for hostnames that do not match any [#server_name server_name]  directives.  If there are no directives with the <code>default</code> parameter, then the default server will be the first server block in which the <code>address:port</code> pair appears.
+</p><p>The <code>listen</code> directive accepts several parameters, specific to the system calls <code>listen(2)</code> and <code>bind(2)</code>.  These parameters must follow the <code>default</code> parameter.
+</p><p>backlog=num -- is assigned parameter backlog in call <code>listen(2)</code>. By default backlog equals -1.
+</p><p>rcvbuf=size -- assigned to the parameter <code>SO_RCVBUF</code> for the listening socket.
+</p><p>sndbuf=size -- assigned to the parameter <code>SO_SNDBUF</code> for the listening socket.
+</p><p>accept_filter=filter -- is assigned name accept-filter.
+</p>
+<dl><dd> . It works only to FreeBSD, it is possible to use two filters -- <code>dataready</code> and <code>httpready</code>. On the signal -HUP accept-filter it is possible to change only in the quite last versions FreeBSD: 6.0, 5.4-STABLE and 4.11-STABLE.
+</dd></dl>
+<p>deferred -- indicates to use that postponed accept(2) on Linux with
+</p>
+<dl><dd> . the aid of option <code>TCP_DEFER_ACCEPT</code>.
+</dd></dl>
+<p>bind -- indicates that it is necessary to make <code>bind(2)</code> separately
+</p>
+<dl><dd> . for this pair of address:port. The fact is that if are described several directives listen with the identical port, but by different  addresses and one of the directives listen listens to on all addresses for this port (*:port), then nginx will make bind(2) only to *:port. It is necessary to consider that in this case for determining the address, on which the connections arrive, is done the system call getsockname(). But if are used parameters backlog, rcvbuf, sndbuf, accept_filter or deferred, then it is always done separately for this pair of address:port bind(2).
+</dd></dl>
+<p>ssl -- parameter (0.7.14) not related to listen(2) and bind(2) syscalls
+</p>
+<dl><dd> . but instead specifies that connections accepted on this port should work in SSL mode. This allows to specify compact configurations for servers working with both HTTP and HTTPS. For example:
+</dd></dl>
+<p></p>
+<pre class="code"><span class="kw3">listen</span>  <span class="nu0">80</span>;
+<span class="kw3">listen</span>  <span class="nu0">443</span> default <span class="kw31">ssl</span>;</pre>
+<p>Example of the use of the parameters:
+</p>
+<pre class="code"><span class="kw3">listen</span>  <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span> default accept_filter=dataready backlog=<span class="nu0">1024</span>;</pre>
+<br><i>Module: NginxHttpCoreModule</i><hr>
+<p><b>syntax:</b> <i>listen</i> <i><b>address:port [ bind ] </b></i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>server</i>
+</p><p>The directive specifies the address and port, on which the server accepts requests. It is possible to specify address or port only, besides, an address can be the server name, for example:
+</p><p></p>
+<pre class="code"><span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8000</span>;
+<span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>;
+<span class="kw3">listen</span> <span class="nu0">8000</span>;
+<span class="kw3">listen</span> *:<span class="nu0">8000</span>;
+<span class="kw3">listen</span> localhost:<span class="nu0">8000</span>;</pre>
+<p>IPv6 address(&gt;=0.7.58) are set in square brackets:
+</p>
+<pre class="code"><span class="kw3">listen</span>  <span class="br0">&#91;</span>::<span class="br0">&#93;</span>:<span class="nu0">8000</span>; 
+<span class="kw3">listen</span>  <span class="br0">&#91;</span>fe80::<span class="nu0">1</span><span class="br0">&#93;</span>;</pre>
+<p>In directive listen it is possible to indicate the system call bind(2).
+</p><p>bind -- indicates that it is necessary to make bind(2) separately for this pair of address:port. If several directives listen with identical port but with different addresses and one of the directives listen to all addresses for this port (*:port) then Nginx will make bind(2) only to *:port. In this case the address is determined by the system call getsockname(). 
+</p>
+<br><i>Module: NginxMailCoreModule</i>

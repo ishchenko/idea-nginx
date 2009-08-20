@@ -1,0 +1,8 @@
+
+<p><b>syntax:</b> <i>client_body_timeout time</i>
+</p><p><b>default:</b> <i>60</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Directive sets the read timeout for the request body from client.
+</p><p>The timeout is set only if a body is not get in one readstep. If after this time the client send nothing, nginx returns error "Request time out" (408).
+</p>
+<br><i>Module: NginxHttpCoreModule</i>

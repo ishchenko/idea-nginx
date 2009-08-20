@@ -1,0 +1,17 @@
+
+<p><b>syntax:</b> <i>expires [time|epoch|max|off] </i>
+</p><p><b>default:</b> <i>expires off</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>It allows or prevents adding or changing the <code>Expires</code> and <code>Cache-Control</code> in the response headers. 
+</p><p>It is possible to assign positive or negative times. Time in the <code>Expires</code> header is obtained as the sum of the current time and the time assigned in the directive. 
+</p><p><code>epoch</code> indicates the absolute time of 1 January, 1970, 00:00:01 GMT.
+<code>max</code> assigns the time of 31 December 2037 23:59:59 GMT to the <code>Expires</code> header and 10 years for the <code>Cache-Control</code> header.
+</p><p>Contents of the <code>Cache-Control</code> header depends on the sign of the preset time: 
+</p>
+<ul><li> negative time: <code>Cache-Control: no-cache</code> 
+</li><li> positive time or equal to zero: <code>Cache-Control: max-age = #</code>, where <code>#</code> is the time in seconds, assigned in the directive. 
+</li></ul>
+<p>The parameter "off" prevents changes to "Expires" and "Cache-Control" in the headers.
+</p><p><b>Note:</b> <code>expires</code> works only for 200, 204, 301, 302, and 304 responses.
+</p>
+<br><i>Module: NginxHttpHeadersModule</i>

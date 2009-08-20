@@ -1,0 +1,91 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>try_files file1 [file2 ... filen] fallback</i>
+</p><p><b>default:</b> <i>none</i>
+</p><p><b>context:</b> <i>location</i>
+</p><p>This directive tells Nginx to test for each file's existence, and use the first found file as the URI.  If none of the files are found, then the location <code>fallback</code> is called ("fallback" can be any name).  <code>fallback</code> is a required parameter.   It can be a named location or any <i>guaranteed</i> URI.
+</p><p>Example:
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> <span class="kw3">index</span>.html <span class="kw3">index</span>.htm <span class="re0">@fallback</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> <span class="re0">@fallback</span> <span class="br0">&#123;</span>
+  <span class="kw3">root</span> /var/www/error;
+  <span class="kw3">index</span> <span class="kw3">index</span>.html;
+<span class="br0">&#125;</span></pre>
+<br><i>Module: NginxHttpCoreModule</i><hr>
+<p><i>Syntax:</i> <i>try_files path1 [ path2] uri</i>
+</p><p><i>Default:</i> <i>none</i>
+</p><p><i>Availability:</i> <i>0.7.27</i>
+</p><p>Checks for the existence of files in order, and returns the first file that is found.  A trailing slash indicates a directory - <code>$uri /</code>. In the event that no file is found, and internal redirect to the last parameter is invoked.   The last parameter is the fallback URI and *must* exist, or else an internal error will be raised.
+</p><p>Example use in proxying Mongrel:
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> /system/maintenance.html
+  <span class="re0">$uri</span> <span class="re0">$uri</span>/<span class="kw3">index</span>.html <span class="re0">$uri</span>.html <span class="re0">@mongrel</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> <span class="re0">@mongrel</span> <span class="br0">&#123;</span>
+  <span class="kw21">proxy_pass</span> <span class="kw3">http</span>://mongrel;
+<span class="br0">&#125;</span></pre>
+<p>Example of use with Drupal / FastCGI:
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> ~ \.php$ <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">@drupal</span>;
+  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
+  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /path/to<span class="re0">$fastcgi_script_name</span>;
+  <span class="co1"># other fastcgi_param</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> <span class="re0">@drupal</span> <span class="br0">&#123;</span>
+  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
+  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /path/to/<span class="kw3">index</span>.php;
+  <span class="kw11">fastcgi_param</span>  QUERY_STRING     q=<span class="re0">$request_uri</span>;
+  <span class="co1"># other fastcgi_param</span>
+<span class="br0">&#125;</span></pre>
+<p>In this example, the directive <code>try_files</code>:
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span>;
+<span class="br0">&#125;</span></pre>
+<p>Similar directives:
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw3">error_page</span>     <span class="nu0">404</span> = <span class="re0">@drupal</span>;
+  <span class="kw1">log_not_found</span>  off;
+<span class="br0">&#125;</span></pre>
+<p>and here:
+</p>
+<pre class="code"><span class="kw3">location</span> ~ \.php$ <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">@drupal</span>;
+&nbsp;
+  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
+  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /path/to<span class="re0">$fastcgi_script_name</span>;
+  <span class="co1"># other fastcgi_param</span>
+<span class="br0">&#125;</span></pre>
+<p><br />	
+<code>try_files</code> tests the existence of PHP file, before submitting a request to the FastCGI server.
+</p><p>Example of use with Wordpress and Joomla:
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@wordpress</span>;
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> ~ \.php$ <span class="br0">&#123;</span>
+  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">@wordpress</span>;
+&nbsp;
+  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
+  <span class="kw11">fastcgi_param</span> SCRIPT_FILENAME /path/to<span class="re0">$fastcgi_script_name</span>;
+  <span class="co1"># other fastcgi_param</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw3">location</span> <span class="re0">@wordpress</span> <span class="br0">&#123;</span>
+    <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
+    <span class="kw11">fastcgi_param</span> SCRIPT_FILENAME /path/to/<span class="kw3">index</span>.php;
+    <span class="co1"># other fastcgi_param</span>
+<span class="br0">&#125;</span></pre>
+<br><i>Module: NginxHttpMainModule</i>

@@ -1,0 +1,14 @@
+
+<p><b>syntax:</b> <i>proxy_next_upstream [error|timeout|invalid_header|http_500|http_502|http_503|http_504|http_404|off] </i>
+</p><p><b>default:</b> <i>proxy_next_upstream error timeout</i>
+</p><p><b>context:</b> <i>http, server, location</i>
+</p><p>Directive determines, in what cases the request will be transmitted to the next server:
+</p>
+<ul><li> error — an error has occurred while connecting to the server, sending a request to it, or reading its response;
+</li><li> timeout — occurred timeout during the connection with the server, transfer the request or while reading response from the server;
+</li><li> invalid_header — server returned a empty or incorrect answer;
+</li><li> http_500 — server returned answer with</li><li> http_502 — server returned answer with</li><li> http_503 — server returned answer with</li><li> http_504 — server returned answer with</li><li> http_404 — server returned answer with</li><li> off — it forbids the request transfer to the next server
+</li></ul>
+<p>Transferring the request to the next server is only possible when nothing has been transferred to the client -- that is, if an error or timeout arises in the middle of the transfer of the request, then it is not possible to retry the current request on a different server.
+</p>
+<br><i>Module: NginxHttpProxyModule</i>

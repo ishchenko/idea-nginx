@@ -209,14 +209,7 @@ public class NginxConfigurationPanel {
             VirtualFile[] file = FileChooser.chooseFiles(serverList, new NginxExecutableFileChooserDescriptor(), null);
             if (file.length > 0) {
 
-                NginxServerDescriptor newDescriptor = null;
-                try {
-                    newDescriptor = pdt.createDescriptorFromFile(file[0]);
-                } catch (PlatformDependentTools.ThisIsNotNginxExecutableException e) {
-                    if (userAgreesThatItIsNotNginx()) {
-                        newDescriptor = pdt.getDefaultDescriptorFromFile(file[0]);
-                    }
-                }
+                NginxServerDescriptor newDescriptor = getDescriptorFromFile(file[0]);
 
                 if (newDescriptor != null) {
                     newDescriptor.setName(getUniqueName(newDescriptor.getName()));
@@ -254,14 +247,8 @@ public class NginxConfigurationPanel {
 
             if (chosen.length > 0) {
 
-                NginxServerDescriptor descriptor = null;
-                try {
-                    descriptor = pdt.createDescriptorFromFile(chosen[0]);
-                } catch (PlatformDependentTools.ThisIsNotNginxExecutableException e) {
-                    if (userAgreesThatItIsNotNginx()) {
-                        descriptor = pdt.getDefaultDescriptorFromFile(chosen[0]);
-                    }
-                }
+                NginxServerDescriptor descriptor = getDescriptorFromFile(chosen[0]);
+
                 if (descriptor != null) {
                     executableField.setText(descriptor.getExecutablePath());
                     configField.setText(descriptor.getConfigPath());
@@ -270,6 +257,27 @@ public class NginxConfigurationPanel {
                 }
             }
 
+        }
+
+        private NginxServerDescriptor getDescriptorFromFile(VirtualFile chosen) {
+
+            boolean useDefaultDescriptor = false;
+            NginxServerDescriptor descriptor = null;
+
+            if (!userAgreesToRunExecutable()) {
+                useDefaultDescriptor = true;
+            } else {
+                try {
+                    descriptor = pdt.createDescriptorFromFile(chosen);
+                } catch (PlatformDependentTools.ThisIsNotNginxExecutableException e) {
+                    useDefaultDescriptor = userAgreesThatItIsNotNginx();
+                }
+            }
+
+            if (useDefaultDescriptor) {
+                descriptor = pdt.getDefaultDescriptorFromFile(chosen);
+            }
+            return descriptor;
         }
 
         public void chooseConfigurationClicked() {
@@ -312,6 +320,18 @@ public class NginxConfigurationPanel {
             builder.setCenterPanel(label);
 
             return builder.show() == DialogWrapper.OK_EXIT_CODE;
+        }
+
+        private boolean userAgreesToRunExecutable() {
+
+            final DialogBuilder builder = new DialogBuilder(serverList);
+
+            JLabel label = new JLabel(NginxBundle.message("run.doyouwanttorun"));
+            builder.setTitle(NginxBundle.message("run.notnginx.warning"));
+            builder.setCenterPanel(label);
+
+            return builder.show() == DialogWrapper.OK_EXIT_CODE;
+
         }
 
         private String getUniqueName(String name) {

@@ -1,0 +1,17 @@
+
+<p><b>syntax:</b> <i>auth_basic_user_file the_file</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>http, server, location, limit_except</i>
+</p><p>This directive sets the htpasswd filename for the authentication realm. Since version 0.6.7 the filename path is relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory.
+</p><p>The format of file is the following: 
+</p>
+<pre>
+user:pass
+user2:pass2:comment
+user3:pass3
+</pre>
+<p>Passwords must be encoded by function crypt(3).
+You can create the password file with the htpasswd program from Apache.
+</p><p><br />
+</p>
+<br><i>Module: NginxHttpAuthBasicModule</i>

@@ -1,0 +1,37 @@
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
+<p><b>syntax:</b> <i>server {...}</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>http</i>
+</p><p>Directive assigns configuration for the virtual server.
+</p><p>There is no separation of IP and name-based (the <code>Host</code> header of the request) servers.
+</p><p>Instead, the directive <code>listen</code> is used to describe all addresses and ports on which incoming connections can occur, and in directive <code>server_name</code> indicate all names of the server.
+</p>
+<br><i>Module: NginxHttpCoreModule</i><hr>
+<p><b>syntax:</b> <i>server name [parameters] </i>
+</p><p><b>default:</b> <i>none</i>
+</p><p><b>context:</b> <i>upstream</i>
+</p><p>Directive assigns the name and the parameters of server. For the name it is possible to use a domain name, an address, port or unix socket. If domain name resolves to several addresses, then all are used.
+</p>
+<ul><li> weight = NUMBER - set weight of the server, if not set weight is equal to one.
+</li><li> max_fails = NUMBER - number of unsuccessful attempts at communicating with the server within the time period (assigned by parameter fail_timeout) after which it is considered inoperative.  If not set, the number of attempts is one. A value of 0 turns off this check.  What is considered a failure is defined by proxy_next_upstream or fastcgi_next_upstream (except http_404 errors which do not count towards max_fails).
+</li><li> fail_timeout = TIME - the time during which must occur *max_fails* number of unsuccessful attempts at communication with the server that would cause the server to be considered inoperative, and also the time for which the  server will be considered inoperative (before another attempt is made).  If not set the time is 10 seconds. fail_timeout has nothing to do with upstream response time, use proxy_connect_timeout  and proxy_read_timeout  for controlling this.
+</li></ul>
+<ul><li> down - marks server as permanently offline, to be used with the directive ip_hash.
+</li><li> backup - (0.6.7 or later) only uses this server if the non-backup servers are all down or busy
+</li></ul>
+<p>Example configuration:
+</p><p></p>
+<pre class="code"><span class="kw4">upstream</span>  backend  <span class="br0">&#123;</span>
+  <span class="kw3">server</span>   backend1.example.com    weight=<span class="nu0">5</span>;
+  <span class="kw3">server</span>   <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8080</span>          max_fails=<span class="nu0">3</span>  fail_timeout=30s;
+  <span class="kw3">server</span>   unix:/tmp/backend3;
+<span class="br0">&#125;</span></pre>
+<br><i>Module: NginxHttpUpstreamModule</i><hr>
+<p><b>syntax:</b> <i>server {...}</i>
+</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>mail</i>
+</p><p>Directive assigns configuration for the virtual server.
+</p><p>There is no clear separation of the virtual servers ip-based and name-based (the value of the line "Host" header in the request).
+</p><p>Instead of this by directives listen are described all addresses and ports, on which it is necessary to assume connections for this server, and in directive server_name are indicated all names of servers.  Example configurations are described in tuning of virtual servers.
+</p>
+<br><i>Module: NginxMailCoreModule</i>

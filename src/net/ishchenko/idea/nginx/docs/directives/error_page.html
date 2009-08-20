@@ -1,0 +1,16 @@
+
+<p><b>syntax:</b> <i>error_page</p><p><b>default:</b> <i>no</i>
+</p><p><b>context:</b> <i>http, server, location, if in location</i>
+</p><p>The directive specifies the URI, which will be showed for the errors indicated.
+</p><p>Example:
+</p>
+<pre class="code"><span class="kw3">error_page</span>   <span class="nu0">404</span>          /<span class="nu0">404</span>.html;
+<span class="kw3">error_page</span>   <span class="nu0">502</span> <span class="nu0">503</span> <span class="nu0">504</span>  /50x.html;
+<span class="kw3">error_page</span>   <span class="nu0">403</span>          <span class="kw3">http</span>://example.com/forbidden.html;</pre>
+<p>Furthermore, it is possible to change the</p><p></p>
+<pre class="code"><span class="kw3">error_page</span> <span class="nu0">404</span> =<span class="nu0">200</span> /.empty.gif;</pre>
+<p>If an erroneous answer is processed by the proxied or FastCGI server and this server can return the different answer codes, for example, 200, 302, 401 or 404, then it is possible to hide the</p><p></p>
+<pre class="code"><span class="kw3">error_page</span>   <span class="nu0">404</span>  =  /<span class="nu0">404</span>.php;</pre>
+<p>If you wish to return the error</p>
+<pre class="code"><span class="kw3">error_page</span>   <span class="nu0">404</span>  /<span class="nu0">404</span>.php;</pre>
+<br><i>Module: NginxHttpCoreModule</i>

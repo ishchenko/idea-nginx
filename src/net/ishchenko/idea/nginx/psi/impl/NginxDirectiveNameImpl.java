@@ -18,10 +18,13 @@ package net.ishchenko.idea.nginx.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiElement;
+import com.intellij.util.IncorrectOperationException;
 import net.ishchenko.idea.nginx.annotator.NginxElementVisitor;
 import net.ishchenko.idea.nginx.psi.NginxDirective;
 import net.ishchenko.idea.nginx.psi.NginxDirectiveName;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.NonNls;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,5 +49,14 @@ public class NginxDirectiveNameImpl extends NginxElementImpl implements NginxDir
 
     public NginxDirective getDirective() {
         return (NginxDirective) getNode().getTreeParent().getPsi();
+    }
+
+    @Override
+    public String getName() {
+        return getText();
+    }
+
+    public PsiElement setName(@NonNls String name) throws IncorrectOperationException {
+        throw new IncorrectOperationException();
     }
 }

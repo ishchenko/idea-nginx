@@ -1,0 +1,10 @@
+
+<p><b>Syntax:</b> <i>timer_resolution t</i>
+</p><p><b>Default:</b> <i>none</i>
+</p><p>Example:
+</p>
+<pre class="code"><span class="kw1">timer_resolution</span>  100ms;</pre>
+<p>The directive allows to decrease number gettimeofday() syscalls. By default gettimeofday() is called after each return from kevent(), epoll, /dev/poll, select(), poll().
+</p><p>But if you need an exact time in logs when logging $upstream_response_time, or $msec variables, then you should use <code>timer_resolution</code>.
+</p>
+<br><i>Module: NginxHttpMainModule</i>
