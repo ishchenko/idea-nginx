@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class NginxDirectiveImpl extends NginxElementImpl implements NginxDirective {
 
-    private final TokenSet DIRECTIVE_VALUE_TOKENS = TokenSet.create(NginxElementTypes.COMPLEX_VALUE);
+    private static final TokenSet DIRECTIVE_VALUE_TOKENS = TokenSet.create(NginxElementTypes.COMPLEX_VALUE);
 
     public NginxDirectiveImpl(ASTNode node) {
         super(node);

@@ -19,13 +19,18 @@ package net.ishchenko.idea.nginx.formatter.blocks;
 import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
-//import com.intellij.psi.PsiComment;
-//import com.intellij.psi.PsiErrorElement;
-//import com.intellij.psi.PsiWhiteSpace;
-//import com.intellij.psi.impl.source.tree.ChameleonElement;
-//import com.intellij.psi.tree.IChameleonElementType;
+import com.intellij.psi.PsiComment;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiWhiteSpace;
+import com.intellij.psi.PsiErrorElement;
+import net.ishchenko.idea.nginx.lexer.NginxElementTypes;
+import net.ishchenko.idea.nginx.psi.NginxComplexValue;
+import net.ishchenko.idea.nginx.psi.NginxContext;
+import net.ishchenko.idea.nginx.psi.NginxDirective;
+import net.ishchenko.idea.nginx.psi.NginxPsiFile;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,26 +41,67 @@ import java.util.List;
  */
 public class NginxBlock implements ASTBlock {
 
-    private static final Spacing NO_SPACING = Spacing.createSpacing(0, 0, 0, false, 0);
-    private static final Spacing NO_SPACING_WITH_NEWLINE = Spacing.createSpacing(0, 0, 0, true, 1);
-    private static final Spacing COMMON_SPACING = Spacing.createSpacing(1, 1, 0, true, 100);
+    private static final Spacing ONE_LINE_BREAK_SPACING = Spacing.createSpacing(0, 0, 1, true, 50);
 
     private ASTNode node;
     private Indent indent;
-    private Wrap wrap;
     private Alignment alignment;
     private List<Block> blocks;
 
-    public NginxBlock(ASTNode node, Wrap wrap, Indent indent, Alignment alignment) {
+    public NginxBlock(ASTNode node, Indent indent, Alignment alignment) {
         this.node = node;
-        this.wrap = wrap;
         this.indent = indent;
         this.alignment = alignment;
     }
 
     @NotNull
     public List<Block> getSubBlocks() {
+
+        if (blocks == null) {
+
+            blocks = new ArrayList<Block>();
+
+            boolean isFileNode = getNode().getPsi() instanceof NginxPsiFile;
+
+            for (ASTNode childNode : getNode().getChildren(null)) {
+
+                if (!(childNode.getPsi() instanceof PsiWhiteSpace) && !(childNode.getPsi() instanceof PsiErrorElement)) { //just omitting whitespace tokens
+
+                    Indent childIndent = Indent.getNoneIndent();
+
+                    if (!isFileNode && (childNode.getPsi() instanceof NginxDirective || childNode.getPsi() instanceof PsiComment)) {
+                        childIndent = Indent.getNormalIndent();
+                    }
+
+                    blocks.add(new NginxBlock(childNode, childIndent, null));
+
+                }
+            }
+        }
         return blocks;
+    }
+
+    public Spacing getSpacing(Block genericLeftBlock, Block genericRightBlock) {
+
+        NginxBlock leftBlock = (NginxBlock) genericLeftBlock;
+        NginxBlock rightBlock = (NginxBlock) genericRightBlock;
+
+        PsiElement leftPsi = leftBlock.getNode().getPsi();
+        PsiElement rightPsi = rightBlock.getNode().getPsi();
+
+        if (rightPsi instanceof NginxDirective) {
+            return ONE_LINE_BREAK_SPACING;
+        }
+
+        if (rightBlock.getNode().getElementType() == NginxElementTypes.CLOSING_BRACE) {
+            return ONE_LINE_BREAK_SPACING;
+        }
+
+        if (leftBlock.getNode().getElementType() == NginxElementTypes.OPENING_BRACE) {
+            return ONE_LINE_BREAK_SPACING;
+        }
+
+        return null;
     }
 
     public ASTNode getNode() {
@@ -68,11 +114,11 @@ public class NginxBlock implements ASTBlock {
     }
 
     public Wrap getWrap() {
-        return wrap;
+        return null;
     }
 
     public Indent getIndent() {
-        return this.indent;
+        return indent;
     }
 
     public Alignment getAlignment() {
@@ -80,32 +126,20 @@ public class NginxBlock implements ASTBlock {
     }
 
     public boolean isIncomplete() {
-        return isIncomplete(getNode());
-    }
-
-    public boolean isIncomplete(@NotNull final ASTNode node) {
-//        if (node.getElementType() instanceof IChameleonElementType) return false;
-//        ASTNode lastChild = node.getLastChildNode();
-//        while (lastChild != null && !(lastChild.getElementType() instanceof IChameleonElementType) &&
-//                (lastChild.getPsi() instanceof PsiWhiteSpace || lastChild.getPsi() instanceof PsiComment)) {
-//            lastChild = lastChild.getTreePrev();
-//        }
-//        return lastChild != null && !(lastChild instanceof ChameleonElement) &&
-//                (lastChild.getPsi() instanceof PsiErrorElement || isIncomplete(lastChild));
-        //todo: formatter stuff
-        return true;
+        return false;
     }
 
     public boolean isLeaf() {
-        return getNode().getFirstChildNode() == null;
-    }
-
-    public Spacing getSpacing(Block child1, Block child2) {
-        return null;  
+        return getNode().getFirstChildNode() == null || getNode().getPsi() instanceof NginxComplexValue;
     }
 
     @NotNull
     public ChildAttributes getChildAttributes(int newChildIndex) {
+
+        if (getNode().getPsi() instanceof NginxContext) {
+            return new ChildAttributes(Indent.getNormalIndent(), null);
+        }
+
         return new ChildAttributes(Indent.getNoneIndent(), null);
     }
 }

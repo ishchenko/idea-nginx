@@ -15,13 +15,14 @@ import net.ishchenko.idea.nginx.lexer.NginxElementTypes;
 %eof{ return;
 %eof}
 
-LineTerminator = \r|\n|\r\n
-WhiteSpace = [ \t]          
+LineTerminator = [\r\n]
+WhiteSpace = [ \t]
 AnySpace = {LineTerminator} | {WhiteSpace} | [\f]
 //tokens to be highlighted
 SpecialDirectives = "http" | "server" | "location" | "if" | "upstream" | "events" | "types" | "charset_map" | "limit_except" | "geo" | "map" | "mail" | "imap"
+ValueStart = [^{};\n\r \t\f#$']
 
-LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator}*)
+LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator})
 
 
 %state DIRECTIVE_VALUE
@@ -36,11 +37,11 @@ LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator}*)
 
 <DIRECTIVE_VALUE> {
     "$" [_a-z]*              {return NginxElementTypes.INNER_VARIABLE;}
-    [^{};\n\r \t\f#$']+("$"[^_a-z])?     {
+    {ValueStart}+("$"[^_a-z])?     {
                                                 //the idea is to distinguish:
                                                 // 1) asd$ as value "asd$"
                                                 // 2) asd$qwe as value "asd" and variable "$qwe"
-                                                //thus, I include dollar and tail and cut the tail 
+                                                //thus, I include dollar and tail and cut the tail
                                                 //if you find any easier solution - advise me, please
                                                 int indexOfDollar = yytext().toString().indexOf("$");
                                                 if (indexOfDollar >= 0) {
@@ -50,7 +51,7 @@ LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator}*)
                                                 return NginxElementTypes.DIRECTIVE_VALUE;
                                             }
     ' ~'                                    {return NginxElementTypes.DIRECTIVE_STRING_VALUE;}
-    {AnySpace}+              {return NginxElementTypes.VALUE_WHITE_SPACE;}
+    {AnySpace}+ {ValueStart} {yypushback(1); return NginxElementTypes.VALUE_WHITE_SPACE;}
     "{"                      {yybegin(YYINITIAL); return NginxElementTypes.OPENING_BRACE; }
     "}"                      {yybegin(YYINITIAL); return NginxElementTypes.CLOSING_BRACE; }
     ";"                      {yybegin(YYINITIAL); return NginxElementTypes.SEMICOLON;}

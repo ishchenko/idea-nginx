@@ -42,7 +42,7 @@ public class NginxFormattingModelBuilder implements FormattingModelBuilder {
         ASTNode astNode = containingFile.getNode();
         assert astNode != null;
 
-        return FormattingModelProvider.createFormattingModelForPsiFile(containingFile, new NginxBlock(node, null, Indent.getAbsoluteNoneIndent(), null), settings);
+        return FormattingModelProvider.createFormattingModelForPsiFile(containingFile, new NginxBlock(node, Indent.getAbsoluteNoneIndent(), null), settings);
 
     }
 
