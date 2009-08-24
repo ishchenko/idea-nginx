@@ -22,6 +22,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.Range;
 import net.ishchenko.idea.nginx.NginxBundle;
 import net.ishchenko.idea.nginx.NginxKeywordsManager;
+import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
+import net.ishchenko.idea.nginx.configurator.NginxServerDescriptor;
 import net.ishchenko.idea.nginx.psi.*;
 
 /**
@@ -36,9 +38,11 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
     private AnnotationHolder holder;
 
     private NginxKeywordsManager keywords;
+    private NginxServersConfiguration configuration;
 
-    public NginxAnnotatingVisitor(NginxKeywordsManager keywords) {
+    public NginxAnnotatingVisitor(NginxKeywordsManager keywords, NginxServersConfiguration configuration) {
         this.keywords = keywords;
+        this.configuration = configuration;
     }
 
     public synchronized void annotate(PsiElement psiElement, AnnotationHolder holder) {
@@ -123,7 +127,8 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
     private void checkParentContext(NginxDirective node) {
         NginxContext parentContext = node.getParentContext();
         if (parentContext == null) {
-            if (!keywords.checkCanResideInMainContext(node.getNameString())) {
+            //top level directive checks are made only main file. other files can be potentially included 
+            if (nodeInMainConfig(node) && !keywords.checkCanResideInMainContext(node.getNameString())) {
                 holder.createWarningAnnotation(node, NginxBundle.message("annotator.directive.cantbeinmain", node.getNameString()));
             }
         } else {
@@ -133,6 +138,18 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
             }
 
         }
+    }
+
+    private boolean nodeInMainConfig(NginxDirective node) {
+        boolean isInMainConfig = false;
+        NginxServerDescriptor[] serversDescriptors = configuration.getServersDescriptors();
+        for (NginxServerDescriptor serversDescriptor : serversDescriptors) {
+            if (serversDescriptor.getConfigPath().equals(node.getContainingFile().getVirtualFile().getPath())) {
+                isInMainConfig = true;
+                break;
+            }
+        }
+        return isInMainConfig;
     }
 
     private void checkBooleanValue(NginxComplexValue node, String directiveName) {

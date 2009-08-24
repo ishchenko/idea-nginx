@@ -123,6 +123,21 @@ public class NginxServersConfiguration implements ApplicationComponent, Persiste
         return cachedFilepaths;
     }
 
+    public synchronized void rebuildFilepaths() {
+
+        //very ugly, indeed
+
+        cachedDescriptors = null;
+        getServersDescriptors();
+
+        cachedNameToPathsMapping = null;
+        getNameToPathsMapping();
+
+        cachedFilepaths = null;
+        getFilepaths();
+        
+    }
+
     private Map<String, Set<String>> extractNameToPaths() {
         Map<String, Set<String>> result = new HashMap<String, Set<String>>();
         for (NginxServerDescriptor descriptor : getServersDescriptors()) {

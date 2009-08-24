@@ -18,6 +18,8 @@ package net.ishchenko.idea.nginx.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet;
 import net.ishchenko.idea.nginx.annotator.NginxElementVisitor;
 import net.ishchenko.idea.nginx.psi.NginxDirective;
 import net.ishchenko.idea.nginx.psi.NginxDirectiveValue;
@@ -47,6 +49,12 @@ public class NginxDirectiveValueImpl extends NginxElementImpl implements NginxDi
         } else {
             visitor.visitElement(this);
         }
+    }
+
+    @NotNull
+    @Override
+    public PsiReference[] getReferences() {
+        return new FileReferenceSet(this).getAllReferences();
     }
 
 }
