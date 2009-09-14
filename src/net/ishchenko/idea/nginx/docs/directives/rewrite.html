@@ -16,12 +16,12 @@
 <ul><li> last - completes processing of rewrite directives, after which searches for corresponding URI and location
 </li><li> break - completes processing of rewrite directives
 </li><li> redirect - returns temporary redirect with</li><li> permanent - returns permanent redirect with</li></ul>
-<p>Note that if an redirect is relative (has no host part), then when redirecting Nginx uses the "Host" header if the header match name of  server_name  directive or the first name of <code>server_name</code> directive, if the header does not match or is absent.  If no <code>server_name</code> is set, then the local hostname is used.  If you want Nginx to always use the "Host" header, you can use a wildcard "*" <code>server_name</code> (but see the  restrictions  on doing so).Example:
+<p>Note that if a redirect is relative (has no host part), then when redirecting Nginx uses the "Host" header if the header match name of  server_name  directive or the first name of <code>server_name</code> directive, if the header does not match or is absent.  If no <code>server_name</code> is set, then the local hostname is used.  If you want Nginx to always use the "Host" header, you can use a wildcard "*" <code>server_name</code> (but see the  restrictions  on doing so). Example:
 </p><p></p>
 <pre class="code"><span class="kw22">rewrite</span>  ^<span class="br0">&#40;</span>/download/.*<span class="br0">&#41;</span>/media/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>\..*$  $<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  last;
 <span class="kw22">rewrite</span>  ^<span class="br0">&#40;</span>/download/.*<span class="br0">&#41;</span>/audio/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>\..*$  $<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.ra   last;
 <span class="kw22">return</span>   <span class="nu0">403</span>;</pre>
-<p>But if we place these directives in location /download/, then it is necessary to replace flag "last" by "break", otherwise nginx will hit the 10 cycle limit and return error 500:
+<p>But if we place these directives in location <code>/download/</code>, then it is necessary to replace flag "last" by "break", otherwise Nginx will hit the 10 cycle limit and return error 500:
 </p><p></p>
 <pre class="code"><span class="kw3">location</span> /download/ <span class="br0">&#123;</span>
   <span class="kw22">rewrite</span>  ^<span class="br0">&#40;</span>/download/.*<span class="br0">&#41;</span>/media/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>\..*$  $<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  <span class="kw22">break</span>;
@@ -31,14 +31,12 @@
 <p>If in the line of replacement arguments are indicated, then the rest of the request arguments are appended to them. To avoid having them appended, place a question mark as the last character:
 </p><p></p>
 <pre class="code">  <span class="kw22">rewrite</span>  ^/users/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>$  /show?<span class="kw1">user</span>=$<span class="nu0">1</span>?  last;</pre>
-<p><br />
-Note: for curly braces( { and } ), as they are used both in regex and for block control, to avoid conflicts, regex with curly braces are to be enclosed with double quotes (or single quotes). For example, to rewrite url's like: 
+<p>Note: for curly braces( { and } ), as they are used both in regexes and for block control, to avoid conflicts, regexes with curly braces are to be enclosed with double quotes (or single quotes). For example, to rewrite URLs like: 
 </p>
 <pre> 
 /photos/123456 
 </pre>
-<p><br />
-to: 
+<p>to: 
 </p>
 <pre> 
 /path/to/photos/12/1234/123456.png 
@@ -46,9 +44,11 @@ to:
 <p>use the following (note the quotes enclosing the regex):
 </p>
 <pre class="code"><span class="kw22">rewrite</span>  <span class="st0">&quot;/photos/([0-9] {2})([0-9] {2})([0-9] {2})&quot;</span> /path/to/photos/$<span class="nu0">1</span>/$<span class="nu0">1</span>$<span class="nu0">2</span>/$<span class="nu0">1</span>$<span class="nu0">2</span>$<span class="nu0">3</span>.png;</pre>
-<p>Also: rewrite operates only on path, not parameters.  To rewrite a url with parameters to another url, use If instead.
+<p>Also: rewrite operates only on path, not parameters.  To rewrite a URL with parameters to another URL, use this instead:
 </p>
 <pre class="code"><span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$args</span> ^~ post=<span class="nu0">100</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
   <span class="kw22">rewrite</span> ^ <span class="kw3">http</span>://example.com/new-address.html? permanent;
 <span class="br0">&#125;</span></pre>
+<p>Note that the $args variable is <b>not</b> decoded, unlike URIs during location matching.
+</p>
 <br><i>Module: NginxHttpRewriteModule</i>

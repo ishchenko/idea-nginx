@@ -2,8 +2,15 @@
 <p><b>syntax:</b> <i>keepalive_timeout [ time ] </i>
 </p><p><b>default:</b> <i>keepalive_timeout 75</i>
 </p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Directive assigns the timeout, for keep-alive connections with the client.
-</p><p>The second parameter assigns value in the line <code>Keep-Alive: timeout=time</code> in the header of response.
-</p><p>The parameters can differ from each other. Line <code>Keep-Alive: timeout=time</code> understands Mozilla and Konqueror. MSIE itself shuts keep-alive connection approximately after 60 seconds.
+</p><p>The first parameter assigns the timeout for keep-alive connections with the client. The server will close connections after this time.
+</p><p>The optional second parameter assigns the <code>time</code> value in the header <code>Keep-Alive: timeout=time</code> of the response. This header can convince some browsers to close the connection, so that the server does not have to. Without this parameter, nginx does not send a <code>Keep-Alive</code> header (though this is not what makes a connection "keep-alive").
+</p><p>The parameters can differ from each other.
+</p><p>Notes on how browsers handle the <code>Keep-Alive</code> header:
 </p>
+<ul><li> MSIE and Opera ignore the "Keep-Alive: timeout=&lt;N&gt;" header.
+</li><li> MSIE keeps the connection alive for about 60-65 seconds, then sends a TCP RST.
+</li><li> Opera keeps the connection alive for a long time.
+</li><li> Mozilla keeps the connection alive for N plus about 1-10 seconds.
+</li><li> Konqueror keeps the connection alive for about N seconds.
+</li></ul>
 <br><i>Module: NginxHttpCoreModule</i>

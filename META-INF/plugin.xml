@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support 9</name>
-    <version>0.0.7</version>
+    <version>0.0.8</version>
     <vendor url="http://code.google.com/p/idea-nginx/" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -15,6 +15,10 @@
     </description>
 
     <change-notes><![CDATA[
+        <b>0.0.8</b>
+        <ul>
+            <li>Documentation and autocompletion update.</li>
+        </ul>
         <b>0.0.7</b>
         <ul>
             <li>Open included files with ctrl+b (Go to Declaration).</li>

@@ -10,6 +10,15 @@ document_root
 document_uri
 fastcgi_path_info
 fastcgi_script_name
+geoip_city
+geoip_city_country_code
+geoip_city_country_code3
+geoip_city_country_name
+geoip_country_code
+geoip_country_code3
+geoip_country_name
+geoip_postal_code
+geoip_region
 host
 hostname
 http_cookie
@@ -60,6 +69,7 @@ ssl_client_i_dn
 ssl_client_raw_cert
 ssl_client_s_dn
 ssl_client_serial
+ssl_client_verify
 ssl_protocol
 upstream_addr
 upstream_cache_status

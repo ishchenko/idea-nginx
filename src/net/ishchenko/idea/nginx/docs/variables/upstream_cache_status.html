@@ -1,3 +1,9 @@
 
-<p>Appeared in 0.8.3.  Needs documentation.
+<p>Appeared in 0.8.3.  Possible values:
 </p>
+<ul><li> MISS
+</li><li> EXPIRED - expired, request was passed to backend
+</li><li> UPDATING - expired, stale response was used due to proxy/fastcgi_cache_use_stale updating
+</li><li> STALE - expired, stale response was used due to proxy/fastcgi_cache_use_stale
+</li><li> HIT
+</li></ul>
