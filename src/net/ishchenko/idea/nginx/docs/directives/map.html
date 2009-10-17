@@ -2,7 +2,7 @@
 <p><b>syntax:</b> <i>map $var1 $var2 { ... }</i>
 </p><p><b>default:</b> <i>none</i>
 </p><p><b>context:</b> <i>http</i>
-</p><p><b>map</b> defines the mapping table which will be used to set a variable.  There are three different type of maps:
+</p><p><b>map</b> defines the mapping table which will be used to set a variable.  There are three special parameters:
 </p>
 <ul><li> default — defines the value to be used where no match is found.
 </li><li> hostnames — it allows for an easier matching of values like host names, names with a starting dot may match exact host names and host names ending with the value, for example: 
@@ -21,6 +21,6 @@ example.com    1;
 <pre>
 .example.com   1;
 </pre>
-<ul><li> include — the maps will be included from a file, or even from multiple files when using wildcards.
+<ul><li> include — include values from a file. Multiple includes may be used.
 </li></ul>
 <br><i>Module: NginxHttpMapModule</i>

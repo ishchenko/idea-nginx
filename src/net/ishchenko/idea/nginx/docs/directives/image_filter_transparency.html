@@ -1,0 +1,11 @@
+
+<p><b>Syntax:</b> <i>image_filter_transparency on|off</i>
+</p><p><b>Default:</b> <i>on</i>
+</p><p><b>Context:</b> <i>http, server, location</i>
+</p><p>This directive allows you to disable image transparency in GIF and
+palette-based PNG to improve image resampling quality. 
+</p><p>True color PNG alpha-channels are always preserved despite this setting.
+</p><p>Note: Grayscale PNG's are untested, but should be handled
+as truecolor PNGs.
+</p>
+<br><i>Module: NginxHttpImageFilterModule</i>

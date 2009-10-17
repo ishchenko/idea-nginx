@@ -34,6 +34,18 @@
 <pre class="code"><span class="kw3">location</span>  /some/path/ <span class="br0">&#123;</span>
   <span class="kw21">proxy_pass</span>   <span class="kw3">http</span>://<span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>;
 <span class="br0">&#125;</span></pre>
-<p><br />
+<p>A special case is using variables in the proxy_pass statement: The requested URL is not used and you are fully responsible to construct the target URL yourself.
+</p><p>This means, the following is not what you want for rewriting into a zope virtual host monster, as it will proxy always to the same URL (within one server specification):
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw21">proxy_pass</span>   <span class="kw3">http</span>://<span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8080</span>/VirtualHostBase/https/<span class="re0">$server_name</span>:<span class="nu0">443</span>/some/path/VirtualHostRoot;
+<span class="br0">&#125;</span></pre>
+<p>Instead use a combination of rewrite and proxy_pass:
+</p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
+  <span class="kw22">rewrite</span> ^<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>$ /VirtualHostBase/https/<span class="re0">$server_name</span>:<span class="nu0">443</span>/some/path/VirtualHostRoot/$<span class="nu0">1</span> <span class="kw22">break</span>;
+  <span class="kw21">proxy_pass</span>   <span class="kw3">http</span>://<span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8080</span>;
+<span class="br0">&#125;</span></pre>
+<p>In this case URL sanitizing is done already as part of the rewriting process, i.e. a trailing slash with the proxy_pass statement has no further effect.
 </p>
 <br><i>Module: NginxHttpProxyModule</i>

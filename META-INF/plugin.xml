@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support 9</name>
-    <version>0.0.8</version>
+    <version>0.0.9</version>
     <vendor url="http://code.google.com/p/idea-nginx/" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -14,7 +14,15 @@
     ]]>
     </description>
 
+    <depends>com.intellij.modules.lang</depends>
+
     <change-notes><![CDATA[
+        <b>0.0.9</b>
+        <ul>
+            <li>Now only "Run" button is enabled for nginx run configuration</li>
+            <li>Works in WebIDE</li>
+            <li>Documentation and autocompletion update.</li>
+        </ul>
         <b>0.0.8</b>
         <ul>
             <li>Documentation and autocompletion update.</li>
@@ -57,7 +65,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="10000" until-build="11000"/>
+    <idea-version since-build="10000"/>
 
     <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 
@@ -73,6 +81,7 @@
         <configurationType implementation="net.ishchenko.idea.nginx.run.NginxConfigurationType"/>
         <completion.contributor language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
         <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
+        <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
     </extensions>
 
     <application-components>

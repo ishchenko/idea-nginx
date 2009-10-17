@@ -4,7 +4,7 @@
 </p><p><b>context:</b> <i>server</i>
 </p><p>This directive allows different configurations depending on the URI. It can be configured using both literal strings and regular expressions. To use regular expressions, you must use the a prefix:
 </p>
-<ol><li>  <code>~*</code> for case insensitive matching
+<ol><li>  <code>~*</code> for case insensitive matching 
 </li><li>  <code>~</code> for case sensitive matching
 </li></ol>
 <p>To determine which <i>location</i> directive matches a particular query, the literal strings are checked first. Literal strings match the beginning portion of the query and are case-sensitive - the most specific match will be used (see below on how nginx determines this). Afterwards, regular expressions are checked in the order defined in the configuration file. The first regular expression to match the query will stop the search. If no regular expression matches are found, the result from the literal string search is used.
@@ -22,24 +22,24 @@
 </p><p></p>
 <pre class="code"><span class="kw3">location</span>  = / <span class="br0">&#123;</span>
   <span class="co1"># matches the query / only.</span>
-  <span class="br0">&#91;</span> configuration A <span class="br0">&#93;</span>
+  <span class="br0">&#91;</span> configuration A <span class="br0">&#93;</span> 
 <span class="br0">&#125;</span>
 <span class="kw3">location</span>  / <span class="br0">&#123;</span>
   <span class="co1"># matches any query, since all queries begin with /, but regular</span>
   <span class="co1"># expressions and any longer conventional blocks will be</span>
   <span class="co1"># matched first.</span>
-  <span class="br0">&#91;</span> configuration B <span class="br0">&#93;</span>
+  <span class="br0">&#91;</span> configuration B <span class="br0">&#93;</span> 
 <span class="br0">&#125;</span>
 <span class="kw3">location</span> ^~ /images/ <span class="br0">&#123;</span>
   <span class="co1"># matches any query beginning with /images/ and halts searching,</span>
   <span class="co1"># so regular expressions will not be checked.</span>
-  <span class="br0">&#91;</span> configuration C <span class="br0">&#93;</span>
+  <span class="br0">&#91;</span> configuration C <span class="br0">&#93;</span> 
 <span class="br0">&#125;</span>
 <span class="kw3">location</span> ~* \.<span class="br0">&#40;</span>gif|jpg|jpeg<span class="br0">&#41;</span>$ <span class="br0">&#123;</span>
   <span class="co1"># matches any request ending in gif, jpg, or jpeg. However, all</span>
   <span class="co1"># requests to the /images/ directory will be handled by</span>
   <span class="co1"># Configuration C.   </span>
-  <span class="br0">&#91;</span> configuration D <span class="br0">&#93;</span>
+  <span class="br0">&#91;</span> configuration D <span class="br0">&#93;</span> 
 <span class="br0">&#125;</span></pre>
 <p>Example requests:
 </p>

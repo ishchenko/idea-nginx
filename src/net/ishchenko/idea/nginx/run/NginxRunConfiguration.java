@@ -23,11 +23,13 @@ import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -47,7 +49,7 @@ import java.io.File;
  * Time: 19:16:26
  */
 @SuppressWarnings({"deprecation"})
-public class NginxRunConfiguration extends RuntimeConfiguration implements ModuleRunConfiguration {
+public class NginxRunConfiguration extends RunConfigurationBase {
 
     public String serverDescriptorId;
     public boolean showHttpLog;
@@ -56,16 +58,13 @@ public class NginxRunConfiguration extends RuntimeConfiguration implements Modul
     public String errorLogPath;
 
     public NginxRunConfiguration(Project project, ConfigurationFactory nginxConfigurationFactory, String name) {
-        super(name, project, nginxConfigurationFactory);
+        super(project, nginxConfigurationFactory, name);
     }
 
     public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException {
-
         return new NginxRunProfileState(env, getProject());
-
     }
 
-    @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
 
         NginxServersConfiguration config = NginxServersConfiguration.getInstance();
@@ -163,6 +162,14 @@ public class NginxRunConfiguration extends RuntimeConfiguration implements Modul
 
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
         return new NginxRunSettingsEditor(this);
+    }
+
+    public JDOMExternalizable createRunnerSettings(ConfigurationInfoProvider provider) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(ProgramRunner runner) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public String getServerDescriptorId() {

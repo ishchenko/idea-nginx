@@ -71,6 +71,7 @@ ssl_client_s_dn
 ssl_client_serial
 ssl_client_verify
 ssl_protocol
+ssl_session_id
 upstream_addr
 upstream_cache_status
 upstream_response_length
