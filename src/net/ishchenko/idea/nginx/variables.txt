@@ -11,12 +11,15 @@ document_uri
 fastcgi_path_info
 fastcgi_script_name
 geoip_city
+geoip_city_continent_code
 geoip_city_country_code
 geoip_city_country_code3
 geoip_city_country_name
 geoip_country_code
 geoip_country_code3
 geoip_country_name
+geoip_latitude
+geoip_longitude
 geoip_postal_code
 geoip_region
 host

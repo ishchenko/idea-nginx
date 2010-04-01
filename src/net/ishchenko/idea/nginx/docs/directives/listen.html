@@ -18,7 +18,7 @@
 <pre class="code"><span class="kw3">listen</span> <span class="br0">&#91;</span>2a02:<span class="nu0">750</span>:<span class="nu0">5</span>::<span class="nu0">123</span><span class="br0">&#93;</span>:<span class="nu0">80</span>;
 <span class="kw3">listen</span> <span class="br0">&#91;</span>::<span class="br0">&#93;</span>:<span class="nu0">80</span> default ipv6only=on;</pre>
 <p>If only address is given, the default port is 80.
-</p><p>If the directive has the <i>default</i> parameter, then the enclosing server {...} block will be the default server for the address:port pair.  This is useful for name-based virtual hosting where you wish to specify the default server block for hostnames that do not match any [#server_name server_name]  directives.  If there are no directives with the <code>default</code> parameter, then the default server will be the first server block in which the <code>address:port</code> pair appears.
+</p><p>If the directive has the <i>default</i> parameter, then the enclosing server {...} block will be the default server for the address:port pair.  This is useful for name-based virtual hosting where you wish to specify the default server block for hostnames that do not match any server_name  directives.  If there are no directives with the <code>default</code> parameter, then the default server will be the first server block in which the <code>address:port</code> pair appears.
 </p><p>The <code>listen</code> directive accepts several parameters, specific to the system calls <code>listen(2)</code> and <code>bind(2)</code>.  These parameters must follow the <code>default</code> parameter.
 </p><p>backlog=num -- is assigned parameter backlog in call <code>listen(2)</code>. By default backlog equals -1.
 </p><p>rcvbuf=size -- assigned to the parameter <code>SO_RCVBUF</code> for the listening socket.
@@ -45,6 +45,9 @@
 <p>Example of the use of the parameters:
 </p>
 <pre class="code"><span class="kw3">listen</span>  <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span> default accept_filter=dataready backlog=<span class="nu0">1024</span>;</pre>
+<p>Since version 0.8.21 nginx is able to listen on unix sockets:
+</p>
+<pre class="code"><span class="kw3">listen</span> unix:/tmp/nginx1.sock;</pre>
 <br><i>Module: NginxHttpCoreModule</i><hr>
 <p><b>syntax:</b> <i>listen</i> <i><b>address:port [ bind ] </b></i>
 </p><p><b>default:</b> <i>no</i>

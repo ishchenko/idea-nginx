@@ -37,9 +37,15 @@ import java.util.regex.Pattern;
  */
 public class NginxCompileParametersExtractor {
 
-    // (?:.*\n)? is added for mac. -V output has one extra line there.
-    private static final Pattern OUTPUT_PATTERN = Pattern.compile("nginx version: nginx/([\\d\\.]+)\r?\n(?:.*\n)?configure arguments: (.*)");
+    private static final Pattern OUTPUT_PATTERN = Pattern.compile("nginx version: nginx/([\\d\\.]+)\r?\n(?:.*\r?\n)*configure arguments: (.*)");
 
+    /**
+     * Runs file with -V argument and matches the output against OUTPUT_PATTERN.
+     * @param from executable to be run with -V command line argument
+     * @return Parameters parsed out from process output
+     * @throws PlatformDependentTools.ThisIsNotNginxExecutableException if file could not be run, or
+     * output would not match against expected pattern
+     */
     public static NginxCompileParameters extract(VirtualFile from) throws PlatformDependentTools.ThisIsNotNginxExecutableException {
 
         NginxCompileParameters result = new NginxCompileParameters();

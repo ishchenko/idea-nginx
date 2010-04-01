@@ -5,10 +5,10 @@
 </p><p>This directive sets the port or socket, on which listens to the proxied server, and the URI, to which will be reflected location.
 </p><p>Port can be indicated in the form of the name of hostname or address and port, for example,
 </p><p></p>
-<pre class="code"><span class="kw21">proxy_pass</span> <span class="kw3">http</span>://localhost:<span class="nu0">8000</span>/uri;</pre>
+<pre class="code"><span class="kw21">proxy_pass</span> <span class="kw3">http</span>://localhost:<span class="nu0">8000</span>/uri/;</pre>
 <p>and socket -- in the form of unix of socket:
 </p><p></p>
-<pre class="code"><span class="kw21">proxy_pass</span> unix:/path/to/backend.socket</pre>
+<pre class="code"><span class="kw21">proxy_pass</span> <span class="kw3">http</span>://unix:/path/to/backend.socket:/uri/;</pre>
 <p>Path is indicated after the word <code>unix</code> and is concluded between two colons.
 </p><p>With the transfer of request to server part URI, which corresponds to location, is substituted to URI, indicated in directive proxy_pass.
 </p><p>But there are two exceptions to this rule, when it is not possible to determine that replaced location:

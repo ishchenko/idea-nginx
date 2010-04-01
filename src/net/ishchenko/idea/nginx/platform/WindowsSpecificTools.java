@@ -37,8 +37,6 @@ public class WindowsSpecificTools implements PlatformDependentTools {
     public static final String DEFAULT_HTTP_LOG_PATH = "/logs/access.log";
     public static final String DEFAULT_ERROR_LOG_PATH = "/logs/error.log";
 
-    public static final String[] EMPTY = new String[0];
-
     public static final String[] STOP_COMMAND = new String[]{"-s", "stop"};
     public static final String[] RELOAD_COMMAND = new String[]{"-s", "reload"};
     public static final String[] TEST_COMMAND = new String[]{"-t"};
@@ -86,11 +84,11 @@ public class WindowsSpecificTools implements PlatformDependentTools {
             prefix = file.getParent().getPath(); // There is no default prefix for windows, so let it be current dir
         }
 
-        descriptor.setConfigPath(getPrefixDependendSettings(compileParameters.getConfigurationPath(), prefix, DEFAULT_CONF_PATH));
-        descriptor.setPidPath(getPrefixDependendSettings(compileParameters.getPidPath(), prefix, DEFAULT_PID_PATH));
+        descriptor.setConfigPath(getPrefixDependentSettings(compileParameters.getConfigurationPath(), prefix, DEFAULT_CONF_PATH));
+        descriptor.setPidPath(getPrefixDependentSettings(compileParameters.getPidPath(), prefix, DEFAULT_PID_PATH));
 
-        descriptor.setHttpLogPath(getPrefixDependendSettings(compileParameters.getHttpLogPath(), prefix, DEFAULT_HTTP_LOG_PATH));
-        descriptor.setErrorLogPath(getPrefixDependendSettings(compileParameters.getErrorLogPath(), prefix, DEFAULT_ERROR_LOG_PATH));
+        descriptor.setHttpLogPath(getPrefixDependentSettings(compileParameters.getHttpLogPath(), prefix, DEFAULT_HTTP_LOG_PATH));
+        descriptor.setErrorLogPath(getPrefixDependentSettings(compileParameters.getErrorLogPath(), prefix, DEFAULT_ERROR_LOG_PATH));
 
         return descriptor;
 
@@ -109,7 +107,7 @@ public class WindowsSpecificTools implements PlatformDependentTools {
 
     }
 
-    private String getPrefixDependendSettings(String configurationPath, String prefix, String defaultValue) {
+    private String getPrefixDependentSettings(String configurationPath, String prefix, String defaultValue) {
 
         //this logic is not needed for linux as default prefix exists there
         if (configurationPath != null) {

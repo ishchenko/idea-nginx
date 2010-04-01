@@ -1,17 +1,19 @@
 
 <p><b>syntax:</b> <i>proxy_cache_valid reply</p><p><b>default:</b> <i>None</i>
 </p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive set the time for caching different replies. Example:
+</p><p>This directive sets the time for caching different replies. Example:
 </p>
 <pre class="code">  <span class="kw21">proxy_cache_valid</span>  <span class="nu0">200</span> <span class="nu0">302</span>  10m;
   <span class="kw21">proxy_cache_valid</span>  <span class="nu0">404</span>      1m;</pre>
-<p>set 10 minutes cache time for replies with</p><p>If defined only time:
+<p>sets 10 minutes cache time for replies with</p><p>If only time is specified:
 </p>
 <pre class="code">  <span class="kw21">proxy_cache_valid</span> 5m;</pre>
-<p>than only replies with codes 200, 301 and 302 will be cached.
+<p>then only replies with codes 200, 301 and 302 will be cached.
 </p><p>Also it is possible to cache any replies with parameter "any":
 </p>
 <pre class="code">  <span class="kw21">proxy_cache_valid</span>  <span class="nu0">200</span> <span class="nu0">302</span> 10m;
   <span class="kw21">proxy_cache_valid</span>  <span class="nu0">301</span> 1h;
   <span class="kw21">proxy_cache_valid</span>  any 1m;</pre>
+<p>Note: you must set this option for any persistent caching to occur.
+</p>
 <br><i>Module: NginxHttpProxyModule</i>

@@ -70,6 +70,9 @@ public class NginxServerDescriptor implements Cloneable {
         return id;
     }
 
+    /**
+     * Do not remove! Used for deserializing!
+     */
     public void setId(String id) {
         this.id = id;
     }

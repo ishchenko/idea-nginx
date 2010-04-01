@@ -1,4 +1,4 @@
-
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
 <p><b>Syntax:</b> <i>include file | *</i>
 </p><p><b>Default:</b> <i>none</i>
 </p><p>You can include any configuration files for what ever purpose you want.  
@@ -8,4 +8,31 @@
 <p>Note that until version 0.6.7, paths are relative to what was specified to <code>configure</code> via the <code>--prefix=&lt;PATH&gt;</code> directive, which by default is <code>/usr/local/nginx</code>.  If you didn't set this when you compiled Nginx, then use absolute paths. 
 </p><p>Since version 0.6.7, paths are relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory.
 </p>
-<br><i>Module: NginxHttpMainModule</i>
+<br><i>Module: NginxHttpMainModule</i><hr>
+<p>Include a document from another source.
+</p>
+<ul><li> <code>file</code> — include a file, e.g. 
+</li></ul>
+<pre>
+  &lt;!--# include file=&quot;footer.html&quot; --&gt;
+</pre>
+<ul><li> <code>virtual</code> — include a request, e.g. 
+</li></ul>
+<pre>
+  &lt;!--# include virtual=&quot;/remote/body.php?argument=value&quot; --&gt;
+</pre> 
+<p>The distinction between "file" and "virtual" is mostly historical.   "file" is the same as "virtual" with implied "wait" option.   At one point the directives mirrored the Apache equivalents but now they are basically the same operation.  Both can handle a URI and both can serve a static file.
+</p><p>Multiple requests will be issued in parallel. If you need them issued sequentially, use the "wait" option.
+</p>
+<ul><li> <code>stub</code> — The name of the block to use as a default if the request is empty or returns an error. 
+</li></ul>
+<pre>
+  &lt;!--# block name=&quot;one&quot; --&gt;&nbsp;&lt;!--# endblock --&gt;
+  &lt;!--# include virtual=&quot;/remote/body.php?argument=value&quot; stub=&quot;one&quot; --&gt;
+</pre>
+<ul><li> <code>wait</code> — when set to yes, the rest of the SSI will not be evaluated until the current request is finished. Example: 
+</li></ul>
+<pre>
+  &lt;!--# include virtual=&quot;/remote/body.php?argument=value&quot; wait=&quot;yes&quot; --&gt;
+</pre>
+<br><i>Module: NginxHttpSsiModule</i>

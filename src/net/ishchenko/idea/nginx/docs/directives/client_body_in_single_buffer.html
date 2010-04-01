@@ -3,5 +3,6 @@
 </p><p><b>default:</b> <i>off</i>
 </p><p><b>context:</b> <i>http, server, location</i>
 </p><p>The directive(0.7.58+) specifies whether to keep the whole body in a single client request buffer. The directive is recommended when using the variable $request_body to reduce the operations of copying.
+</p><p>Note that when the request body cannot be hold in a single buffer (see client_body_buffer_size), the body will still touch the disk.
 </p>
 <br><i>Module: NginxHttpCoreModule</i>

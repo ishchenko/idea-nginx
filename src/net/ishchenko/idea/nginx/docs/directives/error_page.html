@@ -10,8 +10,15 @@
 <span class="kw3">error_page</span>   <span class="nu0">404</span>          = <span class="re0">@fetch</span>;</pre>
 <p>Furthermore, it is possible to change the</p><p></p>
 <pre class="code"><span class="kw3">error_page</span> <span class="nu0">404</span> =<span class="nu0">200</span> /.empty.gif;</pre>
-<p>If an erroneous answer is processed by the proxied or FastCGI server and this server can return the different answer codes, for example, 200, 302, 401 or 404, then it is possible to hide the</p><p></p>
+<p>If an erroneous answer is processed by the proxied or FastCGI server and this server can return the different answer codes, for example, 200, 302, 401 or 404, then it is possible to issue the</p><p></p>
 <pre class="code"><span class="kw3">error_page</span>   <span class="nu0">404</span>  =  /<span class="nu0">404</span>.php;</pre>
-<p>If you wish to return the error</p>
-<pre class="code"><span class="kw3">error_page</span>   <span class="nu0">404</span>  /<span class="nu0">404</span>.php;</pre>
+<p>If there is no need to change URI during redirection it is possible to redirect processing of error pages into a named location:
+</p><p></p>
+<pre class="code"><span class="kw3">location</span> / <span class="br0">&#40;</span>
+    <span class="kw3">error_page</span> <span class="nu0">404</span> = <span class="re0">@fallback</span>;
+<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw3">location</span> <span class="re0">@fallback</span> <span class="br0">&#40;</span>
+    <span class="kw21">proxy_pass</span> <span class="kw3">http</span>://backend;
+<span class="br0">&#41;</span></pre>
 <br><i>Module: NginxHttpCoreModule</i>

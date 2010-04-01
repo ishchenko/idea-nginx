@@ -43,7 +43,7 @@
   <span class="kw22">return</span>   <span class="nu0">403</span>;
 <span class="br0">&#125;</span>
 &nbsp;
-<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$args</span> ^~ post=<span class="nu0">140</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$args</span> ~ post=<span class="nu0">140</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
   <span class="kw22">rewrite</span> ^ <span class="kw3">http</span>://example.com/ permanent;
 <span class="br0">&#125;</span></pre>
 <p>The value of the built-in variable <code>$invalid_referer</code> is given by the directive valid_referers.

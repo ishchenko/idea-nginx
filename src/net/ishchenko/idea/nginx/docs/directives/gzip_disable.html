@@ -2,8 +2,10 @@
 <p><b>syntax:</b> <i>gzip_disable regex</i>
 </p><p><b>context:</b> <i>http, server, location</i>
 </p><p>Disable gzip compression for User-Agents matching the given regular expression. Requires PCRE library. Introduced in Nginx 0.6.23.
-</p><p><br />
+</p><p>You can use "msie6" to disable gzip for Internet Explorer 5.5 and Internet Explorer 6. "SV1" (Service Pack 2) will be ignored since Nginx 0.7.63.
+</p><p>Example
 </p>
+<pre class="code">  <span class="kw13">gzip_disable</span>     <span class="st0">&quot;msie6&quot;</span>;</pre>
 <br><i>Module: NginxHttpGzipModule</i><hr>
 <p>See  NginxHttpGzipModule 
 </p>

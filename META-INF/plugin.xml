@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support 9</name>
-    <version>0.0.9</version>
+    <version>0.0.10</version>
     <vendor url="http://code.google.com/p/idea-nginx/" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -17,10 +17,16 @@
     <depends>com.intellij.modules.lang</depends>
 
     <change-notes><![CDATA[
+        <b>0.0.10</b>
+        <ul>
+            <li>-V output pattern fixed for versions 0.8.23+ and 0.7.64+</li>
+            <li>Works for all Jetbrains platform products (since build 93.94)</li>
+            <li>Documentation and autocompletion update for nginx 0.8.35</li>
+        </ul>
         <b>0.0.9</b>
         <ul>
-            <li>Now only "Run" button is enabled for nginx run configuration</li>
-            <li>Works in WebIDE</li>
+            <li>Now only "Run" button is enabled for nginx run configuration.</li>
+            <li>Works for WebIDE.</li>
             <li>Documentation and autocompletion update.</li>
         </ul>
         <b>0.0.8</b>
@@ -65,7 +71,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="10000"/>
+    <idea-version since-build="93.94"/>
 
     <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 

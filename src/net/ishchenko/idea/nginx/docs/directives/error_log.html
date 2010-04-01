@@ -12,7 +12,9 @@
 </p><p>If you've built Nginx with <code>--with-debug</code>, you may also use:
 </p>
 <pre class="code"><span class="kw1">error_log</span> LOGFILE <span class="br0">&#91;</span>debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap<span class="br0">&#93;</span>;</pre>
-<p>Note that <code>error_log off</code> does not disable logging - the log will be written a file named "off". To disable logging, you may use:
+<p>Note that <code>error_log off</code> does not disable logging - the log will be written to a file named "off". To disable logging, you may use:
 </p>
 <pre class="code"><span class="kw1">error_log</span> /dev/null crit;</pre>
+<p>Also note that as of version 0.7.53, nginx will use a compiled-in default error log location until it has read the config file. If the user running nginx doesn't have write permission to this log location, nginx will raise an alert like this:
+</p>
 <br><i>Module: NginxHttpMainModule</i>

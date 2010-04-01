@@ -1,5 +1,5 @@
 
-<p><b>syntax:</b> <i>access_log path [format [buffer=size | off</i>]]
+<p><b>syntax:</b> <i>access_log path [format [buffer=size]] | off</i>
 </p><p><b>default:</b> <i>access_log log/access.log combined</i>
 </p><p><b>context:</b> <i>http, server, location</i>
 </p><p>The <b>access_log</b> directive sets the path, format and buffer size for the access log file.  Using "off" as the only parameter clears all <b>access_log</b> directives for the current level.  If the format is not indicated, it defaults to "combined". The size of buffer must not exceed the size of the atomic record for writing into the disk file. This size is not limited for FreeBSD 3.0-6.0.

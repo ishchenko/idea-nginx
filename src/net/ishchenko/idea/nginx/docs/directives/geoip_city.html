@@ -4,11 +4,13 @@
 </p><p><b>context:</b> <i>http</i>
 </p><p>The directive indicates the path to the .dat file used for determining countries, regions and cities from IP-address of the client. When set the module makes available the following variables:
 </p>
-<ul><li> $geoip_city_country_code; - two-letter country code, for example, "RU", "US".
-</li><li> $geoip_city_country_code3; - three-letter country code, for example, "RUS", "USA".
-</li><li> $geoip_city_country_name; - the name of the country, for example, "Russian Federation", "United States".
-</li><li> $geoip_region; - the name of region (province, region, state, province, federal land, and the like), for example, "Moscow City", "DC".
-</li><li> $geoip_city; - the name of the city, for example, "Moscow", "Washington".
-</li><li> $geoip_postal_code; - postal code. 
+<ul><li> <b>$geoip_city_country_code</b> - two-letter country code, for example, "RU", "US".
+</li><li> <b>$geoip_city_country_code3</b> - three-letter country code, for example, "RUS", "USA".
+</li><li> <b>$geoip_city_country_name</b> - the name of the country, for example, "Russian Federation", "United States" (if available).
+</li><li> <b>$geoip_region</b> - the name of region (province, region, state, province, federal land, and the like), for example, "Moscow City", "DC" (if available).
+</li><li> <b>$geoip_city</b> - the name of the city, for example, "Moscow", "Washington" (if available).
+</li><li> <b>$geoip_postal_code</b> - postal</li><li> <b>$geoip_city_continent_code</b> (if available)
+</li><li> <b>$geoip_latitude</b> - latitude (if available)
+</li><li> <b>$geoip_longitude</b> - longitude (if available)
 </li></ul>
 <br><i>Module: NginxHttpGeoIPModule</i>

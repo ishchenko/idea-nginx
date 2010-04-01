@@ -10,4 +10,6 @@
     <span class="kw22">set</span> <span class="re0">$limit_rate</span>  4k;
   <span class="br0">&#125;</span>
 <span class="br0">&#125;</span></pre>
+<p>You can also control the rate of individual responses returned by a <code>proxy_pass</code> response (NginxHttpProxyModule) by setting the <code>X-Accel-Limit-Rate</code> header (NginxXSendfile). This can be done without a <code>X-Accel-Redirect</code> header.
+</p>
 <br><i>Module: NginxHttpCoreModule</i>

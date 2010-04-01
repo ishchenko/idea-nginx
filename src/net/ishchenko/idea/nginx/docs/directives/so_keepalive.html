@@ -2,6 +2,6 @@
 <p><b>syntax:</b> <i>so_keepalive</i> <i><b>on|off</b></i>;
 </p><p><b>default:</b> <i>off</i>
 </p><p><b>context:</b> <i>main, server</i>
-</p><p>With this directive you can set the socket SO_KEEPALIVE option for the connection to the IMAP/POP3 backend. In FreeBSD the keepalive option is used for all connections and can be turned off through setsockopt no (see sysctl net.inet.tcp.always_keepalive).
+</p><p>With this directive you can set the socket SO_KEEPALIVE option for the client connection to Nginx. In FreeBSD the keepalive option is used for all connections and can be turned off through setsockopt no (see sysctl net.inet.tcp.always_keepalive).
 </p>
 <br><i>Module: NginxMailCoreModule</i>

@@ -33,10 +33,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class NginxParser implements PsiParser {
 
-    Project project;
-
     public NginxParser(Project project) {
-        this.project = project;
     }
 
     @NotNull
