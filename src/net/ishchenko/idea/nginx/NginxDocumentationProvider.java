@@ -90,8 +90,7 @@ public class NginxDocumentationProvider extends QuickDocumentationProvider {
 
     }
 
-    public String getQuickNavigateInfo(PsiElement element) {
+    public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
         return null;
     }
-
 }
