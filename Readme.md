@@ -8,6 +8,8 @@ The plugin in Jetbrains plugin repo http://plugins.intellij.net/plugin/?id=4415
 
 ![nginx plugin features](http://img571.imageshack.us/img571/4932/pluginfeatures.png)
 
+# Features
+
 * Supports all three platforms IDEA runs on (Windows, Linux, Mac).
 * Server instance configuration are application-wide. Run configuration can use any of configured servers (similar to j2ee servers support in IDEA).
 * -V output is respected and --conf-path/--pid-path compile-time settings are used. --prefix option is also supported. Though some compile-time parameters combinations support may be buggy. Resulting configuration and pid paths are absolute and can be edited. Edit if -V parsing failed or else.
@@ -19,6 +21,6 @@ The plugin in Jetbrains plugin repo http://plugins.intellij.net/plugin/?id=4415
 * Maia version is available as "nginx Support 9" in your plugin list.
 * Slightly outdated build for IDEA 8 can be found here http://plugins.intellij.net/plugin/?id=4411
 
-** Known issues
+# Known issues
 * Sometimes nginx displays wrong line number on error message. This is a nginx bug.
 * No support for ambiguous directive validation, e.g. `server` may reside in `http`, `mail` or `upstream` sections
