@@ -12,7 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="commons-exec" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="commons-io" level="project" />
+    <orderEntry type="library" name="commons-io" level="project" />
   </component>
 </module>
 
