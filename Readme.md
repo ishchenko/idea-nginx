@@ -1,10 +1,8 @@
-Configuration file syntax support, run/reload configs/stop support. Works on all three platform IDEA runs on (Windows, Linux, Mac). Works for all Jetbrains platform products.
-
-The plugin has won a Honorable Mention Award in 2009-2010 Plugin Contest! Yay! http://blogs.jetbrains.com/idea/2010/06/announcing-the-ideal-plugins-for-2009-2010
-
-Detailed plugin description in Russian http://habrahabr.ru/blogs/nginx/66255
-
-The plugin in Jetbrains plugin repo http://plugins.intellij.net/plugin/?id=4415
+# Overview
+* Configuration file syntax support, run/reload configs/stop support. Works on all three platform IDEA runs on (Windows, Linux, Mac). Works for all Jetbrains platform products (IDEA, RubyMine, PhpStorm, WebStorm, PyCharm).
+* The plugin has won a Honorable Mention Award in 2009-2010 Plugin Contest! Yay! http://blogs.jetbrains.com/idea/2010/06/announcing-the-ideal-plugins-for-2009-2010
+* Detailed plugin description in Russian http://habrahabr.ru/blogs/nginx/66255
+* The plugin in Jetbrains plugin repo http://plugins.intellij.net/plugin/?id=4415
 
 ![nginx plugin features](http://img571.imageshack.us/img571/4932/pluginfeatures.png)
 
