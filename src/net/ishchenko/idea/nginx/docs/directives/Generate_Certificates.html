@@ -1,0 +1,22 @@
+<h2> <span class="mw-headline" id="Generate_Certificates"> Generate Certificates </span></h2><p>To generate private (dummy) certificates you can perform the following list of openssl commands. </p><p>First change directory to where you want to create the certificate and private key, for example: </p><pre>
+$ cd /usr/local/nginx/conf
+</pre><p>Now create the server private key, you'll be asked for a passphrase: </p><pre>
+$ openssl genrsa -des3 -out server.key 1024
+</pre><p>Create the Certificate Signing Request (CSR): </p><pre>
+$ openssl req -new -key server.key -out server.csr
+</pre><p>Remove the necessity of entering a passphrase for starting up nginx with SSL using the above private key: </p><pre>
+$ cp server.key server.key.org
+$ openssl rsa -in server.key.org -out server.key
+</pre><p>Finally sign the certificate using the above private key and CSR: </p><pre>
+$ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+</pre><p>Update Nginx configuration by including the newly signed certificate and private key: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+    <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> YOUR_DOMAINNAME_HERE<span class="sy0">;</span>
+    <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="nu0">443</span><span class="sy0">;</span>
+    <a href="/NginxHttpSslModule#ssl"><span class="kw31">ssl</span></a> on<span class="sy0">;</span>
+    <a href="/NginxHttpSslModule#ssl_certificate"><span class="kw31">ssl_certificate</span></a> /usr/local/nginx/conf/<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>.crt<span class="sy0">;</span>
+    <a href="/NginxHttpSslModule#ssl_certificate_key"><span class="kw31">ssl_certificate_key</span></a> /usr/local/nginx/conf/<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>.key<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Restart Nginx. </p><p>Now we're ready to access the above host using: </p><pre>https://YOUR_DOMAINNAME_HERE</pre><br><i>Module: HttpSslModule</i>

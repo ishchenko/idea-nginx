@@ -1,13 +1,4 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>set variable value</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>server, location, if</i>
-</p><p>Directive establishes value for the variable indicated. As the value it is possible to use a text, variables and their combination.
-</p>
-<br><i>Module: NginxHttpRewriteModule</i><hr>
-<p>Assign a variable.
-</p>
-<ul><li> <code>var</code> — the variable.
-</li><li> <code>value</code> — its value. If it contains variable names, these will be evaluated.
-</li></ul>
-<br><i>Module: NginxHttpSsiModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="set"> set </span></h2><p><b>syntax:</b> <i>set variable value</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server, location, if</i> </p><p>Directive establishes value for the variable indicated. As the value it is possible to use a text, variables and their combination. </p><p>You can use <b>set</b> to define a new variable. Note that you can't set the value of a <i>$http_xxx</i> header variable. </p><br><i>Module: HttpRewriteModule</i><hr><h2> <span class="mw-headline" id="set"> set </span></h2><p>Assign a variable. </p><ul>
+ <li> <code>var</code> — the variable. </li>
+ <li> <code>value</code> — its value. If it contains variable names, these will be evaluated. </li>
+</ul><h1> <span class="mw-headline" id="Variables"> Variables </span></h1><br><i>Module: HttpSsiModule</i>

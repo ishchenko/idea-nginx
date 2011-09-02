@@ -1,10 +1,5 @@
-
-<p><b>Syntax:</b> <i>timer_resolution t</i>
-</p><p><b>Default:</b> <i>none</i>
-</p><p>Example:
-</p>
-<pre class="code"><span class="kw1">timer_resolution</span>  100ms;</pre>
-<p>The directive allows to decrease number gettimeofday() syscalls. By default gettimeofday() is called after each return from kevent(), epoll, /dev/poll, select(), poll().
-</p><p>But if you need an exact time in logs when logging $upstream_response_time, or $msec variables, then you should use <code>timer_resolution</code>.
-</p>
-<br><i>Module: NginxHttpMainModule</i>
+<h2> <span class="mw-headline" id="timer_resolution"> timer_resolution </span></h2><p><b>Syntax:</b> <i>timer_resolution t</i> </p><p><b>Default:</b> <i>none</i> </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpMainModule#timer_resolution"><span class="kw1">timer_resolution</span></a>  100ms<span class="sy0">;</span></pre>
+ </div>
+</div><p>The directive allows to decrease number gettimeofday() syscalls. By default gettimeofday() is called after each return from kevent(), epoll, /dev/poll, select(), poll(). </p><p>But if you need an exact time in logs when logging $upstream_response_time, or $msec variables, then you should use <code>timer_resolution</code>. </p><p><br /> </p><br><i>Module: CoreModule</i>

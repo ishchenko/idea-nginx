@@ -1,0 +1,23 @@
+<h2> <span class="mw-headline" id="uwsgi_store"> uwsgi_store </span></h2><p><b>syntax:</b> <i>uwsgi_store on|off|path</i> </p><p><b>default:</b> <i>uwsgi_store off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the path in which upstream files are stored. The parameter &quot;on&quot; preserves files in accordance with path specified in directives <i>alias</i> or <i>root</i>. The parameter &quot;off&quot; forbids storing. Furthermore, the name of the path can be clearly assigned with the aid of the line with the variables: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">uwsgi_store   /data/www<span class="re0">$original_uri</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>The time of modification for the file will be set to the date of &quot;Last-Modified&quot; header in the response. To be able to safe files in this directory it is necessary that the path is under the directory with temporary files, given by directive <a href="#uwsgi_temp_path">uwsgi_temp_path</a> for the data location. </p><p>This directive can be used for creating the local copies for dynamic output of the backend which is not very often changed, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /images/ <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>                /data/www<span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>          <span class="nu0">404</span> <span class="sy0">=</span> /fetch<span class="re0">$uri</span><span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /fetch <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#internal"><span class="kw3">internal</span></a><span class="sy0">;</span>
+&nbsp;
+  <a href="/NginxHttpUwsgiModule#uwsgi_pass"><span class="kw37">uwsgi_pass</span></a>           backend<span class="sy0">;</span>
+  uwsgi_store          on<span class="sy0">;</span>
+  uwsgi_store_access   <a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span>
+  uwsgi_temp_path      /data/temp<span class="sy0">;</span>
+&nbsp;
+  <a href="/NginxHttpCoreModule#alias"><span class="kw3">alias</span></a>               /data/www<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>To be clear uwsgi_store is not a cache, it's rather mirror on demand. </p><br><i>Module: HttpUwsgiModule</i>

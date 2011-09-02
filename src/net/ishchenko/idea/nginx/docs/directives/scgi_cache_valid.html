@@ -1,0 +1,17 @@
+<h2> <span class="mw-headline" id="scgi_cache_valid"> scgi_cache_valid </span></h2><p><b>syntax:</b> <i>scgi_cache_valid [http_return_code [...]] time</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive sets caching period for the specified http return codes. For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">scgi_cache_valid  <span class="nu0">200</span> <span class="nu0">302</span>  10m<span class="sy0">;</span>
+scgi_cache_valid  <span class="nu0">404</span>      1m<span class="sy0">;</span></pre>
+ </div>
+</div><p>sets caching period of 10 minutes for return codes 200 and 302 and 1 minute for the 404 code. </p><p>In case only caching period is specified: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">scgi_cache_valid  5m<span class="sy0">;</span></pre>
+ </div>
+</div><p>the default behavior is to cache only replies with the codes 200, 301 and 302. </p><p>It's also possible to cache all the replies by specifying code &quot;any&quot;: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">&nbsp;
+scgi_cache_valid  <span class="nu0">200</span> <span class="nu0">302</span> 10m<span class="sy0">;</span>
+scgi_cache_valid  <span class="nu0">301</span> 1h<span class="sy0">;</span>
+scgi_cache_valid  any 1m<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpScgiModule</i>

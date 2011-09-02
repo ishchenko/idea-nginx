@@ -1,7 +1,14 @@
-
-<p><b>syntax:</b> <i>deny [ address | CIDR | all ] </i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>http, server, location, limit_except</i>
-</p><p>Directive forbids access for the network or addresses indicated. 
-</p>
-<br><i>Module: NginxHttpAccessModule</i>
+<h2> <span class="mw-headline" id="deny"> deny </span></h2><p><b>syntax:</b> deny <i>[ address | CIDR | all ]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location, limit_except</i> </p><p><b>variables:</b> <i>no</i>&nbsp; </p><p><b>phase:</b> <i>access</i> </p><p><br /> Directive forbids access for the network or addresses indicated. </p><h1> <span class="mw-headline" id="Tips_.26_Tricks"> Tips &amp; Tricks </span></h1><p>The NginxHttpAccessModule can be used in conjunction with the <i>error_page</i> directive to redirect unauthorised visitors to an alternative site: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>  <span class="nu0">403</span>  <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://example.com/forbidden.html<span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+  <a href="/NginxHttpAccessModule#deny"><span class="kw5">deny</span></a>    192.168.1.1<span class="sy0">;</span>
+  <a href="/NginxHttpAccessModule#allow"><span class="kw5">allow</span></a>   192.168.1.0/<span class="nu0">24</span><span class="sy0">;</span>
+  <a href="/NginxHttpAccessModule#allow"><span class="kw5">allow</span></a>   10.1.1.0/<span class="nu0">16</span><span class="sy0">;</span>
+  <a href="/NginxHttpAccessModule#deny"><span class="kw5">deny</span></a>    all<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_access_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/HttpAccessModule">http://wiki.nginx.org/HttpAccessModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: HttpAccessModule</i>

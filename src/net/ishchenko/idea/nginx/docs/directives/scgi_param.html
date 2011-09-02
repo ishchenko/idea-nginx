@@ -1,0 +1,11 @@
+<h2> <span class="mw-headline" id="scgi_param"> scgi_param </span></h2><p><b>syntax:</b> <i>scgi_param parameter value</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive assigns the parameter, which will be transferred to the SCGI-server. </p><p>It is possible to use strings, variables and their combination as values. Directives not set are inherited from the outer level. Directives set in current level clear any previously defined directives for the current level. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">scgi_param  SCGI             <span class="nu0">1</span><span class="sy0">;</span>
+scgi_param  REQUEST_URI      <span class="re0">$request_uri</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Parameter REQUEST_URI is used to determine the name of script to execute, and QUERY_STRING contains the parameters of the request. <i>scgi_param SCGI 1;</i> is required to be in the list of parameters by the SCGI standard. <i>scgi_param CONTENT_LENGTH $content_length;</i> is automatically included as the first parameter. </p><p>If dealing with POST requests, two additional parameters are necessary. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  scgi_param  REQUEST_METHOD   <span class="re0">$request_method</span><span class="sy0">;</span>
+  scgi_param  CONTENT_TYPE     <span class="re0">$content_type</span><span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpScgiModule</i>

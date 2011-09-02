@@ -1,12 +1,5 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>gzip_disable regex</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Disable gzip compression for User-Agents matching the given regular expression. Requires PCRE library. Introduced in Nginx 0.6.23.
-</p><p>You can use "msie6" to disable gzip for Internet Explorer 5.5 and Internet Explorer 6. "SV1" (Service Pack 2) will be ignored since Nginx 0.7.63.
-</p><p>Example
-</p>
-<pre class="code">  <span class="kw13">gzip_disable</span>     <span class="st0">&quot;msie6&quot;</span>;</pre>
-<br><i>Module: NginxHttpGzipModule</i><hr>
-<p>See  NginxHttpGzipModule 
-</p>
-<br><i>Module: NginxHttpGzipStaticModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="gzip_disable"> gzip_disable </span></h2><p><b>syntax:</b> <i>gzip_disable regex</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Disable gzip compression for User-Agents matching the given regular expression. Requires PCRE library. Introduced in Nginx 0.6.23. </p><p>You can use &quot;msie6&quot; to disable gzip for Internet Explorer 5.5 and Internet Explorer 6. &quot;SV1&quot; (Service Pack 2) will be ignored since Nginx 0.7.63. </p><p>Example </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpGzipModule#gzip_disable"><span class="kw13">gzip_disable</span></a>     <span class="st0">&quot;msie6&quot;</span><span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpGzipModule</i><hr><h2> <span class="mw-headline" id="gzip_disable"> gzip_disable </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_disable" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>

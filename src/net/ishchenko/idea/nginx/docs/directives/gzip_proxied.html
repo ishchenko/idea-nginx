@@ -1,22 +1,11 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>gzip_proxied [off|expired|no-cache|no-store|private|no_last_modified|no_etag|auth|any]  ...</i>
-</p><p><b>default:</b> <i>gzip_proxied off</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>It allows or disallows the compression of the response for the proxy request in the dependence on the request and the response.  The fact that, request proxy, is determined on the basis of line "Via" in the headers of request.  In the directive it is possible to indicate simultaneously several parameters:
-</p>
-<ul><li> off - disables compression for all proxied requests
-</li><li> expired - enables compression, if the "Expires" header prevents caching
-</li><li> no-cache - enables compression if "Cache-Control" header is set to "no-cache"
-</li><li> no-store - enables compression if "Cache-Control" header is set to "no-store"
-</li><li> private - enables compression if "Cache-Control" header is set to "private"
-</li><li> no_last_modified - enables compression if "Last-Modified" isn't set
-</li><li> no_etag - enables compression if there is no "ETag" header
-</li><li> auth - enables compression if there is an "Authorization" header
-</li><li> any - enables compression for all requests
-</li></ul>
-<p><br />
-</p>
-<br><i>Module: NginxHttpGzipModule</i><hr>
-<p>See  NginxHttpGzipModule 
-</p>
-<br><i>Module: NginxHttpGzipStaticModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="gzip_proxied"> gzip_proxied </span></h2><p><b>syntax:</b> <i>gzip_proxied [off|expired|no-cache|no-store|private|no_last_modified|no_etag|auth|any] ...</i> </p><p><b>default:</b> <i>gzip_proxied off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>It allows or disallows the compression of the response for the proxy request in the dependence on the request and the response. The fact that, request proxy, is determined on the basis of line &quot;Via&quot; in the headers of request. In the directive it is possible to indicate simultaneously several parameters: </p><ul>
+ <li> off - disables compression for all proxied requests </li>
+ <li> expired - enables compression, if the &quot;Expires&quot; header prevents caching </li>
+ <li> no-cache - enables compression if &quot;Cache-Control&quot; header is set to &quot;no-cache&quot; </li>
+ <li> no-store - enables compression if &quot;Cache-Control&quot; header is set to &quot;no-store&quot; </li>
+ <li> private - enables compression if &quot;Cache-Control&quot; header is set to &quot;private&quot; </li>
+ <li> no_last_modified - enables compression if &quot;Last-Modified&quot; isn't set </li>
+ <li> no_etag - enables compression if there is no &quot;ETag&quot; header </li>
+ <li> auth - enables compression if there is an &quot;Authorization&quot; header </li>
+ <li> any - enables compression for all requests </li>
+</ul><p><br /> </p><br><i>Module: HttpGzipModule</i><hr><h2> <span class="mw-headline" id="gzip_proxied"> gzip_proxied </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_proxied" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>

@@ -1,17 +1,16 @@
-
-<p><b>syntax:</b> <i>expires [time|epoch|max|off] </i>
-</p><p><b>default:</b> <i>expires off</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>It allows or prevents adding or changing the <code>Expires</code> and <code>Cache-Control</code> in the response headers. 
-</p><p>It is possible to assign positive or negative times. Time in the <code>Expires</code> header is obtained as the sum of the current time and the time assigned in the directive. 
-</p><p><code>epoch</code> indicates the absolute time of 1 January, 1970, 00:00:01 GMT.
-<code>max</code> assigns the time of 31 December 2037 23:59:59 GMT to the <code>Expires</code> header and 10 years for the <code>Cache-Control</code> header.
-</p><p>Contents of the <code>Cache-Control</code> header depends on the sign of the preset time: 
-</p>
-<ul><li> negative time: <code>Cache-Control: no-cache</code> 
-</li><li> positive time or equal to zero: <code>Cache-Control: max-age = #</code>, where <code>#</code> is the time in seconds, assigned in the directive. 
-</li></ul>
-<p>The parameter "off" prevents changes to "Expires" and "Cache-Control" in the headers.
-</p><p><b>Note:</b> <code>expires</code> works only for 200, 204, 301, 302, and 304 responses.
-</p>
-<br><i>Module: NginxHttpHeadersModule</i>
+<h2> <span class="mw-headline" id="expires"> expires </span></h2><p><b>syntax:</b> <i>expires [[modified] time|@time-of-day|epoch|max|off] </i> </p><p><b>default:</b> <i>expires off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Controls whether the response should be marked with an expiry time, and if so, what <a href="/ConfigurationSyntax" title="ConfigurationSyntax">time</a> that is. </p><ul>
+ <li> <code>off</code> prevents changes to the <code>Expires</code> and <code>Cache-Control</code> headers. </li>
+</ul><ul>
+ <li> <code>epoch</code> sets the <code>Expires</code> header to 1 January, 1970 00:00:01 GMT. </li>
+</ul><ul>
+ <li> <code>max</code> sets the <code>Expires</code> header to 31 December 2037 23:59:59 GMT, and the <code>Cache-Control</code> max-age to 10 years. </li>
+</ul><ul>
+ <li> A time without an <code>@</code> prefix specifies an expiry time relative to either the response time (if the time is not preceded with &quot;modified&quot;) or the file's modification time (when &quot;modified&quot; is present — available from versions 0.7.0 &amp; 0.6.32). A negative time can be specified, which sets the <code>Cache-Control</code> header to <code>no-cache</code>. </li>
+</ul><ul>
+ <li> Times written with an <code>@</code> prefix represent an absolute time-of-day expiry, written in either the form Hh or Hh:Mm, where H ranges from 0 to 24, and M ranges from 0 to 59 (available from versions 0.7.9 &amp; 0.6.34). </li>
+</ul><p>A non-negative time or time-of-day sets the <code>Cache-Control</code> header to <code>max-age = #</code>, where # is the appropriate time in seconds. </p><p><br /> <b>Note:</b> <code>expires</code> works only for 200, 204, 301, 302, and 304 responses. </p><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_headers_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><h1> <span class="mw-headline" id="See_Also"> See Also </span></h1><ul>
+ <li> The third-party <a href="/NginxHttpHeadersMoreModule" title="NginxHttpHeadersMoreModule" class="mw-redirect">headers_more</a> module for adding, replacing, and clearing both input and output headers. </li>
+</ul><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/HttpHeadersModule">http://wiki.nginx.org/HttpHeadersModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: HttpHeadersModule</i>

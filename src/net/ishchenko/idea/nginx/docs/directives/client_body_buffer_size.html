@@ -1,9 +1,1 @@
-
-<p><b>syntax:</b> <i>client_body_buffer_size the_size</i>
-</p><p><b>default:</b> <i>8k/16k</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The directive specifies the client request body buffer size.
-</p><p>If the request body is more than the buffer, then the entire request body or some part is written in a temporary file.
-</p><p>The default size is equal to two pages size, depending on platform it is either 8K or 16K.
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="client_body_buffer_size"> client_body_buffer_size </span></h2><p><b>syntax:</b> <i>client_body_buffer_size the_size</i> </p><p><b>default:</b> <i>8k/16k</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive specifies the client request body buffer size. </p><p>If the request body is more than the buffer, then the entire request body or some part is written in a temporary file. </p><p>The default size is equal to two pages size, depending on platform it is either 8K or 16K. </p><p>When the <i>Content-Length</i> request header specifies a smaller size value than the buffer size, then Nginx will use the smaller one. So Nginx will *not* always allocate a buffer of this buffer size for every request. </p><br><i>Module: HttpCoreModule</i>

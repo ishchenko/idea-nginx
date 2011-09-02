@@ -1,18 +1,8 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>index file [file...] </i>
-</p><p><b>default:</b> <i>index index.html</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Directive determines the file(s) which will be used as the index. It's possible to use variables in the name of file.
-The presence of the files is checked in the order of their enumeration. A file with an absolute path can be put at the end.
-Example using a variable:
-</p>
-<pre class="code"><span class="kw3">index</span>  <span class="kw3">index</span>.<span class="re0">$geo</span>.html  index<span class="nu0">.0</span>.html  /<span class="kw3">index</span>.html;</pre>
-<p>If you want to automatically generate an index from a directory listing, use autoindex on.
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpCoreModule</i><hr>
-<p><b>syntax:</b> <i>index file-path [file-path [ ... ] ];</i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>server, location</i>
-</p>
-<br><i>Module: NginxHttpIndexModule</i>
+<h2> <span class="mw-headline" id="index"> index </span></h2><p><b>syntax:</b> index <i>filename [filename... [fallback]]</i> </p><p><b>default:</b> index index.html </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>variables:</b> <i>no</i> </p><p><br /> Sets the default file to serve if a directory is requested by the client. Multiple files can be specified. If the first file isn't found, the second will be used and so on. If the last entry begins with a /, and none of the earlier files are found, nginx will perform an internal redirect to this uri. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a> <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.html <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php<span class="sy0">;</span></pre>
+ </div>
+</div><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_index_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/HttpIndexModule">http://wiki.nginx.org/HttpIndexModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: HttpIndexModule</i>

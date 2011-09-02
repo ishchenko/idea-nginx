@@ -1,12 +1,7 @@
-
-<p><b>syntax:</b> <i>proxy_pass_header the_name</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive allows transferring header-lines forbidden for response.
-</p><p>For example:
-</p><p></p>
-<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
-  <span class="kw21">proxy_pass_header</span> X-Accel-Redirect;
-<span class="br0">&#125;</span></pre>
-<p><br />
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_pass_header"> proxy_pass_header </span></h2><p><b>syntax:</b> <i>proxy_pass_header the_name;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive allows transferring header-lines forbidden for response. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+  <a href="/NginxHttpProxyModule#proxy_pass_header"><span class="kw21">proxy_pass_header</span></a> X-Accel-Redirect<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p><br /> </p><br><i>Module: HttpProxyModule</i>

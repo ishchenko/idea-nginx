@@ -1,12 +1,5 @@
-
-<p><b>syntax:</b> <i>proxy_method [method] </i>
-</p><p><b>default:</b> <i>None</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Used to allow the proxying of additional HTTP methods.
-</p><p>Note: at this time, Nginx only appears to allow a single instance of this directive and it only accepts a single argument (method) so it's not clear how useful this might be for proxying to things like Subversion.
-</p><p>Example:
-</p><p></p>
-<pre class="code">  <span class="kw21">proxy_method</span> PROPFIND;</pre>
-<p><br />
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_method"> proxy_method </span></h2><p><b>syntax:</b> <i>proxy_method [method];</i> </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Allows you to override the HTTP method of the request to be passed to the backend server. If you specify POST for example, all requests forwarded to the backend server will be POST requests. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_method"><span class="kw21">proxy_method</span></a> POST<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpProxyModule</i>

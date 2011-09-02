@@ -1,10 +1,5 @@
-
-<p><b>Syntax:</b> <i>user user [group] </i>
-</p><p><b>Default:</b> <i>nobody nobody</i>
-</p><p>If the master process is run as root, then nginx will setuid()/setgid() to USER/GROUP. If GROUP is not specified, then nginx uses the same name as USER. By default it's <code>nobody</code> user and <code>nobody</code> or <code>nogroup</code> group or the <code>--user=USER</code> and <code>--group=GROUP</code> from the <code>./configure</code> script.
-</p><p>Example:
-</p>
-<pre class="code"><span class="kw1">user</span> www users;</pre>
-<p><br />
-</p>
-<br><i>Module: NginxHttpMainModule</i>
+<h2> <span class="mw-headline" id="user"> user </span></h2><p><b>Syntax:</b> <i>user user [group] </i> </p><p><b>Default:</b> <i>nobody nobody</i> </p><p>If the master process is run as root, then nginx will setuid()/setgid() to USER/GROUP. If GROUP is not specified, then nginx uses the same name as USER. By default it's <code>nobody</code> user and <code>nobody</code> or <code>nogroup</code> group or the <code>--user=USER</code> and <code>--group=GROUP</code> from the <code>./configure</code> script. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a> www users<span class="sy0">;</span></pre>
+ </div>
+</div><p><br /> </p><br><i>Module: CoreModule</i>

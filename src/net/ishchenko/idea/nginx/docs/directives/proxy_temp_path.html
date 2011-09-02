@@ -1,7 +1,1 @@
-
-<p><b>syntax:</b> <i>proxy_temp_path dir-path [ level1 [ level2 [ level3 ]    &nbsp;;</i>
-</p><p><b>default:</b> <i>$NGX_PREFIX/proxy_temp controlled by --http-proxy-temp-path at ./configure stage</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive works like client_body_temp_path  to specify a location to buffer large proxied requests to the filesystem.
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_temp_path"> proxy_temp_path </span></h2><p><b>syntax:</b> <i>proxy_temp_path dir-path [ level1 [ level2 [ level3 ];</i> </p><p><b>default:</b> <i>$NGX_PREFIX/proxy_temp controlled by --http-proxy-temp-path at ./configure stage</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive works like <a href="/HttpCoreModule#client_body_temp_path" title="HttpCoreModule">client_body_temp_path</a> to specify a location to buffer large proxied requests to the filesystem. </p><br><i>Module: HttpProxyModule</i>

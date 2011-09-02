@@ -1,16 +1,14 @@
-
-<p><b>syntax:</b> <i>geoip_city path/to/db.dat;</i>
-</p><p><b>default:</b> none
-</p><p><b>context:</b> <i>http</i>
-</p><p>The directive indicates the path to the .dat file used for determining countries, regions and cities from IP-address of the client. When set the module makes available the following variables:
-</p>
-<ul><li> <b>$geoip_city_country_code</b> - two-letter country code, for example, "RU", "US".
-</li><li> <b>$geoip_city_country_code3</b> - three-letter country code, for example, "RUS", "USA".
-</li><li> <b>$geoip_city_country_name</b> - the name of the country, for example, "Russian Federation", "United States" (if available).
-</li><li> <b>$geoip_region</b> - the name of region (province, region, state, province, federal land, and the like), for example, "Moscow City", "DC" (if available).
-</li><li> <b>$geoip_city</b> - the name of the city, for example, "Moscow", "Washington" (if available).
-</li><li> <b>$geoip_postal_code</b> - postal</li><li> <b>$geoip_city_continent_code</b> (if available)
-</li><li> <b>$geoip_latitude</b> - latitude (if available)
-</li><li> <b>$geoip_longitude</b> - longitude (if available)
-</li></ul>
-<br><i>Module: NginxHttpGeoIPModule</i>
+<h2> <span class="mw-headline" id="geoip_city"> geoip_city </span></h2><p><b>syntax:</b> <i>geoip_city path/to/db.dat;</i> </p><p><b>default:</b> none </p><p><b>context:</b> <i>http</i> </p><p>This directive specifies the full path to the Geo IP database .dat file that associates IP addresses with country, city and region geolocation information. This allows you to get that information corresponding to the given IP. It can be used to determine the visitor's geolocation from the IP address of the client. When set the following variables are available: </p><ul>
+ <li> <b>$geoip_city_country_code</b> — two-letter country code, for example, &quot;RU&quot;, &quot;US&quot;. </li>
+ <li> <b>$geoip_city_country_code3</b> — three-letter country code, for example, &quot;RUS&quot;, &quot;USA&quot;. </li>
+ <li> <b>$geoip_city_country_name</b> — the name of the country, for example, &quot;Russian Federation&quot;, &quot;United States&quot; — if available. </li>
+ <li> <b>$geoip_region</b> — the name of region (province, region, state, province, federal land, and the like), for example, &quot;Moscow City&quot;, &quot;DC&quot; — if available. </li>
+ <li> <b>$geoip_city</b> — the name of the city, for example, &quot;Moscow&quot;, &quot;Washington&quot;, &quot;Lisbon&quot;, &amp;c — if available. </li>
+ <li> <b>$geoip_postal_code</b> — zip code or postal code — if available. </li>
+ <li> <b>$geoip_city_continent_code</b> — if available. </li>
+ <li> <b>$geoip_latitude</b> — latitude — if available. </li>
+ <li> <b>$geoip_longitude</b> — longitude — if available. </li>
+</ul><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_geoip_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/HttpGeoIPModule">http://wiki.nginx.org/HttpGeoIPModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: HttpGeoIPModule</i>

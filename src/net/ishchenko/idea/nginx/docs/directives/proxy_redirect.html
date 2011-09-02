@@ -1,46 +1,42 @@
-
-<p><b>syntax:</b> <i>proxy_redirect [ default|off|redirect replacement ] </i>
-</p><p><b>default:</b> <i>proxy_redirect default</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive sets the text, which must be changed in response-header "Location" and "Refresh" in the response of the proxied server.
-</p><p>Let us suppose the proxied server returned line <code>Location: http://localhost:8000/two/some/uri/</code>.
-</p><p>The directive
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_redirect</span> <span class="kw3">http</span>://localhost:<span class="nu0">8000</span>/two/ <span class="kw3">http</span>://frontend/one/;</pre>
-<p>will rewrite this line in the form <code>Location: http://frontend/one/some/uri/</code>.
-</p><p>In the replaceable line it is possible not to indicate the name of the server:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_redirect</span> <span class="kw3">http</span>://localhost:<span class="nu0">8000</span>/two/ /;</pre>
-<p>then the basic name of server and port is set, if it is different from 80.
-</p><p>The change by default, given by the parameter "default", uses the parameters of directives location and proxy_pass.
-</p><p>Therefore two following configurations are equivalent:
-</p><p></p>
-<pre class="code"><span class="kw3">location</span> /one/ <span class="br0">&#123;</span>
-  <span class="kw21">proxy_pass</span>       <span class="kw3">http</span>://<span class="kw4">upstream</span>:port/two/;
-  <span class="kw21">proxy_redirect</span>   default;
-<span class="br0">&#125;</span>
+<h2> <span class="mw-headline" id="proxy_redirect"> proxy_redirect </span></h2><p><b>syntax:</b> <i>proxy_redirect [ default|off|redirect replacement ];</i> </p><p><b>default:</b> <i>proxy_redirect default;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the text, which must be changed in response-header &quot;Location&quot; and &quot;Refresh&quot; in the response of the proxied server. </p><p>Let us suppose the proxied server returned line <code>Location: <a href="http://localhost:8000/two/some/uri/" class="external free" rel="nofollow">http://localhost:8000/two/some/uri/</a></code>. </p><p>The directive </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/two/ <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://frontend/one/<span class="sy0">;</span></pre>
+ </div>
+</div><p>will rewrite this line in the form <code>Location: <a href="http://frontend/one/some/uri/" class="external free" rel="nofollow">http://frontend/one/some/uri/</a></code>. </p><p>In the replaceable line it is possible not to indicate the name of the server: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/two/ /<span class="sy0">;</span></pre>
+ </div>
+</div><p>then the basic name of server and port is set, if it is different from 80. </p><p>The change by default, given by the parameter &quot;default&quot;, uses the parameters of directives location and proxy_pass. </p><p>Therefore two following configurations are equivalent: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /one/ <span class="br0">{</span>
+  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>       <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://<a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a>:port/two/<span class="sy0">;</span>
+  <a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   default<span class="sy0">;</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw3">location</span> /one/ <span class="br0">&#123;</span>
-  <span class="kw21">proxy_pass</span>       <span class="kw3">http</span>://<span class="kw4">upstream</span>:port/two/;
-  <span class="kw21">proxy_redirect</span>   <span class="kw3">http</span>://<span class="kw4">upstream</span>:port/two/   /one/;
-<span class="br0">&#125;</span></pre>
-<p>In the replace line, it is possible to use some variables:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_redirect</span>   <span class="kw3">http</span>://localhost:<span class="nu0">8000</span>/    <span class="kw3">http</span>://<span class="re0">$host</span>:<span class="re0">$server_port</span>/;</pre>
-<p>This directive repeated some times:
-</p><p></p>
-<pre class="code">  <span class="kw21">proxy_redirect</span>   default;
-  <span class="kw21">proxy_redirect</span>   <span class="kw3">http</span>://localhost:<span class="nu0">8000</span>/    /;
-  <span class="kw21">proxy_redirect</span>   <span class="kw3">http</span>://www.example.com/   /;</pre>
-<p>The parameter <code>off</code> forbids all <code>proxy_redirect</code> directives at this level:
-</p><p></p>
-<pre class="code">  <span class="kw21">proxy_redirect</span>   off;
-  <span class="kw21">proxy_redirect</span>   default;
-  <span class="kw21">proxy_redirect</span>   <span class="kw3">http</span>://localhost:<span class="nu0">8000</span>/    /;
-  <span class="kw21">proxy_redirect</span>   <span class="kw3">http</span>://www.example.com/   /;</pre>
-<p>With the help of this directive it is possible to add the name of host for relative redirect, issued by the proxied server:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_redirect</span>   /   /;</pre>
-<p><br />
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /one/ <span class="br0">{</span>
+  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a>       <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://<a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a>:port/two/<span class="sy0">;</span>
+  <a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://<a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a>:port/two/   /one/<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>In the replace line, it is possible to use some variables: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/    <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://<span class="re0">$host</span>:<span class="re0">$server_port</span>/<span class="sy0">;</span></pre>
+ </div>
+</div><p>This directive repeated some times: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   default<span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/    /<span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://www.example.com/   /<span class="sy0">;</span></pre>
+ </div>
+</div><p>The parameter <code>off</code> forbids all <code>proxy_redirect</code> directives at this level: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   off<span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   default<span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/    /<span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://www.example.com/   /<span class="sy0">;</span></pre>
+ </div>
+</div><p>With the help of this directive it is possible to add the name of host for relative redirect, issued by the proxied server: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   /   /<span class="sy0">;</span></pre>
+ </div>
+</div><p><br /> </p><br><i>Module: HttpProxyModule</i>

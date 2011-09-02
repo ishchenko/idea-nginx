@@ -1,0 +1,14 @@
+<h2> <span class="mw-headline" id="satisfy"> satisfy </span></h2><p><b>syntax:</b> <i>satisfy [ all | any ] </i> </p><p><b>default:</b> <i>satisfy all</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>version:</b> ≥ 0.6.25 </p><p>Access policy if directives from both <a href="/HttpAccessModule" title="HttpAccessModule">Access module</a> and <a href="/HttpAuthBasicModule" title="HttpAuthBasicModule">Auth Basic module</a> are defined in a context: </p><ul>
+ <li> all - Both <a href="/HttpAccessModule" title="HttpAccessModule">Access</a> *and* <a href="/HttpAuthBasicModule" title="HttpAuthBasicModule">Auth Basic</a> directives must grant access to the context </li>
+ <li> any - Either <a href="/HttpAccessModule" title="HttpAccessModule">Access</a> *or* <a href="/HttpAuthBasicModule" title="HttpAuthBasicModule">Auth Basic</a> directives grant access to the context </li>
+</ul><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+  satisfy any<span class="sy0">;</span>
+  <a href="/NginxHttpAccessModule#allow"><span class="kw5">allow</span></a> 192.168.1.0/<span class="nu0">32</span><span class="sy0">;</span>
+  <a href="/NginxHttpAccessModule#deny"><span class="kw5">deny</span></a> all<span class="sy0">;</span>
+  <a href="/NginxHttpAuthBasicModule#auth_basic"><span class="kw6">auth_basic</span></a> <span class="st0">&quot;closed site&quot;</span><span class="sy0">;</span>
+  <a href="/NginxHttpAuthBasicModule#auth_basic_user_file"><span class="kw6">auth_basic_user_file</span></a> conf/htpasswd<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><br><i>Module: HttpCoreModule</i>

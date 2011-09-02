@@ -1,13 +1,5 @@
-
-<p><b>syntax:</b> <i>geoip_country path/to/db.dat;</i>
-</p><p><b>default:</b> none
-</p><p><b>context:</b> <i>http</i>
-</p><p>The directive indicates the path to the .dat file used for determining the visitor's country from the IP-address of the client. When set the module makes available the following variables:
-</p>
-<ul><li> $geoip_country_code; - two-letter country code, for example, "RU", "US".
-</li><li> $geoip_country_code3; - three-letter country code, for example, "RUS", "USA".
-</li><li> $geoip_country_name; - the name of the country, for example, "Russian Federation", "United States".
-</li></ul>
-<p>If you only need the country's name, you can just set the geoip_country database(1.1M), while the geoip_city database is much bigger(43M) and all the databses will be cached in memory.
-</p>
-<br><i>Module: NginxHttpGeoIPModule</i>
+<h2> <span class="mw-headline" id="geoip_country"> geoip_country </span></h2><p><b>syntax:</b> <i>geoip_country path/to/db.dat;</i> </p><p><b>default:</b> none </p><p><b>context:</b> <i>http</i> </p><p>This directive specifies the full path to the Geo IP database .dat file that associates IP addresses with country geolocation information. This allows you to get the country corresponding to the given IP. It can be used to determine the visitor's country from the IP address of the client. When set the following variables are available: </p><ul>
+ <li> $geoip_country_code — two-letter country code, for example, &quot;RU&quot;, &quot;US&quot;. </li>
+ <li> $geoip_country_code3 — three-letter country code, for example, &quot;RUS&quot;, &quot;USA&quot;. </li>
+ <li> $geoip_country_name — the (verbose) name of the country, for example, &quot;Russian Federation&quot;, &quot;United States&quot;, &amp;c. </li>
+</ul><p>Nginx caches all supplied databases in memory. The country database is small, roughly 1.4M, therefore there's very little penalty in caching it. The city database is much bigger. Hence its memory footprint is larger. </p><br><i>Module: HttpGeoIPModule</i>

@@ -1,11 +1,6 @@
-
-<p><b>syntax:</b> <i>smtp_auth</i> <i><b>[login]  [plain]  [cram-md5]&nbsp;;</b></i>
-</p><p><b>default:</b> <i>login plain</i>
-</p><p><b>context:</b> <i>main, server</i>
-</p><p>With this directive you can set the permitted methods of authentication for SMTP clients:
-</p>
-<ul><li> login - AUTH LOGIN 
-</li><li> plain - AUTH PLAIN 
-</li><li> cram-md5 - AUTH CRAM-MD5 
-</li></ul>
-<br><i>Module: NginxMailCoreModule</i>
+<h2> <span class="mw-headline" id="smtp_auth"> smtp_auth </span></h2><p><b>syntax:</b> <i>smtp_auth</i> <i><b>[login] [plain] [cram-md5]&nbsp;;</b></i> </p><p><b>default:</b> <i>login plain</i> </p><p><b>context:</b> <i>main, server</i> </p><p>With this directive you can set the permitted methods of authentication for SMTP clients: </p><ul>
+ <li> login - <a href="http://www3.ietf.org/proceedings/03jul/I-D/draft-murchison-sasl-login-00.txt" class="external text" rel="nofollow">AUTH LOGIN</a> </li>
+ <li> plain - <a href="http://ietf.org/rfc/rfc2595.txt" class="external text" rel="nofollow">AUTH PLAIN</a> </li>
+ <li> cram-md5 - <a href="http://ietf.org/rfc/rfc2195.txt" class="external text" rel="nofollow">AUTH CRAM-MD5</a> </li>
+ <li> none - Disable SMTP Auth </li>
+</ul><br><i>Module: MailCoreModule</i>

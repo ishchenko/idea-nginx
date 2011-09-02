@@ -1,12 +1,1 @@
-
-<p><b>syntax:</b> <i>modern_browser browser version|unlisted</i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Directive assigns which version of the browser is to be considered as <b>modern</b>.<br />
-As browser you can assign the values msie, gecko (Mozilla-based browsers) opera, safari, konqueror.
-</p><p>Of versions it is possible to assign in size X, X.X, X.X.X, or X.X.X.X. maximum values for each of their sizes respectively - 4000, 4000.99, 4000.99.99, and 4000.99.99.99.
-</p><p>Special value "unlisted" indicates to consider modern browser, not described by the modern_browser and ancient_browser directives. <br />
-If the headers do not contain "User-agent", the browser is considered ancient (unless "modern_browser unlisted" is specified).
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpBrowserModule</i>
+<h2> <span class="mw-headline" id="modern_browser"> modern_browser </span></h2><p><b>syntax:</b> modern_browser <i>browser version | unlisted</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>variables:</b> <i>unknown</i> </p><p><br /> Directive assigns which version of the browser is to be considered as <b>modern</b>.<br /> As browser you can assign the values msie, gecko (Mozilla-based browsers) opera, safari, konqueror. </p><p>Of versions it is possible to assign in size X, X.X, X.X.X, or X.X.X.X. maximum values for each of their sizes respectively - 4000, 4000.99, 4000.99.99, and 4000.99.99.99. </p><p>Special value &quot;unlisted&quot; indicates to consider modern browser, not described by the modern_browser and ancient_browser directives. <br /> If the headers do not contain &quot;User-agent&quot;, the browser is considered ancient (unless &quot;modern_browser unlisted&quot; is specified). </p><p><br /> </p><br><i>Module: HttpBrowserModule</i>

@@ -1,12 +1,8 @@
-
-<p><b>syntax:</b> <i>break</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>server, location, if</i>
-</p><p>Completes the current set of rules. Do not process any more rewrite directives.
-</p><p>Example:
-</p><p></p>
-<pre class="code"><span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$slow</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
-  <span class="kw3">limit_rate</span>  10k;
-  <span class="kw22">break</span>;
-<span class="br0">&#125;</span></pre>
-<br><i>Module: NginxHttpRewriteModule</i>
+<h2> <span class="mw-headline" id="break"> break </span></h2><p><b>syntax:</b> <i>break</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server, location, if</i> </p><p>Completes the current set of rules. Do not process any more rewrite directives. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$slow</span><span class="br0">)</span> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#limit_rate"><span class="kw3">limit_rate</span></a>  10k<span class="sy0">;</span>
+  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><br><i>Module: HttpRewriteModule</i>

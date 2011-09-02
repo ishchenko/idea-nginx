@@ -1,20 +1,16 @@
-
-<p><b>syntax:</b> <i>fastcgi_param parameter value</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Directive assigns the parameter, which will be transferred to the FastCGI-server. 
-</p><p>It is possible to use strings, variables and their combination as values. Directives not set are inherited from the outer level. Directives set in current level clear any previously defined directives for the current level.
-</p><p>Below is an example of the minimally necessary parameters for PHP:
-</p>
-<pre class="code">  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /home/www/scripts/php<span class="re0">$fastcgi_script_name</span>;
-  <span class="kw11">fastcgi_param</span>  QUERY_STRING     <span class="re0">$query_string</span>;</pre>
-<p>Parameter SCRIPT_FILENAME is used by PHP for determining the name of script to execute, and QUERY_STRING contains the parameters of the request. 
-</p><p>If dealing with POST requests, then the three additional parameters are necessary. Below is an example of the minimally necessary parameters for PHP:
-</p>
-<pre class="code">  <span class="kw11">fastcgi_param</span>  REQUEST_METHOD   <span class="re0">$request_method</span>;
-  <span class="kw11">fastcgi_param</span>  CONTENT_TYPE     <span class="re0">$content_type</span>;
-  <span class="kw11">fastcgi_param</span>  CONTENT_LENGTH   <span class="re0">$content_length</span>;</pre>
-<p>If PHP was compiled with --enable-force-cgi-redirect, then it is necessary to transfer parameter REDIRECT_STATUS with the value of "200":
-</p>
-<pre class="code">  <span class="kw11">fastcgi_param</span>  REDIRECT_STATUS  <span class="nu0">200</span>;</pre>
-<br><i>Module: NginxHttpFcgiModule</i>
+<h2> <span class="mw-headline" id="fastcgi_param"> fastcgi_param </span></h2><p><b>syntax:</b> <i>fastcgi_param parameter value</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive assigns the parameter, which will be transferred to the FastCGI-server. </p><p>It is possible to use strings, variables and their combination as values. Directives not set are inherited from the outer level. Directives set in current level clear any previously defined directives for the current level. </p><p>Below is an example of the minimally necessary parameters for PHP: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  SCRIPT_FILENAME  /home/www/scripts/php<span class="re0">$fastcgi_script_name</span><span class="sy0">;</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  QUERY_STRING     <span class="re0">$query_string</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Parameter SCRIPT_FILENAME is used by PHP for determining the name of script to execute, and QUERY_STRING contains the parameters of the request. </p><p>If dealing with POST requests, then the three additional parameters are necessary. Below is an example of the minimally necessary parameters for PHP: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  REQUEST_METHOD   <span class="re0">$request_method</span><span class="sy0">;</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  CONTENT_TYPE     <span class="re0">$content_type</span><span class="sy0">;</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  CONTENT_LENGTH   <span class="re0">$content_length</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>If PHP was compiled with --enable-force-cgi-redirect, then it is necessary to transfer parameter REDIRECT_STATUS with the value of &quot;200&quot;: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  REDIRECT_STATUS  <span class="nu0">200</span><span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpFcgiModule</i>

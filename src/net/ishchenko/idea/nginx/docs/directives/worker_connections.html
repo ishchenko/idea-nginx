@@ -1,11 +1,4 @@
-
-<p><b>Syntax:</b> <i>worker_connections number</i>
-</p><p><b>Default:</b> <i> </i>
-</p><p>The worker_connections and worker_proceses from the main section allows you to calculate maxclients value:
-</p><p>max_clients = worker_processes * worker_connections
-</p><p>In a reverse proxy situation, max_clients becomes
-</p><p>max_clients = worker_processes * worker_connections/4
-</p><p>Since a browser opens 2 connections by default to a server and nginx uses the fds (file descriptors) from the same pool to connect to the upstream backend
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpEventsModule</i>
+<h2> <span class="mw-headline" id="worker_connections"> worker_connections </span></h2><p><b>Syntax:</b> <i>worker_connections number</i> </p><p><b>Default:</b> <i> </i> </p><p>The worker_connections and worker_proceses from the main section allows you to calculate maxclients value: </p><p>max_clients = worker_processes * worker_connections </p><p>In a reverse proxy situation, max_clients becomes </p><p>max_clients = worker_processes * worker_connections/4 </p><p>Since a browser opens 2 connections by default to a server and nginx uses the fds (file descriptors) from the same pool to connect to the upstream backend </p><p><br /> </p><h1> <span class="mw-headline" id="References"> References </span></h1><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/EventsModule">http://wiki.nginx.org/EventsModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: EventsModule</i>

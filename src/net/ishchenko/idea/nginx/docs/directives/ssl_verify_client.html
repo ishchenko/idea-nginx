@@ -1,7 +1,1 @@
-
-<p><b>syntax:</b> <i>ssl_verify_client on|off|ask</i>
-</p><p><b>default:</b> <i>ssl_verify_client off</i>
-</p><p><b>context:</b> <i>main, server</i>
-</p><p>Directive enables verifying client certificates. Parameter 'ask' checks a client certificate if it was offered.
-</p>
-<br><i>Module: NginxHttpSslModule</i>
+<h2> <span class="mw-headline" id="ssl_verify_client"> ssl_verify_client </span></h2><p><b>syntax:</b> <i>ssl_verify_client on|off|optional</i> </p><p><b>default:</b> <i>ssl_verify_client off</i> </p><p><b>context:</b> <i>http, server</i> </p><p>This directive enables the verification of the client identity. Parameter 'optional' checks the client identity using its certificate in case it was made available to the server. (Was 'ask' before 0.8.7 and 0.7.63) </p><br><i>Module: HttpSslModule</i>

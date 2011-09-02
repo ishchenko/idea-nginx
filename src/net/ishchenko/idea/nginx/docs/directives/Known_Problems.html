@@ -1,0 +1,50 @@
+<h2> <span class="mw-headline" id="Known_Problems"> Known Problems </span></h2><p>This module is experimental; therefore anything is possible and bugs are likely. </p><ol>
+ <li> If a Perl module performs protracted operation, (for example DNS lookups, database queries, etc), then the worker process that is running the Perl script is completely tied up for the duration of script. Therefore embedded Perl scripts should be extremely careful to limit themselves to short, predictable operations. </li>
+ <li> It's possible for Nginx to leak memory if you reload the configuration file (via 'kill -HUP &lt;pid&gt;'). </li>
+</ol><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpEmbeddedPerlModule#perl_modules"><span class="kw26">perl_modules</span></a>  <a href="/NginxHttpEmbeddedPerlModule#perl"><span class="kw26">perl</span></a>/lib<span class="sy0">;</span>
+  <a href="/NginxHttpEmbeddedPerlModule#perl_require"><span class="kw26">perl_require</span></a>  hello.pm<span class="sy0">;</span>
+&nbsp;
+  <a href="/NginxHttpEmbeddedPerlModule#perl_set"><span class="kw26">perl_set</span></a>  <span class="re0">$msie6</span>  <span class="st0">'
+  sub {
+    my $r = shift;
+    my $ua = $r-&gt;header_in(&quot;User-Agent&quot;);
+    return &quot;&quot; if $ua =~ /Opera/;
+    return &quot;1&quot; if $ua =~ / MSIE [6-9] <span class="es0">\.</span><span class="es0">\d</span>+/;
+    return &quot;&quot;;
+  }
+ '</span><span class="sy0">;</span>
+&nbsp;
+  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+    <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+      <a href="/NginxHttpEmbeddedPerlModule#perl"><span class="kw26">perl</span></a>  hello::handler<span class="sy0">;</span>
+    <span class="br0">}</span>
+  <span class="br0">}</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>perl/lib/hello.pm: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="perl source-perl">
+  <pre class="de1"><a href="http://perldoc.perl.org/functions/package.html"><span class="kw3">package</span></a> hello<span class="sy0">;</span>
+<span class="kw2">use</span> nginx<span class="sy0">;</span>
+&nbsp;
+<span class="kw2">sub</span> handler <span class="br0">{</span>
+  <span class="kw1">my</span> <span class="re0">$r</span> <span class="sy0">=</span> <a href="http://perldoc.perl.org/functions/shift.html"><span class="kw3">shift</span></a><span class="sy0">;</span>
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">send_http_header</span><span class="br0">(</span><span class="st0">&quot;text/html&quot;</span><span class="br0">)</span><span class="sy0">;</span>
+  <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> OK <span class="kw1">if</span> <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">header_only</span><span class="sy0">;</span>
+&nbsp;
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">print</span><span class="br0">(</span><span class="st0">&quot;hello!<span class="es0">\n</span>&lt;br/&gt;&quot;</span><span class="br0">)</span><span class="sy0">;</span>
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">rflush</span><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">if</span> <span class="br0">(</span><span class="sy0">-</span>f <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">filename</span> <span class="kw1">or</span> <span class="sy0">-</span>d _<span class="br0">)</span> <span class="br0">{</span>
+    <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">print</span><span class="br0">(</span><span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">uri</span><span class="sy0">,</span> <span class="st0">&quot; exists!<span class="es0">\n</span>&quot;</span><span class="br0">)</span><span class="sy0">;</span>
+  <span class="br0">}</span>
+&nbsp;
+  <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> OK<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="nu0">1</span><span class="sy0">;</span>
+<span class="kw2">__END__</span></pre>
+ </div>
+</div><h1> <span class="mw-headline" id="Directives"> Directives </span></h1><br><i>Module: EmbeddedPerlModule</i>

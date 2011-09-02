@@ -1,8 +1,1 @@
-
-<p><b>syntax:</b> <i>proxy_send_timeout time_in_seconds</i>
-</p><p><b>default:</b> <i>proxy_send_timeout 60</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive assigns timeout with the transfer of request to the proxy server. Time out is established not on entire transfer of request, but only between two operations of record. If after this time the proxy server will not take new data, then nginx is shut the connection
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_send_timeout"> proxy_send_timeout </span></h2><p><b>syntax:</b> <i>proxy_send_timeout time;</i> </p><p><b>default:</b> <i>proxy_send_timeout 60s;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive assigns timeout with the transfer of request to the upstream server. Timeout is established not on entire transfer of request, but only between two write operations. If after this time the upstream server will not take new data, then nginx is shutdown the connection. </p><br><i>Module: HttpProxyModule</i>

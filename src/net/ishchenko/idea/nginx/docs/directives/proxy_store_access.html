@@ -1,13 +1,9 @@
-
-<p><b>syntax:</b> <i>proxy_store_access users:permissions [users:permission ...] </i>
-</p><p><b>default:</b> <i>proxy_store_access user:rw</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive assigns the permissions for the created files and directories, for example:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_store_access</span>  <span class="kw1">user</span>:rw  group:rw  all:r;</pre>
-<p>If any rights for groups or all are assigned, then it is not necessary to assign rights for user:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_store_access</span>  group:rw  all:r;</pre>
-<p><br />
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_store_access"> proxy_store_access </span></h2><p><b>syntax:</b> <i>proxy_store_access users:permissions [users:permission ...];</i> </p><p><b>default:</b> <i>proxy_store_access user:rw;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive assigns the permissions for the created files and directories, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_store_access"><span class="kw21">proxy_store_access</span></a>  <a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span></pre>
+ </div>
+</div><p>If any rights for groups or all are assigned, then it is not necessary to assign rights for user: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_store_access"><span class="kw21">proxy_store_access</span></a>  group:rw  all:r<span class="sy0">;</span></pre>
+ </div>
+</div><p><br /> </p><br><i>Module: HttpProxyModule</i>

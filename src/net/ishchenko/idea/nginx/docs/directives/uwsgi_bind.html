@@ -1,0 +1,5 @@
+<h2> <span class="mw-headline" id="uwsgi_bind"> uwsgi_bind </span></h2><p><b>syntax:</b> <i>uwsgi_bind address</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>example:</b> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">uwsgi_bind  192.168.1.1<span class="sy0">;</span></pre>
+ </div>
+</div><p>Binds each upstream connection to a local address before calling connect(). It may be useful if host has several interfaces/aliases and you want to pass outgoing connections from specific interface/address. </p><br><i>Module: HttpUwsgiModule</i>

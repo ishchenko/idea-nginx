@@ -1,26 +1,23 @@
-
-<p><b>syntax:</b> <i>map $var1 $var2 { ... }</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>http</i>
-</p><p><b>map</b> defines the mapping table which will be used to set a variable.  There are three special parameters:
-</p>
-<ul><li> default — defines the value to be used where no match is found.
-</li><li> hostnames — it allows for an easier matching of values like host names, names with a starting dot may match exact host names and host names ending with the value, for example: 
-</li></ul>
-<pre>
+<h2> <span class="mw-headline" id="map"> map </span></h2><p><b>syntax:</b> <i>map $var1 $var2 { ... }</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http</i> </p><p><b>map</b> defines the mapping table which will be used to set a variable. </p><p>The table has two columns, <b>pattern</b> and <b>value</b>. A pattern can either be a simple string, or a regular expression. A regular expression is prefixed with a leading tilde ('~'). </p><pre>
+map $uri $myvalue {
+    /aa                   /mapped_aa;
+    ~^/aa/(?&lt;suffix&gt;.*)$  /mapped_bb/$suffix;
+}
+</pre><p>If you need to have a tilde to start the pattern but not have it be a regular expression, the pattern can be prefixed with a backslash ('\'): </p><pre>
+map $http_referer $myvalue {
+    Mozilla    1234;
+    \~Mozilla  5678;
+}
+</pre><p>There are three special parameters: </p><ul>
+ <li> default — defines the value to be used where no match is found. </li>
+ <li> hostnames — it allows for an easier matching of values like host names, names with a starting dot may match exact host names and host names ending with the value, for example: </li>
+</ul><pre>
 *.example.com  1; 
-</pre> 
-<p>Instead of two entries 
-</p>
-<pre>
+</pre><p>Instead of two entries </p><pre>
 example.com    1;
 *.example.com  1;
-</pre> 
-<p>we can use only one 
-</p>
-<pre>
+</pre><p>we can use only one </p><pre>
 .example.com   1;
-</pre>
-<ul><li> include — include values from a file. Multiple includes may be used.
-</li></ul>
-<br><i>Module: NginxHttpMapModule</i>
+</pre><ul>
+ <li> include — include values from a file. Multiple includes may be used. </li>
+</ul><br><i>Module: HttpMapModule</i>

@@ -1,8 +1,1 @@
-
-<p>This variable is equal to the URI request or, if if the URI concludes with a forward slash, then the URI request plus the name of the index file given by fastcgi_index. It is possible to use this variable in place of both SCRIPT_FILENAME and PATH_TRANSLATED, utilized, in particular, for determining the name of the script in PHP. 
-</p><p>For example, for the request "/info/":
-</p>
-<pre class="code">  <span class="kw11">fastcgi_index</span>  <span class="kw3">index</span>.php;
-  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /home/www/scripts/php<span class="re0">$fastcgi_script_name</span>;</pre>
-<p>SCRIPT_FILENAME would equal "/home/www/scripts/php/info/index.php".
-</p>
+<p>This variable is equal to the URI request or, if if the URI concludes with a forward slash, then the URI request plus the name of the index file given by fastcgi_index. It is possible to use this variable in place of both SCRIPT_FILENAME and PATH_TRANSLATED, utilized, in particular, for determining the name of the script in PHP. </p>

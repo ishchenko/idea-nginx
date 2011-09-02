@@ -1,12 +1,1 @@
-
-<p><b>syntax:</b> <i>override_charset on|off</i>
-</p><p><b>default:</b> <i>override_charset off</i>
-</p><p><b>context:</b> <i>http, server, location, if in location</i>
-</p><p>This directive determines, to carry out reencoding for the response, obtained from the proxied
-server or from FastCGI-server, if in the response-header a "Content-Type" header already is.
-If reencoding is permitted, then as the initial encoding the encoding, indicated in the obtained answer, is used. 
-</p><p>It is necessary to note that if the response was obtained in the subquery then, independent of directive override_charset,
-is always carried out reencoding from encoding of the response into encoding of basic demand. 
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpCharsetModule</i>
+<h2> <span class="mw-headline" id="override_charset"> override_charset </span></h2><p><b>syntax:</b> <i>override_charset on|off</i> </p><p><b>default:</b> <i>override_charset off</i> </p><p><b>context:</b> <i>http, server, location, if in location</i> </p><p>This directive determines, to carry out reencoding for the response, obtained from the proxied server or from FastCGI-server, if in the response-header a &quot;Content-Type&quot; header already is. If reencoding is permitted, then as the initial encoding the encoding, indicated in the obtained answer, is used. </p><p>It is necessary to note that if the response was obtained in the subquery then, independent of directive override_charset, is always carried out reencoding from encoding of the response into encoding of basic demand. </p><p><br /> </p><br><i>Module: HttpCharsetModule</i>

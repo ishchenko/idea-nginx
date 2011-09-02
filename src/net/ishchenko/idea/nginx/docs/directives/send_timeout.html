@@ -1,7 +1,1 @@
-
-<p><b>syntax:</b> <i>send_timeout the time</i>
-</p><p><b>default:</b> <i>send_timeout 60</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Directive assigns response timeout to client. Timeout is established not on entire transfer of answer, but only between two operations of reading, if after this time client will take nothing, then nginx is shutting down the connection.
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="send_timeout"> send_timeout </span></h2><p><b>syntax:</b> <i>send_timeout the time</i> </p><p><b>default:</b> <i>send_timeout 60</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive assigns response timeout to client. Timeout is established not on entire transfer of answer, but only between two operations of reading, if after this time client will take nothing, then nginx is shutting down the connection. </p><br><i>Module: HttpCoreModule</i>

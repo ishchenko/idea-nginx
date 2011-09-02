@@ -1,17 +1,15 @@
-
-<p><b>syntax:</b> <i>proxy_cache_path path [levels=number] keys_zone=zone_name:zone_size [inactive=time] [max_size=size];</i>
-</p><p><b>default:</b> <i>None</i>
-</p><p><b>context:</b> <i>http</i>
-</p><p>This directive sets the cache path and other cache parameters. Cached data stored in files. Key and filename in cache is md5 of proxied URL. <b>Levels</b> parameter set number of subdirectories in cache, for example for:
-</p>
-<pre class="code">  <span class="kw21">proxy_cache_path</span>  /data/nginx/cache  levels=<span class="nu0">1</span>:<span class="nu0">2</span>   keys_zone=one:10m;</pre>
-<p>file names will be like:
-</p><p>/data/nginx/cache/c/29/b7f54b2df7773722d382f4809d65029c
-</p><p>You may use any combination of 1 and 2 in the level formats: X, X:X, or X:X:X e.g.: "2", "2:2", "1:1:2".
-There can be at most 3 levels.
-</p><p>All active keys and metadata stored in shared memory - zone, name and size of this zone defined in <b>keys_zone</b> parameter. If cached data not requested for time defined in <b>inactive</b> parameter, than data deleted. By default <b>inactive</b> is 10 minutes.
-</p><p>Special process "cache manager" controls on-disk cache size, defined by parameter <b>max_size</b>, and when size exceed least used data deleted. 
-</p><p>Zone size should be set proportional to number of pages to cache. Size of metadata for one page (file) depend on OS, currently it 64 bytes for FreeBSD/i386 and 128 bytes for FreeBSD/amd64. Keys in zone replaced by LRU when zone is full.
-</p><p>proxy_cache_path and proxy_temp_path should be located on same filesyetem.
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_cache_path"> proxy_cache_path </span></h2><p><b>syntax:</b> <i>proxy_cache_path path [levels=number] keys_zone=zone_name:zone_size [inactive=time] [max_size=size];</i> </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>http</i> </p><p>This directive sets the cache path and other cache parameters. Cached data is stored in files. An MD5 hash of the proxied URL is used as the key for the cache entry, and is also used as the filename in the cache path for the response contents and metadata. The <b>levels</b> parameter sets the number of subdirectory levels in cache. For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_cache_path"><span class="kw21">proxy_cache_path</span></a>  /data/nginx/cache/one  levels<span class="sy0">=</span><span class="nu0">1</span>:<span class="nu0">2</span>   keys_zone<span class="sy0">=</span>one:10m<span class="sy0">;</span></pre>
+ </div>
+</div><p>In this cache, file names will be like the following: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="bash source-bash">
+  <pre class="de1"><span class="sy0">/</span>data<span class="sy0">/</span>nginx<span class="sy0">/</span>cache<span class="sy0">/</span>c<span class="sy0">/</span><span class="nu0">29</span><span class="sy0">/</span>b7f54b2df7773722d382f4809d65029c</pre>
+ </div>
+</div><p>You may use any combination of 1 and 2 in the level formats: X, X:X, or X:X:X e.g.: &quot;2&quot;, &quot;2:2&quot;, &quot;1:1:2&quot;. There can be at most 3 levels. </p><p>All active keys and metadata is stored in shared memory. Zone name and the size of the zone is defined via the <b>keys_zone</b> parameter. </p><p>Note that each defined zone must have a unique path. For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_cache_path"><span class="kw21">proxy_cache_path</span></a>  /data/nginx/cache/one    levels<span class="sy0">=</span><span class="nu0">1</span>      keys_zone<span class="sy0">=</span>one:10m<span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_cache_path"><span class="kw21">proxy_cache_path</span></a>  /data/nginx/cache/two    levels<span class="sy0">=</span><span class="nu0">2</span>:<span class="nu0">2</span>    keys_zone<span class="sy0">=</span>two:100m<span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_cache_path"><span class="kw21">proxy_cache_path</span></a>  /data/nginx/cache/three  levels<span class="sy0">=</span><span class="nu0">1</span>:<span class="nu0">1</span>:<span class="nu0">2</span>  keys_zone<span class="sy0">=</span>three:1000m<span class="sy0">;</span></pre>
+ </div>
+</div><p>If cached data is not requested for time defined by the <b>inactive</b> parameter, than that data is removed from the cache. The <b>inactive</b> parameter defaults to 10 minutes (<b>10m</b>). </p><p>A special process, called &quot;cache manager&quot;, is created to control the on-disk cache. It is responsible for removing inactive items and enforcing the size of the cache, as defined by the parameter <b>max_size</b>. When the total size of the cache exceeds the maximum size set by <b>max_size</b>, the least recently used data in the cache is deleted to make room for a new cache entry (a LRU replacement policy). </p><p>Zone size should be set proportional to number of pages to cache. The size of the metadata for one page (file) depends on the OS; currently it is 64 bytes for FreeBSD/i386, and 128 bytes for FreeBSD/amd64. </p><p>The directories specified by <b>proxy_cache_path</b> and <a href="#proxy_temp_path">proxy_temp_path</a> should be located on the same filesystem. </p><br><i>Module: HttpProxyModule</i>

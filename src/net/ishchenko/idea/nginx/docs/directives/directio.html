@@ -1,8 +1,5 @@
-
-<p><b>syntax:</b> <i>directio [size|off]</i>
-</p><p><b>default:</b> <i>directio off</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The directive enables use of flags O_DIRECT (FreeBSD, Linux), F_NOCACHE (Mac OS X) or directio() function (Solaris) for reading files with size greater than specified. This directive disables use of sendfile for this request. This directive may be useful for big files:
-</p>
-<pre class="code">    directio  4m;</pre>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="directio"> directio </span></h2><p><b>syntax:</b> <i>directio [size|off]</i> </p><p><b>default:</b> <i>directio off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive enables use of flags O_DIRECT (FreeBSD, Linux), F_NOCACHE (Mac OS X) or directio() function (Solaris) for reading files with size greater than specified. This directive disables use of <a href="/HttpCoreModule#sendfile" title="HttpCoreModule">sendfile</a> for this request. This directive may be useful for big files: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">    directio  4m<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpCoreModule</i>

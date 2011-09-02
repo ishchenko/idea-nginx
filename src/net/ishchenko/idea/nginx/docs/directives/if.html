@@ -1,51 +1,40 @@
-
-<p><b>syntax:</b> <i>if (condition) { ... }</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>server, location</i>
-</p><p>Checks the truth of a condition.  If the condition evaluates to true, then the</p><p>They can be assigned as the condition:
-</p>
-<ul><li> the name of variable; false values are: empty string "", or any string starting with "0";
-</li><li> the comparison of variable with the line with using the <code>=</code> and <code>!=</code> operators;
-</li><li> pattern matching with regular expressions using the symbols <code>~*</code> and <code>~</code>:
-</li><li> <code>~</code> is case-sensitive match
-</li><li> <code>~*</code> specifies a case-insensitive match (firefox matches FireFox)
-</li><li> <code>!~</code> and <code>!~*</code> mean the opposite, "doesn't match"
-</li><li> checking for the existence of a file using the <code>-f</code> and <code>!-f</code> operators;
-</li><li> checking existence of a directory using the <code>-d</code> and <code>!-d</code> operators;
-</li><li> checking existence of a file, directory or symbolic link using the <code>-e</code> and <code>!-e</code> operators;
-</li><li> checking whether a file is executable using the <code>-x</code> and <code>!-x</code> operators.
-</li></ul>
-<p>Parts of the regular expressions can be in parentheses, whose value can then later be accessed in the <code>$1</code> to <code>$9</code> variables.
-</p><p>Examples of use:
-</p><p></p>
-<pre class="code"><span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$http_user_agent</span> ~ MSIE<span class="br0">&#41;</span> <span class="br0">&#123;</span>
-  <span class="kw22">rewrite</span>  ^<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>$  /msie/$<span class="nu0">1</span>  <span class="kw22">break</span>;
-<span class="br0">&#125;</span>
+<h2> <span class="mw-headline" id="if"> if </span></h2><p><b>syntax:</b> <i>if (condition) { ... }</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server, location</i> </p><p><b>note:</b> Before using if please see <a href="/IfIsEvil" title="IfIsEvil">the if is evil page</a> and consider using <a href="/NginxHttpCoreModule#try_files" title="NginxHttpCoreModule" class="mw-redirect">try_files</a> instead. </p><p>Checks the truth of a condition. If the condition evaluates to true, then the code indicated in the curly braces is carried out and the request is processed in accordance with the configuration within the following block. The configuration inside the <code>if</code>directive is inherited from the previous level. </p><p>The condition can be: </p><ul>
+ <li> the name of a variable; false values are: empty string (<code>&quot;&quot;</code>, or any string starting with &quot;0&quot;; </li>
+ <li> a comparison of a variable using the <code>=</code> and <code>!=</code> operators; </li>
+ <li> pattern matching with <a href="http://perldoc.perl.org/perlretut.html" class="external text" rel="nofollow">regular expressions</a>: 
+  <ul>
+   <li> <code>~</code> performs a case-sensitive match </li>
+   <li> <code>~*</code> performs a case-insensitive match (<code>firefox</code> matches <code>FireFox</code>) </li>
+   <li> <code>!~</code> and <code>!~*</code> mean the opposite, &quot;doesn't match&quot; </li>
+  </ul> </li>
+ <li> checking for the existence of a file using the <code>-f</code> or <code>!-f</code> operators; </li>
+ <li> checking for the existence of a directory using <code>-d</code> or <code>!-d</code>; </li>
+ <li> checking for the existence of a file, directory or symbolic link using <code>-e</code> or <code>!-e</code>; </li>
+ <li> checking whether a file is executable using <code>-x</code> or <code>!-x</code>. </li>
+</ul><p>Parts of the regular expressions can be in parentheses, whose value can then later be accessed in the <code>$1</code> to <code>$9</code> variables. See <a href="http://perldoc.perl.org/perlretut.html#Extracting-matches" class="external text" rel="nofollow">Extracting matches</a>. </p><p>Examples of use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$http_user_agent</span> <span class="sy0">~</span> MSIE<span class="br0">)</span> <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^<span class="br0">(</span>.*<span class="br0">)</span>$  /msie/$<span class="nu0">1</span>  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$http_cookie</span> ~* <span class="st0">&quot;id=([^;] +)(?:;|$)&quot;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
-  <span class="kw22">set</span>  <span class="re0">$id</span>  $<span class="nu0">1</span>;
-<span class="br0">&#125;</span>
+<a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$http_cookie</span> <span class="sy0">~</span>* <span class="st0">&quot;id=([^;] +)(?:;|$)&quot;</span> <span class="br0">)</span> <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#set"><span class="kw22">set</span></a>  <span class="re0">$id</span>  $<span class="nu0">1</span><span class="sy0">;</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$request_method</span> = POST <span class="br0">&#41;</span> <span class="br0">&#123;</span>
-  <span class="kw22">return</span> <span class="nu0">405</span>;
-<span class="br0">&#125;</span>
+<a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$request_method</span> <span class="sy0">=</span> POST <span class="br0">)</span> <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#return"><span class="kw22">return</span></a> <span class="nu0">405</span><span class="sy0">;</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw22">if</span> <span class="br0">&#40;</span>!-f <span class="re0">$request_filename</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
-  <span class="kw22">break</span>;
-  <span class="kw21">proxy_pass</span>  <span class="kw3">http</span>://<span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>;
-<span class="br0">&#125;</span>
+<a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$slow</span><span class="br0">)</span> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#limit_rate"><span class="kw3">limit_rate</span></a>  10k<span class="sy0">;</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$slow</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
-  <span class="kw3">limit_rate</span>  10k;
-<span class="br0">&#125;</span>
+<a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$invalid_referer</span><span class="br0">)</span> <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#return"><span class="kw22">return</span></a>   <span class="nu0">403</span><span class="sy0">;</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$invalid_referer</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
-  <span class="kw22">return</span>   <span class="nu0">403</span>;
-<span class="br0">&#125;</span>
-&nbsp;
-<span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$args</span> ~ post=<span class="nu0">140</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
-  <span class="kw22">rewrite</span> ^ <span class="kw3">http</span>://example.com/ permanent;
-<span class="br0">&#125;</span></pre>
-<p>The value of the built-in variable <code>$invalid_referer</code> is given by the directive valid_referers.
-</p>
-<br><i>Module: NginxHttpRewriteModule</i>
+<a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$args</span> <span class="sy0">~</span> post<span class="sy0">=</span><span class="nu0">140</span><span class="br0">)</span><span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^ <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://example.com/ permanent<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>The value of the built-in variable <code>$invalid_referer</code> is given by the directive <a href="/HttpRefererModule#valid_referers" title="HttpRefererModule">valid_referers</a>. </p><br><i>Module: HttpRewriteModule</i>

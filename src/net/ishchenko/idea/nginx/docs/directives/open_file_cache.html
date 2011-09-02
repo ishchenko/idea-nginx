@@ -1,23 +1,16 @@
-
-<p><b>syntax:</b> <i>open_file_cache max = N [inactive = time] | off </i>
-</p><p><b>default:</b> <i>open_file_cache off</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The directive sets the cache activity on. These information can be stored:
-</p>
-<ul><li> Open file descriptors, information with their size and modification time;
-</li><li> Information about the existence of directories;
-</li><li> Error information when searches for a file - no file, do not have rights to read, etc. See also open_file_cache_errors
-</li></ul>
-<p>Options directive:
-</p>
-<ul><li> <code>max</code> - specifies the maximum number of entries in the cache. When the cache overflows, the longest-used items(LRU) will be removed;
-</li><li> <code>inactive</code> - specifies the time when the cached item is removed, if it has not been downloaded during that time, the default is 60 seconds;
-</li><li> <code>off</code> - prohibits the cache activity.
-</li></ul>
-<p>Example:
-</p>
-<pre class="code"> open_file_cache max=<span class="nu0">1000</span> inactive=20s; 
- open_file_cache_valid    30s; 
- open_file_cache_min_uses <span class="nu0">2</span>;
- open_file_cache_errors   on;</pre>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="open_file_cache"> open_file_cache </span></h2><p><b>syntax:</b> <i>open_file_cache max = N [inactive = time] | off </i> </p><p><b>default:</b> <i>open_file_cache off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive sets the cache activity on. These information can be stored: </p><ul>
+ <li> Open file descriptors, information with their size and modification time; </li>
+ <li> Information about the existence of directories; </li>
+ <li> Error information when searches for a file - no file, do not have rights to read, etc. See also <a href="#open_file_cache_errors">open_file_cache_errors</a> </li>
+</ul><p>Options directive: </p><ul>
+ <li> <code>max</code> - specifies the maximum number of entries in the cache. When the cache overflows, the least recently used(LRU) items will be removed; </li>
+ <li> <code>inactive</code> - specifies the time when the cached item is removed, if it has not been downloaded during that time, the default is 60 seconds; </li>
+ <li> <code>off</code> - prohibits the cache activity. </li>
+</ul><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"> open_file_cache max<span class="sy0">=</span><span class="nu0">1000</span> inactive<span class="sy0">=</span>20s<span class="sy0">;</span> 
+ open_file_cache_valid    30s<span class="sy0">;</span> 
+ open_file_cache_min_uses <span class="nu0">2</span><span class="sy0">;</span>
+ open_file_cache_errors   on<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpCoreModule</i>

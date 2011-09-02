@@ -1,91 +1,72 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>try_files file1 [file2 ... filen] fallback</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>location</i>
-</p><p>This directive tells Nginx to test for each file's existence, and use the first found file as the URI.  If none of the files are found, then the location <code>fallback</code> is called ("fallback" can be any name).  <code>fallback</code> is a required parameter.   It can be a named location or any <i>guaranteed</i> URI.
-</p><p>Example:
-</p>
-<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> <span class="kw3">index</span>.html <span class="kw3">index</span>.htm <span class="re0">@fallback</span>;
-<span class="br0">&#125;</span>
+<h2> <span class="mw-headline" id="try_files"> try_files </span></h2><p><b>syntax:</b> <i>try_files path1 [path2] uri</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server</i>, <i>location</i> </p><p><b>availability:</b> <i>0.7.27</i> </p><p>Checks for the existence of files in order, and returns the first file that is found. A trailing slash indicates a directory - <code>$uri /</code>. In the event that no file is found, an internal redirect to the last parameter is invoked. The last parameter is the fallback URI and *must* exist, or else an internal error will be raised. Unlike rewrite, $args are not automatically preserved if the fallback is not a named location. If you need args preserved, you must do so explicitly: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Example use in proxying Mongrel: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> /system/maintenance.html <span class="re0">$uri</span> <span class="re0">$uri</span>/<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.html <span class="re0">$uri</span>.html <span class="re0">@mongrel</span><span class="sy0">;</span>
 &nbsp;
-<span class="kw3">location</span> <span class="re0">@fallback</span> <span class="br0">&#123;</span>
-  <span class="kw3">root</span> /var/www/error;
-  <span class="kw3">index</span> <span class="kw3">index</span>.html;
-<span class="br0">&#125;</span></pre>
-<br><i>Module: NginxHttpCoreModule</i><hr>
-<p><i>Syntax:</i> <i>try_files path1 [ path2] uri</i>
-</p><p><i>Default:</i> <i>none</i>
-</p><p><i>Availability:</i> <i>0.7.27</i>
-</p><p>Checks for the existence of files in order, and returns the first file that is found.  A trailing slash indicates a directory - <code>$uri /</code>. In the event that no file is found, and internal redirect to the last parameter is invoked.   The last parameter is the fallback URI and *must* exist, or else an internal error will be raised.
-</p><p>Example use in proxying Mongrel:
-</p>
-<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> /system/maintenance.html
-  <span class="re0">$uri</span> <span class="re0">$uri</span>/<span class="kw3">index</span>.html <span class="re0">$uri</span>.html <span class="re0">@mongrel</span>;
-<span class="br0">&#125;</span>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="re0">@mongrel</span> <span class="br0">{</span>
+  <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://mongrel<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Note that you can specify an HTTP <b>status</b> code as the last argument to <code>try_file</code> since Nginx version 0.7.51. Here's an example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /error.php?c<span class="sy0">=</span><span class="nu0">404</span> <span class="sy0">=</span><span class="nu0">404</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>When all other attempts to serve the content corresponding to the request fail issue a <code>404 Not Found</code>. </p><p><br /> Example of use with Drupal / FastCGI: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><span class="co1"># for drupal 6:</span>
+<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span><span class="sy0">;</span>
 &nbsp;
-<span class="kw3">location</span> <span class="re0">@mongrel</span> <span class="br0">&#123;</span>
-  <span class="kw21">proxy_pass</span> <span class="kw3">http</span>://mongrel;
-<span class="br0">&#125;</span></pre>
-<p>Example of use with Drupal / FastCGI:
-</p>
-<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span>;
-<span class="br0">&#125;</span>
+<span class="co1"># for drupal 7:</span>
+<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span>
 &nbsp;
-<span class="kw3">location</span> ~ \.php$ <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">@drupal</span>;
-  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
-  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /path/to<span class="re0">$fastcgi_script_name</span>;
-  <span class="co1"># other fastcgi_param</span>
-<span class="br0">&#125;</span>
+<span class="co1"># only needed for Drupal 6 (or if you absolutely need a named location)</span>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="re0">@drupal</span> <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span> last<span class="sy0">;</span> <span class="co1"># for drupal 6</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw3">location</span> <span class="re0">@drupal</span> <span class="br0">&#123;</span>
-  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
-  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /path/to/<span class="kw3">index</span>.php;
-  <span class="kw11">fastcgi_param</span>  QUERY_STRING     q=<span class="re0">$request_uri</span>;
-  <span class="co1"># other fastcgi_param</span>
-<span class="br0">&#125;</span></pre>
-<p>In this example, the directive <code>try_files</code>:
-</p>
-<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span>;
-<span class="br0">&#125;</span></pre>
-<p>Similar directives:
-</p>
-<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
-  <span class="kw3">error_page</span>     <span class="nu0">404</span> = <span class="re0">@drupal</span>;
-  <span class="kw1">log_not_found</span>  off;
-<span class="br0">&#125;</span></pre>
-<p>and here:
-</p>
-<pre class="code"><span class="kw3">location</span> ~ \.php$ <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">@drupal</span>;
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span> \.php$ <span class="br0">{</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a> 127.0.0.1:<span class="nu0">8888</span><span class="sy0">;</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  SCRIPT_FILENAME <span class="re0">$document_root</span><span class="re0">$fastcgi_script_name</span><span class="sy0">;</span> <span class="co1"># if not already defined in the fastcgi_params file</span>
+  <span class="co1"># any other specific fastcgi_params</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>In this example, the directive <code>try_files</code> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Is basically the same as this: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>     <span class="nu0">404</span> <span class="sy0">=</span> <span class="re0">@drupal</span><span class="sy0">;</span>
+  <a href="/NginxHttpMainModule#log_not_found"><span class="kw1">log_not_found</span></a>  off<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Or this: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span>!-e <span class="re0">$request_filename</span><span class="br0">)</span> <span class="br0">{</span>
+   <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span> last<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p><code>try_files</code> is basically a replacement for the typical mod_rewrite style file/directory existence check. It is supposed to be more efficient than using <code>if</code> - see <a href="/IfIsEvil" title="IfIsEvil">IfIsEvil</a> </p><p>Examples of use with Wordpress and Joomla (typical &quot;Front controller pattern&quot; packages) </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><span class="co1"># wordpress (without WP Super Cache) - example 1</span>
+<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span>
 &nbsp;
-  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
-  <span class="kw11">fastcgi_param</span>  SCRIPT_FILENAME  /path/to<span class="re0">$fastcgi_script_name</span>;
-  <span class="co1"># other fastcgi_param</span>
-<span class="br0">&#125;</span></pre>
-<p><br />	
-<code>try_files</code> tests the existence of PHP file, before submitting a request to the FastCGI server.
-</p><p>Example of use with Wordpress and Joomla:
-</p>
-<pre class="code"><span class="kw3">location</span> / <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@wordpress</span>;
-<span class="br0">&#125;</span>
+<span class="co1"># wordpress (without WP Super Cache) - example 2 (it doesn't REALLY need the &quot;q&quot; parameter)</span>
+<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php<span class="sy0">;</span>
 &nbsp;
-<span class="kw3">location</span> ~ \.php$ <span class="br0">&#123;</span>
-  <span class="kw3">try_files</span> <span class="re0">$uri</span> <span class="re0">@wordpress</span>;
+<span class="co1"># joomla</span>
+<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span>
 &nbsp;
-  <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
-  <span class="kw11">fastcgi_param</span> SCRIPT_FILENAME /path/to<span class="re0">$fastcgi_script_name</span>;
-  <span class="co1"># other fastcgi_param</span>
-<span class="br0">&#125;</span>
-&nbsp;
-<span class="kw3">location</span> <span class="re0">@wordpress</span> <span class="br0">&#123;</span>
-    <span class="kw11">fastcgi_pass</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8888</span>;
-    <span class="kw11">fastcgi_param</span> SCRIPT_FILENAME /path/to/<span class="kw3">index</span>.php;
-    <span class="co1"># other fastcgi_param</span>
-<span class="br0">&#125;</span></pre>
-<br><i>Module: NginxHttpMainModule</i>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span> \.php$ <span class="br0">{</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a> 127.0.0.1:<span class="nu0">8888</span><span class="sy0">;</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  SCRIPT_FILENAME <span class="re0">$document_root</span><span class="re0">$fastcgi_script_name</span><span class="sy0">;</span> <span class="co1"># if not already defined in the fastcgi_params file</span>
+  <span class="co1"># any other specific fastcgi_params</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>WP Super Cache requires a bunch of static file checks. Those are not shown here. </p><br><i>Module: HttpCoreModule</i>

@@ -1,7 +1,9 @@
-
-<p><b>syntax:</b> <i>fastcgi_cache_path /path/to/cache [levels=m:n keys_zone=name:time inactive=time clean_time=time]</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>TODO: Description.
-</p>
-<br><i>Module: NginxHttpFcgiModule</i>
+<h2> <span class="mw-headline" id="fastcgi_cache_path"> fastcgi_cache_path </span></h2><p><b>syntax:</b> <i>fastcgi_cache_path path [levels=m:n] keys_zone=name:size [inactive=time] [max_size=size]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http</i> </p><p>The <i>clean_time</i> parameter was removed in 0.7.45. </p><p>This directive specifies path to the cache storage and other cache parameters. All data is stored in the files. The cache key and the name of cache file are calculated as MD5 sum of the proxied URL. </p><p>Level parameter sets number and width of the names of subdirectories used to store caching files. For example, with the directive like: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_cache_path"><span class="kw11">fastcgi_cache_path</span></a>  /data/nginx/cache  levels<span class="sy0">=</span><span class="nu0">1</span>:<span class="nu0">2</span>   keys_zone<span class="sy0">=</span>one:10m<span class="sy0">;</span></pre>
+ </div>
+</div><p>the data will be stored in the following file: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">/data/nginx/cache/c/<span class="nu0">29</span>/b7f54b2df7773722d382f4809d65029c</pre>
+ </div>
+</div><p>Caching data is first written to the temporary file which is then moved to the final location in a cache directory. Starting from 0.8.9 it is possible to store temporary and cache files on different file systems, but it should be kept in mind that in such a case instead of cheap and atomic rename syscall a full file copy is performed. So it's better to use the same file system in both parameters of <a href="#fastcgi_temp_path">fastcgi_temp_path</a> and <code>fastcgi_cache_path</code> directives. </p><p>In addition, all active keys and information about data are kept in the shared memory zone, which name and size are specified by the options of the <code>key_zone</code> parameter. In case this data haven't been accessed for the time, specified in the option of <code>inactive</code> parameter, it is wiped out from the memory. By default inactive period is set to 10 minutes. </p><p>To maintain the maximum size of the cache, which is set by <code>max_size</code> parameter, a special process <b>cache manager</b> periodically deletes old data from the cache. </p><br><i>Module: HttpFcgiModule</i>

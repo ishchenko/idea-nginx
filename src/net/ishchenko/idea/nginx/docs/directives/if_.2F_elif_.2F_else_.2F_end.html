@@ -1,0 +1,19 @@
+<h2> <span class="mw-headline" id="if_.2F_elif_.2F_else_.2F_end"> if / elif / else / end </span></h2><p>Conditionally include text or other directives. Usage: </p><pre>
+  &lt;!--# if expr=&quot;...&quot; --&gt;
+  ...
+  &lt;!--# elif expr=&quot;...&quot; --&gt;
+  ...
+  &lt;!--# else --&gt;
+  ...
+  &lt;!--# endif --&gt;
+</pre><p>Only one level of nesting is possible. </p><ul>
+ <li> <i>expr</i> — the expression to evaluate. It can be a variable: </li>
+</ul><pre>
+  &lt;!--# if expr=&quot;$name&quot; --&gt;
+</pre><p>A string comparison: </p><pre>
+  &lt;!--# if expr=&quot;$name = text&quot; --&gt;
+  &lt;!--# if expr=&quot;$name&nbsp;!= text&quot; --&gt;
+</pre><p>Or a regex match: </p><pre>
+  &lt;!--# if expr=&quot;$name = /text/&quot; --&gt;
+  &lt;!--# if expr=&quot;$name&nbsp;!= /text/&quot; --&gt;
+</pre><p>If there are variables in the text, they will have their values substituted. </p><br><i>Module: HttpSsiModule</i>

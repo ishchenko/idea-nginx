@@ -1,11 +1,9 @@
-
-<p><b>syntax:</b> <i>dav_access user:permissions [users:permissions]  ...</i>
-</p><p><b>default:</b> <i>dav_access user:rw</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive assigns access rights for file and directories, for example:
-</p>
-<pre class="code"><span class="kw34">dav_access</span> <span class="kw1">user</span>:rw group:rw all:r;</pre>
-<p>If assigning any permissions for <code>groups</code> or <code>all</code>, then it's not necessary to indicate permissions for <code>user</code>:
-</p>
-<pre class="code"><span class="kw34">dav_access</span> group:rw all:r;</pre>
-<br><i>Module: NginxHttpDavModule</i>
+<h2> <span class="mw-headline" id="dav_access"> dav_access </span></h2><p><b>syntax:</b> <i>dav_access user:permissions [users:permissions] ...</i> </p><p><b>default:</b> <i>dav_access user:rw</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive assigns access rights for file and directories, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpDavModule#dav_access"><span class="kw34">dav_access</span></a> <a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a>:rw group:rw all:r<span class="sy0">;</span></pre>
+ </div>
+</div><p>If assigning any permissions for <code>groups</code> or <code>all</code>, then it's not necessary to indicate permissions for <code>user</code>: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpDavModule#dav_access"><span class="kw34">dav_access</span></a> group:rw all:r<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpDavModule</i>

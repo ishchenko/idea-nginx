@@ -1,9 +1,1 @@
-
-<p><b>syntax:</b> <i>client_header_buffer_size size</i>
-</p><p><b>default:</b> <i>1k</i>
-</p><p><b>context:</b> <i>http, server</i>
-</p><p>Directive sets the headerbuffer size for the request header from client.
-</p><p>For the overwhelming majority of requests it is completely sufficient a buffer size of 1K.
-</p><p>However if a big cookie is in the request-header or the request has come from a wap-client the header can not be placed in 1K, therefore, the request-header or a line of request-header is not located completely in this buffer nginx allocate a bigger buffer, the size of the bigger buffer can be set with the instruction large_client_header_buffers.
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="client_header_buffer_size"> client_header_buffer_size </span></h2><p><b>syntax:</b> <i>client_header_buffer_size size</i> </p><p><b>default:</b> <i>1k</i> </p><p><b>context:</b> <i>http, server</i> </p><p>Directive sets the headerbuffer size for the request header from client. </p><p>For the overwhelming majority of requests it is completely sufficient a buffer size of 1K. </p><p>However if a big cookie is in the request-header or the request has come from a wap-client the header can not be placed in 1K, therefore, the request-header or a line of request-header is not located completely in this buffer nginx allocate a bigger buffer, the size of the bigger buffer can be set with the instruction large_client_header_buffers. </p><br><i>Module: HttpCoreModule</i>

@@ -1,24 +1,18 @@
-
-<p><b>syntax:</b> <i>log_format name format [format ...] </i>
-</p><p><b>default:</b> <i>log_format combined "..."</i>
-</p><p><b>context:</b> <i>http</i> <i>server</i>
-</p><p>The <b>log_format</b> directive describes the format of a log entry. You can use general variables in the format, as well as variables which exist only at the moment of writing into the log:
-</p>
-<ul><li> $body_bytes_sent, the number of bytes, transmitted to client minus the response headers. This variable is compatible with the&nbsp;%B parameter of Apache's mod_log_config (this was called $apache_bytes_sent, before version 0.3.10)
-</li><li> $bytes_sent, the number of bytes transmitted to client
-</li><li> $connection, the number of connection
-</li><li> $msec, the current time at the moment of writing the log entry (microsecond accuracy)
-</li><li> $pipe, "p" if request was pipelined 
-</li><li> $request_length, the length of the body of the request
-</li><li> $request_time, the time it took nginx to work on the request, in milliseconds, (in seconds for versions older than 0.5.19)
-</li><li> $status, status of answer
-</li><li> $time_local, local time into common log format.
-</li></ul>
-<p>The headers, transmitted to client, begin from the prefix "sent_http_", for example, $sent_http_content_range.
-</p><p>Note that variables produced by other modules can also be logged.  For example you can log upstream response headers with the prefix "upstream_http_", see  upstream .
-</p><p>There is a predefined log format called "combined":
-</p><p></p>
-<pre class="code"><span class="kw18">log_format</span> combined <span class="st0">'$remote_addr - $remote_user [$time_local]  '</span>
+<h2> <span class="mw-headline" id="log_format"> log_format </span></h2><p><b>syntax:</b> <i>log_format name format [format ...] </i> </p><p><b>default:</b> <i>log_format combined &quot;...&quot;</i> </p><p><b>context:</b> <i>http</i> <i>server</i> </p><p>The <b>log_format</b> directive describes the format of a log entry. You can use general variables in the format, as well as variables which exist only at the moment of writing into the log: </p><ul>
+ <li> $body_bytes_sent, the number of bytes, transmitted to client minus the response headers. This variable is compatible with the&nbsp;%B parameter of Apache's mod_log_config (this was called $apache_bytes_sent, before version 0.3.10) </li>
+ <li> $bytes_sent, the number of bytes transmitted to client </li>
+ <li> $connection, the number of connection </li>
+ <li> $msec, the current time at the moment of writing the log entry (microsecond accuracy) </li>
+ <li> $pipe, &quot;p&quot; if request was <a href="http://en.wikipedia.org/wiki/HTTP_pipelining" class="external text" rel="nofollow">pipelined</a> </li>
+ <li> $request_length, the length of the body of the request </li>
+ <li> $request_time, the time it took nginx to work on the request, in seconds with millisecond precision (just seconds for versions older than 0.5.19) </li>
+ <li> $status, status of answer </li>
+ <li> $time_iso8601, time in <a href="http://en.wikipedia.org/wiki/ISO_8601" class="external text" rel="nofollow">ISO 8601</a> format, e. g. 2011-03-21T18:52:25+03:00 (added in 0.9.6) </li>
+ <li> $time_local, local time into common log format. </li>
+</ul><p>The headers, transmitted to client, begin from the prefix &quot;sent_http_&quot;, for example, $sent_http_content_range. </p><p>Note that variables produced by other modules can also be logged. For example you can log upstream response headers with the prefix &quot;upstream_http_&quot;, see <a href="/NginxHttpUpstreamModule" title="NginxHttpUpstreamModule" class="mw-redirect"> upstream</a> . </p><p>There is a predefined log format called &quot;combined&quot;: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpLogModule#log_format"><span class="kw18">log_format</span></a> combined <span class="st0">'$remote_addr - $remote_user [$time_local]  '</span>
                     <span class="st0">'&quot;$request&quot; $status $body_bytes_sent '</span>
-                    <span class="st0">'&quot;$http_referer&quot; &quot;$http_user_agent&quot;'</span>;</pre>
-<br><i>Module: NginxHttpLogModule</i>
+                    <span class="st0">'&quot;$http_referer&quot; &quot;$http_user_agent&quot;'</span><span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpLogModule</i>

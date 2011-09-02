@@ -1,69 +1,73 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>listen address:port [ default [ backlog=num | rcvbuf=size | sndbuf=size | accept_filter=filter | deferred | bind | ssl ] ]   </i>
-</p><p><b>default:</b> <i>listen 80</i>
-</p><p><b>context:</b> <i>server</i>
-</p><p>The <i>listen</i> directive specifies the address and port accepted by the enclosing server {...}  block. It is possible to specify only an address, only a port, or a server name as the address.
-</p><p></p>
-<pre class="code"><span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8000</span>;
-<span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>;
-<span class="kw3">listen</span> <span class="nu0">8000</span>;
-<span class="kw3">listen</span> *:<span class="nu0">8000</span>;
-<span class="kw3">listen</span> localhost:<span class="nu0">8000</span>;</pre>
-<p>IPv6 address(0.7.36) are set in square brackets:
-</p>
-<pre class="code"><span class="kw3">listen</span> <span class="br0">&#91;</span>::<span class="br0">&#93;</span>:<span class="nu0">8000</span>; 
-<span class="kw3">listen</span> <span class="br0">&#91;</span>fe80::<span class="nu0">1</span><span class="br0">&#93;</span>;</pre>
-<p>When Linux (in contrast to FreeBSD) binds IPv6 [::], it will also bind the corresponding IPv4 address. If other non IPv6 server definitions already used this, the bind will fail. By using explicit addresses instead of [::] this will not be a problem. It is also possible to specify that this listen directive is only to bind the IPv6 address with use of the "default ipv6only=on" option. Note that this only affect this listen directive, the same server {...} block may very well listen to IPv4 as well, specified by other listen directives.
-</p>
-<pre class="code"><span class="kw3">listen</span> <span class="br0">&#91;</span>2a02:<span class="nu0">750</span>:<span class="nu0">5</span>::<span class="nu0">123</span><span class="br0">&#93;</span>:<span class="nu0">80</span>;
-<span class="kw3">listen</span> <span class="br0">&#91;</span>::<span class="br0">&#93;</span>:<span class="nu0">80</span> default ipv6only=on;</pre>
-<p>If only address is given, the default port is 80.
-</p><p>If the directive has the <i>default</i> parameter, then the enclosing server {...} block will be the default server for the address:port pair.  This is useful for name-based virtual hosting where you wish to specify the default server block for hostnames that do not match any server_name  directives.  If there are no directives with the <code>default</code> parameter, then the default server will be the first server block in which the <code>address:port</code> pair appears.
-</p><p>The <code>listen</code> directive accepts several parameters, specific to the system calls <code>listen(2)</code> and <code>bind(2)</code>.  These parameters must follow the <code>default</code> parameter.
-</p><p>backlog=num -- is assigned parameter backlog in call <code>listen(2)</code>. By default backlog equals -1.
-</p><p>rcvbuf=size -- assigned to the parameter <code>SO_RCVBUF</code> for the listening socket.
-</p><p>sndbuf=size -- assigned to the parameter <code>SO_SNDBUF</code> for the listening socket.
-</p><p>accept_filter=filter -- is assigned name accept-filter.
-</p>
-<dl><dd> . It works only to FreeBSD, it is possible to use two filters -- <code>dataready</code> and <code>httpready</code>. On the signal -HUP accept-filter it is possible to change only in the quite last versions FreeBSD: 6.0, 5.4-STABLE and 4.11-STABLE.
-</dd></dl>
-<p>deferred -- indicates to use that postponed accept(2) on Linux with
-</p>
-<dl><dd> . the aid of option <code>TCP_DEFER_ACCEPT</code>.
-</dd></dl>
-<p>bind -- indicates that it is necessary to make <code>bind(2)</code> separately
-</p>
-<dl><dd> . for this pair of address:port. The fact is that if are described several directives listen with the identical port, but by different  addresses and one of the directives listen listens to on all addresses for this port (*:port), then nginx will make bind(2) only to *:port. It is necessary to consider that in this case for determining the address, on which the connections arrive, is done the system call getsockname(). But if are used parameters backlog, rcvbuf, sndbuf, accept_filter or deferred, then it is always done separately for this pair of address:port bind(2).
-</dd></dl>
-<p>ssl -- parameter (0.7.14) not related to listen(2) and bind(2) syscalls
-</p>
-<dl><dd> . but instead specifies that connections accepted on this port should work in SSL mode. This allows to specify compact configurations for servers working with both HTTP and HTTPS. For example:
-</dd></dl>
-<p></p>
-<pre class="code"><span class="kw3">listen</span>  <span class="nu0">80</span>;
-<span class="kw3">listen</span>  <span class="nu0">443</span> default <span class="kw31">ssl</span>;</pre>
-<p>Example of the use of the parameters:
-</p>
-<pre class="code"><span class="kw3">listen</span>  <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span> default accept_filter=dataready backlog=<span class="nu0">1024</span>;</pre>
-<p>Since version 0.8.21 nginx is able to listen on unix sockets:
-</p>
-<pre class="code"><span class="kw3">listen</span> unix:/tmp/nginx1.sock;</pre>
-<br><i>Module: NginxHttpCoreModule</i><hr>
-<p><b>syntax:</b> <i>listen</i> <i><b>address:port [ bind ] </b></i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>server</i>
-</p><p>The directive specifies the address and port, on which the server accepts requests. It is possible to specify address or port only, besides, an address can be the server name, for example:
-</p><p></p>
-<pre class="code"><span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>:<span class="nu0">8000</span>;
-<span class="kw3">listen</span> <span class="nu0">127.0</span><span class="nu0">.0</span><span class="nu0">.1</span>;
-<span class="kw3">listen</span> <span class="nu0">8000</span>;
-<span class="kw3">listen</span> *:<span class="nu0">8000</span>;
-<span class="kw3">listen</span> localhost:<span class="nu0">8000</span>;</pre>
-<p>IPv6 address(&gt;=0.7.58) are set in square brackets:
-</p>
-<pre class="code"><span class="kw3">listen</span>  <span class="br0">&#91;</span>::<span class="br0">&#93;</span>:<span class="nu0">8000</span>; 
-<span class="kw3">listen</span>  <span class="br0">&#91;</span>fe80::<span class="nu0">1</span><span class="br0">&#93;</span>;</pre>
-<p>In directive listen it is possible to indicate the system call bind(2).
-</p><p>bind -- indicates that it is necessary to make bind(2) separately for this pair of address:port. If several directives listen with identical port but with different addresses and one of the directives listen to all addresses for this port (*:port) then Nginx will make bind(2) only to *:port. In this case the address is determined by the system call getsockname(). 
-</p>
-<br><i>Module: NginxMailCoreModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="listen"> listen </span></h2><p><b>syntax:</b> <i>listen address:port [ default(deprecated in 0.8.21) | default_server | [ backlog=num | rcvbuf=size | sndbuf=size | accept_filter=filter | deferred | bind | ipv6only=[on|off] | ssl ] ]</i> </p><p><b>default:</b> <i>listen 80</i> </p><p><b>context:</b> <i>server</i> </p><p>The <i>listen</i> directive specifies the address and port accepted by the enclosing <a href="#server">server {...}</a> block. It is possible to specify only an address, only a port, or a server name as the address. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1:<span class="nu0">8000</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1<span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="nu0">8000</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> *:<span class="nu0">8000</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> localhost:<span class="nu0">8000</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>IPv6 address(0.7.36) are set in square brackets: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>::<span class="br0">]</span>:<span class="nu0">8000</span><span class="sy0">;</span> 
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>fe80::<span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>In Linux by default any IPv6 TCP socket <b>also accepts</b> IPv4 traffic using the IPv4 to IPv6 mapped address format, i.e.,&nbsp;::ffff:&lt;IPv4 adddress in dotted decimal notation&gt;. E.g., <code>::ffff:192.168.0.27</code> maps the IPv4 address 192.168.0.27 to an IPv6 address. </p><p>When you enable the address [::]:80, binding port 80 using IPv6, in the listen directive, in Linux, by default, the IPv4 port 80 is also enabled. Meaning that nginx listens for <b>both</b> IPv4 and IPv6 incoming traffic. Therefore if you erroneously specify also a IPv4 address you'll get an <i>already bind address</i> error when reloading nginx configuration. </p><p>In Linux the separation of the IPv6 and IPv4 stacks is controlled through the runtime parameter: <code>net.ipv6.bindv6only</code> which has the value 0 by default. </p><p>If you want to use <b>separate</b> sockets for IPv4 and IPv6 you should set this parameter to 1 using <code>sysctl</code>. </p><p>Note that any nginx instance that was running <b>before</b> you made the change will <b>continue to accept</b> IPv4 traffic. Therefore you should edit your nginx configuration to reflect the new setup for IPv6 and IPv4 packet handling and do a <b>restart</b>. </p><p>If on the other hand you launched another server instance (vhost) and you expect it to also handle IPv4 traffic by using only, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>::<span class="br0">]</span>:<span class="nu0">80</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>the binding of the IPv4 address will fail. The correct way to to this is by using the &quot;ipv6only=on&quot; option in the IPv6 listen directive and also specifying a IPv4 listen directive in the respective server block. </p><p>This re-editing of the configuration must be done <b>after</b> you changed your kernel runtime parameter. This is the most generic situation in that case (separation of IPv6 and IPv4 sockets): </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>::<span class="br0">]</span>:<span class="nu0">80</span> ipv6only<span class="sy0">=</span>on<span class="sy0">;</span> <span class="co1"># listen for IPv6 only traffic on IPv6 sockets</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="nu0">80</span><span class="sy0">;</span> <span class="co1"># listen also for IPv4 traffic on &quot;regular&quot; IPv4 sockets</span></pre>
+ </div>
+</div><p>In FreeBSD the default is <b>separate</b> IPv4 and IPv6 sockets. Therefore &quot;listen [::]:80&quot; only binds port 80 for listening to IPv6 traffic. It's always necessary to specify also IPv4 listen directives if you wish to also handle IPv4 traffic. </p><p>It's possible to specify <b>only</b> IPv6 addresses in the listen directive. Using the &quot;default_server ipv6only=on&quot; option. Specific IPv6 addresses can be used with a IPv6 only default directive. Other server directives can also specifiy listen directives with IPv4 addresses. The uniqueness of the IPv6 handling concerns only the <b>same</b> <a href="#server">server {...}</a> block. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>2a02:<span class="nu0">750</span>:<span class="nu0">5</span>::<span class="nu0">123</span><span class="br0">]</span>:<span class="nu0">80</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>::<span class="br0">]</span>:<span class="nu0">80</span> default_server ipv6only<span class="sy0">=</span>on<span class="sy0">;</span></pre>
+ </div>
+</div><p>If only the address is given, the default port nginx binds to is 80. </p><p>If the directive has the <i>default_server</i> parameter, then the enclosing <a href="#server">server {...}</a> block will be the default server for the address:port pair. This is useful for name-based virtual hosting where you wish to specify the default server block for hostnames that do not match any <a href="#server_name">server_name</a> directives. If there are no directives with the <i>default_server</i> parameter, then the default server will be the first server block in which the <code>address:port</code> pair appears. The <i>default_server</i> parameter appeared in version 0.8.21 thus deprecating the parameter <i>default</i>. </p><p>The <code>listen</code> directive accepts several parameters, specific to the system calls <code>listen(2)</code> and <code>bind(2)</code>. These parameters must follow the <code>default</code> parameter. </p><p>backlog=num -- is assigned parameter backlog in call <code>listen(2)</code>. By default backlog equals -1. </p><p>rcvbuf=size -- assigned to the parameter <code>SO_RCVBUF</code> for the listening socket. </p><p>sndbuf=size -- assigned to the parameter <code>SO_SNDBUF</code> for the listening socket. </p><p>accept_filter=filter -- is assigned name accept-filter. </p><dl>
+ <dd>
+   . It works only to FreeBSD, it is possible to use two filters -- 
+  <code>dataready</code> and 
+  <code>httpready</code>. On the signal -HUP accept-filter it is possible to change only in the quite last versions FreeBSD: 6.0, 5.4-STABLE and 4.11-STABLE. 
+ </dd>
+</dl><p>deferred -- indicates to use that postponed accept(2) on Linux with </p><dl>
+ <dd>
+   . the aid of option 
+  <code>TCP_DEFER_ACCEPT</code>. 
+ </dd>
+</dl><p>bind -- indicates that it is necessary to make <code>bind(2)</code> separately </p><dl>
+ <dd>
+   . for this pair of address:port. The fact is that if are described several directives listen with the identical port, but by different addresses and one of the directives listen listens to on all addresses for this port (*:port), then nginx will make bind(2) only to *:port. It is necessary to consider that in this case for determining the address, on which the connections arrive, is done the system call getsockname(). But if are used parameters backlog, rcvbuf, sndbuf, accept_filter or deferred, then it is always done separately for this pair of address:port bind(2). 
+ </dd>
+</dl><p>ssl -- parameter (0.7.14) not related to listen(2) and bind(2) syscalls </p><dl>
+ <dd>
+   . but instead specifies that connections accepted on this port should work in SSL mode. This allows to specify compact configurations for servers working with both HTTP and HTTPS. For example: 
+ </dd>
+</dl><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>  <span class="nu0">80</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>  <span class="nu0">443</span> default_server <a href="/NginxHttpSslModule#ssl"><span class="kw31">ssl</span></a><span class="sy0">;</span></pre>
+ </div>
+</div><p>Example of the use of the parameters: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>  127.0.0.1 default_server accept_filter<span class="sy0">=</span>dataready backlog<span class="sy0">=</span><span class="nu0">1024</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Since version 0.8.21 nginx is able to listen on unix sockets: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> unix:/tmp/nginx1.sock<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpCoreModule</i><hr><h2> <span class="mw-headline" id="listen"> listen </span></h2><p><b>syntax:</b> <i>listen</i> <i><b>address:port [ bind ] </b></i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>server</i> </p><p>The directive specifies the address and port, on which the server accepts requests. It is possible to specify address or port only, besides, an address can be the server name, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1:<span class="nu0">8000</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1<span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="nu0">8000</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> *:<span class="nu0">8000</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> localhost:<span class="nu0">8000</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>IPv6 address(&gt;=0.7.58) are set in square brackets: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>  <span class="br0">[</span>::<span class="br0">]</span>:<span class="nu0">8000</span><span class="sy0">;</span> 
+<a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>  <span class="br0">[</span>fe80::<span class="nu0">1</span><span class="br0">]</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>In directive listen it is possible to indicate the system call bind(2). </p><p>bind -- indicates that it is necessary to make bind(2) separately for this pair of address:port. If several directives listen with identical port but with different addresses and one of the directives listen to all addresses for this port (*:port) then Nginx will make bind(2) only to *:port. In this case the address is determined by the system call getsockname(). </p><br><i>Module: MailCoreModule</i>

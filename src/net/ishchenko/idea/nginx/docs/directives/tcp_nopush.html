@@ -1,9 +1,1 @@
-
-<p><b>syntax:</b> <i>tcp_nopush [on|off] </i>
-</p><p><b>default:</b> <i>tcp_nopush off</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive permits or forbids the use of the socket options <code>TCP_NOPUSH</code> on FreeBSD or <code>TCP_CORK</code> on Linux. This option is only available when using <code>sendfile</code>. 
-</p><p>Setting this option causes nginx to attempt to send it's HTTP response headers in one packet on Linux and FreeBSD 4.x
-</p><p>You can read more about the <code>TCP_NOPUSH</code> and <code>TCP_CORK</code> socket options here.
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="tcp_nopush"> tcp_nopush </span></h2><p><b>syntax:</b> <i>tcp_nopush [on|off] </i> </p><p><b>default:</b> <i>tcp_nopush off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive permits or forbids the use of the socket options <code>TCP_NOPUSH</code> on FreeBSD or <code>TCP_CORK</code> on Linux. This option is only available when using <code>sendfile</code>. </p><p>Setting this option causes nginx to attempt to send it's HTTP response headers in one packet on Linux and FreeBSD 4.x </p><p>You can read more about the <code>TCP_NOPUSH</code> and <code>TCP_CORK</code> socket options <a href="/ReadMoreAboutTcpNopush" title="ReadMoreAboutTcpNopush">here</a>. </p><br><i>Module: HttpCoreModule</i>

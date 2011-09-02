@@ -1,0 +1,22 @@
+<h2> <span class="mw-headline" id="uwsgi_string"> uwsgi_string </span></h2><p><b>syntax:</b> <i>uwsgi_string string</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server, location</i> </p><p>append a string to a uwsgi request </p><p>Example (for a uwsgi compatible server that support the <b>eval modifier</b> as uWSGI) </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+    <a href="/NginxHttpUwsgiModule#uwsgi_pass"><span class="kw37">uwsgi_pass</span></a> unix:/var/run/example.com.sock<span class="sy0">;</span>
+    uwsgi_pass_request_headers off<span class="sy0">;</span>
+    uwsgi_pass_request_body off<span class="sy0">;</span>
+    uwsgi_string <span class="st0">&quot;
+&nbsp;
+import uwsgi
+&nbsp;
+uwsgi.start_response('200 OK', [('Content-type','text/plain')])
+total = 30+22
+uwsgi.send(&quot;</span><span class="nu0">30</span> + <span class="nu0">22</span> <span class="sy0">=</span> <span class="re0">%d</span><span class="st0">&quot;&nbsp;% total)
+&nbsp;
+&quot;</span><span class="sy0">;</span>
+&nbsp;
+    uwsgi_modifier1 <span class="nu0">22</span><span class="sy0">;</span>
+    uwsgi_modifier2 <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+  <span class="br0">}</span></pre>
+ </div>
+</div><br><i>Module: HttpUwsgiModule</i>

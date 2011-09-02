@@ -1,0 +1,10 @@
+<h2> <span class="mw-headline" id="uwsgi_cache_bypass"> uwsgi_cache_bypass </span></h2><p><b>syntax:</b> <i>uwsgi_cache_bypass variable1 variable2...</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>version:</b> <i>&gt;= 0.8.46</i> </p><p>Specifies in what cases a request will bypass a cached response and pass the request to upstream. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">uwsgi_cache_bypass <span class="re0">$cookie_nocache</span>  <span class="re0">$arg_nocache</span><span class="re0">$arg_comment</span><span class="sy0">;</span>
+uwsgi_cache_bypass <span class="re0">$http_pragma</span>     <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>The expression is false if it is equal to the empty string or &quot;0&quot;. For instance, in the above example, the request will always go through to the back-end if the cookie &quot;nocache&quot; is set in the request. </p><p>Note that the response from the back-end is still eligible for caching. Thus one way of refreshing an item in the cache is sending a request with a header you pick yourself, e.g. &quot;My-Secret-Header: 1&quot;, then having a <b>uwsgi_no_cache</b> line like: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">uwsgi_no_cache <span class="re0">$http_my_secret_header</span><span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpUwsgiModule</i>

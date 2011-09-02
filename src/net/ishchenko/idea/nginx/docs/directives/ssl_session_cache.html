@@ -1,32 +1,18 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>ssl_session_cache off|none|builtin:size and/or shared:name:size</i>
-</p><p><b>default:</b> <i>ssl_session_cache off</i>
-</p><p><b>context:</b> <i>main, server</i>
-</p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br />The cache types are:
-</p>
-<ul><li> off -- Hard off: nginx says explicitly to a client that sessions can not reused.
-</li><li> none -- Soft off: nginx says to a client that session can be resued, but nginx actually never reuses them. This is workaround for some mail clients as ssl_session_cache may be used in mail proxy as well as in HTTP server.
-</li><li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions. Note: there appears to be a memory fragmentation issue using this method, please take that into consideration when using this. See "References" below.
-</li><li> shared -- the cache is shared between all worker processes. The size of cache is assigned in the bytes, 1 MB cache can contain about 4000 sessions. Each shared cache must have arbitrary name. Cache with the same name can be used in several virtual servers.
-</li></ul>
-<p>It is possible to use both types of cache simultaneously, for example:
-</p>
-<pre>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_session_cache"> ssl_session_cache </span></h2><p><b>syntax:</b> <i>ssl_session_cache off|none|builtin:size and/or shared:name:size</i> </p><p><b>default:</b> <i>ssl_session_cache off</i> </p><p><b>context:</b> <i>http, server</i> </p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br />The cache types are: </p><ul>
+ <li> off -- Hard off: nginx says explicitly to a client that sessions can not reused. </li>
+ <li> none -- Soft off: nginx says to a client that session can be resued, but nginx actually never reuses them. This is workaround for some mail clients as ssl_session_cache may be used in mail proxy as well as in HTTP server. </li>
+ <li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions. Note: there appears to be a memory fragmentation issue using this method, please take that into consideration when using this. See &quot;References&quot; below. </li>
+ <li> shared -- the cache is shared between all worker processes. The size of the cache is assigned in bytes: 1 MB cache can contain roughly 4000 sessions. Each shared cache must be given an arbitrary name. A shared cache with a given name can be used in several virtual hosts. </li>
+</ul><p>It's possible to use both types of cache — builtin and shared — simultaneously, for example: </p><pre>
   ssl_session_cache  builtin:1000  shared:SSL:10m;
-</pre>
-<p>However, the only shared cache usage without that builtin should be more effective.
-</p>
-<br><i>Module: NginxHttpSslModule</i><hr>
-<p><b>syntax:</b> <i>ssl_session_cache</i> <i><b>[builtin[<code></code>:size  [shared:name:size] </b></i>
-</p><p><b>default:</b> <i>builtin:20480</i>
-</p><p><b>context:</b> <i>mail, server</i>
-</p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br /> The cache types are:
-</p>
-<ul><li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions.
-</li><li> shared -- the cache is shared between all worker processes. The size of cache is assigned in the bytes, 1 MB cache can contain about 4000 sessions. Each shared cache must have arbitrary name. Cache with the same name can be used in several virtual servers.
-</li></ul>
-It is possible to use both types of cache simultaneously, for example:<pre>
-ssl_session_cache  builtin:1000  shared:SSL:10m;</pre>
-<p>However, the only shared cache usage without that builtin should be more effective.
-</p>
-<br><i>Module: NginxMailSslModule</i>
+</pre><p>Bear in mind however, that using only shared cache, i.e., without builtin, should be more effective. </p><p>For Nginx versions below 0.8.34 this directive shouldn't be set to 'none' or 'off' if ssl_verify_client is set to 'on' or 'optional'. </p><ul>
+ <li> Note that for session resumption to work you'll need to have, at least, the server configured as <b>default</b> for the SSL socket. Like this: </li>
+</ul><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>::<span class="br0">]</span>:<span class="nu0">443</span> <a href="/NginxHttpSslModule#ssl"><span class="kw31">ssl</span></a> default_server<span class="sy0">;</span></pre>
+ </div>
+</div><p>This is so because session resumption happens before any TLS extensions are enabled, namely Server Name Identification (SNI). The ClientHello message requests a session ID from a given IP address (server). For that to work the default server setting is <b>required</b>. </p><p>A <b>preferred</b> approach is to move the <code>ssl_session_cache</code> directive to the <code>http</code> context. The (minor) downside is that all configured virtual hosts get the <b>same</b> SSL cache settings. </p><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_session_cache"> ssl_session_cache </span></h2><p><b>syntax:</b> <i>ssl_session_cache</i> <i><b>[builtin[<code></code>:size [shared:name:size] </b></i> </p><p><b>default:</b> <i>builtin:20480</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br /> The cache types are: </p><ul>
+ <li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions. </li>
+ <li> shared -- the cache is shared between all worker processes. The size of cache is assigned in the bytes, 1 MB cache can contain about 4000 sessions. Each shared cache must have arbitrary name. Cache with the same name can be used in several virtual servers. </li>
+</ul><pre>
+ssl_session_cache  builtin:1000  shared:SSL:10m;</pre><p>However, the only shared cache usage without that builtin should be more effective. </p><br><i>Module: MailSslModule</i>

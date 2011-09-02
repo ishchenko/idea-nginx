@@ -1,18 +1,17 @@
-
-<p><b>syntax:</b> <i>fastcgi_pass fastcgi-server</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>location, if in location</i>
-</p><p>Directive assigns the port or socket on which the FastCGI-server is listening. Port can be indicated by itself or as an address and port, for example:
-</p>
-<pre class="code">  <span class="kw11">fastcgi_pass</span>   localhost:<span class="nu0">9000</span>;</pre>
-<p>using a Unix domain socket:
-</p>
-<pre class="code">  <span class="kw11">fastcgi_pass</span>   unix:/tmp/fastcgi.socket;</pre>
-<p>You may also use an upstream block.
-</p>
-<pre class="code"><span class="kw4">upstream</span> backend  <span class="br0">&#123;</span>
-  <span class="kw3">server</span>   localhost:<span class="nu0">1234</span>;
-<span class="br0">&#125;</span>
+<h2> <span class="mw-headline" id="fastcgi_pass"> fastcgi_pass </span></h2><p><b>syntax:</b> <i>fastcgi_pass fastcgi-server</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>location, if in location</i> </p><p>Directive assigns the port or socket on which the FastCGI-server is listening. Port can be indicated by itself or as an address and port, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a>   localhost:<span class="nu0">9000</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>using a Unix domain socket: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a>   unix:/tmp/fastcgi.socket<span class="sy0">;</span></pre>
+ </div>
+</div><p>You may also use an upstream block. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a> backend  <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   localhost:<span class="nu0">1234</span><span class="sy0">;</span>
+<span class="br0">}</span>
 &nbsp;
-<span class="kw11">fastcgi_pass</span>   backend;</pre>
-<br><i>Module: NginxHttpFcgiModule</i>
+<a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a>   backend<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpFcgiModule</i>

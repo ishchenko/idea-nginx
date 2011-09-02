@@ -1,9 +1,6 @@
-
-<p><b>syntax:</b> <i>limit_rate_after time</i>
-</p><p><b>default:</b> <i>limit_rate_after 1m</i>
-</p><p><b>context:</b> <i>http, server, location, if in location</i>
-</p><p>The directive limits speed only after the first part was sent.
-</p><p></p>
-<pre class="code"><span class="kw3">limit_rate_after</span> 1m;
-<span class="kw3">limit_rate</span> 100k;</pre>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="limit_rate_after"> limit_rate_after </span></h2><p><b>syntax:</b> <i>limit_rate_after time</i> </p><p><b>default:</b> <i>limit_rate_after 1m</i> </p><p><b>context:</b> <i>http, server, location, if in location</i> </p><p>The directive limits speed only after the first part was sent. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#limit_rate_after"><span class="kw3">limit_rate_after</span></a> 1m<span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#limit_rate"><span class="kw3">limit_rate</span></a> 100k<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpCoreModule</i>

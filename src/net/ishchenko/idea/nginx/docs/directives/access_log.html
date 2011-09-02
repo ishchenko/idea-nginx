@@ -1,14 +1,5 @@
-
-<p><b>syntax:</b> <i>access_log path [format [buffer=size]] | off</i>
-</p><p><b>default:</b> <i>access_log log/access.log combined</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The <b>access_log</b> directive sets the path, format and buffer size for the access log file.  Using "off" as the only parameter clears all <b>access_log</b> directives for the current level.  If the format is not indicated, it defaults to "combined". The size of buffer must not exceed the size of the atomic record for writing into the disk file. This size is not limited for FreeBSD 3.0-6.0.
-</p><p>The log file path can contain variables (version &gt;=0.7.4) but such logs have some limitations:
-</p>
-<ul><li> worker user must have permission to create files in;
-</li><li> buffering does not work;
-</li><li> for each log entry, the file is opened and immediately closed after writing the record. However, descriptors of frequently used files may be stored in  open_log_file_cache . Regarding log rotation, it must be kept in mind that over time (which is set by the parameter <i>valid</i> of directive  open_log_file_cache), logging can be still continue to the old file.
-</li></ul>
-<p>Nginx supports powerful access log separation per location. Accesses can also be output to more than one log at the same time. For more details, see the Multiple access_log directives in different contexts  thread on the mailing list.
-</p>
-<br><i>Module: NginxHttpLogModule</i>
+<h2> <span class="mw-headline" id="access_log"> access_log </span></h2><p><b>syntax:</b> <i>access_log path [format [buffer=size]] | off</i> </p><p><b>default:</b> <i>access_log log/access.log combined</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The <b>access_log</b> directive sets the path, format and buffer size for the access log file. Using &quot;off&quot; as the only parameter clears all <b>access_log</b> directives for the current level. If the format is not indicated, it defaults to <a href="/NginxHttpLogModule#log_format_combined" title="NginxHttpLogModule" class="mw-redirect">&quot;combined&quot;</a>. The size of buffer must not exceed the size of the atomic record for writing into the disk file. This size is not limited for FreeBSD 3.0-6.0. </p><p>The log file path can contain variables (version &gt;=0.7.4) but such logs have some limitations: </p><ul>
+ <li> worker user must have permission to create files in; </li>
+ <li> buffering does not work; </li>
+ <li> for each log entry, the file is opened and immediately closed after writing the record. However, descriptors of frequently used files may be stored in <a href="#open_log_file_cache"> open_log_file_cache</a> . Regarding log rotation, it must be kept in mind that over time (which is set by the parameter <i>valid</i> of directive <a href="#open_log_file_cache"> open_log_file_cache</a>), logging can be still continue to the old file. </li>
+</ul><p>Nginx supports powerful access log separation per location. Accesses can also be output to more than one log at the same time. For more details, see the <a href="http://thread.gmane.org/gmane.comp.web.nginx.english/9277" class="external text" rel="nofollow">Multiple access_log directives in different contexts</a> thread on the mailing list. </p><br><i>Module: HttpLogModule</i>

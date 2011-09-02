@@ -1,15 +1,7 @@
-
-<p><b>syntax:</b> <i>client_body_temp_path dir-path [ level1 [ level2 [ level3 ]     </i>
-</p><p><b>default:</b> <i>client_body_temp</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The directive assigns the directory for storing the temporary files in it with the body of the request.
-</p><p>In the <code>dir-path</code> a hierarchy of subdirectories up to three levels are possible.
-</p><p>For example
-</p><p></p>
-<pre class="code"><span class="kw3">client_body_temp_path</span>  /spool/nginx/client_temp <span class="nu0">1</span> <span class="nu0">2</span>;</pre>
-<p>The directory structure will be like this:
-</p>
-<pre>
+<h2> <span class="mw-headline" id="client_body_temp_path"> client_body_temp_path </span></h2><p><b>syntax:</b> <i>client_body_temp_path dir-path [ level1 [ level2 [ level3 ] </i> </p><p><b>default:</b> <i>client_body_temp</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive assigns the directory for storing the temporary files in it with the body of the request. </p><p>In the <code>dir-path</code> a hierarchy of subdirectories up to three levels are possible. </p><p>For example </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#client_body_temp_path"><span class="kw3">client_body_temp_path</span></a>  /spool/nginx/client_temp <span class="nu0">1</span> <span class="nu0">2</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>The directory structure will be like this: </p><pre>
 /spool/nginx/client_temp/7/45/00000123457
-</pre>
-<br><i>Module: NginxHttpCoreModule</i>
+</pre><br><i>Module: HttpCoreModule</i>

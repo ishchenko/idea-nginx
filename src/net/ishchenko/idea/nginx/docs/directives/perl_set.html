@@ -1,7 +1,98 @@
-
-<p><b>syntax:</b> <i>perl_set module::function | 'sub {...}' </i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>http</i>
-</p><p>Directive establishes the function of variable&nbsp;???
-</p>
-<br><i>Module: NginxEmbeddedPerlModule</i>
+<h2> <span class="mw-headline" id="perl_set"> perl_set </span></h2><p><b>syntax:</b> <i>perl_set module::function | 'sub {...}' </i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http</i> </p><p>Directive establishes the function of variable&nbsp;??? </p><h1> <span class="mw-headline" id="Calling_Perl_from_SSI"> Calling Perl from SSI </span></h1><p>Instruction format is as follows: </p><pre>
+&lt;!- # perl sub=&quot;module::function&quot; arg=&quot;parameter1&quot; arg=&quot;parameter2&quot;... &gt;
+</pre><p>Methods of request object $r: </p><ul>
+ <li> $r-&gt;args - method returns the arguments of request. </li>
+ <li> $r-&gt;discard_request_body - method tells nginx to discard the request body. </li>
+ <li> $r-&gt;filename - method returns the name of file, which corresponds to URI request. </li>
+ <li> $r-&gt;has_request_body(function) - method returns 0, if there is no request body. But if the request body exists, then the passed function is established and 1 returned. At the end of the body processing, nginx will call the established processor. Example usage: </li>
+</ul><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="perl source-perl">
+  <pre class="de1"><a href="http://perldoc.perl.org/functions/package.html"><span class="kw3">package</span></a> hello<span class="sy0">;</span>
+&nbsp;
+<span class="kw2">use</span> nginx<span class="sy0">;</span>
+&nbsp;
+<span class="kw2">sub</span> handler <span class="br0">{</span>
+  <span class="kw1">my</span> <span class="re0">$r</span> <span class="sy0">=</span> <a href="http://perldoc.perl.org/functions/shift.html"><span class="kw3">shift</span></a><span class="sy0">;</span>
+&nbsp;
+  <span class="kw1">if</span> <span class="br0">(</span><span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">request_method</span> <span class="kw1">ne</span> <span class="st0">&quot;POST&quot;</span><span class="br0">)</span> <span class="br0">{</span>
+    <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> DECLINED<span class="sy0">;</span>
+  <span class="br0">}</span>
+&nbsp;
+  <span class="kw1">if</span> <span class="br0">(</span><span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">has_request_body</span><span class="br0">(</span><span class="re0">\&amp;post</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span>
+    <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> OK<span class="sy0">;</span>
+  <span class="br0">}</span>
+&nbsp;
+  <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> <span class="nu0">400</span><span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="kw2">sub</span> post <span class="br0">{</span>
+  <span class="kw1">my</span> <span class="re0">$r</span> <span class="sy0">=</span> <a href="http://perldoc.perl.org/functions/shift.html"><span class="kw3">shift</span></a><span class="sy0">;</span>
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">send_http_header</span><span class="sy0">;</span>
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">print</span><span class="br0">(</span><span class="st0">&quot;request_body: <span class="es0">\&quot;</span>&quot;</span><span class="sy0">,</span> <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">request_body</span><span class="sy0">,</span> <span class="st0">&quot;<span class="es0">\&quot;</span>&lt;br/&gt;&quot;</span><span class="br0">)</span><span class="sy0">;</span>
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">print</span><span class="br0">(</span><span class="st0">&quot;request_body_file: <span class="es0">\&quot;</span>&quot;</span><span class="sy0">,</span> <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">request_body_file</span><span class="sy0">,</span> <span class="st0">&quot;<span class="es0">\&quot;</span>&lt;br/&gt;<span class="es0">\n</span>&quot;</span><span class="br0">)</span><span class="sy0">;</span>
+  <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> OK<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw2">__END__</span></pre>
+ </div>
+</div><ul>
+ <li> $r-&gt;header_in(header) - retrieve an HTTP request header. </li>
+ <li> $r-&gt;header_only - true if we only need to return a response header. </li>
+ <li> $r-&gt;header_out(header, value) - set a response header. </li>
+ <li> $r-&gt;internal_redirect(uri) - method makes internal redirect to the indicated uri. Redirect occurs only after the completion of Perl script. </li>
+ <li> $r-&gt;print(args, ...) - sends data to client. </li>
+ <li> $r-&gt;request_body - method returns the request body of client when the body is not recorded into the temporary file. </li>
+</ul><dl>
+ <dd>
+   So that the body of the demand of client is guaranteed to remain in memory, it is necessary to limit its size with the aid 
+ </dd>
+ <dd>
+   of client_max_body_size and to assign sufficient size for the buffer using client_body_buffer_size. 
+ </dd>
+</dl><ul>
+ <li> $r-&gt;request_body_file — method returns the name of the file, in which is stored the body of the demand of client. The file must be removed on the completion of work. So that the body of the request would always be written to the file, it is necessary to indicate client_body_in_file_only on. </li>
+ <li> $r-&gt;request_method — method returns the HTTP method of the request. </li>
+ <li> $r-&gt;remote_addr - method returns IP address of client. </li>
+ <li> $r-&gt;rflush - method immediately transmits data to client. </li>
+ <li> $r-&gt;sendfile(file [, displacement [, length ] ) - transfers to client contents of the file indicated. The optional parameters indicate initial offset and length of transmitted data. Strictly the transmission of data occurs only after the completion of the perl script. </li>
+ <li> $r-&gt;send_http_header(type) - adds header to response. The optional parameter &quot;type&quot; establishes the value of line &quot;Content-Type&quot; in the title of answer. </li>
+ <li> $r-&gt;sleep(milliseconds, handler) - method sets the specified handler and stops processing the request at a given time. nginx will continue to process other requests in the meantime. After the specified timeout has expired, nginx will run the installed handler. Please note that you need to pass a reference to the function handler. To transfer data between processors you should use $r-&gt;variable(). Example of usage: </li>
+</ul><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="perl source-perl">
+  <pre class="de1"><a href="http://perldoc.perl.org/functions/package.html"><span class="kw3">package</span></a> hello<span class="sy0">;</span> 
+&nbsp;
+<span class="kw2">use</span> nginx<span class="sy0">;</span> 
+&nbsp;
+<span class="kw2">sub</span> handler <span class="br0">{</span>
+   <span class="kw1">my</span> <span class="re0">$r</span> <span class="sy0">=</span> <a href="http://perldoc.perl.org/functions/shift.html"><span class="kw3">shift</span></a><span class="sy0">;</span> 
+&nbsp;
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">discard_request_body</span><span class="sy0">;</span> 
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">variable</span><span class="br0">(</span><span class="st0">&quot;var&quot;</span><span class="sy0">,</span> <span class="st0">&quot;OK&quot;</span><span class="br0">)</span><span class="sy0">;</span> 
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">sleep</span><span class="br0">(</span><span class="nu0">1000</span><span class="sy0">,</span> <span class="re0">\&amp;next</span><span class="br0">)</span><span class="sy0">;</span> 
+&nbsp;
+  <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> OK<span class="sy0">;</span> 
+<span class="br0">}</span>
+&nbsp;
+<span class="kw2">sub</span> <span class="kw1">next</span> <span class="br0">{</span>
+  <span class="kw1">my</span> <span class="re0">$r</span> <span class="sy0">=</span> <a href="http://perldoc.perl.org/functions/shift.html"><span class="kw3">shift</span></a><span class="sy0">;</span> 
+&nbsp;
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">send_http_header</span><span class="sy0">;</span> 
+  <span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">print</span><span class="br0">(</span><span class="re0">$r</span><span class="sy0">-&gt;</span><span class="me1">variable</span><span class="br0">(</span><span class="st0">&quot;var&quot;</span><span class="br0">)</span><span class="br0">)</span><span class="sy0">;</span> 
+&nbsp;
+  <a href="http://perldoc.perl.org/functions/return.html"><span class="kw3">return</span></a> OK<span class="sy0">;</span>
+<span class="br0">}</span> 
+&nbsp;
+<span class="nu0">1</span><span class="sy0">;</span> 
+<span class="kw2">__END__</span></pre>
+ </div>
+</div><ul>
+ <li> $r-&gt;status(code) - sets the HTTP response code </li>
+ <li> $r-&gt;unescape(text) - decodes the text, assigned in the form&nbsp;%XX. </li>
+ <li> $r-&gt;uri - returns request URI. </li>
+ <li> $r-&gt;variable(name[, value]) - the method returns or sets the value of the specified variable. Variables are local to each query. </li>
+</ul><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_perl_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/EmbeddedPerlModule">http://wiki.nginx.org/EmbeddedPerlModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: EmbeddedPerlModule</i>

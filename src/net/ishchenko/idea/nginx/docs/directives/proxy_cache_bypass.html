@@ -1,0 +1,10 @@
+<h2> <span class="mw-headline" id="proxy_cache_bypass"> proxy_cache_bypass </span></h2><p><b>syntax:</b> <i>proxy_cache_bypass line [...];</i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive specifies the conditions under which the answer will not be taken from the cache. If at least one of a string variable is not empty and not equal to &quot;0&quot;, the answer is not taken from the cache: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"> proxy_cache_bypass <span class="re0">$cookie_nocache</span> <span class="re0">$arg_nocache</span> <span class="re0">$arg_comment</span><span class="sy0">;</span>
+ proxy_cache_bypass <span class="re0">$http_pragma</span> <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Note that the response from the back-end is still eligible for caching. Thus one way of refreshing an item in the cache is sending a request with a header you pick yourself, e.g. &quot;My-Secret-Header: 1&quot;, then having a <b>proxy_cache_bypass</b> line like: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">proxy_cache_bypass <span class="re0">$http_my_secret_header</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Can be used in conjunction with the directive <a href="#proxy_no_cache">proxy_no_cache</a>. </p><br><i>Module: HttpProxyModule</i>

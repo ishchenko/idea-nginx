@@ -1,21 +1,14 @@
-
-<p><b>syntax:</b> <i>stub_status</i> on
-</p><p><b>default:</b> <i>None</i>
-</p><p><b>context:</b> <i>location</i>
-</p><p>Enables the status handler in this location.
-</p><p>The stub status module reports status similar to mathopd's  status page. It is plain text information like
-</p>
-<pre>
+<h2> <span class="mw-headline" id="stub_status"> stub_status </span></h2><p><b>syntax:</b> <i>stub_status</i> on </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>location</i> </p><p>Enables the status handler in this location. </p><p>The stub status module reports status similar to <a href="http://www.mathopd.org/" class="external text" rel="nofollow">mathopd's</a> status page. It is plain text information like </p><pre>
 Active connections: 291
 server accepts handled requests
   16630948 16630948 31070465
 Reading: 6 Writing: 179 Waiting: 106
-</pre>
-<p><code>active connections</code> -- number of all open connections including connections to backends
-</p><p><code>server accepts handled requests</code> -- nginx accepted 16630948 connections, handled 16630948 connections (no one was closed just it was accepted), and handles 31070465 requests
-(1.8 requests per connection)
-</p><p><code>reading</code> -- nginx reads request header
-</p><p><code>writing</code> -- nginx reads request body, processes request, or writes response to a client 
-</p><p><code>waiting</code> -- keep-alive connections, actually it is <code>active - (reading + writing)</code>
-</p>
-<br><i>Module: NginxHttpStubStatusModule</i>
+</pre><p><code>active connections</code> -- number of all open connections including connections to backends </p><p><code>server accepts handled requests</code> -- nginx accepted 16630948 connections, handled 16630948 connections (no one was closed just it was accepted), and handles 31070465 requests (1.8 requests per connection) </p><p><code>reading</code> -- nginx reads request header </p><p><code>writing</code> -- nginx reads request body, processes request, or writes response to a client </p><p><code>waiting</code> -- keep-alive connections, actually it is <code>active - (reading + writing)</code> </p><h1> <span class="mw-headline" id="References"> References </span></h1><ul>
+ <li> <a href="http://blog.kovyrin.net/2006/04/29/monitoring-nginx-with-rrdtool/" class="external text" rel="nofollow">Monitoring Nginx with RRDtool</a> </li>
+ <li> <a href="http://dev.2xlp.com/svn/nginx_config/trunk/conf/_rrd/__README__.txt" class="external text" rel="nofollow">RRDtool README</a> </li>
+ <li> <a href="http://exchange.munin-monitoring.org" class="external text" rel="nofollow">Munin Plugin Exchange</a> (containing plugins for Nginx) </li>
+ <li> <a href="http://github.com/perusio/nginx-munin" class="external text" rel="nofollow">Nginx Munin plugins on Github with howto instructions</a> </li>
+</ul><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/HttpStubStatusModule">http://wiki.nginx.org/HttpStubStatusModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: HttpStubStatusModule</i>

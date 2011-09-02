@@ -1,18 +1,30 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>Syntax:</b> <i>ssl_engine engine</i>
-</p><p><b>Default:</b> <i>system dependent</i>
-</p><p>Here you can set your preferred openssl engine if any available. You can figure out which one do you have with the commandline tool: <code>openssl engine -t</code>
-</p><p>For example:
-</p>
-<pre>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_engine"> ssl_engine </span></h2><p><b>Syntax:</b> <i>ssl_engine engine</i> </p><p><b>Default:</b> <i>system dependent</i> </p><p>Here you can set your preferred openssl engine if any available. You can figure out which one do you have with the commandline tool: <code>openssl engine -t</code> </p><p>For example: </p><pre>
 $ openssl engine -t
 (cryptodev) BSD cryptodev engine
   [ available ] 
 (dynamic) Dynamic engine loading support
   [ unavailable ] 
-</pre>
-<br><i>Module: NginxHttpMainModule</i><hr>
-<p><b>syntax:</b> <i>ssl_engine</i>
-</p><p>This allows specifying the OpenSSL engine to use, like Padlock for example. It requires a more recent version of OpenSSL.
-</p>
-<br><i>Module: NginxHttpSslModule</i>
+</pre><br><i>Module: CoreModule</i><hr><h2> <span class="mw-headline" id="ssl_engine"> ssl_engine </span></h2><p><b>syntax:</b> <i>ssl_engine</i> </p><p>This allows specifying the OpenSSL engine to use, like PadLock for example. It requires a recent version of OpenSSL. To verify if the OpenSSL version installed in your platform supports this, issue the command: </p><pre>
+openssl engine
+</pre><p>On a Debian testing with OpenSSL version 0.9.8o from 01 Jun 2010 it returns: </p><pre>
+$ openssl engine
+(padlock) VIA PadLock (no-RNG, no-ACE)
+(dynamic) Dynamic engine loading support
+</pre><h1> <span class="mw-headline" id="Built-in_variables"> Built-in variables </span></h1><p>Module ngx_http_ssl_module supports the following built-in variables: </p><ul>
+ <li> $ssl_cipher returns the cipher suite being used for the currently established SSL/TLS connection </li>
+ <li> $ssl_client_serial returns the serial number of the client certificate for the currently established SSL/TLS connection — if applicable, i.e., if client authentication is activated in the connection </li>
+ <li> $ssl_client_s_dn returns the subject Distinguished Name (DN) of the client certificate for the currently established SSL/TLS connection — if applicable, i.e., if client authentication is activated in the connection </li>
+ <li> $ssl_client_i_dn returns the issuer DN of the client certificate for the currently established SSL/TLS connection — if applicable, i.e., if client authentication is activated in the connection </li>
+ <li> $ssl_protocol returns the protocol of the currently established SSL/TLS connection — depending on the configuration and client available options it's one of SSLv2, SSLv3 or TLSv1 </li>
+ <li> $ssl_session_id the Session ID of the established secure connection — requires Nginx version greater or equal to 0.8.20 </li>
+ <li> $ssl_client_cert </li>
+ <li> $ssl_client_raw_cert </li>
+ <li> $ssl_client_verify takes the value &quot;SUCCESS&quot; when the client certificate is successfully verified </li>
+</ul><h1> <span class="mw-headline" id="Nonstandard_error_codes"> Nonstandard error codes </span></h1><p>This module supports several nonstandard error codes which can be used for debugging with the aid of directive error_page: </p><ul>
+ <li> 495 - error checking client certificate </li>
+ <li> 496 - client did not grant the required certificate </li>
+ <li> 497 - normal request was sent to HTTPS </li>
+</ul><p>Debugging is done after the request is completely &quot;disassembled&quot; and it's components are accessible via variables such as $request_uri, $uri, $arg and more. </p><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_ssl_module.html" class="external text" rel="nofollow">Original Documentation</a><br /> <a href="http://kbeezie.com/view/free-ssl-with-nginx/" class="external text" rel="nofollow">Implementing an actual SSL Certificate</a><br /> <a href="http://marc.info/?t=120127289900027" class="external text" rel="nofollow">SSL Memory Fragmentation and new default status for ssl_session_cache</a> </p><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/HttpSslModule">http://wiki.nginx.org/HttpSslModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: HttpSslModule</i>

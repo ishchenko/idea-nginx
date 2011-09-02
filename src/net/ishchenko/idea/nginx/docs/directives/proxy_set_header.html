@@ -1,25 +1,22 @@
-
-<p><b>syntax:</b> <i>proxy_set_header header value</i>
-</p><p><b>default:</b> <i>Host and Connection</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive allows to redefine and to add some request header lines which will be transferred to the proxied server.
-</p><p>As the value it is possible to use a text, variables and their combination.
-</p><p><code>proxy_set_header</code> directives issued at higher levels are only inherited when no <code>proxy_set_header</code> directives have been issued at a given level.
-</p><p>By default only two lines will be redefined:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_set_header</span> Host <span class="re0">$proxy_host</span>;
-<span class="kw21">proxy_set_header</span> Connection Close;</pre>
-<p>The unchanged request-header "Host" can be transmitted like this:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_set_header</span> Host <span class="re0">$http_host</span>;</pre>
-<p>However, if this line is absent from the client request, then nothing will be transferred.
-</p><p>In this case it is better to use variable $host, it's value is equal to the name of server in the request-header "Host" or to the basic name of server, if there is no line:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_set_header</span> Host <span class="re0">$host</span>;</pre>
-<p>Furthermore, it is possible to transmit the name of server together with the port of the proxied server:
-</p><p></p>
-<pre class="code"><span class="kw21">proxy_set_header</span> Host <span class="re0">$host</span>:<span class="re0">$proxy_port</span>;</pre>
-<p>If value is empty string, than header will not be sent to upstream. For example this setting can be used to disable gzip compression on upstream:
-</p>
-<pre class="code"><span class="kw21">proxy_set_header</span>  Accept-Encoding  <span class="st0">&quot;&quot;</span>;</pre>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_set_header"> proxy_set_header </span></h2><p><b>syntax:</b> <i>proxy_set_header header value;</i> </p><p><b>default:</b> <i>Host and Connection</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive allows to redefine and to add some request header lines which will be transferred to the proxied server. </p><p>As the value it is possible to use a text, variables and their combination. </p><p><code>proxy_set_header</code> directives issued at higher levels are only inherited when no <code>proxy_set_header</code> directives have been issued at a given level. </p><p>By default only two lines will be redefined: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Host <span class="re0">$proxy_host</span><span class="sy0">;</span>
+<a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Connection Close<span class="sy0">;</span></pre>
+ </div>
+</div><p>The unchanged request-header &quot;Host&quot; can be transmitted like this: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Host <span class="re0">$http_host</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>However, if this line is absent from the client request, then nothing will be transferred. </p><p>In this case it is better to use variable $host, it's value is equal to the name of server in the request-header &quot;Host&quot; or to the basic name of server, if there is no line: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Host <span class="re0">$host</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Furthermore, it is possible to transmit the name of server together with the port of the proxied server: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Host <span class="re0">$host</span>:<span class="re0">$proxy_port</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>If value is empty string, than header will not be sent to upstream. For example this setting can be used to disable gzip compression on upstream: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a>  Accept-Encoding  <span class="st0">&quot;&quot;</span><span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpProxyModule</i>

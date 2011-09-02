@@ -1,9 +1,1 @@
-
-<p><b>syntax:</b> <i>server_name_in_redirect on|off</i>
-</p><p><b>default:</b> <i>server_name_in_redirect on</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>If <code>server_name_in_redirect</code> is on, then Nginx will use the first value
-of the server_name directive for redirects. If <code>server_name_in_redirect</code> is off,
-then nginx will use the requested <code>Host</code> header.
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="server_name_in_redirect"> server_name_in_redirect </span></h2><p><b>syntax:</b> <i>server_name_in_redirect on|off</i> </p><p><b>default:</b> <i>server_name_in_redirect on</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>If <code>server_name_in_redirect</code> is on, then Nginx will use the first value of the <a href="#server_name">server_name</a> directive for redirects. If <code>server_name_in_redirect</code> is off, then nginx will use the requested <code>Host</code> header. </p><p>Note: for Location headers coming from an upstream proxy (via proxy_pass for example) this may not be the only directive you need. In fact, it seems to be ignored a lot of the time. If you are seeing the upstream's server name come through and not be rewritten, you will need to use <a href="/NginxHttpProxyModule#proxy_redirect" title="NginxHttpProxyModule" class="mw-redirect">proxy_redirect</a> to rewrite the upstream's provided hostname to what you want. Something like <code>proxy_redirect <a href="http://some.upstream.url/" class="external free" rel="nofollow">http://some.upstream.url/</a> /</code> - you will want to rewrite it to a / relative path. </p><br><i>Module: HttpCoreModule</i>

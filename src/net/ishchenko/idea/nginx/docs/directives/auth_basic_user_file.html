@@ -1,17 +1,8 @@
-
-<p><b>syntax:</b> <i>auth_basic_user_file the_file</i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>http, server, location, limit_except</i>
-</p><p>This directive sets the htpasswd filename for the authentication realm. Since version 0.6.7 the filename path is relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory.
-</p><p>The format of file is the following: 
-</p>
-<pre>
+<h2> <span class="mw-headline" id="auth_basic_user_file"> auth_basic_user_file </span></h2><p><b>syntax:</b> auth_basic_user_file <i>file</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location, limit_except</i> </p><p><b>variables:</b> <i>no</i>&nbsp; </p><p><b>phase:</b> <i>access</i> </p><p><br /> This directive sets the htpasswd filename for the authentication realm. Since version 0.6.7 the filename path is relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory. </p><p>The format of file is the following: </p><pre>
 user:pass
 user2:pass2:comment
 user3:pass3
-</pre>
-<p>Passwords must be encoded by function crypt(3).
-You can create the password file with the htpasswd program from Apache.
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpAuthBasicModule</i>
+</pre><p><br /> Passwords must be encoded by function crypt(3). If Apache is installed, you can create the password file using the htpasswd program included. Note: Apache uses MD5 for encryption. </p><p>See also: <a href="/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F" title="Faq">Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F</a> </p><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_auth_basic_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><p><a href="http://kbeezie.com/view/protecting-folders-with-nginx/" class="external text" rel="nofollow">Protecting Folders with Auth_Basic</a> </p><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/HttpAuthBasicModule">http://wiki.nginx.org/HttpAuthBasicModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: HttpAuthBasicModule</i>

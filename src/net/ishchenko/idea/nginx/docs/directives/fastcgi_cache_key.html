@@ -1,8 +1,5 @@
-
-<p><b>syntax:</b> <i>fastcgi_cache_key line&nbsp;;</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The directive sets the key for caching, for example:
-</p>
-<pre class="code">fastcgi_cache_key localhost: <span class="nu0">9000</span> $ request_uri;</pre>
-<br><i>Module: NginxHttpFcgiModule</i>
+<h2> <span class="mw-headline" id="fastcgi_cache_key"> fastcgi_cache_key </span></h2><p><b>syntax:</b> <i>fastcgi_cache_key line</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive sets the key for caching, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  fastcgi_cache_key localhost:<span class="nu0">9000</span><span class="re0">$request_uri</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>Be advised that a <code>HEAD</code> request can cause an empty response to be cached &amp; later be distributed to <code>GET</code> requests, avoid this by having <a href="/HttpCoreModule#.24request_method" title="HttpCoreModule">$request_method</a> in the cache key. </p><br><i>Module: HttpFcgiModule</i>

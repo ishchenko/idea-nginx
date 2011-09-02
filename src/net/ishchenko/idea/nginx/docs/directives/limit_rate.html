@@ -1,15 +1,9 @@
-
-<p><b>syntax:</b> <i>limit_rate speed</i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>http, server, location, if in location</i>
-</p><p>Directive assigns the speed of transmission of the answer to client. Speed is assigned in the bytes per second. Limitation works only for one connection, i.e., if client opens 2 connections, then total velocity will be 2 times higher then the limit set.
-</p><p>If it is necessary to limit speed for the part of the clients at the <i>server</i> level, based on some kind of condition - then this directive does not apply. Instead you should specify the limit by assigning the value to the $limit_rate variable, as shown below:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw22">if</span> <span class="br0">&#40;</span><span class="re0">$slow</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
-    <span class="kw22">set</span> <span class="re0">$limit_rate</span>  4k;
-  <span class="br0">&#125;</span>
-<span class="br0">&#125;</span></pre>
-<p>You can also control the rate of individual responses returned by a <code>proxy_pass</code> response (NginxHttpProxyModule) by setting the <code>X-Accel-Limit-Rate</code> header (NginxXSendfile). This can be done without a <code>X-Accel-Redirect</code> header.
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="limit_rate"> limit_rate </span></h2><p><b>syntax:</b> <i>limit_rate speed</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location, if in location</i> </p><p>Directive assigns the speed of transmission of the answer to client. Speed is assigned in the bytes per second. Limitation works only for one connection, i.e., if client opens 2 connections, then total velocity will be 2 times higher then the limit set. </p><p>If it is necessary to limit speed for the part of the clients at the <i>server</i> level, based on some kind of condition - then this directive does not apply. Instead you should specify the limit by assigning the value to the $limit_rate variable, as shown below: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$slow</span><span class="br0">)</span> <span class="br0">{</span>
+    <a href="/NginxHttpRewriteModule#set"><span class="kw22">set</span></a> <span class="re0">$limit_rate</span>  4k<span class="sy0">;</span>
+  <span class="br0">}</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>You can also control the rate of individual responses returned by a <code>proxy_pass</code> response (<a href="/HttpProxyModule" title="HttpProxyModule">HttpProxyModule</a>) by setting the <code>X-Accel-Limit-Rate</code> header (<a href="/XSendfile" title="XSendfile">XSendfile</a>). This can be done without a <code>X-Accel-Redirect</code> header. </p><br><i>Module: HttpCoreModule</i>

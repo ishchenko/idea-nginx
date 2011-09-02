@@ -1,8 +1,1 @@
-
-<p><b>syntax:</b> <i>proxy_ignore_headers name [name ...]</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive(0.7.54+) prohibits the processing of the header lines from the proxy server's response.
-</p><p>It can specify the string as "X-Accel-Redirect", "X-Accel-Expires", "Expires" or "Cache-Control".
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_ignore_headers"> proxy_ignore_headers </span></h2><p><b>syntax:</b> <i>proxy_ignore_headers name [name ...]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>version:</b> ≥ 0.7.54 </p><p>Prohibits the processing of the header lines from the proxy server's response. </p><p>It can specify the string as &quot;<a href="/XSendfile" title="XSendfile">X-Accel-Redirect</a>&quot;, &quot;X-Accel-Expires&quot;, &quot;Expires&quot; or &quot;Cache-Control&quot;. </p><br><i>Module: HttpProxyModule</i>

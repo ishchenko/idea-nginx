@@ -1,105 +1,95 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>server_name name [... ] </i>
-</p><p><b>default:</b> <i>server_name hostname</i>
-</p><p><b>context:</b> <i>server</i>
-</p><p>This directive performs two actions:
-</p>
-<ul><li> Compares the <code>Host</code> header of the incoming HTTP request against the server { ... } blocks in the Nginx configuration files and selects the first one that matches. This is how <b>virtual servers</b> are defined. Server names are processed in the following order:
-</li></ul>
-<ol><li> full, static names
-</li><li> names with a wildcard at the start of the name — *.example.com
-</li><li> names with a wildcard at the end of the name — www.example.*
-</li><li> names with regular expressions
-</li></ol>
-<dl><dd> If there is no match, a server { ... }  block in the configuration file will be used based on the following order:
-</dd></dl>
-<ol><li> the server block with a matching <code>listen</code> directive marked as <code>default</code>
-</li><li> the first server block with a matching <code>listen</code> directive (or implicit <code>listen 80;</code>)
-</li></ol>
-<ul><li> Sets the server name that will be used in HTTP redirects if server_name_in_redirect  is set.
-</li></ul>
-<p>Example:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>   example.com  www.example.com;
-<span class="br0">&#125;</span></pre>
-<p>The first name becomes the basic name of server. By default the name of the machine (hostname) is used.  
-</p><p>It is possible to use "*" for replacing the first or the last part of the name:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>   example.com  *.example.com  www.example.*;
-<span class="br0">&#125;</span></pre>
-<p>The first two of the above names (example.com and *.example.com) can be combined into one:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>  .example.com;
-<span class="br0">&#125;</span></pre>
-<p>It is also possible to use regular expressions in server names, prepending the name with a tilde "~" like so:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>   www.example.com   ~^www\d+\.example\.com$;
-<span class="br0">&#125;</span></pre>
-<p><br />
-The basic name of server is used in an HTTP redirects, if no <code>Host</code> header was in client request or that header does not match any assigned server_name. You can also use just "*" to force Nginx to use the <code>Host</code> header in the HTTP redirect (note that "*" cannot be used as the first name, but you can use a dummy name such as "_" instead):
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span> example.com *;
-<span class="br0">&#125;</span>
-<span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span> _ *;
-<span class="br0">&#125;</span></pre>
-<p>Note that this has changed in 0.6.x and is now:
-</p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span> _;
-<span class="br0">&#125;</span></pre>
-<p>Since nginx 0.7.12, an empty server name is supported, to catch the requests without "Host" header:
-</p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span> <span class="st0">&quot;&quot;</span>;
-<span class="br0">&#125;</span></pre>
-<p>Since nginx 0.8.25 named captures can be used in server_name:
-</p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>   ~^<span class="br0">&#40;</span>www\.<span class="br0">&#41;</span>?<span class="br0">&#40;</span>?<span class="re4">&lt;domain&gt;</span>.+<span class="br0">&#41;</span>$;
-  <span class="kw3">location</span> / <span class="br0">&#123;</span>
-    <span class="kw3">root</span>  /sites/<span class="re0">$domain</span>;
-  <span class="br0">&#125;</span>
-<span class="br0">&#125;</span></pre>
-<p>Some older versions of PCRE may have issues with this syntax. If any problems arise try this following syntax:
-</p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>   ~^<span class="br0">&#40;</span>www\.<span class="br0">&#41;</span>?<span class="br0">&#40;</span>?P<span class="re4">&lt;domain&gt;</span>.+<span class="br0">&#41;</span>$;
-  <span class="kw3">location</span> / <span class="br0">&#123;</span>
-    <span class="kw3">root</span>  /sites/<span class="re0">$domain</span>;
-  <span class="br0">&#125;</span>
-<span class="br0">&#125;</span></pre>
-<br><i>Module: NginxHttpCoreModule</i><hr>
-<p><b>syntax:</b> <i>server_name name</i> <i><b>fqdn_server_host</b></i>
-</p><p><b>default:</b> <i>The name of the host, obtained through gethostname()</i>
-</p><p><b>context:</b> <i>mail, server</i>
-</p><p>Directive assigns the names of virtual server, for example:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>   example.com  www.example.com;
-<span class="br0">&#125;</span></pre>
-<p>The first name becomes the basic name of server. By default the name of the machine (hostname) is used.  It is possible to use "*" for replacing the first part of the name:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>   example.com  *.example.com;
-<span class="br0">&#125;</span></pre>
-<p>Two of the given name of the  above example can be combined into one:
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span>  .example.com;
-<span class="br0">&#125;</span></pre>
-<p>The basic name of server is used in an HTTP redirects, if no a "Host" header was in client request or that header does not match any assigned server_name. You can also use just "*" to force Nginx to use the "Host" header in the HTTP redirect (note that "*" cannot be used as the first name, but you can use a dummy name such as "_" instead):
-</p><p></p>
-<pre class="code"><span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span> example.com *;
-<span class="br0">&#125;</span>
-<span class="kw3">server</span> <span class="br0">&#123;</span>
-  <span class="kw3">server_name</span> _ *;
-<span class="br0">&#125;</span></pre>
-<hr />
-<br><i>Module: NginxMailCoreModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="server_name"> server_name </span></h2><p><b>syntax:</b> <i>server_name name [... ] </i> </p><p><b>default:</b> <i>server_name &quot;&quot;</i> </p><p><b>context:</b> <i>server</i> </p><p>This directive performs two actions: </p><ul>
+ <li> Compares the <code>Host</code> header of the incoming HTTP request against the <a href="#server">server { ... }</a> blocks in the Nginx configuration files and selects the first one that matches. This is how <b>virtual servers</b> are defined. Server names are processed in the following order: </li>
+</ul><ol>
+ <li> full, static names </li>
+ <li> names with a wildcard at the start of the name — *.example.com </li>
+ <li> names with a wildcard at the end of the name — www.example.* </li>
+ <li> names with regular expressions </li>
+</ol><dl>
+ <dd>
+   If there is no match, a 
+  <a href="#server">server { ... }</a> block in the configuration file will be used based on the following order: 
+ </dd>
+</dl><ol>
+ <li> the server block with a matching <code>listen</code> directive marked as <code>[default|default_server]</code> </li>
+ <li> the first server block with a matching <code>listen</code> directive (or implicit <code>listen 80;</code>) </li>
+</ol><ul>
+ <li> Sets the server name that will be used in HTTP redirects if <a href="#server_name_in_redirect">server_name_in_redirect</a> is set. </li>
+</ul><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  www.example.com<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>The first name becomes the basic name of server. By default the name of the machine (hostname) is used. </p><p>It is possible to use &quot;*&quot; for replacing the first or the last part of the name: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  *.example.com  www.example.*<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>The first two of the above names (example.com and *.example.com) can be combined into one: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>  .example.com<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>It is also possible to use regular expressions in server names, prepending the name with a tilde &quot;~&quot; like so: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   www.example.com   <span class="sy0">~</span>^www\d+\.example\.com$<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Since nginx 0.7.12, an empty server name is supported to catch the requests without &quot;Host&quot; header, please note that most browsers will always send a Host header, if accessed by IP the Host header will contain the IP. To specify a catch-all block please see the default_server flag of the listen directive. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Since nginx 0.8.25 named captures can be used in server_name: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   <span class="sy0">~</span>^<span class="br0">(</span>www\.<span class="br0">)</span>?<span class="br0">(</span>?<span class="re4">&lt;domain&gt;</span>.+<span class="br0">)</span>$<span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /sites/<span class="re0">$domain</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Some older versions of PCRE may have issues with this syntax. If any problems arise try this following syntax: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   <span class="sy0">~</span>^<span class="br0">(</span>www\.<span class="br0">)</span>?<span class="br0">(</span>?P<span class="re4">&lt;domain&gt;</span>.+<span class="br0">)</span>$<span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /sites/<span class="re0">$domain</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Since nginx 0.9.4, <a href="#.24hostname">$hostname</a> can be used as a server_name argument: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> <span class="re0">$hostname</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><br><i>Module: HttpCoreModule</i><hr><h2> <span class="mw-headline" id="server_name"> server_name </span></h2><p><b>syntax:</b> <i>server_name name</i> <i><b>fqdn_server_host</b></i> </p><p><b>default:</b> <i>The name of the host, obtained through gethostname()</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Directive assigns the names of virtual server, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  www.example.com<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>The first name becomes the basic name of server. By default the name of the machine (hostname) is used. It is possible to use &quot;*&quot; for replacing the first part of the name: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  *.example.com<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Two of the given name of the above example can be combined into one: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>  .example.com<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>The basic name of server is used in an HTTP redirects, if no a &quot;Host&quot; header was in client request or that header does not match any assigned server_name. You can also use just &quot;*&quot; to force Nginx to use the &quot;Host&quot; header in the HTTP redirect (note that &quot;*&quot; cannot be used as the first name, but you can use a dummy name such as &quot;_&quot; instead): </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> example.com *<span class="sy0">;</span>
+<span class="br0">}</span>
+<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> _ *<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><hr /><br><i>Module: MailCoreModule</i>

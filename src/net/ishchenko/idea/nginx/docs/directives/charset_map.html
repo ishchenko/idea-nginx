@@ -1,21 +1,11 @@
-
-<p><b>syntax:</b> <i>charset_map  encoding1 encoding2 {...}</i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The directive charset_map describes the table of reencoding from one encoding into another.
-A table for the inverse reencoding is created using the same data.
-The codes of symbols are assigned in hexadecimal form. If no recorded symbols are
-in the range 80-FF they will be substituted with '?'.
-</p><p>Example usage:
-</p>
-<pre class="code"><span class="kw9">charset_map</span>  koi8-r  windows<span class="nu0">-1251</span> <span class="br0">&#123;</span>
-  C0  FE&nbsp;; <span class="co1"># small yu</span>
-  C1  E0&nbsp;; <span class="co1"># small a</span>
-  C2  E1&nbsp;; <span class="co1"># small b</span>
-  C3  F6&nbsp;; <span class="co1"># small ts</span>
+<h2> <span class="mw-headline" id="charset_map"> charset_map </span></h2><p><b>syntax:</b> <i>charset_map encoding1 encoding2 {...}</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive charset_map describes the table of reencoding from one encoding into another. A table for the inverse reencoding is created using the same data. The codes of symbols are assigned in hexadecimal form. If no recorded symbols are in the range 80-FF they will be substituted with '?'. </p><p>Example usage: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCharsetModule#charset_map"><span class="kw9">charset_map</span></a>  koi8-r  windows-<span class="nu0">1251</span> <span class="br0">{</span>
+  C0  FE <span class="sy0">;</span> <span class="co1"># small yu</span>
+  C1  E0 <span class="sy0">;</span> <span class="co1"># small a</span>
+  C2  E1 <span class="sy0">;</span> <span class="co1"># small b</span>
+  C3  F6 <span class="sy0">;</span> <span class="co1"># small ts</span>
   <span class="co1"># ...</span>
-<span class="br0">&#125;</span></pre>
-<p>The complete table of conversion from koi8-r into Windows-1251 is distributed with nginx and is located in file conf/koi-win.
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpCharsetModule</i>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>The complete table of conversion from koi8-r into Windows-1251 is distributed with nginx and is located in file conf/koi-win. </p><p><br /> </p><br><i>Module: HttpCharsetModule</i>

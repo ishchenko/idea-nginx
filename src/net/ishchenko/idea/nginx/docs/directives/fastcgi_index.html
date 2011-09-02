@@ -1,7 +1,6 @@
-
-<p><b>syntax:</b> <i>fastcgi_index file</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>The name of the file which will be appended to the URI and stored in the variable $fastcgi_script_name if URI concludes with a slash.
-</p>
-<br><i>Module: NginxHttpFcgiModule</i>
+<h2> <span class="mw-headline" id="fastcgi_index"> fastcgi_index </span></h2><p><b>syntax:</b> <i>fastcgi_index file</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The name of the file which will be appended to the URI and stored in the variable $fastcgi_script_name if URI concludes with a slash. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_index"><span class="kw11">fastcgi_index</span></a>  <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php<span class="sy0">;</span>
+<a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  SCRIPT_FILENAME  /home/www/scripts/php<span class="re0">$fastcgi_script_name</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>for the request &quot;/page.php&quot; parameter SCRIPT_FILENAME will be set to &quot;/home/www/scripts/php/page.php&quot;, but for the &quot;/&quot; — &quot;/home/www/scripts/php/index.php&quot;. </p><br><i>Module: HttpFcgiModule</i>

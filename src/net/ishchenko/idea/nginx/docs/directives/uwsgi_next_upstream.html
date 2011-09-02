@@ -1,0 +1,10 @@
+<h2> <span class="mw-headline" id="uwsgi_next_upstream"> uwsgi_next_upstream </span></h2><p><b>syntax:</b> <i>uwsgi_next_upstream error|timeout|invalid_header|http_500|http_503|http_404|off</i> </p><p><b>default:</b> <i>uwsgi_next_upstream error timeout</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive defines in which cases request will be passed to the next server: </p><ul>
+ <li> error — an error occurred during connection to the server, passing request to it or reading server respond header; </li>
+ <li> timeout — a timeout occurred during connection to the server, passing request to it or reading server respond header; </li>
+ <li> invalid_header — server returned empty or invalid answer; </li>
+ <li> http_500 — server returned 500 respond; </li>
+ <li> http_503 — server returned 503 respond; </li>
+ <li> http_404 — server returned 404 respond; </li>
+ <li> updating — <i>?</i> </li>
+ <li> off — explicitly forbids passing request to the next server; </li>
+</ul><p>It should be clear that passing request to the next server is possible only if no data have been yet returned to the client. So, if the error or timeout occurred during the data transmission to the client it's too late to fix it. </p><br><i>Module: HttpUwsgiModule</i>

@@ -1,16 +1,8 @@
-
-<p><b>syntax:</b> <i>xclient</i> <i><b>on | off</b></i>
-</p><p><b>default:</b> <i>on</i>
-</p><p><b>context:</b> <i>mail, server</i>
-</p><p>With this directive you can enable or disable the command XCLIENT with the connection to SMTP backend. This allows the backend to enforce limitations on the client based on IP/HELO/LOGIN.
-</p><p>If xclient is enabled then nginx first transfers to the backend:
-</p>
-<pre>
+<h2> <span class="mw-headline" id="xclient"> xclient </span></h2><p><b>syntax:</b> <i>xclient</i> <i><b>on | off</b></i> </p><p><b>default:</b> <i>on</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>With this directive you can enable or disable the command XCLIENT with the connection to SMTP backend. This allows the backend to enforce limitations on the client based on IP/HELO/LOGIN. </p><p>If xclient is enabled then nginx first transfers to the backend: </p><pre>
 EHLO server_name
-</pre>
-<p>Then:
-</p>
-<pre>
+</pre><p>Then: </p><pre>
 XCLIENT PROTO=ESMTP HELO=client_helo ADDR=client_ip LOGIN=authentificated_user NAME=[UNAVAILABLE] 
-</pre>
-<br><i>Module: NginxMailProxyModule</i>
+</pre><h1> <span class="mw-headline" id="References"> References </span></h1><div class="printfooter">
+  Retrieved from &quot;
+ <a href="http://wiki.nginx.org/MailProxyModule">http://wiki.nginx.org/MailProxyModule</a>&quot;
+</div><div class="visualClear"></div><br><i>Module: MailProxyModule</i>

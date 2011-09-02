@@ -1,26 +1,14 @@
-
-<p><b>syntax:</b> <i>xslt_stylesheet template [parameter[[ parameter... </i>
-]]
-<b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Specifies the XSLT template with its parameters. Template is compiled at the stage of configuration. The parameters are assigned as shown:
-</p>
-<pre>
+<h2> <span class="mw-headline" id="xslt_stylesheet"> xslt_stylesheet </span></h2><p><b>syntax:</b> <i>xslt_stylesheet template [parameter[[ parameter... </i> ]] <b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Specifies the XSLT template with its parameters. Template is compiled at the stage of configuration. The parameters are assigned as shown: </p><pre>
   param=value
-</pre>
-<p>You can specify parameters either one per line, or separate multiple parameters with colon (“: ”) If the parameter itself contains the character “:”, escape it as “%3A”. Furthermore, libxslt requires that string parameters should be quoted by the single or dual quotation marks if they contain non-alphanumeric characters, for example:
-</p>
-<pre>
+</pre><p>You can specify parameters either one per line, or separate multiple parameters with colon (“: ”) If the parameter itself contains the character “:”, escape it as “%3A”. Furthermore, libxslt requires that string parameters should be quoted by the single or dual quotation marks if they contain non-alphanumeric characters, for example: </p><pre>
   param1='http%3A//www.example.com': param2=value2
-</pre>
-<p>It's possible to use variables as parameters, for example, the entire line of the parameters can be substituted with one variable:
-</p><p></p>
-<pre class="code">  <span class="kw3">location</span> / <span class="br0">&#123;</span>
-    <span class="kw36">xslt_stylesheet</span> /site/xslt/one.xslt
+</pre><p>It's possible to use variables as parameters, for example, the entire line of the parameters can be substituted with one variable: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+    <a href="/NginxHttpXsltModule#xslt_stylesheet"><span class="kw36">xslt_stylesheet</span></a> /site/xslt/one.xslt
     <span class="re0">$arg_xslt_params</span>
-    param1=<span class="st0">'$value1'</span>: param2=value2
-    param3=value3;
-  <span class="br0">&#125;</span></pre>
-<p>It is possible to specify several templates, in which case they would be chained together in the order of their declaration.
-</p>
-<br><i>Module: NginxHttpXsltModule</i>
+    param1<span class="sy0">=</span><span class="st0">'$value1'</span>: param2<span class="sy0">=</span>value2
+    param3<span class="sy0">=</span>value3<span class="sy0">;</span>
+  <span class="br0">}</span></pre>
+ </div>
+</div><p>It is possible to specify several templates, in which case they would be chained together in the order of their declaration. </p><br><i>Module: HttpXsltModule</i>

@@ -1,0 +1,6 @@
+<h2> <span class="mw-headline" id="scgi_no_cache"> scgi_no_cache </span></h2><p><b>syntax:</b> <i>scgi_no_cache variable [...]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Specifies in what cases the responses will not be stored, e.g. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">scgi_no_cache <span class="re0">$cookie_nocache</span>  <span class="re0">$arg_nocache</span><span class="re0">$arg_comment</span><span class="sy0">;</span>
+scgi_no_cache <span class="re0">$http_pragma</span>     <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>The expression is false if it is equal to the empty string or &quot;0&quot;. For instance, in the above example, the response will not be stored if the cookie &quot;nocache&quot; is set in the request. </p><br><i>Module: HttpScgiModule</i>

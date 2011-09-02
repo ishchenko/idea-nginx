@@ -1,9 +1,1 @@
-
-<p><b>syntax:</b> <i>fastcgi_buffer_size the_size</i>
-</p><p><b>default:</b> <i>fastcgi_buffer_size 4k/8k</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive sets the buffersize, into which will be read the first part of the response, obtained from the fastcgi server.
-</p><p>In this part of response the small response-header is located, as a rule.
-</p><p>By default, the buffersize is equal to the size of one buffer in directive <code>fastcgi_buffers</code>; however, it is possible to set it to less.
-</p>
-<br><i>Module: NginxHttpFcgiModule</i>
+<h2> <span class="mw-headline" id="fastcgi_buffer_size"> fastcgi_buffer_size </span></h2><p><b>syntax:</b> <i>fastcgi_buffer_size the_size</i> </p><p><b>default:</b> <i>fastcgi_buffer_size 4k/8k</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the buffer size for reading the header of the backend FastCGI process. </p><p>By default, the buffer size is equal to the size of one buffer in <a href="#fastcgi_buffers">fastcgi_buffers</a>. This directive allows you to set it to an <b>arbitrary</b> value. </p><br><i>Module: HttpFcgiModule</i>

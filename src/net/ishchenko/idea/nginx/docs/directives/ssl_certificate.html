@@ -1,13 +1,1 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>ssl_certificate file</i>
-</p><p><b>default:</b> <i>ssl_certificate cert.pem</i>
-</p><p><b>context:</b> <i>main, server</i>
-</p><p>Indicates file with the certificate in PEM format for this virtual server.  The same file can contain other certificates, and also secret key in PEM format. Since version 0.6.7 the file path is relative to directory of nginx configuration file nginx.conf, but not to nginx prefix directory.
-</p>
-<br><i>Module: NginxHttpSslModule</i><hr>
-<p><b>syntax:</b> <i>ssl_certificate</i> <i><b>file</b></i>
-</p><p><b>default:</b> <i>cert.pem</i>
-</p><p><b>context:</b> <i>mail, server</i>
-</p><p>Indicates file with the certificate in PEM format for this virtual server. The same file can contain other certificates, and also secret key in PEM format.
-</p>
-<br><i>Module: NginxMailSslModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_certificate"> ssl_certificate </span></h2><p><b>syntax:</b> <i>ssl_certificate file</i> </p><p><b>default:</b> <i>ssl_certificate cert.pem</i> </p><p><b>context:</b> <i>http, server</i> </p><p>This directive specifies the file containing the certificate, in PEM format, for this virtual host. This file can contain also other certificates and the server private key. Since version 0.6.7 the file path is relative to the directory where nginx main configuration file, nginx.conf, resides. </p><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_certificate"> ssl_certificate </span></h2><p><b>syntax:</b> <i>ssl_certificate</i> <i><b>file</b></i> </p><p><b>default:</b> <i>cert.pem</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Indicates file with the certificate in PEM format for this virtual server. The same file can contain other certificates, and also secret key in PEM format. </p><br><i>Module: MailSslModule</i>

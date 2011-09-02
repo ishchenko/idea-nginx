@@ -1,13 +1,1 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>ssl_prefer_server_ciphers [on|off] </i>
-</p><p><b>default:</b> <i>ssl_prefer_server_ciphers off</i>
-</p><p><b>context:</b> <i>main, server</i>
-</p><p>Requires protocols SSLv3 and TLSv1 server ciphers be preferred over the client's ciphers.
-</p>
-<br><i>Module: NginxHttpSslModule</i><hr>
-<p><b>syntax:</b> <i>ssl_prefer_server_ciphers</i> <i><b>on | off</b></i>
-</p><p><b>default:</b> <i>off</i>
-</p><p><b>context:</b> <i>mail, server</i>
-</p><p>Requires protocols SSLv3 and TLSv1 server ciphers be preferred over the client's ciphers.
-</p>
-<br><i>Module: NginxMailSslModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_prefer_server_ciphers"> ssl_prefer_server_ciphers </span></h2><p><b>syntax:</b> <i>ssl_prefer_server_ciphers [on|off] </i> </p><p><b>default:</b> <i>ssl_prefer_server_ciphers off</i> </p><p><b>context:</b> <i>http, server</i> </p><p>The server requires that the cipher suite list for protocols SSLv3 and TLSv1 are to be preferred over the client supported cipher suite list. </p><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_prefer_server_ciphers"> ssl_prefer_server_ciphers </span></h2><p><b>syntax:</b> <i>ssl_prefer_server_ciphers</i> <i><b>on | off</b></i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Requires protocols SSLv3 and TLSv1 server ciphers be preferred over the client's ciphers. </p><br><i>Module: MailSslModule</i>

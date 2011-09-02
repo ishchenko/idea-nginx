@@ -1,9 +1,5 @@
-
-<p><b>syntax:</b> <i>fastcgi_cache_methods [GET HEAD POST];</i>
-</p><p><b>default:</b> <i>fastcgi_cache_methods GET HEAD;</i>
-</p><p><b>context:</b> <i>main,http,location</i>
-</p><p>GET/HEAD is syntax sugar, i.e. you can not disable GET/HEAD even
-if you set just
-</p>
-<pre class="code"><span class="kw11">fastcgi_cache_methods</span>  POST;</pre>
-<br><i>Module: NginxHttpFcgiModule</i>
+<h2> <span class="mw-headline" id="fastcgi_cache_methods"> fastcgi_cache_methods </span></h2><p>Which HTTP methods are allowed to be used when caching FastCGI requests. </p><p><br /> <b>syntax:</b> <i>fastcgi_cache_methods [GET HEAD POST];</i> </p><p><b>default:</b> <i>fastcgi_cache_methods GET HEAD;</i> </p><p><b>context:</b> <i>main, http, location</i> </p><p>This directive specifies which HTTP methods are allowed to be used when caching FastCGI requests. Note that GET and HEAD are <b>syntactic sugars</b>, i.e., a mere convenience in terms of this directive configuration logic. They <b>cannot</b> be disabled even if you set: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_cache_methods"><span class="kw11">fastcgi_cache_methods</span></a>  POST<span class="sy0">;</span> <span class="co1"># note that GET and HEAD are still enabled</span></pre>
+ </div>
+</div><br><i>Module: HttpFcgiModule</i>

@@ -1,0 +1,25 @@
+<h2> <span class="mw-headline" id="Using_Wildcard_certificates_with_multiple_servers"> Using Wildcard certificates with multiple servers </span></h2><p>In some instances you may wish to provide a number of secure subdomains amongst unsecured ones, and possibly share resources across both HTTP and HTTPS subdomains. To do this one would require a wildcard subdomain, for example <i>*.nginx.org</i>. An example configuration follows which shows how to configure a standard <i>www</i> subdomain, a secured subdomain, and share images across both subdomains using a third. </p><p>When using a configuration like this it's more efficient memory wise to place the certificate file containing the certificate(s) for all domain names and the corresponding private key file directives in a http context, such that it's inherited by all active servers/virtual hosts: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpSslModule#ssl_certificate"><span class="kw31">ssl_certificate</span></a>      common.crt<span class="sy0">;</span>
+<a href="/NginxHttpSslModule#ssl_certificate_key"><span class="kw31">ssl_certificate_key</span></a>  common.key<span class="sy0">;</span>
+&nbsp;
+<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>           <span class="nu0">80</span><span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>      www.nginx.org<span class="sy0">;</span>
+  ...
+<span class="br0">}</span>
+&nbsp;
+<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>           <span class="nu0">443</span> default_server <a href="/NginxHttpSslModule#ssl"><span class="kw31">ssl</span></a><span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>      secure.nginx.org<span class="sy0">;</span>
+  ...
+<span class="br0">}</span>
+&nbsp;
+<a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>           <span class="nu0">80</span><span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a>           <span class="nu0">443</span><span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>      images.nginx.org<span class="sy0">;</span>
+  ...
+<span class="br0">}</span></pre>
+ </div>
+</div><h1> <span class="mw-headline" id="Directives"> Directives </span></h1><br><i>Module: HttpSslModule</i>

@@ -1,0 +1,18 @@
+<h2> <span class="mw-headline" id="Limitations"> Limitations </span></h2><p>Note that as of 0.8.17 no contents will be added if the current location is served as a subrequest itself. Consider the following example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /foo <span class="br0">{</span>
+  <a href="/NginxHttpAdditionModule#add_before_body"><span class="kw25">add_before_body</span></a> /bar<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /bar <span class="br0">{</span>
+  <a href="/NginxHttpAdditionModule#add_before_body"><span class="kw25">add_before_body</span></a>  /baz<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Then accessing <i>/foo</i> won't get <i>/baz</i> inserted before the contents of the subrequest <i>/bar</i>. </p><p>Also note that at this time, only strings can be used in before/after body locations, not variables. So </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#set"><span class="kw22">set</span></a> <span class="re0">$before_action</span> /before_action<span class="sy0">;</span>
+  <a href="/NginxHttpAdditionModule#add_before_body"><span class="kw25">add_before_body</span></a> <span class="re0">$before_action</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>will not work as expected (although the configuration file will still load properly). </p><h1> <span class="mw-headline" id="Directives"> Directives </span></h1><br><i>Module: HttpAdditionModule</i>

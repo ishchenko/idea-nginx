@@ -1,7 +1,3 @@
-
-<p><b>syntax:</b> <i>ssi_value_length length</i>
-</p><p><b>default:</b> <i>ssi_value_length 256</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Defines the allowed length of values for parameters used in SSI. 
-</p>
-<br><i>Module: NginxHttpSsiModule</i>
+<h2> <span class="mw-headline" id="ssi_value_length"> ssi_value_length </span></h2><p><b>syntax:</b> <i>ssi_value_length length</i> </p><p><b>default:</b> <i>ssi_value_length 256</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Defines the allowed length of values for parameters used in SSI. </p><h1> <span class="mw-headline" id="SSI_Commands"> SSI Commands </span></h1><p>Instruction format is the following: </p><pre>
+  &lt;!--# command parameter1=value parameter2=value ... parameterN=value --&gt;
+</pre><p>Note that the hash ('#') must immediately follow the two dashes ('--'). </p><p>The supported SSI commands are listed below. </p><br><i>Module: HttpSsiModule</i>

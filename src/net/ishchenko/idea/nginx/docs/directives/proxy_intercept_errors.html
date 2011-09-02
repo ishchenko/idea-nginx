@@ -1,10 +1,1 @@
-
-<p><b>syntax:</b> <i>proxy_intercept_errors [ on|off ] </i>
-</p><p><b>default:</b> <i>proxy_intercept_errors off</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>This directive decides if nginx will intercept responses with HTTP status codes of 400 and higher.
-</p><p>By default all responses will be sent as-is from the proxied server.
-</p><p>If you set this to <code>on</code> then nginx will intercept status codes that are explicitly handled by an <code>error_page</code> directive. Responses with status codes that do not match an <code>error_page</code> directive will be sent as-is from the proxied server.
-</p><p><br />
-</p>
-<br><i>Module: NginxHttpProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_intercept_errors"> proxy_intercept_errors </span></h2><p><b>syntax:</b> <i>proxy_intercept_errors [ on|off ];</i> </p><p><b>default:</b> <i>proxy_intercept_errors off;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive decides if nginx will intercept responses with HTTP status codes of 400 and higher. </p><p>By default all responses will be sent as-is from the proxied server. </p><p>If you set this to <code>on</code> then nginx will intercept status codes that are explicitly handled by an <code>error_page</code> directive. Responses with status codes that do not match an <code>error_page</code> directive will be sent as-is from the proxied server. </p><p><br /> </p><br><i>Module: HttpProxyModule</i>

@@ -1,0 +1,16 @@
+<h2> <span class="mw-headline" id="post_action"> post_action </span></h2><p><b>syntax:</b> <i>post_action [ uri|off ] </i> </p><p><b>default:</b> <i>post_action off</i> </p><p><b>context:</b> <i>http, server, location, if-in-location</i> </p><p>Defines a URI to sub-request upon completion of current request. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /protected_files <span class="br0">{</span> 
+	<a href="/NginxHttpCoreModule#internal"><span class="kw3">internal</span></a><span class="sy0">;</span>
+&nbsp;
+	<a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://127.0.0.2<span class="sy0">;</span>
+	post_action /protected_done<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<span class="co1"># Send the post_action request to a FastCGI backend for logging.</span>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /protected_done <span class="br0">{</span>
+	<a href="/NginxHttpCoreModule#internal"><span class="kw3">internal</span></a><span class="sy0">;</span>
+	<a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a> 127.0.0.1:<span class="nu0">9000</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><br><i>Module: HttpCoreModule</i>

@@ -1,8 +1,1 @@
-
-<p><b>syntax:</b> <i>add_header name value</i>
-</p><p><b>default:</b> <i>none</i>
-</p><p><b>context:</b> <i>http, server, location</i>
-</p><p>Directive adds headers to the HTTP response when the response</p><p>In the value it is possible to use variables.
-</p><p>Note that it just appends a new header entry to the output header list. So you can't use this directive to rewrite existing headers like <code>Server</code>. Use the headers_more module for it.
-</p>
-<br><i>Module: NginxHttpHeadersModule</i>
+<h2> <span class="mw-headline" id="add_header"> add_header </span></h2><p><b>syntax:</b> <i>add_header name value</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b> variables:</b> <i>yes</i> </p><p>Adds headers to the HTTP response when the response code is equal to 200, 204, 301, 302 or 304. </p><p>Note that for headers other than <code>Last-Modified</code>, it just appends a new header entry to the output header list. So you can't use this directive to rewrite existing headers like <code>Server</code>. Use the <a href="/NginxHttpHeadersMoreModule" title="NginxHttpHeadersMoreModule" class="mw-redirect">headers_more</a> module for it. </p><br><i>Module: HttpHeadersModule</i>

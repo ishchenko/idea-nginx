@@ -1,8 +1,1 @@
-
-<p><b>syntax:</b> <i>proxy_pass_error_message</i> <i><b>on | off</b></i>
-</p><p><b>default:</b> <i>off</i>
-</p><p><b>context:</b> <i>mail, server</i>
-</p><p>With this directive you can pass authentification error messages obtained from the backend back to the client. Usually if authorization in nginx passed successfully then the backend cannot return errors back to the client.
-</p><p>But for some POP3 servers errors in response to correct password is a regular behavior. For example CommuniGatePro  notifies user about overcrowding of the mailbox (or other events) periodically issuing an error in authorization. In this case is worth indicating proxy_error_message on.
-</p>
-<br><i>Module: NginxMailProxyModule</i>
+<h2> <span class="mw-headline" id="proxy_pass_error_message"> proxy_pass_error_message </span></h2><p><b>syntax:</b> <i>proxy_pass_error_message</i> <i><b>on | off</b></i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>With this directive you can pass authentification error messages obtained from the backend back to the client. Usually if authorization in nginx passed successfully then the backend cannot return errors back to the client. </p><p>But for some POP3 servers errors in response to correct password is a regular behavior. For example <a href="http://www.stalker.com/" class="external text" rel="nofollow">CommuniGatePro</a> notifies user about overcrowding of the mailbox (or other events) periodically issuing an error in authorization. In this case is worth indicating proxy_error_message on. </p><br><i>Module: MailProxyModule</i>

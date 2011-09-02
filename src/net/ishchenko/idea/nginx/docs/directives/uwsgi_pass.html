@@ -1,0 +1,18 @@
+<h2> <span class="mw-headline" id="uwsgi_pass"> uwsgi_pass </span></h2><p><b>syntax:</b> <i>uwsgi_pass uwsgi-server</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>location, if in location</i> </p><p>Directive assigns the port or socket on which the uWSGI-server is listening. Port can be indicated by itself or as an address and port, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpUwsgiModule#uwsgi_pass"><span class="kw37">uwsgi_pass</span></a>   localhost:<span class="nu0">9000</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>using a Unix domain socket: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">  <a href="/NginxHttpUwsgiModule#uwsgi_pass"><span class="kw37">uwsgi_pass</span></a>   unix:/tmp/uwsgi.socket<span class="sy0">;</span></pre>
+ </div>
+</div><p>You may also use an upstream block. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a> backend  <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> 127.0.0.1:<span class="nu0">1234</span><span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> unix:/var/run/example.com.sock<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<a href="/NginxHttpUwsgiModule#uwsgi_pass"><span class="kw37">uwsgi_pass</span></a>   backend<span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpUwsgiModule</i>

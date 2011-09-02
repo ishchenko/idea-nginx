@@ -1,13 +1,1 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr>
-<p><b>syntax:</b> <i>ssl_session_timeout time</i>
-</p><p><b>default:</b> <i>ssl_session_timeout 5m</i>
-</p><p><b>context:</b> <i>main, server</i>
-</p><p>Assigns the time during which the client can repeatedly use the parameters of the session, which is stored in the cache.
-</p>
-<br><i>Module: NginxHttpSslModule</i><hr>
-<p><b>syntax:</b> <i>ssl_session_timeout</i> <i><b>time</b></i>
-</p><p><b>default:</b> <i>5m</i>
-</p><p><b>context:</b> <i>mail, server</i>
-</p><p>Assigns the time during which the client can repeatedly use the parameters of the session, which is stored in the cache.
-</p>
-<br><i>Module: NginxMailSslModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_session_timeout"> ssl_session_timeout </span></h2><p><b>syntax:</b> <i>ssl_session_timeout time</i> </p><p><b>default:</b> <i>ssl_session_timeout 5m</i> </p><p><b>context:</b> <i>http, server</i> </p><p>This directive defines the maximum time during which the client can re-use the previously negotiated cryptographic parameters of the secure session that is stored in the SSL cache. </p><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_session_timeout"> ssl_session_timeout </span></h2><p><b>syntax:</b> <i>ssl_session_timeout</i> <i><b>time</b></i> </p><p><b>default:</b> <i>5m</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Assigns the time during which the client can repeatedly use the parameters of the session, which is stored in the cache. </p><br><i>Module: MailSslModule</i>

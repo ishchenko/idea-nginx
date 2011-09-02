@@ -1,0 +1,10 @@
+<h2> <span class="mw-headline" id="Installation"> Installation </span></h2><p>By default the module is not built, it is necessary to enable its build with </p><pre>
+./configure --with-http_addition_module
+</pre><p>at compilation time. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+  <a href="/NginxHttpAdditionModule#add_before_body"><span class="kw25">add_before_body</span></a>   /before_action<span class="sy0">;</span>
+  <a href="/NginxHttpAdditionModule#add_after_body"><span class="kw25">add_after_body</span></a>    /after_action<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><br><i>Module: HttpAdditionModule</i>

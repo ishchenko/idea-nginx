@@ -1,58 +1,38 @@
-
-<p><b>syntax:</b> <i>location [=|~|~*|^~|@]  /uri/ { ... }</i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>server</i>
-</p><p>This directive allows different configurations depending on the URI. It can be configured using both literal strings and regular expressions. To use regular expressions, you must use a prefix:
-</p>
-<ol><li>  "~" for case sensitive matching
-</li><li>  "~*" for case insensitive matching 
-</li></ol>
-<p>To determine which <i>location</i> directive matches a particular query, the literal strings are checked first. Literal strings match the beginning portion of the query - the most specific match will be used. Afterwards, regular expressions are checked in the order defined in the configuration file. The first regular expression to match the query will stop the search. If no regular expression matches are found, the result from the literal string search is used.
-</p><p>For caseless operation systems, like Mac OS X and Cygwin, liternal string matching will be done in case insensitive way (0.7.7).  However, comparision is limited to single-byte locale's only.
-</p><p>Regular expression may contain captures (0.7.40), which can be used in other directives.
-</p><p>It is possible to disable regular expression checks after liternal string matching by using "^~" prefix.  If most specific match literal location have this prefix - regular expressions aren't checked.
-</p><p>By using "=" prefix on may define exact match between URI and location.  On match search stops immediately as further search has no sense.  E.g. if the request "/" occurs frequently, using "location = /" will speed up processing of this request a bit as search will stop after first comparison.
-</p><p>On exact match with literal location without "=" or "^~" prefixes search is also immediately terminated.
-</p><p>To summarize, the order in which directives are checked is as follows:
-</p>
-<ol><li>  Directives with the "=" prefix that match the query exactly. If found, searching stops.
-</li><li>  All remaining directives with conventional strings. If this match used the "^~" prefix, searching stops.
-</li><li>  Regular expressions, in the order they are defined in the configuration file.
-</li><li>  If #3 yielded a match, that result is used. Otherwise, the match from #2 is used.
-</li></ol>
-<p>It is important to know that nginx does the comparison against decoded URIs. For example, if you wish to match "/images/%20/test", then you must use "/images/ /test" to determine the location.
-</p><p>Example:
-</p><p></p>
-<pre class="code"><span class="kw3">location</span>  = / <span class="br0">&#123;</span>
+<h2> <span class="mw-headline" id="location"> location </span></h2><p><b>syntax:</b> <i>location [=|~|~*|^~|@] /uri/ { ... }</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>server</i> </p><p>This directive allows different configurations depending on the URI. It can be configured using both literal strings and regular expressions. To use regular expressions, you must use a prefix: </p><ol>
+ <li> &quot;~&quot; for case sensitive matching </li>
+ <li> &quot;~*&quot; for case insensitive matching </li>
+</ol><p>To determine which <i>location</i> directive matches a particular query, the literal strings are checked first. Literal strings match the beginning portion of the query - the most specific match will be used. Afterwards, regular expressions are checked in the order defined in the configuration file. The first regular expression to match the query will stop the search. If no regular expression matches are found, the result from the literal string search is used. </p><p>For case insensitive operating systems, like Mac OS X or Windows with Cygwin, literal string matching is done in a case insensitive way (0.7.7). However, comparison is limited to single-byte locale's only. </p><p>Regular expression may contain captures (0.7.40), which can then be used in other directives. </p><p>It is possible to disable regular expression checks after literal string matching by using &quot;^~&quot; prefix. If the most specific match literal location has this prefix: regular expressions aren't checked. </p><p>By using the &quot;=&quot; prefix we define the <b>exact</b> match between request URI and location. When matched search stops immediately. E.g., if the request &quot;/&quot; occurs frequently, using &quot;location = /&quot; will speed up processing of this request a bit as search will stop after first comparison. </p><p>On exact match with literal location without &quot;=&quot; or &quot;^~&quot; prefixes search is also immediately terminated. </p><p>To summarize, the order in which directives are checked is as follows: </p><ol>
+ <li> Directives with the &quot;=&quot; prefix that match the query exactly. If found, searching stops. </li>
+ <li> All remaining directives with conventional strings. If this match used the &quot;^~&quot; prefix, searching stops. </li>
+ <li> Regular expressions, in the order they are defined in the configuration file. </li>
+ <li> If #3 yielded a match, that result is used. Otherwise, the match from #2 is used. </li>
+</ol><p>It is important to know that nginx does the comparison against decoded URIs. For example, if you wish to match &quot;/images/%20/test&quot;, then you must use &quot;/images/ /test&quot; to determine the location. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a>  <span class="sy0">=</span> / <span class="br0">{</span>
   <span class="co1"># matches the query / only.</span>
-  <span class="br0">&#91;</span> configuration A <span class="br0">&#93;</span> 
-<span class="br0">&#125;</span>
-<span class="kw3">location</span>  / <span class="br0">&#123;</span>
+  <span class="br0">[</span> configuration A <span class="br0">]</span> 
+<span class="br0">}</span>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a>  / <span class="br0">{</span>
   <span class="co1"># matches any query, since all queries begin with /, but regular</span>
   <span class="co1"># expressions and any longer conventional blocks will be</span>
   <span class="co1"># matched first.</span>
-  <span class="br0">&#91;</span> configuration B <span class="br0">&#93;</span> 
-<span class="br0">&#125;</span>
-<span class="kw3">location</span> ^~ /images/ <span class="br0">&#123;</span>
+  <span class="br0">[</span> configuration B <span class="br0">]</span> 
+<span class="br0">}</span>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> ^<span class="sy0">~</span> /images/ <span class="br0">{</span>
   <span class="co1"># matches any query beginning with /images/ and halts searching,</span>
   <span class="co1"># so regular expressions will not be checked.</span>
-  <span class="br0">&#91;</span> configuration C <span class="br0">&#93;</span> 
-<span class="br0">&#125;</span>
-<span class="kw3">location</span> ~* \.<span class="br0">&#40;</span>gif|jpg|jpeg<span class="br0">&#41;</span>$ <span class="br0">&#123;</span>
+  <span class="br0">[</span> configuration C <span class="br0">]</span> 
+<span class="br0">}</span>
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span>* \.<span class="br0">(</span>gif|jpg|jpeg<span class="br0">)</span>$ <span class="br0">{</span>
   <span class="co1"># matches any request ending in gif, jpg, or jpeg. However, all</span>
   <span class="co1"># requests to the /images/ directory will be handled by</span>
   <span class="co1"># Configuration C.   </span>
-  <span class="br0">&#91;</span> configuration D <span class="br0">&#93;</span> 
-<span class="br0">&#125;</span></pre>
-<p>Example requests:
-</p>
-<ul><li>  / -&gt; configuration A
-</li><li> /documents/document.html -&gt; configuration B
-</li><li> /images/1.gif -&gt; configuration C
-</li><li> /documents/1.jpg -&gt; configuration D
-</li></ul>
-<p>Note that you could define these 4 configurations in any order and the results would remain the same.  While nested locations are allowed by the configuration file parser, their use is discouraged and may produce unexpected results.
-</p><p>The prefix "@" specifies a named location. Such locations are not used during normal processing of requests, they are intended only to process internally redirected requests (see 
-error_page, try_files).
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+  <span class="br0">[</span> configuration D <span class="br0">]</span> 
+<span class="br0">}</span></pre>
+ </div>
+</div><p>Example requests: </p><ul>
+ <li> / -&gt; configuration A </li>
+ <li> /documents/document.html -&gt; configuration B </li>
+ <li> /images/1.gif -&gt; configuration C </li>
+ <li> /documents/1.jpg -&gt; configuration D </li>
+</ul><p>Note that you could define these 4 configurations in any order and the results would remain the same. While nested locations are allowed by the configuration file parser, their use is discouraged and may produce unexpected results. </p><p>The prefix &quot;@&quot; specifies a named location. Such locations are not used during normal processing of requests, they are intended only to process internally redirected requests (see <a href="/HttpCoreModule#error_page" title="HttpCoreModule">error_page</a>, <a href="/HttpCoreModule#try_files" title="HttpCoreModule">try_files</a>). </p><br><i>Module: HttpCoreModule</i>

@@ -1,22 +1,13 @@
-
-<p><b>syntax:</b> <i>alias file-path|directory-path;</i>
-</p><p><b>default:</b> <i>no</i>
-</p><p><b>context:</b> <i>location</i>
-</p><p>This directive assigns a path to be used for the indicated location.  Note that it may look similar to
-the <code>root</code> directive, but the document root doesn't change, just the file system path used for the request.
-</p><p>For example:
-</p><p></p>
-<pre class="code"><span class="kw3">location</span>  /i/ <span class="br0">&#123;</span>
-  <span class="kw3">alias</span>  /spool/w3/images/;
-<span class="br0">&#125;</span></pre>
-<p>The request "/i/top.gif" will return the file "/spool/w3/images/top.gif".
-</p><p>Alias can also be used in a regex specified location.
-</p><p>For example:
-</p><p></p>
-<pre class="code"><span class="kw3">location</span> ~ ^/download/<span class="br0">&#40;</span>.*<span class="br0">&#41;</span>$ <span class="br0">&#123;</span>
-  <span class="kw3">alias</span> /home/website/files/$<span class="nu0">1</span>;
-<span class="br0">&#125;</span></pre>
-<p>The request "/download/book.pdf" will return the file "/home/website/files/book.pdf"
-</p><p>It is possible to use variables in the replacement path.
-</p>
-<br><i>Module: NginxHttpCoreModule</i>
+<h2> <span class="mw-headline" id="alias"> alias </span></h2><p><b>syntax:</b> <i>alias file-path|directory-path</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>location</i> </p><p>This directive assigns a path to be used as the basis for serving requests for the indicated location. Note that it may look similar to the <code>root</code> directive at first sight, but the document root doesn't change, just the file system path used for the request. The location part of the request is <b>dropped</b> in the request Nginx issues. Let's see this in action. Consider the following example. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a>  /i/ <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#alias"><span class="kw3">alias</span></a>  /spool/w3/images/<span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>A request for &quot;/i/top.gif&quot; will instruct Nginx to serve the file &quot;/spool/w3/images/top.gif&quot;. As you can see, <b>only</b> the part of the URI <b>after</b> the location is appended. The location itself, in this case &quot;/i/&quot;, is dropped. With a <code>root</code> directive the <b>full</b> path is appended, i.e., in the above example it would have been, &quot;/spool/w3/images/i/top.gif&quot; — hence including <b>also</b> the location &quot;/i/&quot;. </p><p>Aliases can also be used in a location specified by a regex. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span> ^/download/<span class="br0">(</span>.*<span class="br0">)</span>$ <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#alias"><span class="kw3">alias</span></a> /home/website/files/$<span class="nu0">1</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
+</div><p>The request &quot;/download/book.pdf&quot; will return the file &quot;/home/website/files/book.pdf&quot;. Note again that only part of the request URI <b>after</b> the location is appended to the path defined by <code>alias</code>. </p><p>It is possible to use variables in the replacement path. </p><br><i>Module: HttpCoreModule</i>

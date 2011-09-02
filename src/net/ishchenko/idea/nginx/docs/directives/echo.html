@@ -1,15 +1,8 @@
-
-<p>Print a variable.
-</p>
-<ul><li> <code>var</code> — the name of the variable
-</li><li> <code>default</code> - if the variable is empty, display this string. Defaults to "none". Example: 
-</li></ul>
-<pre>
+<h2> <span class="mw-headline" id="echo"> echo </span></h2><p>Print a variable. </p><ul>
+ <li> <code>var</code> — the name of the variable </li>
+ <li> <code>default</code> - if the variable is empty, display this string. Defaults to &quot;none&quot;. Example: </li>
+</ul><pre>
   &lt;!--# echo var=&quot;name&quot; default=&quot;no&quot; --&gt;
-</pre> 
-<p>is the same as
-</p>
-<pre>
+</pre><p>is the same as </p><pre>
   &lt;!--# if expr=&quot;$name&quot; --&gt;&lt;!--# echo var=&quot;name&quot; --&gt;&lt;!--# else --&gt;no&lt;!--# endif --&gt;
-</pre>
-<br><i>Module: NginxHttpSsiModule</i>
+</pre><br><i>Module: HttpSsiModule</i>
