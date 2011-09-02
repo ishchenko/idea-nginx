@@ -3,6 +3,10 @@ package net.ishchenko.idea.nginx;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.apache.commons.io.filefilter.RegexFileFilter;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,9 +38,6 @@ import java.util.regex.Pattern;
 public class DocumentationFromWikiGenerator {
 
 
-    private static final Pattern DIRECTIVE_NAME_PATTERN = Pattern.compile("<a name=\"([a-z_]+)\" id=\"([a-z_]+)\"></a><h2>.*");
-    private static final Pattern VARIABLE_NAME_PATTERN = Pattern.compile("<a name=\"\\.24([a-z_]+)\" id=\"\\.24([a-z_]+)\"></a><h2>.*");
-
     public static void main(String[] args) throws IOException {
 
         File wikiDir = new File("wiki.nginx.org");
@@ -50,9 +51,9 @@ public class DocumentationFromWikiGenerator {
         variablesOutputDir.mkdirs();
 
         Set<File> ambiguousDirectiveFiles = new TreeSet<File>();
-        for (Object o : FileUtils.listFiles(wikiDir, new RegexFileFilter("Nginx.*Module"), FalseFileFilter.FALSE)) {
-            processDirectives((File) o, directivesOutputDir, ambiguousDirectiveFiles);
-            processVariables((File) o, variablesOutputDir);
+        for (File o : FileUtils.listFiles(wikiDir, new RegexFileFilter(".*Module"), FalseFileFilter.FALSE)) {
+            processDirectives(o, directivesOutputDir, ambiguousDirectiveFiles);
+            processVariables(o, variablesOutputDir);
         }
 
         for (File ambiguousFile : ambiguousDirectiveFiles) {
@@ -65,36 +66,30 @@ public class DocumentationFromWikiGenerator {
 
         System.out.println("All done!");
 
-
     }
 
     private static void processDirectives(File moduleFile, File outputDirectory, Set<File> ambiguousFiles) throws IOException {
 
-        String fileContents = FileUtils.readFileToString(moduleFile);
+        Document doc = Jsoup.parse(moduleFile, "UTF-8");
+        for (Element element : doc.select("h2 > span.mw-headline:not([id^=.24])")) {
 
-        Matcher nameMatcher = DIRECTIVE_NAME_PATTERN.matcher(fileContents);
-        while (nameMatcher.find()) {
+            String name = element.attr("id");
 
-            String filename = nameMatcher.group(1);
+            StringBuilder description = new StringBuilder();
+            Element descriptionPart = element.parent();
+            do {
+                description.append(descriptionPart.outerHtml());
+            } while ((descriptionPart = descriptionPart.nextElementSibling()) != null && !descriptionPart.tagName().equals("h2"));
 
-            String contents = fileContents.substring(nameMatcher.end());
-
-            String doc = contents.substring(0, contents.indexOf("<a name"));
-            doc = doc.replaceAll("<style>.*\n", "").replaceAll(".code .*\n", "");
-            doc = doc.replaceAll("<a href=[^>]*>", "").replaceAll("</a>", "").replaceAll("</style>", "");
-
-            File docFile = new File(outputDirectory, filename + ".html");
+            File docFile = new File(outputDirectory, name + ".html");
             if (!docFile.exists()) {
-                FileUtils.writeStringToFile(docFile, doc + "<br><i>Module: " + moduleFile.getName() + "</i>");
+                FileUtils.writeStringToFile(docFile, description + "<br><i>Module: " + moduleFile.getName() + "</i>");
             } else {
                 ambiguousFiles.add(docFile);
-
                 StringBuilder sb = new StringBuilder(FileUtils.readFileToString(docFile)).append("<hr>");
-                sb.append(doc);
+                sb.append(description);
                 sb.append("<br><i>Module: ").append(moduleFile.getName()).append("</i>");
-
                 FileUtils.writeStringToFile(docFile, sb.toString());
-
             }
 
         }
@@ -103,26 +98,14 @@ public class DocumentationFromWikiGenerator {
 
     private static void processVariables(File moduleFile, File variablesOutputDir) throws IOException {
 
-        String fileContents = FileUtils.readFileToString(moduleFile);
-
-        Matcher nameMatcher = VARIABLE_NAME_PATTERN.matcher(fileContents);
-        while (nameMatcher.find()) {
-
-            String contents = fileContents.substring(nameMatcher.end());
-
-            int index = contents.indexOf("<a name");
-            if (index == -1) {
-                index = contents.indexOf("<!--");
-            }
-            String doc = contents.substring(0, index);
-            doc = doc.replaceAll("<style>.*\n", "").replaceAll(".code .*\n", "");
-            doc = doc.replaceAll("<a href=[^>]*>", "").replaceAll("</a>", "").replaceAll("</style>", "");
-
-            FileUtils.writeStringToFile(new File(variablesOutputDir, nameMatcher.group(2) + ".html"), doc);
+        Document doc = Jsoup.parse(moduleFile, "UTF-8");
+        for (Element element : doc.select("h2 > span.mw-headline[id^=.24]")) {
+            String name = element.attr("id").replace(".24", "");
+            String description = element.parent().nextElementSibling().outerHtml();
+            FileUtils.writeStringToFile(new File(variablesOutputDir, name + ".html"), description);
         }
 
     }
-
 
 }
 
