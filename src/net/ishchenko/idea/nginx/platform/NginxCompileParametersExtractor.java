@@ -37,8 +37,6 @@ import java.util.regex.Pattern;
  */
 public class NginxCompileParametersExtractor {
 
-    private static final Pattern OUTPUT_PATTERN = Pattern.compile("nginx version: nginx/([\\d\\.]+)\r?\n(?:.*\r?\n)*configure arguments: (.*)");
-
     /**
      * Runs file with -V argument and matches the output against OUTPUT_PATTERN.
      * @param from executable to be run with -V command line argument
@@ -61,10 +59,13 @@ public class NginxCompileParametersExtractor {
         }
 
         String output = os.toString();
-        Matcher matcher = OUTPUT_PATTERN.matcher(output);
-        if (matcher.find()) {
-            String version = matcher.group(1);
-            String params = matcher.group(2);
+        Matcher versionMatcher = Pattern.compile("nginx version: nginx/([\\d\\.]+)").matcher(output);
+        Matcher configureArgumentsMatcher = Pattern.compile("configure arguments: (.*)").matcher(output);
+
+        if (versionMatcher.find() && configureArgumentsMatcher.find()) {
+
+            String version = versionMatcher.group(1);
+            String params = configureArgumentsMatcher.group(1);
 
             result.setVersion(version);
 
