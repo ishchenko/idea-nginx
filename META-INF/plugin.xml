@@ -2,13 +2,13 @@
 <idea-plugin url="http://code.google.com/p/idea-nginx/">
 
     <id>ideanginx9</id>
-    <name>nginx Support 9</name>
-    <version>0.0.10</version>
-    <vendor url="http://code.google.com/p/idea-nginx/" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
+    <name>nginx Support</name>
+    <version>0.0.11</version>
+    <vendor url="https://github.com/ishchenko/idea-nginx" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
     <![CDATA[
-        nginx server support for IDEA 9 (Maia)<br>
+        nginx server support for IntelliJ IDEA<br>
         Runs/reloads configuration/stops nginx server from IDEA.<br>
         Configuration file syntax highlighting, auto-completion and inspections.
     ]]>
@@ -17,6 +17,12 @@
     <depends>com.intellij.modules.lang</depends>
 
     <change-notes><![CDATA[
+        <b>0.0.11</b>
+        <ul>
+            <li>-V output pattern parser fixed again, should work for all versions</li>
+            <li>Documentation and autocompletion update for nginx 1.1.1</li>
+            <li>Built for IDEA 10.5.x and later</li>
+        </ul>
         <b>0.0.10</b>
         <ul>
             <li>-V output pattern fixed for versions 0.8.23+ and 0.7.64+</li>
@@ -54,7 +60,7 @@
         <b>0.0.3</b>
         <ul>
             <li>Log files can be shown in tabs next to console. Important: "Horizontal toolbars" layout mode must be turned on
-            (vote http://www.jetbrains.net/jira/browse/IDEADEV-28543 to fix)</li>
+            (vote http://youtrack.jetbrains.net/issue/IDEA-44882 to fix)</li>
         </ul>
         <b>0.0.2</b>
         <ul>
@@ -71,7 +77,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="93.94"/>
+    <idea-version since-build="107.322"/>
 
     <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 
