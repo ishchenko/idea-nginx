@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support</name>
-    <version>0.0.11</version>
+    <version>0.0.12</version>
     <vendor url="https://github.com/ishchenko/idea-nginx" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -17,6 +17,10 @@
     <depends>com.intellij.modules.lang</depends>
 
     <change-notes><![CDATA[
+        <b>0.0.12</b>
+        <ul>
+            <li>Built for IDEA 11 and later</li>
+        </ul>
         <b>0.0.11</b>
         <ul>
             <li>-V output pattern parser fixed again, should work for all versions</li>
@@ -77,7 +81,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="107.322"/>
+    <idea-version since-build="111.69"/>
 
     <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 

@@ -42,13 +42,13 @@ public class PlatformDependentToolsInstaller implements ApplicationComponent {
 
         IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(((PluginClassLoader)getClass().getClassLoader()).getPluginId());
 
-        config.interfaceClass = PlatformDependentTools.class.getName();
+        config.setInterfaceClass(PlatformDependentTools.class.getName());
         if (SystemInfo.isLinux) {
-            config.implementationClass = LinuxSpecificTools.class.getName();
+            config.setImplementationClass(LinuxSpecificTools.class.getName());
         } else if (SystemInfo.isWindows) {
-            config.implementationClass = WindowsSpecificTools.class.getName();
+            config.setImplementationClass(WindowsSpecificTools.class.getName());
         } else if (SystemInfo.isMac) {
-            config.implementationClass = LinuxSpecificTools.class.getName(); // looks like, it works
+            config.setImplementationClass(LinuxSpecificTools.class.getName()); // looks like, it works
         } else {
             throw new RuntimeException("I really am sorry, but your operating system is not known to mankind."); // ;)
         }
