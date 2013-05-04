@@ -1,15 +1,18 @@
 package net.ishchenko.idea.nginx;
 
-import com.intellij.lang.documentation.QuickDocumentationProvider;
+import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiManager;
 import net.ishchenko.idea.nginx.psi.NginxDirectiveName;
 import net.ishchenko.idea.nginx.psi.NginxInnerVariable;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,9 +20,27 @@ import java.io.InputStreamReader;
  * Date: 19.08.2009
  * Time: 0:49:41
  */
-public class NginxDocumentationProvider extends QuickDocumentationProvider {
+public class NginxDocumentationProvider implements DocumentationProvider {
 
     public static final Logger LOG = Logger.getInstance("#com.intellij.lang.documentation.QuickDocumentationProvider");
+
+    @Nullable
+    @Override
+    public List<String> getUrlFor(PsiElement element, PsiElement originalElement) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+        return null;
+    }
 
     @Override
     public String generateDoc(PsiElement element, PsiElement originalElement) {
@@ -90,6 +111,7 @@ public class NginxDocumentationProvider extends QuickDocumentationProvider {
 
     }
 
+    @Override
     public String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
         return null;
     }
