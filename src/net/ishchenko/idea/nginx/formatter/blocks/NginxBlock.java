@@ -21,14 +21,15 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.PsiErrorElement;
+import com.intellij.psi.PsiWhiteSpace;
 import net.ishchenko.idea.nginx.lexer.NginxElementTypes;
 import net.ishchenko.idea.nginx.psi.NginxComplexValue;
 import net.ishchenko.idea.nginx.psi.NginxContext;
 import net.ishchenko.idea.nginx.psi.NginxDirective;
 import net.ishchenko.idea.nginx.psi.NginxPsiFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,12 +82,16 @@ public class NginxBlock implements ASTBlock {
         return blocks;
     }
 
+    @Nullable
     public Spacing getSpacing(Block genericLeftBlock, Block genericRightBlock) {
 
         NginxBlock leftBlock = (NginxBlock) genericLeftBlock;
         NginxBlock rightBlock = (NginxBlock) genericRightBlock;
 
-        PsiElement leftPsi = leftBlock.getNode().getPsi();
+        if (leftBlock == null || rightBlock == null) {
+            return null;
+        }
+
         PsiElement rightPsi = rightBlock.getNode().getPsi();
 
         if (rightPsi instanceof NginxDirective) {
