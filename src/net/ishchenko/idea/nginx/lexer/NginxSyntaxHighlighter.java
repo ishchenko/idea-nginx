@@ -18,8 +18,8 @@ package net.ishchenko.idea.nginx.lexer;
 
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.HighlighterColors;
-import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
@@ -46,11 +46,11 @@ public class NginxSyntaxHighlighter extends SyntaxHighlighterBase {
         lexer = new FlexAdapter(new _NginxLexer((java.io.Reader) null));
 
         colors.put(NginxElementTypes.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
-        colors.put(NginxElementTypes.COMMENT, SyntaxHighlighterColors.JAVA_BLOCK_COMMENT);
+        colors.put(NginxElementTypes.COMMENT, DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 
-        colors.put(NginxElementTypes.CONTEXT_NAME, SyntaxHighlighterColors.KEYWORD);
-        colors.put(NginxElementTypes.DIRECTIVE_STRING_VALUE, SyntaxHighlighterColors.STRING);
-        colors.put(NginxElementTypes.INNER_VARIABLE, SyntaxHighlighterColors.NUMBER);
+        colors.put(NginxElementTypes.CONTEXT_NAME, DefaultLanguageHighlighterColors.KEYWORD);
+        colors.put(NginxElementTypes.DIRECTIVE_STRING_VALUE, DefaultLanguageHighlighterColors.STRING);
+        colors.put(NginxElementTypes.INNER_VARIABLE, DefaultLanguageHighlighterColors.NUMBER);
 
     }
 
