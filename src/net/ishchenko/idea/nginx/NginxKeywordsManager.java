@@ -238,7 +238,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
             if (!keywords.containsKey(keyword)) {
                 keywords.put(keyword, flags);
             } else {
-                //todo: deal with ambiguous
+                keywords.get(keyword).addAll(flags);
             }
 
         }
