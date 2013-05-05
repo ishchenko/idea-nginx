@@ -1,0 +1,20 @@
+<h2><span class="editsection">[<a href="/index.php?title=HttpSplitClientsModule&amp;action=edit&amp;section=5" title="Edit section: Redirecting 51% of the traffic to another URL">edit</a>]</span> <span class="mw-headline" id="Redirecting_51.25_of_the_traffic_to_another_URL"> Redirecting 51% of the traffic to another URL </span></h2><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a> <span class="br0">{</span>
+    split_clients <span class="st0">&quot;${remote_addr}&quot;</span> <span class="re0">$redirectSite</span> <span class="br0">{</span>
+	    <span class="nu0">51</span>% <span class="st0">&quot;1&quot;</span><span class="sy0">;</span>
+	    <span class="nu0">49</span>% <span class="st0">&quot;0&quot;</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+&nbsp;
+    <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+        <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
+            <a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$redirectSite</span> <span class="sy0">=</span> <span class="st0">&quot;1&quot;</span><span class="br0">)</span> <span class="br0">{</span>
+                <a href="/NginxHttpRewriteModule#return"><span class="kw22">return</span></a> <span class="nu0">302</span> <span class="st0">&quot;http://www.website2.com/&quot;</span><span class="sy0">;</span>
+            <span class="br0">}</span>
+            <span class="br0">[</span>...<span class="br0">]</span>
+        <span class="br0">}</span>
+    <span class="br0">}</span></pre>
+ </div>
+</div><ul>
+ <li> Although on nginx <a rel="nofollow" class="external text" href="http://wiki.nginx.org/IfIsEvil">IF is evil</a>, we can use it in this specific case. </li>
+</ul><br><i>Module: HttpSplitClientsModule</i>

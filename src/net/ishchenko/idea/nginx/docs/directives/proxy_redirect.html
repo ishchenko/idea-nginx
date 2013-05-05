@@ -1,8 +1,34 @@
-<h2> <span class="mw-headline" id="proxy_redirect"> proxy_redirect </span></h2><p><b>syntax:</b> <i>proxy_redirect [ default|off|redirect replacement ];</i> </p><p><b>default:</b> <i>proxy_redirect default;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the text, which must be changed in response-header &quot;Location&quot; and &quot;Refresh&quot; in the response of the proxied server. </p><p>Let us suppose the proxied server returned line <code>Location: <a href="http://localhost:8000/two/some/uri/" class="external free" rel="nofollow">http://localhost:8000/two/some/uri/</a></code>. </p><p>The directive </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=36" title="Edit section: proxy redirect">edit</a>]</span> <span class="mw-headline" id="proxy_redirect"> proxy_redirect </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_redirect</b> <code>default</code> <br /><b>proxy_redirect</b> <code>off</code> <br /><b>proxy_redirect</b> <i>redirect</i> <i>replacement</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>default</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_redirect">proxy_redirect</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 283/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive sets the text, which must be changed in response-header &quot;Location&quot; and &quot;Refresh&quot; in the response of the proxied server. </p><p>Let us suppose the proxied server returned line <code>Location: <a rel="nofollow" class="external free" href="http://localhost:8000/two/some/uri/">http://localhost:8000/two/some/uri/</a></code>. </p><p>The directive </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/two/ <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://frontend/one/<span class="sy0">;</span></pre>
  </div>
-</div><p>will rewrite this line in the form <code>Location: <a href="http://frontend/one/some/uri/" class="external free" rel="nofollow">http://frontend/one/some/uri/</a></code>. </p><p>In the replaceable line it is possible not to indicate the name of the server: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+</div><p>will rewrite this line in the form <code>Location: <a rel="nofollow" class="external free" href="http://frontend/one/some/uri/">http://frontend/one/some/uri/</a></code>. </p><p>In the replaceable line it is possible not to indicate the name of the server: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/two/ /<span class="sy0">;</span></pre>
  </div>
@@ -39,4 +65,4 @@
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_redirect"><span class="kw21">proxy_redirect</span></a>   /   /<span class="sy0">;</span></pre>
  </div>
-</div><p><br /> </p><br><i>Module: HttpProxyModule</i>
+</div><br><i>Module: HttpProxyModule</i>

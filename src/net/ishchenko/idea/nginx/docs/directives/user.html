@@ -1,5 +1,31 @@
-<h2> <span class="mw-headline" id="user"> user </span></h2><p><b>Syntax:</b> <i>user user [group] </i> </p><p><b>Default:</b> <i>nobody nobody</i> </p><p>If the master process is run as root, then nginx will setuid()/setgid() to USER/GROUP. If GROUP is not specified, then nginx uses the same name as USER. By default it's <code>nobody</code> user and <code>nobody</code> or <code>nogroup</code> group or the <code>--user=USER</code> and <code>--group=GROUP</code> from the <code>./configure</code> script. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=14" title="Edit section: user">edit</a>]</span> <span class="mw-headline" id="user"> user </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>user</b> <i>user</i> [ <i>group</i> ]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>nobody nobody</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> main</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#user">user</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 111/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> If the master process is run as root, then nginx will setuid()/setgid() to USER/GROUP. If GROUP is not specified, then nginx uses the same name as USER. By default it's <code>nobody</code> user and <code>nobody</code> or <code>nogroup</code> group or the <code>--user=USER</code> and <code>--group=GROUP</code> from the <code>./configure</code> script. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a> www users<span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a> www users<span class="sy0">;</span></pre>
  </div>
-</div><p><br /> </p><br><i>Module: CoreModule</i>
+</div><br><i>Module: CoreModule</i>

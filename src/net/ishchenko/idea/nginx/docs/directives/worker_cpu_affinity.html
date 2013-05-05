@@ -1,11 +1,37 @@
-<h2> <span class="mw-headline" id="worker_cpu_affinity"> worker_cpu_affinity </span></h2><p><b>Syntax:</b> <i>worker_cpu_affinity cpumask [cpumask...] </i> </p><p><b>Default:</b> <i>none</i> </p><p>Linux only. </p><p>With this option you can bind the worker process to a CPU, it calls sched_setaffinity(). </p><p>For example, </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=15" title="Edit section: worker cpu affinity">edit</a>]</span> <span class="mw-headline" id="worker_cpu_affinity"> worker_cpu_affinity </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>worker_cpu_affinity</b> <i>cpumask</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> main</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#worker_cpu_affinity">worker_cpu_affinity</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 121/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Linux only. </p><p>With this option you can bind the worker process to a CPU, it calls sched_setaffinity(). </p><p>For example, </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#worker_processes"><span class="kw1">worker_processes</span></a>     <span class="nu0">4</span><span class="sy0">;</span>
-<a href="/NginxHttpMainModule#worker_cpu_affinity"><span class="kw1">worker_cpu_affinity</span></a> 0001 0010 0100 <span class="nu0">1000</span><span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#worker_processes"><span class="kw1">worker_processes</span></a>     <span class="nu0">4</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#worker_cpu_affinity"><span class="kw1">worker_cpu_affinity</span></a> 0001 0010 0100 <span class="nu0">1000</span><span class="sy0">;</span></pre>
  </div>
 </div><p>Bind each worker process to one CPU only. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#worker_processes"><span class="kw1">worker_processes</span></a>     <span class="nu0">2</span><span class="sy0">;</span>
-<a href="/NginxHttpMainModule#worker_cpu_affinity"><span class="kw1">worker_cpu_affinity</span></a> 0101 <span class="nu0">1010</span><span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#worker_processes"><span class="kw1">worker_processes</span></a>     <span class="nu0">2</span><span class="sy0">;</span>
+<a href="/NginxHttpCoreModule#worker_cpu_affinity"><span class="kw1">worker_cpu_affinity</span></a> 0101 <span class="nu0">1010</span><span class="sy0">;</span></pre>
  </div>
-</div><p>Bind the first worker to CPU0/CPU2, bind the second worker to CPU1/CPU3. This is suitable for HTT. </p><p><br /> </p><br><i>Module: CoreModule</i>
+</div><p>Bind the first worker to CPU0/CPU2, bind the second worker to CPU1/CPU3. This is suitable for HTT. </p><br><i>Module: CoreModule</i>

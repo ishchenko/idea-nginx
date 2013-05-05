@@ -1,0 +1,30 @@
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=38" title="Edit section: merge slashes">edit</a>]</span> <span class="mw-headline" id="merge_slashes"> merge_slashes </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>merge_slashes</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>on</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#merge_slashes">merge_slashes</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 330/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Enables merging adjacent slashes when parsing the request line. For example, a request for <a rel="nofollow" class="external free" href="http://www.example.com/foo//bar/">http://www.example.com/foo//bar/</a> will produce the following values for $uri: </p><ul>
+ <li> on: /foo/bar/ </li>
+ <li> off: /foo//bar/ </li>
+</ul><p><b>Be aware</b> that static location matching is performed as a string compare, so if merge_slashes is turned off, a request for /foo//bar/ will *not* match <code>location /foo/bar/</code>. </p><br><i>Module: HttpCoreModule</i>

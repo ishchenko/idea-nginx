@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="proxy_cache_path"> proxy_cache_path </span></h2><p><b>syntax:</b> <i>proxy_cache_path path [levels=number] keys_zone=zone_name:zone_size [inactive=time] [max_size=size];</i> </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>http</i> </p><p>This directive sets the cache path and other cache parameters. Cached data is stored in files. An MD5 hash of the proxied URL is used as the key for the cache entry, and is also used as the filename in the cache path for the response contents and metadata. The <b>levels</b> parameter sets the number of subdirectory levels in cache. For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=15" title="Edit section: proxy cache path">edit</a>]</span> <span class="mw-headline" id="proxy_cache_path"> proxy_cache_path </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_cache_path</b> <i>path</i> [ <code>levels</code> = <i>levels</i> ] <code>keys_zone</code> = <i>name</i>&nbsp;: <i>size</i> [ <code>inactive</code> = <i>time</i> ] [ <code>max_size</code> = <i>size</i> ] [ <code>loader_files</code> = <i>number</i> ] [ <code>loader_sleep</code> = <i>time</i> ] [ <code>loader_threshold</code> = <i>time</i> ]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_path">proxy_cache_path</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 103/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive sets the cache path and other cache parameters. Cached data is stored in files. An MD5 hash of the proxied URL is used as the key for the cache entry, and is also used as the filename in the cache path for the response contents and metadata. The <b>levels</b> parameter sets the number of subdirectory levels in cache. For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_cache_path"><span class="kw21">proxy_cache_path</span></a>  /data/nginx/cache/one  levels<span class="sy0">=</span><span class="nu0">1</span>:<span class="nu0">2</span>   keys_zone<span class="sy0">=</span>one:10m<span class="sy0">;</span></pre>
  </div>

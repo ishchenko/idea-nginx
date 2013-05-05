@@ -1,6 +1,32 @@
-<h2> <span class="mw-headline" id="worker_processes"> worker_processes </span></h2><p><b>Syntax:</b> <i>worker_processes number</i> </p><p><b>Default:</b> <i>1</i> </p><p>e.g.: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=17" title="Edit section: worker processes">edit</a>]</span> <span class="mw-headline" id="worker_processes"> worker_processes </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>worker_processes</b> <i>number</i> | <code>auto</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>1</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> main</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#worker_processes">worker_processes</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 141/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> e.g.: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#worker_processes"><span class="kw1">worker_processes</span></a> <span class="nu0">4</span><span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#worker_processes"><span class="kw1">worker_processes</span></a> <span class="nu0">4</span><span class="sy0">;</span></pre>
  </div>
 </div><p>A worker process is a single-threaded process. </p><p>If Nginx is doing CPU-intensive work such as SSL or gzipping and you have 2 or more CPUs/cores, then you may set worker_processes to be equal to the number of CPUs or cores. </p><p>If you are serving a lot of static files and the total size of the files is bigger than the available memory, then you may increase worker_processes to fully utilize disk bandwidth. </p><p>Your OS may schedule all workers on single CPU/core this can be avoided using <a href="/CoreModule#worker_cpu_affinity" title="CoreModule">worker_cpu_affinity</a>. </p><p>Nginx has the ability to use more than one worker process for several reasons: </p><ol>
  <li> to use SMP </li>

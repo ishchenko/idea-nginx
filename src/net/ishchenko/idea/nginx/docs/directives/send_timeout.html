@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="send_timeout"> send_timeout </span></h2><p><b>syntax:</b> <i>send_timeout the time</i> </p><p><b>default:</b> <i>send_timeout 60</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive assigns response timeout to client. Timeout is established not on entire transfer of answer, but only between two operations of reading, if after this time client will take nothing, then nginx is shutting down the connection. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=59" title="Edit section: send timeout">edit</a>]</span> <span class="mw-headline" id="send_timeout"> send_timeout </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>send_timeout</b> <i>time</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>60s</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#send_timeout">send_timeout</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 489/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies the response timeout to the client. This timeout does not apply to the <i>entire</i> transfer but, rather, only between two subsequent client-read operations. Thus, if the client has not read any data for this amount of time, then nginx shuts down the connection. </p><br><i>Module: HttpCoreModule</i>

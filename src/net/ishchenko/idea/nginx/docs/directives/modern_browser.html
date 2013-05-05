@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="modern_browser"> modern_browser </span></h2><p><b>syntax:</b> modern_browser <i>browser version | unlisted</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>variables:</b> <i>unknown</i> </p><p><br /> Directive assigns which version of the browser is to be considered as <b>modern</b>.<br /> As browser you can assign the values msie, gecko (Mozilla-based browsers) opera, safari, konqueror. </p><p>Of versions it is possible to assign in size X, X.X, X.X.X, or X.X.X.X. maximum values for each of their sizes respectively - 4000, 4000.99, 4000.99.99, and 4000.99.99.99. </p><p>Special value &quot;unlisted&quot; indicates to consider modern browser, not described by the modern_browser and ancient_browser directives. <br /> If the headers do not contain &quot;User-agent&quot;, the browser is considered ancient (unless &quot;modern_browser unlisted&quot; is specified). </p><p><br /> </p><br><i>Module: HttpBrowserModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpBrowserModule&amp;action=edit&amp;section=5" title="Edit section: modern browser">edit</a>]</span> <span class="mw-headline" id="modern_browser"> modern_browser </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>modern_browser</b> <i>browser</i> <i>version</i> <br /><b>modern_browser</b> <code>unlisted</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_browser_module.html#modern_browser">modern_browser</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 30/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive assigns which version of the browser is to be considered as <b>modern</b>.<br /> As browser you can assign the values msie, gecko (Mozilla-based browsers) opera, safari, konqueror. </p><p>Of versions it is possible to assign in size X, X.X, X.X.X, or X.X.X.X. maximum values for each of their sizes respectively - 4000, 4000.99, 4000.99.99, and 4000.99.99.99. </p><p>Special value &quot;unlisted&quot; indicates to consider modern browser, not described by the modern_browser and ancient_browser directives. <br /> If the headers do not contain &quot;User-agent&quot;, the browser is considered ancient (unless &quot;modern_browser unlisted&quot; is specified). </p><br><i>Module: HttpBrowserModule</i>

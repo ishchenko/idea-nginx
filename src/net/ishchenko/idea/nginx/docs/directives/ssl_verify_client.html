@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="ssl_verify_client"> ssl_verify_client </span></h2><p><b>syntax:</b> <i>ssl_verify_client on|off|optional</i> </p><p><b>default:</b> <i>ssl_verify_client off</i> </p><p><b>context:</b> <i>http, server</i> </p><p>This directive enables the verification of the client identity. Parameter 'optional' checks the client identity using its certificate in case it was made available to the server. (Was 'ask' before 0.8.7 and 0.7.63) </p><br><i>Module: HttpSslModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=14" title="Edit section: ssl verify client">edit</a>]</span> <span class="mw-headline" id="ssl_verify_client"> ssl_verify_client </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>ssl_verify_client</b> <code>on</code> | <code>off</code> | <code>optional</code> | <code>optional_no_ca</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_verify_client">ssl_verify_client</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 114/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive enables the verification of the client identity. Parameter 'optional' checks the client identity using its certificate in case it was made available to the server. (Was 'ask' before 0.8.7 and 0.7.63) </p><br><i>Module: HttpSslModule</i>

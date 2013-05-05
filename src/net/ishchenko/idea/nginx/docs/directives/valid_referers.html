@@ -1,8 +1,31 @@
-<h2> <span class="mw-headline" id="valid_referers"> valid_referers </span></h2><p><b>syntax:</b> <i>valid_referers [none|blocked|server_names] ...</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>server, location</i> </p><p>This directive assigns a value of 0 or 1 to the variable <code>$invalid_referer</code> based on the contents of the <code>referer</code> header. </p><p>You can use this to help reduce deep-linking from outside sites. If <code>Referer</code> header is not accounted for in the list of <code>valid_referers</code>, then <code>$invalid_referer</code> will be set to 1 (see example above). </p><p>The parameters can be as follows: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpRefererModule&amp;action=edit&amp;section=3" title="Edit section: valid referers">edit</a>]</span> <span class="mw-headline" id="valid_referers"> valid_referers </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>valid_referers</b> <code>none</code> | <code>blocked</code> | <code>server_names</code> | <i>string</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_referer_module.html#valid_referers">valid_referers</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive assigns a value of 0 or 1 to the variable <code>$invalid_referer</code> based on the contents of the <code>referer</code> header. </p><p>You can use this to help reduce deep-linking from outside sites. If <code>Referer</code> header is not accounted for in the list of <code>valid_referers</code>, then <code>$invalid_referer</code> will be set to 1 (see example above). </p><p>The parameters can be as follows: </p><ul>
  <li> <code>none</code> means the absence of &quot;Referer&quot; header. </li>
  <li> <code>blocked</code> means masked <code>Referer</code> header by firewall, for example, &quot;Referer: XXXXXXX&quot;. </li>
  <li> server_names is a list of one or more servers. From version 0.5.33 onwards, * wildcards can be used in the server names. </li>
-</ul><p><br /> </p><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_referer_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpRefererModule">http://wiki.nginx.org/HttpRefererModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpRefererModule</i>
+</ul><h1><span class="editsection">[<a href="/index.php?title=HttpRefererModule&amp;action=edit&amp;section=4" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_referer_module.html">Original Documentation</a> </p><br><i>Module: HttpRefererModule</i>

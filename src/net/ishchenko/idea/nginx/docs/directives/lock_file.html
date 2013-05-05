@@ -1,5 +1,5 @@
-<h2> <span class="mw-headline" id="lock_file"> lock_file </span></h2><p><b>Syntax:</b> <i>lock_file file</i> </p><p><b>Default:</b> <i>compile-time option</i> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=8" title="Edit section: lock file">edit</a>]</span> <span class="mw-headline" id="lock_file"> lock_file </span></h2><p><b>Syntax:</b> <i>lock_file file</i> </p><p><b>Default:</b> <i>compile-time option</i> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#lock_file"><span class="kw1">lock_file</span></a>  /var/log/<a href="/NginxHttpMainModule#lock_file"><span class="kw1">lock_file</span></a><span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#lock_file"><span class="kw1">lock_file</span></a>  /var/log/<a href="/NginxHttpCoreModule#lock_file"><span class="kw1">lock_file</span></a><span class="sy0">;</span></pre>
  </div>
 </div><p>nginx uses accept mutex to serialize accept() syscalls. If nginx is built by gcc, Intel C++, or SunPro C++ compilers on i386, amd64, sparc64, and ppc64, then nginx uses the atomic instructions to implement the mutex. In other cases the lock file would be used. </p><p><br /> </p><br><i>Module: CoreModule</i>

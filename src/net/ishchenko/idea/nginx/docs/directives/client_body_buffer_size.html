@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="client_body_buffer_size"> client_body_buffer_size </span></h2><p><b>syntax:</b> <i>client_body_buffer_size the_size</i> </p><p><b>default:</b> <i>8k/16k</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive specifies the client request body buffer size. </p><p>If the request body is more than the buffer, then the entire request body or some part is written in a temporary file. </p><p>The default size is equal to two pages size, depending on platform it is either 8K or 16K. </p><p>When the <i>Content-Length</i> request header specifies a smaller size value than the buffer size, then Nginx will use the smaller one. So Nginx will *not* always allocate a buffer of this buffer size for every request. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=8" title="Edit section: client body buffer size">edit</a>]</span> <span class="mw-headline" id="client_body_buffer_size"> client_body_buffer_size </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>client_body_buffer_size</b> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>8k|16k</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#client_body_buffer_size">client_body_buffer_size</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 60/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive specifies the client request body buffer size. </p><p>If the request body size is more than the buffer size, then the entire (or partial) request body is written into a temporary file. </p><p>The default size is equal to page size times 2. Depending on the platform, the page size is either 8K or 16K. </p><p>When the <i>Content-Length</i> request header specifies a smaller size value than the buffer size, then Nginx will use the smaller one. As a result, Nginx will <b>not</b> always allocate a buffer of this buffer size for every request. </p><br><i>Module: HttpCoreModule</i>

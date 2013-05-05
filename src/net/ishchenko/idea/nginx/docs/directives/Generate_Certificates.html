@@ -1,4 +1,4 @@
-<h2> <span class="mw-headline" id="Generate_Certificates"> Generate Certificates </span></h2><p>To generate private (dummy) certificates you can perform the following list of openssl commands. </p><p>First change directory to where you want to create the certificate and private key, for example: </p><pre>
+<h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=2" title="Edit section: Generate Certificates">edit</a>]</span> <span class="mw-headline" id="Generate_Certificates"> Generate Certificates </span></h2><p>To generate private (dummy) certificates you can perform the following list of openssl commands. </p><p>First change directory to where you want to create the certificate and private key, for example: </p><pre>
 $ cd /usr/local/nginx/conf
 </pre><p>Now create the server private key, you'll be asked for a passphrase: </p><pre>
 $ openssl genrsa -des3 -out server.key 1024

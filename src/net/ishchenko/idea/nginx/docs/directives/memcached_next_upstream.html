@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="memcached_next_upstream"> memcached_next_upstream </span></h2><p><b>syntax:</b> <i>memcached_next_upstream [ error | timeout | invalid_response | not_found | off ] </i> </p><p><b>default:</b> <i>error timeout</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Which failure conditions should cause the request to be forwarded to another upstream server? Applies only when the value in memcached_pass is an upstream with two or more servers. </p><h1> <span class="mw-headline" id="Variables"> Variables </span></h1><br><i>Module: HttpMemcachedModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpMemcachedModule&amp;action=edit&amp;section=8" title="Edit section: memcached next upstream">edit</a>]</span> <span class="mw-headline" id="memcached_next_upstream"> memcached_next_upstream </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>memcached_next_upstream</b> <code>error</code> | <code>timeout</code> | <code>invalid_response</code> | <code>not_found</code> | <code>off</code> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>error timeout</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_next_upstream">memcached_next_upstream</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 48/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Which failure conditions should cause the request to be forwarded to another upstream server? Applies only when the value in memcached_pass is an upstream with two or more servers. </p><h1><span class="editsection">[<a href="/index.php?title=HttpMemcachedModule&amp;action=edit&amp;section=9" title="Edit section: Variables">edit</a>]</span> <span class="mw-headline" id="Variables"> Variables </span></h1><br><i>Module: HttpMemcachedModule</i>

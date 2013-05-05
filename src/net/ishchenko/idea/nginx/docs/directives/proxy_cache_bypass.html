@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="proxy_cache_bypass"> proxy_cache_bypass </span></h2><p><b>syntax:</b> <i>proxy_cache_bypass line [...];</i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive specifies the conditions under which the answer will not be taken from the cache. If at least one of a string variable is not empty and not equal to &quot;0&quot;, the answer is not taken from the cache: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=9" title="Edit section: proxy cache bypass">edit</a>]</span> <span class="mw-headline" id="proxy_cache_bypass"> proxy_cache_bypass </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_cache_bypass</b> <i>string</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_bypass">proxy_cache_bypass</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 52/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive specifies the conditions under which the answer will not be taken from the cache. If at least one of a string variable is not empty and not equal to &quot;0&quot;, the answer is not taken from the cache: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"> proxy_cache_bypass <span class="re0">$cookie_nocache</span> <span class="re0">$arg_nocache</span> <span class="re0">$arg_comment</span><span class="sy0">;</span>
  proxy_cache_bypass <span class="re0">$http_pragma</span> <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>

@@ -1,4 +1,30 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_session_cache"> ssl_session_cache </span></h2><p><b>syntax:</b> <i>ssl_session_cache off|none|builtin:size and/or shared:name:size</i> </p><p><b>default:</b> <i>ssl_session_cache off</i> </p><p><b>context:</b> <i>http, server</i> </p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br />The cache types are: </p><ul>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=16" title="Edit section: ssl session cache">edit</a>]</span> <span class="mw-headline" id="ssl_session_cache"> ssl_session_cache </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>ssl_session_cache</b> <code>off</code> | <code>none</code> | [ <code>builtin</code> [: <i>size</i> ]] [ <code>shared</code>&nbsp;: <i>name</i>&nbsp;: <i>size</i> ]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>none</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_session_cache">ssl_session_cache</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 128/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive sets the types and sizes of caches to store the SSL sessions.<br />The cache types are: </p><ul>
  <li> off -- Hard off: nginx says explicitly to a client that sessions can not reused. </li>
  <li> none -- Soft off: nginx says to a client that session can be resued, but nginx actually never reuses them. This is workaround for some mail clients as ssl_session_cache may be used in mail proxy as well as in HTTP server. </li>
  <li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions. Note: there appears to be a memory fragmentation issue using this method, please take that into consideration when using this. See &quot;References&quot; below. </li>
@@ -11,7 +37,7 @@
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> <span class="br0">[</span>::<span class="br0">]</span>:<span class="nu0">443</span> <a href="/NginxHttpSslModule#ssl"><span class="kw31">ssl</span></a> default_server<span class="sy0">;</span></pre>
  </div>
-</div><p>This is so because session resumption happens before any TLS extensions are enabled, namely Server Name Identification (SNI). The ClientHello message requests a session ID from a given IP address (server). For that to work the default server setting is <b>required</b>. </p><p>A <b>preferred</b> approach is to move the <code>ssl_session_cache</code> directive to the <code>http</code> context. The (minor) downside is that all configured virtual hosts get the <b>same</b> SSL cache settings. </p><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_session_cache"> ssl_session_cache </span></h2><p><b>syntax:</b> <i>ssl_session_cache</i> <i><b>[builtin[<code></code>:size [shared:name:size] </b></i> </p><p><b>default:</b> <i>builtin:20480</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br /> The cache types are: </p><ul>
+</div><p>This is so because session resumption happens before any TLS extensions are enabled, namely Server Name Identification (SNI). The ClientHello message requests a session ID from a given IP address (server). For that to work the default server setting is <b>required</b>. </p><p>A <b>preferred</b> approach is to move the <code>ssl_session_cache</code> directive to the <code>http</code> context. The (minor) downside is that all configured virtual hosts get the <b>same</b> SSL cache settings. </p><br><i>Module: HttpSslModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailSslModule&amp;action=edit&amp;section=9" title="Edit section: ssl session cache">edit</a>]</span> <span class="mw-headline" id="ssl_session_cache"> ssl_session_cache </span></h2><p><b>syntax:</b> <i>ssl_session_cache</i> <i><b>[builtin[<code></code>:size [shared:name:size] </b></i> </p><p><b>default:</b> <i>builtin:20480</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>The directive sets the types and sizes of caches to store the SSL sessions.<br /> The cache types are: </p><ul>
  <li> builtin -- the OpenSSL builtin cache, is used inside one worker process only. The cache size is assigned in the number of the sessions. </li>
  <li> shared -- the cache is shared between all worker processes. The size of cache is assigned in the bytes, 1 MB cache can contain about 4000 sessions. Each shared cache must have arbitrary name. Cache with the same name can be used in several virtual servers. </li>
 </ul><pre>

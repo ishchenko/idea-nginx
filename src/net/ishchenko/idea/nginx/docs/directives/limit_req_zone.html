@@ -1,0 +1,29 @@
+<h2><span class="editsection">[<a href="/index.php?title=HttpLimitReqModule&amp;action=edit&amp;section=6" title="Edit section: limit req zone">edit</a>]</span> <span class="mw-headline" id="limit_req_zone"> limit_req_zone </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>limit_req_zone</b> <i>$variable</i> <code>zone</code> = <i>name</i>&nbsp;: <i>size</i> <code>rate</code> = <i>rate</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req_zone">limit_req_zone</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 34/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive describes the area, which stores the state of the sessions. The values of the sessions is determined by the given variable. Example of usage: </p><pre>
+limit_req_zone  $binary_remote_addr  zone=one:10m   rate=1r/s;
+</pre><p>In this case, the session state is allocated 10MB as a zone called &quot;one&quot;, and the average speed of queries for this zone is limited to 1 request per second. </p><p>The sessions are tracked per-user in this case, but note that instead of the variable $remote_addr, we've used the variable $binary_remote_addr, reducing the size of the state to 64 bytes. A 1 MB zone can hold approximately 16000 states of this size. </p><p>The speed is set in requests per second or requests per minute. The rate must be an integer, so if you need to specify less than one request per second, say, one request every two seconds, you would specify it as &quot;30r/m&quot;. </p><h1><span class="editsection">[<a href="/index.php?title=HttpLimitReqModule&amp;action=edit&amp;section=7" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_limit_req_module.html">Original Documentation</a> </p><br><i>Module: HttpLimitReqModule</i>

@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="upstream"> upstream </span></h2><p><b>syntax:</b> <i>upstream name { ... }</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http</i> </p><p>This directive describes a set of servers, which can be used in directives proxy_pass and fastcgi_pass as a single entity. They can listen to server on different ports and furthermore, it is possible to simultaneously use a server that listens on both TCP and Unix sockets. </p><p>Servers can be assigned different weights. If not specified weight is equal to one. </p><p>Example configuration: u </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpUpstreamModule&amp;action=edit&amp;section=7" title="Edit section: upstream">edit</a>]</span> <span class="mw-headline" id="upstream"> upstream </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>upstream</b> <i>name</i> { ... }</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#upstream">upstream</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 47/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive describes a set of servers, which can be used in directives proxy_pass and fastcgi_pass as a single entity. They can listen to server on different ports and furthermore, it is possible to simultaneously use a server that listens on both TCP and Unix sockets. </p><p>Servers can be assigned different weights. If not specified weight is equal to one. </p><p>Example configuration: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpUpstreamModule#upstream"><span class="kw4">upstream</span></a> backend <span class="br0">{</span>
   <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> backend1.example.com weight<span class="sy0">=</span><span class="nu0">5</span><span class="sy0">;</span>
@@ -6,7 +32,7 @@
   <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> unix:/tmp/backend3<span class="sy0">;</span>
 <span class="br0">}</span></pre>
  </div>
-</div><p>Requests are distributed according to the servers in round-robin manner with respect of the server weight.<br /> For example of every seven requests given above they will be distributed like this: 5 requests on backend1.example.com and one request to the second and the third of server. If with an attempt at the work with the server error occurred, then the request will be transmitted to the following server and then until all workers of server not are tested. If successful answer is not succeeded in obtaining from all servers, then to client will be returned the result of work with the last server. </p><h1> <span class="mw-headline" id="Variables"> Variables </span></h1><p>Since version 0.5.18, it is possible to log via log_module variables. </p><p>Configuration example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+</div><p>Requests are distributed according to the servers in round-robin manner with respect of the server weight.<br /> For example of every seven requests given above they will be distributed like this: 5 requests on backend1.example.com and one request to the second and the third of server. If with an attempt at the work with the server error occurred, then the request will be transmitted to the following server and then until all workers of server not are tested. If successful answer is not succeeded in obtaining from all servers, then to client will be returned the result of work with the last server. </p><h1><span class="editsection">[<a href="/index.php?title=HttpUpstreamModule&amp;action=edit&amp;section=8" title="Edit section: Variables">edit</a>]</span> <span class="mw-headline" id="Variables"> Variables </span></h1><p>Since version 0.5.18, it is possible to log via log_module variables. </p><p>Configuration example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpLogModule#log_format"><span class="kw18">log_format</span></a> timing <span class="st0">'$remote_addr - $remote_user [$time_local]  $request '</span>
   <span class="st0">'upstream_response_time $upstream_response_time '</span>

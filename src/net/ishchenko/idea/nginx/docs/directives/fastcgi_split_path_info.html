@@ -1,15 +1,41 @@
-<h2> <span class="mw-headline" id="fastcgi_split_path_info"> fastcgi_split_path_info </span></h2><p><b>syntax:</b> <i>fastcgi_split_path_info regex</i> </p><p><b>context:</b> <i>location</i> </p><p><b>version:</b> <i>≥ 0.7.31</i> </p><p>This directive allows the setting of the SCRIPT_FILENAME (SCRIPT_NAME) and PATH_INFO variables of the <a href="http://www.ietf.org/rfc/rfc3875" class="external text" rel="nofollow">CGI specification</a>. The regex consists of <b>two</b> groups: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=35" title="Edit section: fastcgi split path info">edit</a>]</span> <span class="mw-headline" id="fastcgi_split_path_info"> fastcgi_split_path_info </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>fastcgi_split_path_info</b> <i>regex</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_split_path_info">fastcgi_split_path_info</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 323/1000000
+Post-expand include size: 401/2097152 bytes
+Template argument size: 178/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive allows the setting of the SCRIPT_FILENAME (SCRIPT_NAME) and PATH_INFO variables of the <a rel="nofollow" class="external text" href="http://www.ietf.org/rfc/rfc3875">CGI specification</a>. The regex consists of <b>two</b> groups: </p><ul>
  <li> path to the script that will handle the request — corresponding to <code>$fastcgi_script_name</code>. </li>
  <li> the value of the parameter to be given to the script — corresponding to the <code>$fastcgi_path_info</code>. </li>
 </ul><p><br /> Here's an example. The script <code>show.php</code> receives as argument the string <code>article/0001</code>. The following configuration will handle path splitting properly: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span> ^.+\.php <span class="br0">{</span>
   <span class="br0">(</span>...<span class="br0">)</span>
-  <a href="/NginxHttpFcgiModule#fastcgi_split_path_info"><span class="kw11">fastcgi_split_path_info</span></a> ^<span class="br0">(</span>.+\.php<span class="br0">)</span><span class="br0">(</span>.*<span class="br0">)</span>$<span class="sy0">;</span>
-  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a> SCRIPT_FILENAME /path/to/php<span class="re0">$fastcgi_script_name</span><span class="sy0">;</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_split_path_info"><span class="kw11">fastcgi_split_path_info</span></a> ^<span class="br0">(</span><span class="br0">(</span>?U<span class="br0">)</span>.+\.php<span class="br0">)</span><span class="br0">(</span>/?.+<span class="br0">)</span>$<span class="sy0">;</span>
+  <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a> SCRIPT_FILENAME <span class="re0">$document_root</span><span class="re0">$fastcgi_script_name</span><span class="sy0">;</span>
   <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a> PATH_INFO <span class="re0">$fastcgi_path_info</span><span class="sy0">;</span>
   <a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a> PATH_TRANSLATED <span class="re0">$document_root</span><span class="re0">$fastcgi_path_info</span><span class="sy0">;</span>
   <span class="br0">(</span>...<span class="br0">)</span>
 <span class="br0">}</span></pre>
  </div>
-</div><p>Requesting <code>/show.php/article/0001</code> sets SCRIPT_FILENAME to <code>/path/to/php/show.php</code> and PATH_INFO to <code>/article/0001</code>. </p><br><i>Module: HttpFcgiModule</i>
+</div><p>Requesting <code>/show.php/article/0001</code> sets SCRIPT_FILENAME to <code>/path/to/php/show.php</code> and PATH_INFO to <code>/article/0001</code>. </p><br><i>Module: HttpFastcgiModule</i>

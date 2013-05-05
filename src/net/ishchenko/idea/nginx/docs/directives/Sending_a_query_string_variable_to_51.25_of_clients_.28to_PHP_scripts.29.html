@@ -1,0 +1,16 @@
+<h2><span class="editsection">[<a href="/index.php?title=HttpSplitClientsModule&amp;action=edit&amp;section=4" title="Edit section: Sending a query string variable to 51% of clients (to PHP scripts)">edit</a>]</span> <span class="mw-headline" id="Sending_a_query_string_variable_to_51.25_of_clients_.28to_PHP_scripts.29"> Sending a query string variable to 51% of clients (to PHP scripts) </span></h2><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a> <span class="br0">{</span>
+    split_clients <span class="st0">&quot;${remote_addr}&quot;</span> <span class="re0">$additionalQsVariable</span> <span class="br0">{</span>
+	    <span class="nu0">51</span>% <span class="st0">&quot;coolVariable=1&quot;</span><span class="sy0">;</span>
+	    <span class="nu0">49</span>% <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+	<span class="br0">}</span>
+&nbsp;
+    <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+        <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span> \.php$ <span class="br0">{</span>
+            <a href="/NginxHttpRewriteModule#set"><span class="kw22">set</span></a> <span class="re0">$args</span> <span class="st0">&quot;${query_string}&amp;${additionalQsVariable}&quot;</span><span class="sy0">;</span>
+            <span class="br0">[</span>...<span class="br0">]</span>
+        <span class="br0">}</span>
+    <span class="br0">}</span></pre>
+ </div>
+</div><br><i>Module: HttpSplitClientsModule</i>

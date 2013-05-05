@@ -1,6 +1,58 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="server"> server </span></h2><p><b>syntax:</b> <i>server {...}</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http</i> </p><p>Directive assigns configuration for the virtual server. </p><p>There is no separation of IP and name-based (the <code>Host</code> header of the request) servers. </p><p>Instead, the directive <code>listen</code> is used to describe all addresses and ports on which incoming connections can occur, and in directive <code>server_name</code> indicate all names of the server. </p><br><i>Module: HttpCoreModule</i><hr><h2> <span class="mw-headline" id="server"> server </span></h2><p><b>syntax:</b> <i>server name [parameters] </i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>upstream</i> </p><p>Directive assigns the name and the parameters of server. For the name it is possible to use a domain name, an address, port or unix socket. If domain name resolves to several addresses, then all are used. </p><ul>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=62" title="Edit section: server">edit</a>]</span> <span class="mw-headline" id="server"> server </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>server</b> { ... }</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server">server</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 510/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive assigns configuration for the virtual server. </p><p>There is no separation of IP and name-based (the <code>Host</code> header of the request) servers. </p><p>Instead, the directive <code>listen</code> is used to describe all addresses and ports on which incoming connections can occur, and in directive <code>server_name</code> indicate all names of the server. </p><br><i>Module: HttpCoreModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=HttpUpstreamModule&amp;action=edit&amp;section=6" title="Edit section: server">edit</a>]</span> <span class="mw-headline" id="server"> server </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>server</b> <i>address</i> [ <i>parameters</i> ]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> upstream</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_upstream_module.html#server">server</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 37/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive assigns the name and the parameters of server. For the name it is possible to use a domain name, an address, port or unix socket. If domain name resolves to several addresses, then all are used. </p><ul>
  <li> weight = NUMBER - set weight of the server, if not set weight is equal to one. </li>
- <li> max_fails = NUMBER - number of unsuccessful attempts at communicating with the server within the time period (assigned by parameter fail_timeout) after which it is considered inoperative. If not set, the number of attempts is one. A value of 0 turns off this check. What is considered a failure is defined by <a href="/NginxHttpProxyModule#proxy_next_upstream" title="NginxHttpProxyModule" class="mw-redirect">proxy_next_upstream</a> or <a href="/HttpFcgiModule#fastcgi_next_upstream" title="HttpFcgiModule">fastcgi_next_upstream</a> (except http_404 errors which do not count towards max_fails). </li>
+ <li> max_fails = NUMBER - number of unsuccessful attempts at communicating with the server within the time period (assigned by parameter fail_timeout) after which it is considered inoperative. If not set, the number of attempts is one. A value of 0 turns off this check. What is considered a failure is defined by <a href="/NginxHttpProxyModule#proxy_next_upstream" title="NginxHttpProxyModule" class="mw-redirect">proxy_next_upstream</a> or <a href="/HttpFcgiModule#fastcgi_next_upstream" title="HttpFcgiModule" class="mw-redirect">fastcgi_next_upstream</a> (except http_404 errors which do not count towards max_fails). </li>
  <li> fail_timeout = TIME - the time during which must occur *max_fails* number of unsuccessful attempts at communication with the server that would cause the server to be considered inoperative, and also the time for which the server will be considered inoperative (before another attempt is made). If not set the time is 10 seconds. fail_timeout has nothing to do with upstream response time, use <a href="/NginxHttpProxyModule#proxy_connect_timeout" title="NginxHttpProxyModule" class="mw-redirect">proxy_connect_timeout</a> and <a href="/NginxHttpProxyModule#proxy_read_timeout" title="NginxHttpProxyModule" class="mw-redirect">proxy_read_timeout</a> for controlling this. </li>
  <li> down - marks server as permanently offline, to be used with the directive ip_hash. </li>
  <li> backup - (0.6.7 or later) only uses this server if the non-backup servers are all down or busy (cannot be used with the directive ip_hash) </li>
@@ -12,4 +64,4 @@
   <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a>   unix:/tmp/backend3<span class="sy0">;</span>
 <span class="br0">}</span></pre>
  </div>
-</div><p><b>Attention: If you use only one upstream server nginx set a internal variable to 1, this means that the max_fails &amp; fail_timeout parameter are not handled.</b> </p><p>Effect: If nginx can not connect to upstream the request it's gone. </p><p>Solution: Use the same server several times </p><br><i>Module: HttpUpstreamModule</i><hr><h2> <span class="mw-headline" id="server"> server </span></h2><p><b>syntax:</b> <i>server {...}</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>mail</i> </p><p>Directive assigns configuration for the virtual server. </p><p>There is no clear separation of the virtual servers ip-based and name-based (the value of the line &quot;Host&quot; header in the request). </p><p>Instead of this by directives listen are described all addresses and ports, on which it is necessary to assume connections for this server, and in directive server_name are indicated all names of servers. Example configurations are described in tuning of virtual servers. </p><br><i>Module: MailCoreModule</i>
+</div><p><b>Attention: If you use only one upstream server nginx set a internal variable to 1, this means that the max_fails &amp; fail_timeout parameter are not handled.</b> </p><p>Effect: If nginx can not connect to upstream the request it's gone. </p><p>Solution: Use the same server several times </p><br><i>Module: HttpUpstreamModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=11" title="Edit section: server">edit</a>]</span> <span class="mw-headline" id="server"> server </span></h2><p><b>syntax:</b> <i>server {...}</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>mail</i> </p><p>Directive assigns configuration for the virtual server. </p><p>There is no clear separation of the virtual servers ip-based and name-based (the value of the line &quot;Host&quot; header in the request). </p><p>Instead of this by directives listen are described all addresses and ports, on which it is necessary to assume connections for this server, and in directive server_name are indicated all names of servers. Example configurations are described in tuning of virtual servers. </p><br><i>Module: MailCoreModule</i>

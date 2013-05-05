@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="limit_except"> limit_except </span></h2><p><b>syntax:</b> <i>limit_except methods {...}</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>location</i> </p><p>Directive limits HTTP-methods, accessible inside location. </p><p>For the limitation can be used the directives of modules ngx_http_access_module and ngx_http_auth_basic_module: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=27" title="Edit section: limit except">edit</a>]</span> <span class="mw-headline" id="limit_except"> limit_except </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>limit_except</b> <i>method</i> ... { ... }</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#limit_except">limit_except</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 217/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Limits which HTTP methods are allowed for a given request path/location. </p><p>For the limitation can be used the directives of modules ngx_http_access_module and ngx_http_auth_basic_module: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#limit_except"><span class="kw3">limit_except</span></a>  GET <span class="br0">{</span>
   <a href="/NginxHttpAccessModule#allow"><span class="kw5">allow</span></a>  192.168.1.0/<span class="nu0">32</span><span class="sy0">;</span>

@@ -1,7 +1,33 @@
-<h2> <span class="mw-headline" id="if"> if </span></h2><p><b>syntax:</b> <i>if (condition) { ... }</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server, location</i> </p><p><b>note:</b> Before using if please see <a href="/IfIsEvil" title="IfIsEvil">the if is evil page</a> and consider using <a href="/NginxHttpCoreModule#try_files" title="NginxHttpCoreModule" class="mw-redirect">try_files</a> instead. </p><p>Checks the truth of a condition. If the condition evaluates to true, then the code indicated in the curly braces is carried out and the request is processed in accordance with the configuration within the following block. The configuration inside the <code>if</code>directive is inherited from the previous level. </p><p>The condition can be: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=4" title="Edit section: if">edit</a>]</span> <span class="mw-headline" id="if"> if </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>if</b> ( <i>condition</i> ) { ... }</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#if">if</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 20/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> <b>note:</b> Before using if please see <a href="/IfIsEvil" title="IfIsEvil">the if is evil page</a> and consider using <a href="/NginxHttpCoreModule#try_files" title="NginxHttpCoreModule" class="mw-redirect">try_files</a> instead. </p><p>Checks the truth of a condition. If the condition evaluates to true, then the code indicated in the curly braces is carried out and the request is processed in accordance with the configuration within the following block. The configuration inside the <code>if</code>directive is inherited from the previous level. </p><p>The condition can be: </p><ul>
  <li> the name of a variable; false values are: empty string (<code>&quot;&quot;</code>, or any string starting with &quot;0&quot;; </li>
  <li> a comparison of a variable using the <code>=</code> and <code>!=</code> operators; </li>
- <li> pattern matching with <a href="http://perldoc.perl.org/perlretut.html" class="external text" rel="nofollow">regular expressions</a>: 
+ <li> pattern matching with <a rel="nofollow" class="external text" href="http://perldoc.perl.org/perlretut.html">regular expressions</a>: 
   <ul>
    <li> <code>~</code> performs a case-sensitive match </li>
    <li> <code>~*</code> performs a case-insensitive match (<code>firefox</code> matches <code>FireFox</code>) </li>
@@ -11,7 +37,7 @@
  <li> checking for the existence of a directory using <code>-d</code> or <code>!-d</code>; </li>
  <li> checking for the existence of a file, directory or symbolic link using <code>-e</code> or <code>!-e</code>; </li>
  <li> checking whether a file is executable using <code>-x</code> or <code>!-x</code>. </li>
-</ul><p>Parts of the regular expressions can be in parentheses, whose value can then later be accessed in the <code>$1</code> to <code>$9</code> variables. See <a href="http://perldoc.perl.org/perlretut.html#Extracting-matches" class="external text" rel="nofollow">Extracting matches</a>. </p><p>Examples of use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+</ul><p>Parts of the regular expressions can be in parentheses, whose value can then later be accessed in the <code>$1</code> to <code>$9</code> variables. See <a rel="nofollow" class="external text" href="http://perldoc.perl.org/perlretut.html#Extracting-matches">Extracting matches</a>. </p><p>Examples of use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$http_user_agent</span> <span class="sy0">~</span> MSIE<span class="br0">)</span> <span class="br0">{</span>
   <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^<span class="br0">(</span>.*<span class="br0">)</span>$  /msie/$<span class="nu0">1</span>  <a href="/NginxHttpRewriteModule#break"><span class="kw22">break</span></a><span class="sy0">;</span>

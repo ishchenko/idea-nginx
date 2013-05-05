@@ -1,3 +1,29 @@
-<h2> <span class="mw-headline" id="xml_entities"> xml_entities </span></h2><p><b>syntax:</b> <i>xml_entities &lt;path&gt;</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Specifies the DTD file which describes symbolic elements (xml entities). This file is compiled at the stage of configuration. For technical reasons it's not possible to specify entities in the XML being processed, therefore they are ignored, but this specially assigned file is used instead. In this file it is not necessary to describe structure of processed XML, it is sufficient only to declare necessary symbolic elements, for example: </p><pre>
+<h2><span class="editsection">[<a href="/index.php?title=HttpXsltModule&amp;action=edit&amp;section=3" title="Edit section: xml entities">edit</a>]</span> <span class="mw-headline" id="xml_entities"> xml_entities </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>xml_entities</b> <i>path</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_xslt_module.html#xml_entities">xml_entities</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 16/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies the DTD file which describes symbolic elements (xml entities). This file is compiled at the stage of configuration. For technical reasons it's not possible to specify entities in the XML being processed, therefore they are ignored, but this specially assigned file is used instead. In this file it is not necessary to describe structure of processed XML, it is sufficient only to declare necessary symbolic elements, for example: </p><pre>
   &lt;! ENTITY of nbsp “&nbsp; “&gt;
 </pre><br><i>Module: HttpXsltModule</i>

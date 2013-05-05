@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="map_hash_bucket_size"> map_hash_bucket_size </span></h2><p><b>syntax:</b> <i>map_hash_bucket_size n</i> </p><p><b>default:</b> <i>map_hash_bucket_size 32/64/128</i> </p><p><b>context:</b> <i>http</i> </p><p>The directive sets the maximum size in a hash table to map variables. The default value depends on the size of the cache line processor. More see in the descriptions of hash settings in the <a href="/NginxOptimizations" title="NginxOptimizations" class="mw-redirect">Optimization section</a> . </p><p><br /> </p><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_map_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpMapModule">http://wiki.nginx.org/HttpMapModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpMapModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpMapModule&amp;action=edit&amp;section=5" title="Edit section: map hash bucket size">edit</a>]</span> <span class="mw-headline" id="map_hash_bucket_size"> map_hash_bucket_size </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>map_hash_bucket_size</b> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>32|64|128</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_map_module.html#map_hash_bucket_size">map_hash_bucket_size</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 45/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive sets the maximum size in a hash table to map variables. The default value depends on the size of the cache line processor. More see in the descriptions of hash settings in the <a href="/NginxOptimizations" title="NginxOptimizations" class="mw-redirect">Optimization section</a> . </p><h1><span class="editsection">[<a href="/index.php?title=HttpMapModule&amp;action=edit&amp;section=6" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><ul>
+ <li> <a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_map_module.html">Original Documentation</a> </li>
+ <li> <a rel="nofollow" class="external text" href="http://redant.com.au/blog/manage-ssl-redirection-in-nginx-using-maps-and-save-the-universe/">Advanced Usage - Forcing HTTP/HTTPS via maps</a> </li>
+</ul><br><i>Module: HttpMapModule</i>

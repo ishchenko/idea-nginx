@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="memcached_buffer_size"> memcached_buffer_size </span></h2><p><b>syntax:</b> <i>memcached_buffer_size [ size ] </i> </p><p><b>default:</b> see <i>getpagesize(2)</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The recv/send buffer size, in bytes. </p><br><i>Module: HttpMemcachedModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpMemcachedModule&amp;action=edit&amp;section=7" title="Edit section: memcached buffer size">edit</a>]</span> <span class="mw-headline" id="memcached_buffer_size"> memcached_buffer_size </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>memcached_buffer_size</b> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>4k|8k</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_buffer_size">memcached_buffer_size</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 41/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The recv/send buffer size, in bytes. </p><br><i>Module: HttpMemcachedModule</i>

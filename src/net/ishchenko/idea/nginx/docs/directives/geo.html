@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="geo"> geo </span></h2><p><b>syntax:</b> <i>geo [$ip_variable] $variable { ... }</i> </p><p><b>default:</b> none </p><p><b>context:</b> <i>http</i> </p><p>This directive describes the dependency of the value of the defined variable on the client's IP address. By default, the IP address used for doing the lookup is $remote_addr, but since version 0.7.27 it is possible to specify an another variable. </p><p>Note that in the case of an invalid IP address, the value <b>255.255.255.255</b> is used. </p><p>Here we're using <code>$arg_remote_addr</code>: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpGeoModule&amp;action=edit&amp;section=3" title="Edit section: geo">edit</a>]</span> <span class="mw-headline" id="geo"> geo </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>geo</b> [ <i>$address</i> ] <i>$variable</i> { ... }</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_geo_module.html#geo">geo</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive describes the dependency of the value of the defined variable on the client's IP address. By default, the IP address used for doing the lookup is $remote_addr, but since version 0.7.27 it is possible to specify an another variable. </p><p>Note that in the case of an invalid IP address, the value <b>255.255.255.255</b> is used. </p><p>Here we're using <code>$arg_remote_addr</code>: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"> <a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>  <span class="re0">$arg_remote_addr</span> <span class="re0">$geo</span> <span class="br0">{</span>
    <span class="br0">(</span>...<span class="br0">)</span>
@@ -15,7 +41,7 @@
  <div class="nginx source-nginx">
   <pre class="de1"> <a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>  <span class="re0">$country</span>  <span class="br0">{</span>
    default          no<span class="sy0">;</span> <span class="co1"># Sets the default value (client doesn't match any of the enumerated IP addresses) to &quot;no&quot;</span>
-   <a href="/NginxHttpMainModule#include"><span class="kw1">include</span></a>          conf/<a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>.conf<span class="sy0">;</span>
+   <a href="/NginxHttpCoreModule#include"><span class="kw1">include</span></a>          conf/<a href="/NginxHttpGeoModule#geo"><span class="kw12">geo</span></a>.conf<span class="sy0">;</span>
    127.0.0.0/<span class="nu0">24</span>     us<span class="sy0">;</span>
    127.0.0.1/<span class="nu0">32</span>     ru<span class="sy0">;</span>
    10.1.0.0/<span class="nu0">16</span>      ru<span class="sy0">;</span>
@@ -39,11 +65,8 @@
    192.168.1.0-192.168.1.255  uk<span class="sy0">;</span> 
  <span class="br0">}</span></pre>
  </div>
-</div><h1> <span class="mw-headline" id="References"> References </span></h1><ul>
+</div><h1><span class="editsection">[<a href="/index.php?title=HttpGeoModule&amp;action=edit&amp;section=4" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><ul>
+ <li> <a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_geo_module.html">Original Documentation</a> </li>
  <li> <a href="/HWLoadbalancerCheckErrors" title="HWLoadbalancerCheckErrors">HWLoadbalancerCheckErrors</a> </li>
- <li> <a href="http://www.ruby-forum.com/topic/125810" class="external text" rel="nofollow">Creating geo.conf From MaxMind GeoIP Country Database</a> </li>
- <li> <a href="http://sysoev.ru/nginx/docs/http/ngx_http_geo_module.html" class="external text" rel="nofollow">Original Documentation</a> </li>
-</ul><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpGeoModule">http://wiki.nginx.org/HttpGeoModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpGeoModule</i>
+ <li> <a rel="nofollow" class="external text" href="http://www.ruby-forum.com/topic/125810">Creating geo.conf From MaxMind GeoIP Country Database</a> </li>
+</ul><br><i>Module: HttpGeoModule</i>

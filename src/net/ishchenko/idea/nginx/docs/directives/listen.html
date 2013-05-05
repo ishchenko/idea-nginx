@@ -1,4 +1,30 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="listen"> listen </span></h2><p><b>syntax:</b> <i>listen address:port [ default(deprecated in 0.8.21) | default_server | [ backlog=num | rcvbuf=size | sndbuf=size | accept_filter=filter | deferred | bind | ipv6only=[on|off] | ssl ] ]</i> </p><p><b>default:</b> <i>listen 80</i> </p><p><b>context:</b> <i>server</i> </p><p>The <i>listen</i> directive specifies the address and port accepted by the enclosing <a href="#server">server {...}</a> block. It is possible to specify only an address, only a port, or a server name as the address. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=33" title="Edit section: listen">edit</a>]</span> <span class="mw-headline" id="listen"> listen </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>listen</b> <i>address</i> [: <i>port</i> ] [ <code>default_server</code> ] [ <code>setfib</code> = <i>number</i> ] [ <code>backlog</code> = <i>number</i> ] [ <code>rcvbuf</code> = <i>size</i> ] [ <code>sndbuf</code> = <i>size</i> ] [ <code>accept_filter</code> = <i>filter</i> ] [ <code>deferred</code> ] [ <code>bind</code> ] [ <code>ipv6only</code> = <code>on</code> | <code>off</code> ] [ <code>ssl</code> ] [ <code>so_keepalive</code> = <code>on</code> | <code>off</code> |[ <i>keepidle</i> ]:[ <i>keepintvl</i> ]:[ <i>keepcnt</i> ]]<br /><b>listen</b> <i>port</i> [ <code>default_server</code> ] [ <code>setfib</code> = <i>number</i> ] [ <code>backlog</code> = <i>number</i> ] [ <code>rcvbuf</code> = <i>size</i> ] [ <code>sndbuf</code> = <i>size</i> ] [ <code>accept_filter</code> = <i>filter</i> ] [ <code>deferred</code> ] [ <code>bind</code> ] [ <code>ipv6only</code> = <code>on</code> | <code>off</code> ] [ <code>ssl</code> ] [ <code>so_keepalive</code> = <code>on</code> | <code>off</code> |[ <i>keepidle</i> ]:[ <i>keepintvl</i> ]:[ <i>keepcnt</i> ]]<br /><b>listen</b> <code>unix:</code> <i>path</i> [ <code>default_server</code> ] [ <code>backlog</code> = <i>number</i> ] [ <code>rcvbuf</code> = <i>size</i> ] [ <code>sndbuf</code> = <i>size</i> ] [ <code>accept_filter</code> = <i>filter</i> ] [ <code>deferred</code> ] [ <code>bind</code> ] [ <code>ssl</code> ] [ <code>so_keepalive</code> = <code>on</code> | <code>off</code> |[ <i>keepidle</i> ]:[ <i>keepintvl</i> ]:[ <i>keepcnt</i> ]]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>*:80 | *:8000</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#listen">listen</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 268/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The <i>listen</i> directive specifies the address and port accepted by the enclosing <a href="#server">server {...}</a> block. It is possible to specify only an address, only a port, or a server name as the address. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1:<span class="nu0">8000</span><span class="sy0">;</span>
 <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1<span class="sy0">;</span>
@@ -57,7 +83,7 @@
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> unix:/tmp/nginx1.sock<span class="sy0">;</span></pre>
  </div>
-</div><br><i>Module: HttpCoreModule</i><hr><h2> <span class="mw-headline" id="listen"> listen </span></h2><p><b>syntax:</b> <i>listen</i> <i><b>address:port [ bind ] </b></i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>server</i> </p><p>The directive specifies the address and port, on which the server accepts requests. It is possible to specify address or port only, besides, an address can be the server name, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+</div><br><i>Module: HttpCoreModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=7" title="Edit section: listen">edit</a>]</span> <span class="mw-headline" id="listen"> listen </span></h2><p><b>syntax:</b> <i>listen</i> <i><b>address:port [ bind ] </b></i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>server</i> </p><p>The directive specifies the address and port, on which the server accepts requests. It is possible to specify address or port only, besides, an address can be the server name, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1:<span class="nu0">8000</span><span class="sy0">;</span>
 <a href="/NginxHttpCoreModule#listen"><span class="kw3">listen</span></a> 127.0.0.1<span class="sy0">;</span>

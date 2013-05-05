@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="image_filter"> image_filter </span></h2><p><b>Syntax:</b> <i>image_filter (test|size|resize width height|crop width height)</i> </p><p><b>Default:</b> <i>none</i> </p><p><b>Context:</b> <i>location</i> </p><p>Specifies the type of transformation to apply to the image, one of the below: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpImageFilterModule&amp;action=edit&amp;section=4" title="Edit section: image filter">edit</a>]</span> <span class="mw-headline" id="image_filter"> image_filter </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>image_filter</b> <code>off</code> <br /><b>image_filter</b> <code>test</code> <br /><b>image_filter</b> <code>size</code> <br /><b>image_filter</b> <code>rotate</code> <code>90</code> | <code>180</code> | <code>270</code> <br /><b>image_filter</b> <code>resize</code> <i>width</i> <i>height</i> <br /><b>image_filter</b> <code>crop</code> <i>width</i> <i>height</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_image_filter_module.html#image_filter">image_filter</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 17/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies the type of transformation to apply to the image, one of the below: </p><ul>
  <li> test: checking that the response is indeed an image format JPEG, GIF or PNG. Otherwise, an error 415. </li>
 </ul><ul>
  <li> size: Gives information about the image in JSON format. For example, </li>

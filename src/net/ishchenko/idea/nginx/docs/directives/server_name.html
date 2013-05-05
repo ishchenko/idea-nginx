@@ -1,4 +1,30 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="server_name"> server_name </span></h2><p><b>syntax:</b> <i>server_name name [... ] </i> </p><p><b>default:</b> <i>server_name &quot;&quot;</i> </p><p><b>context:</b> <i>server</i> </p><p>This directive performs two actions: </p><ul>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=63" title="Edit section: server name">edit</a>]</span> <span class="mw-headline" id="server_name"> server_name </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>server_name</b> <i>name</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>&quot;&quot;</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_name">server_name</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 517/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive performs two actions: </p><ul>
  <li> Compares the <code>Host</code> header of the incoming HTTP request against the <a href="#server">server { ... }</a> blocks in the Nginx configuration files and selects the first one that matches. This is how <b>virtual servers</b> are defined. Server names are processed in the following order: </li>
 </ul><ol>
  <li> full, static names </li>
@@ -52,6 +78,13 @@
   <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /sites/<span class="re0">$domain</span><span class="sy0">;</span>
 <span class="br0">}</span></pre>
  </div>
+</div><p>and multiple name captures: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+  <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   <span class="sy0">~</span>^<span class="br0">(</span>?<span class="re4">&lt;subdomain&gt;</span>.+?<span class="br0">)</span>\.<span class="br0">(</span>?<span class="re4">&lt;domain&gt;</span>.+<span class="br0">)</span>$<span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /sites/<span class="re0">$domain</span>/<span class="re0">$subdomain</span><span class="sy0">;</span>
+<span class="br0">}</span></pre>
+ </div>
 </div><p>Some older versions of PCRE may have issues with this syntax. If any problems arise try this following syntax: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
@@ -65,7 +98,7 @@
   <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a> <span class="re0">$hostname</span><span class="sy0">;</span>
 <span class="br0">}</span></pre>
  </div>
-</div><br><i>Module: HttpCoreModule</i><hr><h2> <span class="mw-headline" id="server_name"> server_name </span></h2><p><b>syntax:</b> <i>server_name name</i> <i><b>fqdn_server_host</b></i> </p><p><b>default:</b> <i>The name of the host, obtained through gethostname()</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Directive assigns the names of virtual server, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+</div><br><i>Module: HttpCoreModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailCoreModule&amp;action=edit&amp;section=12" title="Edit section: server name">edit</a>]</span> <span class="mw-headline" id="server_name"> server_name </span></h2><p><b>syntax:</b> <i>server_name name</i> <i><b>fqdn_server_host</b></i> </p><p><b>default:</b> <i>The name of the host, obtained through gethostname()</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Directive assigns the names of virtual server, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
   <a href="/NginxHttpCoreModule#server_name"><span class="kw3">server_name</span></a>   example.com  www.example.com<span class="sy0">;</span>

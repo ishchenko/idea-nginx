@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="proxy_ignore_headers"> proxy_ignore_headers </span></h2><p><b>syntax:</b> <i>proxy_ignore_headers name [name ...]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>version:</b> ≥ 0.7.54 </p><p>Prohibits the processing of the header lines from the proxy server's response. </p><p>It can specify the string as &quot;<a href="/XSendfile" title="XSendfile">X-Accel-Redirect</a>&quot;, &quot;X-Accel-Expires&quot;, &quot;Expires&quot; or &quot;Cache-Control&quot;. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=26" title="Edit section: proxy ignore headers">edit</a>]</span> <span class="mw-headline" id="proxy_ignore_headers"> proxy_ignore_headers </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_ignore_headers</b> <i>field</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers">proxy_ignore_headers</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 195/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Prohibits the processing of the header lines from the proxy server's response. </p><p>It can specify the string as &quot;<a href="/XSendfile" title="XSendfile">X-Accel-Redirect</a>&quot;, &quot;X-Accel-Expires&quot;, &quot;Expires&quot;, &quot;Cache-Control&quot; or &quot;Set-Cookie&quot;. By default, nginx does not caches requests with Set-Cookie. </p><br><i>Module: HttpProxyModule</i>

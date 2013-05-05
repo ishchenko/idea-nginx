@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="reset_timedout_connection"> reset_timedout_connection </span></h2><p><b>syntax:</b> <i>reset_timedout_connection [on|off] </i> </p><p><b>default:</b> <i>reset_timedout_connection off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive enables or disables resetting the connection on timeout. When resetting the connection, before the socket is closed, the socket SO_LINGER option is set with a 0 timeout, which forces the RST packet to be sent to the client upon closing the socket, thus freeing all memory associated with it. This prevents the socket in the FIN_WAIT1 state, along with the buffers associated with it from lying around. </p><p>Note that sockets with keepalive connections, after the defined timeout, are closed in the usual way. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=52" title="Edit section: reset timedout connection">edit</a>]</span> <span class="mw-headline" id="reset_timedout_connection"> reset_timedout_connection </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>reset_timedout_connection</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#reset_timedout_connection">reset_timedout_connection</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 428/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive enables or disables resetting the connection on timeout. When resetting the connection, before the socket is closed, the socket SO_LINGER option is set with a 0 timeout, which forces the RST packet to be sent to the client upon closing the socket, thus freeing all memory associated with it. This prevents the socket in the FIN_WAIT1 state, along with the buffers associated with it from lying around. </p><p>Note that sockets with keepalive connections, after the defined timeout, are closed in the usual way. </p><br><i>Module: HttpCoreModule</i>

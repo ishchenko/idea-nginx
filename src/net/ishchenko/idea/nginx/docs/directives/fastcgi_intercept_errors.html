@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="fastcgi_intercept_errors"> fastcgi_intercept_errors </span></h2><p><b>syntax:</b> <i>fastcgi_intercept_errors on|off</i> </p><p><b>default:</b> <i>fastcgi_intercept_errors off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive determines whether or not to transfer 4xx and 5xx errors back to the client or to allow Nginx to answer with directive error_page. </p><p>Note: You need to explicitly define the error_page handler for this for it to be useful. As Igor says, &quot;nginx does not intercept an error if there is no custom handler for it it does not show its default pages. This allows to intercept some errors, while passing others as are.&quot; </p><br><i>Module: HttpFcgiModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=22" title="Edit section: fastcgi intercept errors">edit</a>]</span> <span class="mw-headline" id="fastcgi_intercept_errors"> fastcgi_intercept_errors </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>fastcgi_intercept_errors</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_intercept_errors">fastcgi_intercept_errors</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 170/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive determines whether or not to transfer 4xx and 5xx errors back to the client or to allow Nginx to answer with directive error_page. </p><p>Note: You need to explicitly define the error_page handler for this for it to be useful. As Igor says, &quot;nginx does not intercept an error if there is no custom handler for it it does not show its default pages. This allows to intercept some errors, while passing others as are.&quot; </p><br><i>Module: HttpFastcgiModule</i>

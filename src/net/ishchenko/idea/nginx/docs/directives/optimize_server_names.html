@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="optimize_server_names"> optimize_server_names </span></h2><p><b>syntax:</b> <i>optimize_server_names [ on|off ] </i> </p><p><b>default:</b> <i>optimize_server_names on</i> </p><p><b>context:</b> <i>http, server</i> </p><p>Directive activates or deactivates optimization of host name checks for name-based virtual servers. </p><p>In particular, the check influences the name of the host used in redirects. If optimization is on, and all name-based servers listening on one address:port pair have identical configuration, then names are not checked during request execution and redirects use first server name. </p><p>If redirect must use host name passed by the client, then the optimization must be turned off. </p><p>Note: this directive is deprecated in nginx 0.7.x, use <a href="#server_name_in_redirect">server_name_in_redirect</a> instead. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=45" title="Edit section: optimize server names">edit</a>]</span> <span class="mw-headline" id="optimize_server_names"> optimize_server_names </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>optimize_server_names</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#optimize_server_names">optimize_server_names</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 382/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive activates or deactivates optimization of host name checks for name-based virtual servers. </p><p>In particular, the check influences the name of the host used in redirects. If optimization is on, and all name-based servers listening on one address:port pair have identical configuration, then names are not checked during request execution and redirects use first server name. </p><p>If redirect must use host name passed by the client, then the optimization must be turned off. </p><p>Note: this directive is deprecated in nginx 0.7.x, use <a href="#server_name_in_redirect">server_name_in_redirect</a> instead. </p><br><i>Module: HttpCoreModule</i>

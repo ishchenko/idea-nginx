@@ -1,9 +1,35 @@
-<h2> <span class="mw-headline" id="fastcgi_store_access"> fastcgi_store_access </span></h2><p><b>syntax:</b> <i>fastcgi_store_access users:permissions [users:permission ...] </i> </p><p><b>default:</b> <i>fastcgi_store_access user:rw</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive assigns the permissions for the created files and directories, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=37" title="Edit section: fastcgi store access">edit</a>]</span> <span class="mw-headline" id="fastcgi_store_access"> fastcgi_store_access </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>fastcgi_store_access</b> <i>users</i>&nbsp;: <i>permissions</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>user:rw</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_store_access">fastcgi_store_access</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 346/1000000
+Post-expand include size: 401/2097152 bytes
+Template argument size: 178/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive assigns the permissions for the created files and directories, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_store_access"><span class="kw11">fastcgi_store_access</span></a>  <a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_store_access"><span class="kw11">fastcgi_store_access</span></a>  <a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span></pre>
  </div>
 </div><p>If any rights for groups or all are assigned, then it is not necessary to assign rights for user: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_store_access"><span class="kw11">fastcgi_store_access</span></a>  group:rw  all:r<span class="sy0">;</span></pre>
  </div>
-</div><br><i>Module: HttpFcgiModule</i>
+</div><br><i>Module: HttpFastcgiModule</i>

@@ -1,4 +1,4 @@
-<h2> <span class="mw-headline" id="Known_Problems"> Known Problems </span></h2><p>This module is experimental; therefore anything is possible and bugs are likely. </p><ol>
+<h2><span class="editsection">[<a href="/index.php?title=HttpPerlModule&amp;action=edit&amp;section=3" title="Edit section: Known Problems">edit</a>]</span> <span class="mw-headline" id="Known_Problems"> Known Problems </span></h2><p>This module is experimental; therefore anything is possible and bugs are likely. </p><ol>
  <li> If a Perl module performs protracted operation, (for example DNS lookups, database queries, etc), then the worker process that is running the Perl script is completely tied up for the duration of script. Therefore embedded Perl scripts should be extremely careful to limit themselves to short, predictable operations. </li>
  <li> It's possible for Nginx to leak memory if you reload the configuration file (via 'kill -HUP &lt;pid&gt;'). </li>
 </ol><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
@@ -47,4 +47,4 @@
 <span class="nu0">1</span><span class="sy0">;</span>
 <span class="kw2">__END__</span></pre>
  </div>
-</div><h1> <span class="mw-headline" id="Directives"> Directives </span></h1><br><i>Module: EmbeddedPerlModule</i>
+</div><h1><span class="editsection">[<a href="/index.php?title=HttpPerlModule&amp;action=edit&amp;section=4" title="Edit section: Directives">edit</a>]</span> <span class="mw-headline" id="Directives"> Directives </span></h1><br><i>Module: HttpPerlModule</i>

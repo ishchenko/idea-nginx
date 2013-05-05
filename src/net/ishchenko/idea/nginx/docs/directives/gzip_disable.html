@@ -1,5 +1,39 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="gzip_disable"> gzip_disable </span></h2><p><b>syntax:</b> <i>gzip_disable regex</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Disable gzip compression for User-Agents matching the given regular expression. Requires PCRE library. Introduced in Nginx 0.6.23. </p><p>You can use &quot;msie6&quot; to disable gzip for Internet Explorer 5.5 and Internet Explorer 6. &quot;SV1&quot; (Service Pack 2) will be ignored since Nginx 0.7.63. </p><p>Example </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpGzipModule&amp;action=edit&amp;section=6" title="Edit section: gzip disable">edit</a>]</span> <span class="mw-headline" id="gzip_disable"> gzip_disable </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>gzip_disable</b> <i>regex</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Appeared in:</b></td> 
+   <td> 0.6.23</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_disable">gzip_disable</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 34/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Disable gzip compression for User-Agents matching the given regular expression. Requires PCRE library. Introduced in Nginx 0.6.23. </p><p>You can use &quot;msie6&quot; to disable gzip for Internet Explorer 5.5 and Internet Explorer 6. &quot;SV1&quot; (Service Pack 2) will be ignored since Nginx 0.7.63. </p><p>Example </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1">  <a href="/NginxHttpGzipModule#gzip_disable"><span class="kw13">gzip_disable</span></a>     <span class="st0">&quot;msie6&quot;</span><span class="sy0">;</span></pre>
  </div>
-</div><br><i>Module: HttpGzipModule</i><hr><h2> <span class="mw-headline" id="gzip_disable"> gzip_disable </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_disable" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>
+</div><p>or </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">   <a href="/NginxHttpGzipModule#gzip_disable"><span class="kw13">gzip_disable</span></a> <span class="st0">&quot;MSIE [1-6]<span class="es0">\.</span>(?!.*SV1)&quot;</span><span class="sy0">;</span></pre>
+ </div>
+</div><br><i>Module: HttpGzipModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=HttpGzipStaticModule&amp;action=edit&amp;section=6" title="Edit section: gzip disable">edit</a>]</span> <span class="mw-headline" id="gzip_disable"> gzip_disable </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_disable" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>

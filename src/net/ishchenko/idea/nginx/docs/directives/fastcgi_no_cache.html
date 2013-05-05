@@ -1,6 +1,32 @@
-<h2> <span class="mw-headline" id="fastcgi_no_cache"> fastcgi_no_cache </span></h2><p><b>syntax:</b> <i>fastcgi_no_cache variable [...]</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Specifies in what cases the cached responses will not be used, e.g. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=26" title="Edit section: fastcgi no cache">edit</a>]</span> <span class="mw-headline" id="fastcgi_no_cache"> fastcgi_no_cache </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>fastcgi_no_cache</b> <i>string</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_no_cache">fastcgi_no_cache</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 198/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies in what cases the cached responses will not be used, e.g. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1">  fastcgi_no_cache <span class="re0">$cookie_nocache</span>  <span class="re0">$arg_nocache</span><span class="re0">$arg_comment</span><span class="sy0">;</span>
   fastcgi_no_cache <span class="re0">$http_pragma</span>     <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>
  </div>
-</div><p>The expression is false if it is equal to the empty string or &quot;0&quot;. For instance, in the above example, the cache will be bypassed if the cookie &quot;nocache&quot; is set in the request. </p><br><i>Module: HttpFcgiModule</i>
+</div><p>The expression is false if it is equal to the empty string or &quot;0&quot;. For instance, in the above example, the cache will be bypassed if the cookie &quot;nocache&quot; is set in the request. </p><br><i>Module: HttpFastcgiModule</i>

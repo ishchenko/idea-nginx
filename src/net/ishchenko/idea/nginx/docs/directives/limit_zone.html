@@ -1,4 +1,34 @@
-<h2> <span class="mw-headline" id="limit_zone"> limit_zone </span></h2><p><b>syntax:</b> <i>limit_zone zone_name $variable memory_max_size</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http</i> </p><p>Directive describes the zone, in which the session states are stored.<br /> The numbers of sessions is determined by the assigned variable, it depends on the size of the used Variable and <b>memory_max_size</b> value. </p><p>Example of the use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpLimitZoneModule&amp;action=edit&amp;section=3" title="Edit section: limit zone">edit</a>]</span> <span class="mw-headline" id="limit_zone"> limit_zone </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>limit_zone</b> <i>name</i> <i>$variable</i> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_limit_conn_module.html#limit_zone">limit_zone</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive is made obsolete in version 1.1.8, an equivalent limit_conn_zone directive with a changed syntax should be used instead: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">limit_conn_zone <span class="re0">$variable</span> zone<span class="sy0">=</span>name:size<span class="sy0">;</span></pre>
+ </div>
+</div><p>Directive describes the zone, in which the session states are stored.<br /> The numbers of sessions is determined by the assigned variable, it depends on the size of the used Variable and <b>memory_max_size</b> value. </p><p>Example of the use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpLimitZoneModule#limit_zone"><span class="kw17">limit_zone</span></a> one <span class="re0">$binary_remote_addr</span> 10m<span class="sy0">;</span></pre>
  </div>

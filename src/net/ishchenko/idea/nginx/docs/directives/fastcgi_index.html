@@ -1,6 +1,32 @@
-<h2> <span class="mw-headline" id="fastcgi_index"> fastcgi_index </span></h2><p><b>syntax:</b> <i>fastcgi_index file</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The name of the file which will be appended to the URI and stored in the variable $fastcgi_script_name if URI concludes with a slash. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=21" title="Edit section: fastcgi index">edit</a>]</span> <span class="mw-headline" id="fastcgi_index"> fastcgi_index </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>fastcgi_index</b> <i>name</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_index">fastcgi_index</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 160/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The name of the file which will be appended to the URI and stored in the variable $fastcgi_script_name if URI concludes with a slash. </p><p>For example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_index"><span class="kw11">fastcgi_index</span></a>  <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php<span class="sy0">;</span>
-<a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  SCRIPT_FILENAME  /home/www/scripts/php<span class="re0">$fastcgi_script_name</span><span class="sy0">;</span></pre>
+<a href="/NginxHttpFcgiModule#fastcgi_param"><span class="kw11">fastcgi_param</span></a>  SCRIPT_FILENAME  <span class="re0">$document_root</span><span class="re0">$fastcgi_script_name</span><span class="sy0">;</span></pre>
  </div>
-</div><p>for the request &quot;/page.php&quot; parameter SCRIPT_FILENAME will be set to &quot;/home/www/scripts/php/page.php&quot;, but for the &quot;/&quot; — &quot;/home/www/scripts/php/index.php&quot;. </p><br><i>Module: HttpFcgiModule</i>
+</div><p>for the request &quot;/page.php&quot; parameter SCRIPT_FILENAME will be set to &quot;/home/www/scripts/php/page.php&quot;, but for the &quot;/&quot; — &quot;/home/www/scripts/php/index.php&quot;. </p><br><i>Module: HttpFastcgiModule</i>

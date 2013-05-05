@@ -1,1 +1,27 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="gzip_http_version"> gzip_http_version </span></h2><p><b>syntax:</b> <i>gzip_http_version 1.0|1.1</i> </p><p><b>default:</b> <i>gzip_http_version 1.1</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Turns gzip compression on or off depending on the HTTP request version. </p><p>When HTTP version 1.0 is used, the <i>Vary: Accept-Encoding</i> header is not set. As this can lead to proxy cache corruption, consider adding it with <a href="/NginxHttpHeadersModule" title="NginxHttpHeadersModule" class="mw-redirect"> add_header</a> . Also note that the Content-Length header is not set when using either version. Keepalives will therefore be impossible with version 1.0, while for 1.1 it is handled by chunked transfers. </p><p><br /> </p><br><i>Module: HttpGzipModule</i><hr><h2> <span class="mw-headline" id="gzip_http_version"> gzip_http_version </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_http_version" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpGzipModule&amp;action=edit&amp;section=7" title="Edit section: gzip http version">edit</a>]</span> <span class="mw-headline" id="gzip_http_version"> gzip_http_version </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>gzip_http_version</b> <code>1.0</code> | <code>1.1</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>1.1</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_http_version">gzip_http_version</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 47/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Turns gzip compression on or off depending on the HTTP request version. </p><p>Note that the Content-Length header is not set when using either version. Keepalives will therefore be impossible with version 1.0, while for 1.1 it is handled by chunked transfers. </p><p><br /> </p><br><i>Module: HttpGzipModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=HttpGzipStaticModule&amp;action=edit&amp;section=4" title="Edit section: gzip http version">edit</a>]</span> <span class="mw-headline" id="gzip_http_version"> gzip_http_version </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_http_version" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>

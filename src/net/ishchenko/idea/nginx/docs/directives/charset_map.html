@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="charset_map"> charset_map </span></h2><p><b>syntax:</b> <i>charset_map encoding1 encoding2 {...}</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive charset_map describes the table of reencoding from one encoding into another. A table for the inverse reencoding is created using the same data. The codes of symbols are assigned in hexadecimal form. If no recorded symbols are in the range 80-FF they will be substituted with '?'. </p><p>Example usage: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpCharsetModule&amp;action=edit&amp;section=4" title="Edit section: charset map">edit</a>]</span> <span class="mw-headline" id="charset_map"> charset_map </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>charset_map</b> <i>charset1</i> <i>charset2</i> { ... }</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_charset_module.html#charset_map">charset_map</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 20/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive charset_map describes the table of reencoding from one encoding into another. A table for the inverse reencoding is created using the same data. The codes of symbols are assigned in hexadecimal form. If no recorded symbols are in the range 80-FF they will be substituted with '?'. </p><p>Example usage: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCharsetModule#charset_map"><span class="kw9">charset_map</span></a>  koi8-r  windows-<span class="nu0">1251</span> <span class="br0">{</span>
   C0  FE <span class="sy0">;</span> <span class="co1"># small yu</span>
@@ -8,4 +34,4 @@
   <span class="co1"># ...</span>
 <span class="br0">}</span></pre>
  </div>
-</div><p>The complete table of conversion from koi8-r into Windows-1251 is distributed with nginx and is located in file conf/koi-win. </p><p><br /> </p><br><i>Module: HttpCharsetModule</i>
+</div><p>The complete table of conversion from koi8-r into Windows-1251 is distributed with nginx and is located in file conf/koi-win. </p><br><i>Module: HttpCharsetModule</i>

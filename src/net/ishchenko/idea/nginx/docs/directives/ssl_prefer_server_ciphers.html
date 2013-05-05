@@ -1,1 +1,27 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_prefer_server_ciphers"> ssl_prefer_server_ciphers </span></h2><p><b>syntax:</b> <i>ssl_prefer_server_ciphers [on|off] </i> </p><p><b>default:</b> <i>ssl_prefer_server_ciphers off</i> </p><p><b>context:</b> <i>http, server</i> </p><p>The server requires that the cipher suite list for protocols SSLv3 and TLSv1 are to be preferred over the client supported cipher suite list. </p><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_prefer_server_ciphers"> ssl_prefer_server_ciphers </span></h2><p><b>syntax:</b> <i>ssl_prefer_server_ciphers</i> <i><b>on | off</b></i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Requires protocols SSLv3 and TLSv1 server ciphers be preferred over the client's ciphers. </p><br><i>Module: MailSslModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=12" title="Edit section: ssl prefer server ciphers">edit</a>]</span> <span class="mw-headline" id="ssl_prefer_server_ciphers"> ssl_prefer_server_ciphers </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>ssl_prefer_server_ciphers</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_prefer_server_ciphers">ssl_prefer_server_ciphers</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 100/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The server requires that the cipher suite list for protocols SSLv3 and TLSv1 are to be preferred over the client supported cipher suite list. </p><br><i>Module: HttpSslModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailSslModule&amp;action=edit&amp;section=7" title="Edit section: ssl prefer server ciphers">edit</a>]</span> <span class="mw-headline" id="ssl_prefer_server_ciphers"> ssl_prefer_server_ciphers </span></h2><p><b>syntax:</b> <i>ssl_prefer_server_ciphers</i> <i><b>on | off</b></i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Requires protocols SSLv3 and TLSv1 server ciphers be preferred over the client's ciphers. </p><br><i>Module: MailSslModule</i>

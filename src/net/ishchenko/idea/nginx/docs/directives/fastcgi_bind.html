@@ -1,5 +1,5 @@
-<h2> <span class="mw-headline" id="fastcgi_bind"> fastcgi_bind </span></h2><p><b>syntax:</b> <i>fastcgi_bind address</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>version:</b> <i>≥ 0.8.22</i> </p><p><b>example:</b> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=3" title="Edit section: fastcgi bind">edit</a>]</span> <span class="mw-headline" id="fastcgi_bind"> fastcgi_bind </span></h2><p><b>syntax:</b> <i>fastcgi_bind address</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>version:</b> <i>≥ 0.8.22</i> </p><p><b>example:</b> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1">fastcgi_bind  192.168.1.1<span class="sy0">;</span></pre>
  </div>
-</div><p>This directive binds each upstream socket to a local address before calling connect(). It may be useful if host has several interfaces/aliases and you want to pass outgoing connections from specific interface/address. </p><br><i>Module: HttpFcgiModule</i>
+</div><p>This directive binds each upstream socket to a local address before calling connect(). It may be useful if host has several interfaces/aliases and you want to pass outgoing connections from specific interface/address. </p><br><i>Module: HttpFastcgiModule</i>

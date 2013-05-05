@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="proxy_pass"> proxy_pass </span></h2><p><b>syntax:</b> <i>proxy_pass URL;</i> </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>location, if in location</i> </p><p>This directive sets the address of the proxied server and the URI to which location will be mapped. Address may be given as hostname or address and port, for example, </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=32" title="Edit section: proxy pass">edit</a>]</span> <span class="mw-headline" id="proxy_pass"> proxy_pass </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_pass</b> <i>URL</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location<br />if in location<br />limit_except</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass">proxy_pass</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 237/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive sets the address of the proxied server and the URI to which location will be mapped. Address may be given as hostname or address and port, for example, </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://localhost:<span class="nu0">8000</span>/uri/<span class="sy0">;</span></pre>
  </div>
@@ -6,7 +32,11 @@
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://unix:/path/to/backend.socket:/uri/<span class="sy0">;</span></pre>
  </div>
-</div><p>path is given after the word <code>unix</code> between two colons. </p><p>Note that the HTTP Host header is not forwarded, but is set based on the proxy_pass statement. For example, if you are moving the virtual host example.com from one machine to another, configure the new machine as normal (listening for the example.com on the new IP), manually specify the new IP for example.com in /etc/hosts on the old machine, and use proxy_pass to redirect your traffic to <a href="http://example.com" class="external free" rel="nofollow">http://example.com</a>, then change your DNS entry to the new IP. </p><p>While passing request nginx replaces URI part which corresponds to location with one indicated in proxy_pass directive. But there are two exceptions from this rule when it is not possible to determine what to replace: </p><ul>
+</div><p>path is given after the word <code>unix</code> between two colons. </p><p>By default, the Host header from the request is not forwarded, but is set based on the proxy_pass statement. To forward the requested Host header, it is necessary to use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Host <span class="re0">$host</span><span class="sy0">;</span></pre>
+ </div>
+</div><p>While passing request nginx replaces URI part which corresponds to location with one indicated in proxy_pass directive. But there are two exceptions from this rule when it is not possible to determine what to replace: </p><ul>
  <li> if the location is given by regular expression; </li>
  <li> if inside proxied location URI is changed by rewrite directive, and this configuration will be used to process request (break): </li>
 </ul><div dir="ltr" class="mw-geshi" style="text-align: left;">

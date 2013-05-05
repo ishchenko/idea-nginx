@@ -1,6 +1,6 @@
-<h2> <span class="mw-headline" id="debug_connection"> debug_connection </span></h2><p><b>Syntax:</b> <i>debug_connection [ip | CIDR] </i> </p><p><b>Default:</b> <i>none</i> </p><p>Since 0.3.54 this option support CIDR address format </p><p>This option gives you the ability to write debug log only for the clients of this IP/NET. </p><p>Several different directives are possible. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=EventsModule&amp;action=edit&amp;section=5" title="Edit section: debug connection">edit</a>]</span> <span class="mw-headline" id="debug_connection"> debug_connection </span></h2><p><b>Syntax:</b> <i>debug_connection [ip | CIDR] </i> </p><p><b>Default:</b> <i>none</i> </p><p>Since 0.3.54 this option support CIDR address format </p><p>This option gives you the ability to write debug log only for the clients of this IP/NET. </p><p>Several different directives are possible. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#error_log"><span class="kw1">error_log</span></a> /var/log/nginx/errors<span class="sy0">;</span>
+  <pre class="de1"><a href="/NginxHttpCoreModule#error_log"><span class="kw1">error_log</span></a> /var/log/nginx/errors<span class="sy0">;</span>
 <a href="/NginxHttpEventsModule#events"><span class="kw2">events</span></a> <span class="br0">{</span>
   <a href="/NginxHttpEventsModule#debug_connection"><span class="kw2">debug_connection</span></a>   192.168.1.1<span class="sy0">;</span>
 <span class="br0">}</span></pre>

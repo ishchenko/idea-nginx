@@ -1,7 +1,37 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_ciphers"> ssl_ciphers </span></h2><p><b>syntax:</b> <i>ssl_ciphers openssl_cipherlist_spec</i> </p><p><b>default:</b> <i>ssl_ciphers ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP</i> </p><p><b>context:</b> <i>http, server</i> </p><p>This directive describes the list of cipher suites the server supports for establishing a secure connection. Cipher suites are specified in the <a href="http://openssl.org/docs/apps/ciphers.html" class="external text" rel="nofollow">OpenSSL</a> cipherlist format, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=8" title="Edit section: ssl ciphers">edit</a>]</span> <span class="mw-headline" id="ssl_ciphers"> ssl_ciphers </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>ssl_ciphers</b> <i>ciphers</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>HIGH:!aNULL:!MD5</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_ciphers">ssl_ciphers</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 63/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive describes the list of cipher suites the server supports for establishing a secure connection. Cipher suites are specified in the <a rel="nofollow" class="external text" href="http://openssl.org/docs/apps/ciphers.html">OpenSSL</a> cipherlist format, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpSslModule#ssl_ciphers"><span class="kw31">ssl_ciphers</span></a>  ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP<span class="sy0">;</span></pre>
  </div>
+</div><p>Since nginx version 1.0.5, the default ciphers are: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1"><a href="/NginxHttpSslModule#ssl_ciphers"><span class="kw31">ssl_ciphers</span></a>  HIGH:!aNULL:!MD5<span class="sy0">;</span></pre>
+ </div>
 </div><p>The complete cipherlist supported by the currently installed version of OpenSSL in your platform can be obtained by issuing the command: </p><pre>
 openssl ciphers
-</pre><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_ciphers"> ssl_ciphers </span></h2><p><b>syntax:</b> <i>ssl_ciphers file</i> <i><b>ciphers</b></i> </p><p><b>default:</b> <i>ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Directive describes the permitted ciphers. Ciphers are assigned in the formats supported by OpenSSL. </p><br><i>Module: MailSslModule</i>
+</pre><br><i>Module: HttpSslModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailSslModule&amp;action=edit&amp;section=6" title="Edit section: ssl ciphers">edit</a>]</span> <span class="mw-headline" id="ssl_ciphers"> ssl_ciphers </span></h2><p><b>syntax:</b> <i>ssl_ciphers file</i> <i><b>ciphers</b></i> </p><p><b>default:</b> <i>ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Directive describes the permitted ciphers. Ciphers are assigned in the formats supported by OpenSSL. </p><br><i>Module: MailSslModule</i>

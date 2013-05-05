@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="fastcgi_temp_path"> fastcgi_temp_path </span></h2><p><b>syntax:</b> <i>fastcgi_temp_path path [level1 [level2 [level3]]]</i> </p><p><b>default:</b> <i>fastcgi_temp_path fastcgi_temp</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the path where to store temporary files received from another server. It is possible to use up to 3 levels of subdirectories to create hashed storage. Level value specifies how many symbols will be used for hashing. For example, in the following configuration: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=39" title="Edit section: fastcgi temp path">edit</a>]</span> <span class="mw-headline" id="fastcgi_temp_path"> fastcgi_temp_path </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>fastcgi_temp_path</b> <i>path</i> [ <i>level1</i> [ <i>level2</i> [ <i>level3</i> ]]]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>fastcgi_temp</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_temp_path">fastcgi_temp_path</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 366/1000000
+Post-expand include size: 401/2097152 bytes
+Template argument size: 178/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive sets the path where to store temporary files received from another server. It is possible to use up to 3 levels of subdirectories to create hashed storage. Level value specifies how many symbols will be used for hashing. For example, in the following configuration: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpFcgiModule#fastcgi_temp_path"><span class="kw11">fastcgi_temp_path</span></a>  /spool/nginx/fastcgi_temp <span class="nu0">1</span> <span class="nu0">2</span><span class="sy0">;</span></pre>
  </div>
@@ -6,4 +32,4 @@
  <div class="nginx source-nginx">
   <pre class="de1">/spool/nginx/fastcgi_temp/<span class="nu0">7</span>/<span class="nu0">45</span>/00000123457</pre>
  </div>
-</div><h1> <span class="mw-headline" id="Parameters.2C_transferred_to_FastCGI-server."> Parameters, transferred to FastCGI-server. </span></h1><p>The request headers are transferred to the FastCGI-server in the form of parameters. In the applications and the scripts run from the FastCGI-server, these parameters are usually accessible in the form of environment variables. For example, the header &quot;User-agent&quot; is transferred as parameter HTTP_USER_AGENT. Besides the headers of the HTTP request, it is possible to transfer arbitrary parameters with the aid of directive fastcgi_param. </p><h1> <span class="mw-headline" id="Variables"> Variables </span></h1><br><i>Module: HttpFcgiModule</i>
+</div><h1><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=40" title="Edit section: Parameters, transferred to FastCGI-server.">edit</a>]</span> <span class="mw-headline" id="Parameters.2C_transferred_to_FastCGI-server."> Parameters, transferred to FastCGI-server. </span></h1><p>The request headers are transferred to the FastCGI-server in the form of parameters. In the applications and the scripts run from the FastCGI-server, these parameters are usually accessible in the form of environment variables. For example, the header &quot;User-agent&quot; is transferred as parameter HTTP_USER_AGENT. Besides the headers of the HTTP request, it is possible to transfer arbitrary parameters with the aid of directive fastcgi_param. </p><h1><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=41" title="Edit section: Variables">edit</a>]</span> <span class="mw-headline" id="Variables"> Variables </span></h1><br><i>Module: HttpFastcgiModule</i>

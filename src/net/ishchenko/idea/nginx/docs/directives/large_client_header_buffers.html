@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="large_client_header_buffers"> large_client_header_buffers </span></h2><p><b>syntax:</b> <i>large_client_header_buffers number size</i> </p><p><b>default:</b> <i>large_client_header_buffers 4 4k/8k</i> </p><p><b>context:</b> <i>http, server</i> </p><p>Directive assigns the maximum number and size of buffers for large headers to read from client request. </p><p>The request line can not be bigger than the size of one buffer, if the client send a bigger header nginx returns error &quot;Request URI too large&quot; (414). </p><p>The longest header line of request also must be not more than the size of one buffer, otherwise the client get the error &quot;Bad request&quot; (400). </p><p>Buffers are separated only as needed. </p><p>By default the size of one buffer is equal to the size of page, depending on platform this either 4K or 8K, if at the end of working request connection converts to state keep-alive, then these buffers are freed. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=26" title="Edit section: large client header buffers">edit</a>]</span> <span class="mw-headline" id="large_client_header_buffers"> large_client_header_buffers </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>large_client_header_buffers</b> <i>number</i> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>4 8k</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#large_client_header_buffers">large_client_header_buffers</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 210/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive assigns the maximum number and size of buffers for large headers to read from client request. </p><p>The request line can not be bigger than the size of one buffer, if the client send a bigger header nginx returns error &quot;Request URI too large&quot; (414). </p><p>The longest header line of request also must be not more than the size of one buffer, otherwise the client get the error &quot;Bad request&quot; (400). </p><p>Buffers are separated only as needed. </p><p>By default the size of one buffer is 8192 bytes. In the old nginx, this is equal to the size of page, depending on platform this either 4K or 8K, if at the end of working request connection converts to state keep-alive, then these buffers are freed. </p><br><i>Module: HttpCoreModule</i>

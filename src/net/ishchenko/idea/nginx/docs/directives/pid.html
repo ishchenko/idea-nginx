@@ -1,5 +1,31 @@
-<h2> <span class="mw-headline" id="pid"> pid </span></h2><p><b>Syntax:</b> <i>pid file</i> </p><p><b>Default:</b> <i>compile-time option</i> </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=11" title="Edit section: pid">edit</a>]</span> <span class="mw-headline" id="pid"> pid </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>pid</b> <i>file</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>nginx.pid</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> main</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#pid">pid</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 81/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#pid"><span class="kw1">pid</span></a> /var/log/nginx.<a href="/NginxHttpMainModule#pid"><span class="kw1">pid</span></a><span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#pid"><span class="kw1">pid</span></a> /var/log/nginx.<a href="/NginxHttpCoreModule#pid"><span class="kw1">pid</span></a><span class="sy0">;</span></pre>
  </div>
 </div><p>The pid-file. It can be used for the kill-command to send signals to nginx, eg: to reload the config: <code>kill -HUP `cat /var/log/nginx.pid`</code> </p><br><i>Module: CoreModule</i>

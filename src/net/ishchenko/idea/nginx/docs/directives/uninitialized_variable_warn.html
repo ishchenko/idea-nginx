@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="uninitialized_variable_warn"> uninitialized_variable_warn </span></h2><p><b>syntax:</b> <i>uninitialized_variable_warn on|off</i> </p><p><b>default:</b> <i>uninitialized_variable_warn on</i> </p><p><b>context:</b> <i>http, server, location, if</i> </p><p>Enables or disables logging of warnings about noninitialized variables. </p><p>Internally, the rewrite directives are compiled at the time the configuration file is loaded into internal codes, usable during the request by the interpreter. </p><p>This interpreter is a simple stack virtual machine. For example, the directive: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=9" title="Edit section: uninitialized variable warn">edit</a>]</span> <span class="mw-headline" id="uninitialized_variable_warn"> uninitialized_variable_warn </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>uninitialized_variable_warn</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>on</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location<br />if</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#uninitialized_variable_warn">uninitialized_variable_warn</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 106/1000000
+Post-expand include size: 186/2097152 bytes
+Template argument size: 90/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Enables or disables logging of warnings about noninitialized variables. </p><h1><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=10" title="Edit section: Internal implementation">edit</a>]</span> <span class="mw-headline" id="Internal_implementation"> Internal implementation </span></h1><p>Internally, the rewrite directives are compiled at the time the configuration file is loaded into internal codes, usable during the request by the interpreter. </p><p>This interpreter is a simple stack virtual machine. For example, the directive: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /download/ <span class="br0">{</span>
   <a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span><span class="re0">$forbidden</span><span class="br0">)</span> <span class="br0">{</span>
@@ -41,7 +67,4 @@
   copying &quot;.mp3&quot;
   completion of regular expression
   completion of entire code
-</pre><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_rewrite_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><p><a href="http://www.pcre.org/pcre.txt" class="external text" rel="nofollow">PCRE Man Page in Plain Text</a> </p><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpRewriteModule">http://wiki.nginx.org/HttpRewriteModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpRewriteModule</i>
+</pre><h1><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=11" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html">Original Documentation</a> </p><p><a rel="nofollow" class="external text" href="http://www.pcre.org/pcre.txt">PCRE Man Page in Plain Text</a> </p><p><br /> <a rel="nofollow" class="external text" href="http://regexone.com/">RegexOne&raquo; Learn regular expressions with simple, interactive examples.</a> </p><p><a rel="nofollow" class="external text" href="http://regexpal.com/">RegexPal — a JavaScript regular expression tester</a> </p><br><i>Module: HttpRewriteModule</i>

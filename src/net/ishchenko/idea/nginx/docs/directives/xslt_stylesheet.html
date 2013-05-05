@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="xslt_stylesheet"> xslt_stylesheet </span></h2><p><b>syntax:</b> <i>xslt_stylesheet template [parameter[[ parameter... </i> ]] <b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Specifies the XSLT template with its parameters. Template is compiled at the stage of configuration. The parameters are assigned as shown: </p><pre>
+<h2><span class="editsection">[<a href="/index.php?title=HttpXsltModule&amp;action=edit&amp;section=6" title="Edit section: xslt stylesheet">edit</a>]</span> <span class="mw-headline" id="xslt_stylesheet"> xslt_stylesheet </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>xslt_stylesheet</b> <i>stylesheet</i> [ <i>parameter</i> = <i>value</i> ...]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_xslt_module.html#xslt_stylesheet">xslt_stylesheet</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 40/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies the XSLT template with its parameters. Template is compiled at the stage of configuration. The parameters are assigned as shown: </p><pre>
   param=value
 </pre><p>You can specify parameters either one per line, or separate multiple parameters with colon (“: ”) If the parameter itself contains the character “:”, escape it as “%3A”. Furthermore, libxslt requires that string parameters should be quoted by the single or dual quotation marks if they contain non-alphanumeric characters, for example: </p><pre>
   param1='http%3A//www.example.com': param2=value2

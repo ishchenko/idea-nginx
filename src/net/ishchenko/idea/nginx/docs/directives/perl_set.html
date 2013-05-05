@@ -1,6 +1,33 @@
-<h2> <span class="mw-headline" id="perl_set"> perl_set </span></h2><p><b>syntax:</b> <i>perl_set module::function | 'sub {...}' </i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http</i> </p><p>Directive establishes the function of variable&nbsp;??? </p><h1> <span class="mw-headline" id="Calling_Perl_from_SSI"> Calling Perl from SSI </span></h1><p>Instruction format is as follows: </p><pre>
-&lt;!- # perl sub=&quot;module::function&quot; arg=&quot;parameter1&quot; arg=&quot;parameter2&quot;... &gt;
-</pre><p>Methods of request object $r: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpPerlModule&amp;action=edit&amp;section=8" title="Edit section: perl set">edit</a>]</span> <span class="mw-headline" id="perl_set"> perl_set </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>perl_set</b> <i>$variable</i> <i>module</i>&nbsp;:: <i>function</i> |'sub { ... }'</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_perl_module.html#perl_set">perl_set</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 39/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive establishes the function of variable&nbsp;??? </p><h1><span class="editsection">[<a href="/index.php?title=HttpPerlModule&amp;action=edit&amp;section=9" title="Edit section: Calling Perl from SSI">edit</a>]</span> <span class="mw-headline" id="Calling_Perl_from_SSI"> Calling Perl from SSI </span></h1><p>Instruction format is as follows: </p><pre>
+&lt;!--# perl sub=&quot;module::function&quot; arg=&quot;parameter1&quot; arg=&quot;parameter2&quot;...
+--&gt;
+</pre><h1><span class="editsection">[<a href="/index.php?title=HttpPerlModule&amp;action=edit&amp;section=10" title="Edit section: Methods of request object $r">edit</a>]</span> <span class="mw-headline" id="Methods_of_request_object_.24r"> Methods of request object $r </span></h1><ul>
  <li> $r-&gt;args - method returns the arguments of request. </li>
  <li> $r-&gt;discard_request_body - method tells nginx to discard the request body. </li>
  <li> $r-&gt;filename - method returns the name of file, which corresponds to URI request. </li>
@@ -92,7 +119,4 @@
  <li> $r-&gt;unescape(text) - decodes the text, assigned in the form&nbsp;%XX. </li>
  <li> $r-&gt;uri - returns request URI. </li>
  <li> $r-&gt;variable(name[, value]) - the method returns or sets the value of the specified variable. Variables are local to each query. </li>
-</ul><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_perl_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/EmbeddedPerlModule">http://wiki.nginx.org/EmbeddedPerlModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: EmbeddedPerlModule</i>
+</ul><h1><span class="editsection">[<a href="/index.php?title=HttpPerlModule&amp;action=edit&amp;section=11" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_perl_module.html">Original Documentation</a> </p><br><i>Module: HttpPerlModule</i>

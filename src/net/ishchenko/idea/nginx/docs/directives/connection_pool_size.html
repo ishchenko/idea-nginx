@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="connection_pool_size"> connection_pool_size </span></h2><p><b>syntax:</b> <i>connection_pool_size the_size</i> </p><p><b>default:</b> <i>connection_pool_size the_size 256</i> </p><p><b>context:</b> <i>http (more?)</i> </p><p>The directive is used to allocate memory per connection. The pool is used for small allocations. If a block is bigger than pool size or bigger than page size, then it is allocated outside the pool. If there is not enough memory for small allocation inside pool, then a new block of the same pool size is allocated. This directive has only a very small effect. (source <a href="http://markmail.org/message/b2kmrluscevimpba" class="external free" rel="nofollow">http://markmail.org/message/b2kmrluscevimpba</a>) </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=14" title="Edit section: connection pool size">edit</a>]</span> <span class="mw-headline" id="connection_pool_size"> connection_pool_size </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>connection_pool_size</b> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>256</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#connection_pool_size">connection_pool_size</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 108/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive is used to allocate memory per connection. The pool is used for small allocations. If a block is bigger than pool size or bigger than page size, then it is allocated outside the pool. If there is not enough memory for small allocation inside pool, then a new block of the same pool size is allocated. This directive has only a very small effect. (source <a rel="nofollow" class="external free" href="http://markmail.org/message/b2kmrluscevimpba">http://markmail.org/message/b2kmrluscevimpba</a>) </p><br><i>Module: HttpCoreModule</i>

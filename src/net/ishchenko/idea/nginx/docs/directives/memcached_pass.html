@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="memcached_pass"> memcached_pass </span></h2><p><b>syntax:</b> <i>memcached_pass [ name:port ] </i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The backend should set the data in memcached. The memcached key is &quot;/uri?args&quot;. </p><p>Since 0.5.9 the memcached key is now in <code>$memcached_key</code>. </p><br><i>Module: HttpMemcachedModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpMemcachedModule&amp;action=edit&amp;section=3" title="Edit section: memcached pass">edit</a>]</span> <span class="mw-headline" id="memcached_pass"> memcached_pass </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>memcached_pass</b> <i>address</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location<br />if in location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_memcached_module.html#memcached_pass">memcached_pass</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The backend should set the data in memcached. The memcached key is &quot;/uri?args&quot;. </p><p>Since 0.5.9 the memcached key is now in <code>$memcached_key</code>. </p><br><i>Module: HttpMemcachedModule</i>

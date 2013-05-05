@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="add_header"> add_header </span></h2><p><b>syntax:</b> <i>add_header name value</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p><b> variables:</b> <i>yes</i> </p><p>Adds headers to the HTTP response when the response code is equal to 200, 204, 301, 302 or 304. </p><p>Note that for headers other than <code>Last-Modified</code>, it just appends a new header entry to the output header list. So you can't use this directive to rewrite existing headers like <code>Server</code>. Use the <a href="/NginxHttpHeadersMoreModule" title="NginxHttpHeadersMoreModule" class="mw-redirect">headers_more</a> module for it. </p><br><i>Module: HttpHeadersModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpHeadersModule&amp;action=edit&amp;section=3" title="Edit section: add header">edit</a>]</span> <span class="mw-headline" id="add_header"> add_header </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>add_header</b> <i>name</i> <i>value</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location<br />if in location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_headers_module.html#add_header">add_header</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Adds headers to the HTTP response when the response code is equal to 200, 204, 301, 302 or 304. </p><p>Note that for headers other than <code>Last-Modified</code>, it just appends a new header entry to the output header list. So you can't use this directive to rewrite existing headers like <code>Server</code>. Use the <a href="/NginxHttpHeadersMoreModule" title="NginxHttpHeadersMoreModule" class="mw-redirect">headers_more</a> module for it. </p><br><i>Module: HttpHeadersModule</i>

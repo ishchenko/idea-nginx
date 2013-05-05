@@ -17,6 +17,10 @@
     <depends>com.intellij.modules.lang</depends>
 
     <change-notes><![CDATA[
+        <b>0.0.13</b>
+        <ul>
+            <li>Built for IDEA 12 and later</li>
+        </ul>
         <b>0.0.12</b>
         <ul>
             <li>Built for IDEA 11 and later</li>
@@ -81,7 +85,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="111.69"/>
+    <idea-version since-build="120.00"/>
 
     <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 

@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="auth_basic"> auth_basic </span></h2><p><b>syntax:</b> auth_basic <i>realm | off</i> </p><p><b>default:</b> auth_basic off </p><p><b>context:</b> <i>http, server, location, limit_except</i> </p><p><b>variables:</b> <i>no</i>&nbsp; </p><p><b>phase:</b> <i>access</i> </p><p><br /> This directive includes testing name and password with HTTP Basic Authentication. The assigned parameter is used as authentication realm. A value of &quot;off&quot; makes it possible to override the action for the inheritable from a lower-level directive. </p><p><br /> </p><br><i>Module: HttpAuthBasicModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpAuthBasicModule&amp;action=edit&amp;section=3" title="Edit section: auth basic">edit</a>]</span> <span class="mw-headline" id="auth_basic"> auth_basic </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>auth_basic</b> <i>string</i> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location<br />limit_except</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_auth_basic_module.html#auth_basic">auth_basic</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive includes testing name and password with HTTP Basic Authentication. The assigned parameter is used as authentication realm. A value of &quot;off&quot; makes it possible to override the action for the inheritable from a lower-level directive. </p><p><br /> </p><br><i>Module: HttpAuthBasicModule</i>

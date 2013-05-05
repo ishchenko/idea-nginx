@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="root"> root </span></h2><p><b>syntax:</b> <i>root path</i> </p><p><b>default:</b> <i>root html</i> </p><p><b>context:</b> <i>http, server, location, if in location</i> </p><p><b>root</b> specifies the document root for the requests. For example, with this configuration </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=55" title="Edit section: root">edit</a>]</span> <span class="mw-headline" id="root"> root </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>root</b> <i>path</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>html</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location<br />if in location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#root">root</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 455/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> <b>root</b> specifies the document root for the requests. For example, with this configuration </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a>  /i/ <span class="br0">{</span>
   <a href="/NginxHttpCoreModule#root"><span class="kw3">root</span></a>  /spool/w3<span class="sy0">;</span>

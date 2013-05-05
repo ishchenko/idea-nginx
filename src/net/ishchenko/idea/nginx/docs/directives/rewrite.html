@@ -1,9 +1,35 @@
-<h2> <span class="mw-headline" id="rewrite"> rewrite </span></h2><p><b>syntax:</b> <i>rewrite regex replacement flag</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server, location, if</i> </p><p>This directive changes <b>URI</b> in accordance with the regular expression and the replacement string. Directives are carried out in order of appearance in the configuration file. </p><p>Flags make it possible to end the execution of rewrite directives. </p><p>If the replacement string begins with <code>http://</code> then the client will be redirected, and any further rewrite directives are terminated. </p><p>Flags can be any of the following: </p><ul>
- <li> last - completes processing of rewrite directives, after which searches for corresponding URI and location </li>
- <li> break - completes processing of rewrite directives </li>
+<h2><span class="editsection">[<a href="/index.php?title=HttpRewriteModule&amp;action=edit&amp;section=6" title="Edit section: rewrite">edit</a>]</span> <span class="mw-headline" id="rewrite"> rewrite </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>rewrite</b> <i>regex</i> <i>replacement</i> [ <i>flag</i> ]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> server<br />location<br />if</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite">rewrite</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 37/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive changes <b>URI</b> in accordance with the regular expression and the replacement string. Directives are carried out in order of appearance in the configuration file. </p><p>Flags make it possible to end the execution of rewrite directives. </p><p>If the replacement string begins with <code>http://</code> then the client will be redirected, and any further rewrite directives are terminated. </p><p>Flags can be any of the following: </p><ul>
+ <li> last - completes processing of current rewrite directives and restarts the process (including rewriting) with a search for a match on the URI from all available locations. </li>
+ <li> break - completes processing of current rewrite directives and non-rewrite processing continues within the current location block only. </li>
  <li> redirect - returns temporary redirect with code 302; it is used if the substituting line begins with <code>http://</code> </li>
  <li> permanent - returns permanent redirect with code 301 </li>
-</ul><p>Note that if a redirect is relative (has no host part), then when redirecting Nginx uses the &quot;Host&quot; header if the header match name of <a href="/NginxHttpCoreModule#server_name" title="NginxHttpCoreModule" class="mw-redirect"> server_name</a> directive or the first name of <code>server_name</code> directive, if the header does not match or is absent. If no <code>server_name</code> is set, then the local hostname is used. If you want Nginx to always use the &quot;Host&quot; header, you can use a wildcard &quot;*&quot; <code>server_name</code> (but see the <a href="/NginxHttpCoreModule#server_name" title="NginxHttpCoreModule" class="mw-redirect"> restrictions</a> on doing so). Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+</ul><p>- Note that outside location blocks, <b>last</b> and <b>break</b> are effectively the same. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^<span class="br0">(</span>/download/.*<span class="br0">)</span>/media/<span class="br0">(</span>.*<span class="br0">)</span>\..*$  $<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.mp3  last<span class="sy0">;</span>
 <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^<span class="br0">(</span>/download/.*<span class="br0">)</span>/audio/<span class="br0">(</span>.*<span class="br0">)</span>\..*$  $<span class="nu0">1</span>/mp3/$<span class="nu0">2</span>.ra   last<span class="sy0">;</span>
@@ -19,11 +45,11 @@
  </div>
 </div><p>If in the line of replacement arguments are indicated, then the rest of the request arguments are appended to them. To avoid having them appended, place a question mark as the last character: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1">  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^/users/<span class="br0">(</span>.*<span class="br0">)</span>$  /show?<a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a><span class="sy0">=</span>$<span class="nu0">1</span>?  last<span class="sy0">;</span></pre>
+  <pre class="de1">  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  ^/users/<span class="br0">(</span>.*<span class="br0">)</span>$  /show?<a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a><span class="sy0">=</span>$<span class="nu0">1</span>?  last<span class="sy0">;</span></pre>
  </div>
 </div><p>Note: for curly braces( { and } ), as they are used both in regexes and for block control, to avoid conflicts, regexes with curly braces are to be enclosed with double quotes (or single quotes). For example, to rewrite URLs like: </p><pre>/photos/123456</pre><p>to: </p><pre>/path/to/photos/12/1234/123456.png</pre><p>use the following (note the quotes enclosing the regex): </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  <span class="st0">&quot;/photos/([0-9] {2})([0-9] {2})([0-9] {2})&quot;</span> /path/to/photos/$<span class="nu0">1</span>/$<span class="nu0">1</span>$<span class="nu0">2</span>/$<span class="nu0">1</span>$<span class="nu0">2</span>$<span class="nu0">3</span>.png<span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a>  <span class="st0">&quot;/photos/([0-9]{2})([0-9]{2})([0-9]{2})&quot;</span> /path/to/photos/$<span class="nu0">1</span>/$<span class="nu0">1</span>$<span class="nu0">2</span>/$<span class="nu0">1</span>$<span class="nu0">2</span>$<span class="nu0">3</span>.png<span class="sy0">;</span></pre>
  </div>
 </div><p>If you specify a <code>?</code> at the end of a rewrite then Nginx will drop the original $args (arguments). When using <a href="/HttpCoreModule#.24request_uri" title="HttpCoreModule">$request_uri</a> or <a href="/HttpCoreModule#.24uri" title="HttpCoreModule">$uri</a>&amp;<a href="/HttpCoreModule#.24args" title="HttpCoreModule">$args</a> you should specify the <code>?</code> at the end of the rewrite to avoid Nginx doubling the query string. </p><p>Example using $request_uri in a rewrite from www.example.com to example.com </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
@@ -38,4 +64,4 @@
   <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^ <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://example.com/new-address.html? permanent<span class="sy0">;</span>
 <span class="br0">}</span></pre>
  </div>
-</div><p>Note that the $args variable is <b>not</b> decoded, unlike URIs during <a href="/NginxHttpCoreModule#location" title="NginxHttpCoreModule" class="mw-redirect">location matching</a>. </p><br><i>Module: HttpRewriteModule</i>
+</div><p>Note that the $args variable is <b>not</b> decoded, unlike URIs during <a href="/NginxHttpCoreModule#location" title="NginxHttpCoreModule" class="mw-redirect">location matching</a>. </p><p>Also note that named subexpressions <code>(?&lt;name&gt;)</code> should be used when accessing variables from a <a href="/HttpMapModule#map" title="HttpMapModule">map</a> using regular expressions (patterns begininng with <code>~</code>) because the map runs on demand and will override <code>$1</code> (even when named subexpressions are used in the map). </p><br><i>Module: HttpRewriteModule</i>

@@ -1,4 +1,4 @@
-<h2> <span class="mw-headline" id="uwsgi_temp_path"> uwsgi_temp_path </span></h2><p><b>syntax:</b> <i>uwsgi_temp_path path [level1 [level2 [level3]]]</i> </p><p><b>default:</b> <i>uwsgi_temp_path uwsgi_temp</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the path where to store temporary files received from another server. It is possible to use up to 3 levels of subdirectories to create hashed storage. Level value specifies how many symbols will be used for hashing. For example, in the following configuration: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=39" title="Edit section: uwsgi temp path">edit</a>]</span> <span class="mw-headline" id="uwsgi_temp_path"> uwsgi_temp_path </span></h2><p><b>syntax:</b> <i>uwsgi_temp_path path [level1 [level2 [level3]]]</i> </p><p><b>default:</b> <i>uwsgi_temp_path uwsgi_temp</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the path where to store temporary files received from another server. It is possible to use up to 3 levels of subdirectories to create hashed storage. Level value specifies how many symbols will be used for hashing. For example, in the following configuration: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1">uwsgi_temp_path  /spool/nginx/uwsgi_temp <span class="nu0">1</span> <span class="nu0">2</span><span class="sy0">;</span></pre>
  </div>
@@ -6,14 +6,11 @@
  <div class="nginx source-nginx">
   <pre class="de1">/spool/nginx/uwsgi_temp/<span class="nu0">7</span>/<span class="nu0">45</span>/00000123457</pre>
  </div>
-</div><h1> <span class="mw-headline" id="Parameters_transferred_to_uWSGI-server."> Parameters transferred to uWSGI-server. </span></h1><p>The request headers are transferred to the uWSGI-server in the form of parameters. In the applications and the scripts run from the uWSGI-server, these parameters are usually accessible in the form of environment variables. For example, the header &quot;User-agent&quot; is transferred as parameter HTTP_USER_AGENT. Besides the headers of the HTTP request, it is possible to transfer arbitrary parameters with the aid of directive uwsgi_param. </p><h1> <span class="mw-headline" id="References"> References </span></h1><ul>
- <li> <a href="http://projects.unbit.it/uwsgi/wiki" class="external text" rel="nofollow">uWSGI Project</a> </li>
- <li> <a href="http://projects.unbit.it/uwsgi/wiki/RunOnNginx" class="external text" rel="nofollow">nginx page on uWSGI wiki</a> </li>
- <li> <a href="http://www.westphahl.net/blog/2010/4/8/running-django-nginx-and-uwsgi/" class="external text" rel="nofollow">Simon Westphahl's blog</a> </li>
+</div><h1><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=40" title="Edit section: Parameters transferred to uWSGI-server.">edit</a>]</span> <span class="mw-headline" id="Parameters_transferred_to_uWSGI-server."> Parameters transferred to uWSGI-server. </span></h1><p>The request headers are transferred to the uWSGI-server in the form of parameters. In the applications and the scripts run from the uWSGI-server, these parameters are usually accessible in the form of environment variables. For example, the header &quot;User-agent&quot; is transferred as parameter HTTP_USER_AGENT. Besides the headers of the HTTP request, it is possible to transfer arbitrary parameters with the aid of directive uwsgi_param. </p><h1><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=41" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><ul>
+ <li> <a rel="nofollow" class="external text" href="http://projects.unbit.it/uwsgi/wiki">uWSGI Project</a> </li>
+ <li> <a rel="nofollow" class="external text" href="http://projects.unbit.it/uwsgi/wiki/RunOnNginx">nginx page on uWSGI wiki</a> </li>
+ <li> <a rel="nofollow" class="external text" href="http://www.westphahl.net/blog/2010/4/8/running-django-nginx-and-uwsgi/">Simon Westphahl's blog</a> </li>
  <li> <a href="/NginxHttpFcgiModule" title="NginxHttpFcgiModule" class="mw-redirect">SCGI Module</a> </li>
-</ul><h1> <span class="mw-headline" id="Links"> Links </span></h1><ul>
+</ul><h1><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=42" title="Edit section: Links">edit</a>]</span> <span class="mw-headline" id="Links"> Links </span></h1><ul>
  <li> <a href="/HttpUwsgiModuleMultipleDynamicApplications" title="HttpUwsgiModuleMultipleDynamicApplications">Multiple uWSGI apps from a single upstream</a> </li>
-</ul><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpUwsgiModule">http://wiki.nginx.org/HttpUwsgiModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpUwsgiModule</i>
+</ul><br><i>Module: HttpUwsgiModule</i>

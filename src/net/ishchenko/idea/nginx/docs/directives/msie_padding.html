@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="msie_padding"> msie_padding </span></h2><p><b>syntax:</b> <i>msie_padding [on|off] </i> </p><p><b>default:</b> <i>msie_padding on</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive enables or disables the the msie_padding feature for MSIE browsers, and Chrome (as of nginx 0.8.25+). When this is enabled, nginx will pad the size of the response body to a minimum of 512 bytes, for responses with a status code above or equal to 400. </p><p>The padding prevents the activation of &quot;friendly&quot; HTTP error pages in MSIE and Chrome, so as to not hide the more-informative error pages from the server. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=39" title="Edit section: msie padding">edit</a>]</span> <span class="mw-headline" id="msie_padding"> msie_padding </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>msie_padding</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>on</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#msie_padding">msie_padding</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 337/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive enables or disables the msie_padding feature for MSIE browsers, and Chrome (as of nginx 0.8.25+). When this is enabled, nginx will pad the size of the response body to a minimum of 512 bytes for responses with a status code above or equal to 400. </p><p>The padding prevents the activation of &quot;friendly&quot; HTTP error pages in MSIE and Chrome, so as to not hide/mask the more-informative error pages from the server. </p><br><i>Module: HttpCoreModule</i>

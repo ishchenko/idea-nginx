@@ -1,4 +1,4 @@
-<h2> <span class="mw-headline" id="uwsgi_store"> uwsgi_store </span></h2><p><b>syntax:</b> <i>uwsgi_store on|off|path</i> </p><p><b>default:</b> <i>uwsgi_store off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the path in which upstream files are stored. The parameter &quot;on&quot; preserves files in accordance with path specified in directives <i>alias</i> or <i>root</i>. The parameter &quot;off&quot; forbids storing. Furthermore, the name of the path can be clearly assigned with the aid of the line with the variables: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpUwsgiModule&amp;action=edit&amp;section=35" title="Edit section: uwsgi store">edit</a>]</span> <span class="mw-headline" id="uwsgi_store"> uwsgi_store </span></h2><p><b>syntax:</b> <i>uwsgi_store on|off|path</i> </p><p><b>default:</b> <i>uwsgi_store off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the path in which upstream files are stored. The parameter &quot;on&quot; preserves files in accordance with path specified in directives <i>alias</i> or <i>root</i>. The parameter &quot;off&quot; forbids storing. Furthermore, the name of the path can be clearly assigned with the aid of the line with the variables: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1">uwsgi_store   /data/www<span class="re0">$original_uri</span><span class="sy0">;</span></pre>
  </div>
@@ -14,7 +14,7 @@
 &nbsp;
   <a href="/NginxHttpUwsgiModule#uwsgi_pass"><span class="kw37">uwsgi_pass</span></a>           backend<span class="sy0">;</span>
   uwsgi_store          on<span class="sy0">;</span>
-  uwsgi_store_access   <a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span>
+  uwsgi_store_access   <a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a>:rw  group:rw  all:r<span class="sy0">;</span>
   uwsgi_temp_path      /data/temp<span class="sy0">;</span>
 &nbsp;
   <a href="/NginxHttpCoreModule#alias"><span class="kw3">alias</span></a>               /data/www<span class="sy0">;</span>

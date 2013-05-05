@@ -1,6 +1,32 @@
-<h2> <span class="mw-headline" id="proxy_no_cache"> proxy_no_cache </span></h2><p><b>syntax:</b> <i>proxy_no_cache variable1 variable2 ...;</i> </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Specifies in what cases a cached response will not be used, e.g. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=31" title="Edit section: proxy no cache">edit</a>]</span> <span class="mw-headline" id="proxy_no_cache"> proxy_no_cache </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_no_cache</b> <i>string</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_no_cache">proxy_no_cache</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 227/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies in what cases a response will not be cached, e.g. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1">proxy_no_cache <span class="re0">$cookie_nocache</span>  <span class="re0">$arg_nocache</span><span class="re0">$arg_comment</span><span class="sy0">;</span>
-proxy_no_cache <span class="re0">$http_pragma</span>     <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>
+  <pre class="de1">proxy_no_cache <span class="re0">$cookie_nocache</span> <span class="re0">$arg_nocache</span> <span class="re0">$arg_comment</span><span class="sy0">;</span>
+proxy_no_cache <span class="re0">$http_pragma</span> <span class="re0">$http_authorization</span><span class="sy0">;</span></pre>
  </div>
-</div><p>The expression is false if it is equal to the empty string or &quot;0&quot;. For instance, in the above example, the request will always go through to the back-end if the cookie &quot;nocache&quot; is set in the request. </p><br><i>Module: HttpProxyModule</i>
+</div><p>The response is marked uncacheable if any of the arguments expand to anything other than &quot;0&quot; or the empty string. For instance, in the above example, the response will never be cached if the cookie &quot;nocache&quot; is set in the request. </p><br><i>Module: HttpProxyModule</i>

@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="error_page"> error_page </span></h2><p><b>syntax:</b> <i>error_page code [ code... ] [ = | =answer-code ] uri | @named_location </i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location, if in location</i> </p><p>The directive specifies the URI that will be shown for the errors indicated. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=19" title="Edit section: error page">edit</a>]</span> <span class="mw-headline" id="error_page"> error_page </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>error_page</b> <i>code</i> ... [ <code>=</code> [ <i>response</i> ]] <i>uri</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location<br />if in location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#error_page">error_page</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 146/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive specifies the URI that will be shown for the errors indicated. </p><p>Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>   <span class="nu0">404</span>          /<span class="nu0">404</span>.html<span class="sy0">;</span>
 <a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>   <span class="nu0">502</span> <span class="nu0">503</span> <span class="nu0">504</span>  /50x.html<span class="sy0">;</span>
@@ -24,4 +50,4 @@
     <a href="/NginxHttpProxyModule#proxy_pass"><span class="kw21">proxy_pass</span></a> <a href="/NginxHttpCoreModule#http"><span class="kw3">http</span></a>://backend<span class="sy0">;</span>
 <span class="br0">)</span></pre>
  </div>
-</div><br><i>Module: HttpCoreModule</i>
+</div><p>If you want to use error_page for proxy (upstream) status codes, please see <a rel="nofollow" class="external free" href="http://wiki.nginx.org/HttpProxyModule#proxy_intercept_errors">http://wiki.nginx.org/HttpProxyModule#proxy_intercept_errors</a> </p><br><i>Module: HttpCoreModule</i>

@@ -1,13 +1,39 @@
-<h2> <span class="mw-headline" id="log_format"> log_format </span></h2><p><b>syntax:</b> <i>log_format name format [format ...] </i> </p><p><b>default:</b> <i>log_format combined &quot;...&quot;</i> </p><p><b>context:</b> <i>http</i> <i>server</i> </p><p>The <b>log_format</b> directive describes the format of a log entry. You can use general variables in the format, as well as variables which exist only at the moment of writing into the log: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpLogModule&amp;action=edit&amp;section=4" title="Edit section: log format">edit</a>]</span> <span class="mw-headline" id="log_format"> log_format </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>log_format</b> <i>name</i> <i>string</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>combined &quot;...&quot;</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_log_module.html#log_format">log_format</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 20/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The <b>log_format</b> directive describes the format of a log entry. You can use general variables in the format, as well as variables which exist only at the moment of writing into the log: </p><ul>
  <li> $body_bytes_sent, the number of bytes, transmitted to client minus the response headers. This variable is compatible with the&nbsp;%B parameter of Apache's mod_log_config (this was called $apache_bytes_sent, before version 0.3.10) </li>
  <li> $bytes_sent, the number of bytes transmitted to client </li>
  <li> $connection, the number of connection </li>
  <li> $msec, the current time at the moment of writing the log entry (microsecond accuracy) </li>
- <li> $pipe, &quot;p&quot; if request was <a href="http://en.wikipedia.org/wiki/HTTP_pipelining" class="external text" rel="nofollow">pipelined</a> </li>
+ <li> $pipe, &quot;p&quot; if request was <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/HTTP_pipelining">pipelined</a> </li>
  <li> $request_length, the length of the body of the request </li>
  <li> $request_time, the time it took nginx to work on the request, in seconds with millisecond precision (just seconds for versions older than 0.5.19) </li>
  <li> $status, status of answer </li>
- <li> $time_iso8601, time in <a href="http://en.wikipedia.org/wiki/ISO_8601" class="external text" rel="nofollow">ISO 8601</a> format, e. g. 2011-03-21T18:52:25+03:00 (added in 0.9.6) </li>
+ <li> $time_iso8601, time in <a rel="nofollow" class="external text" href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> format, e. g. 2011-03-21T18:52:25+03:00 (added in 0.9.6) </li>
  <li> $time_local, local time into common log format. </li>
 </ul><p>The headers, transmitted to client, begin from the prefix &quot;sent_http_&quot;, for example, $sent_http_content_range. </p><p>Note that variables produced by other modules can also be logged. For example you can log upstream response headers with the prefix &quot;upstream_http_&quot;, see <a href="/NginxHttpUpstreamModule" title="NginxHttpUpstreamModule" class="mw-redirect"> upstream</a> . </p><p>There is a predefined log format called &quot;combined&quot;: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">

@@ -1,1 +1,27 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="ssl_certificate"> ssl_certificate </span></h2><p><b>syntax:</b> <i>ssl_certificate file</i> </p><p><b>default:</b> <i>ssl_certificate cert.pem</i> </p><p><b>context:</b> <i>http, server</i> </p><p>This directive specifies the file containing the certificate, in PEM format, for this virtual host. This file can contain also other certificates and the server private key. Since version 0.6.7 the file path is relative to the directory where nginx main configuration file, nginx.conf, resides. </p><br><i>Module: HttpSslModule</i><hr><h2> <span class="mw-headline" id="ssl_certificate"> ssl_certificate </span></h2><p><b>syntax:</b> <i>ssl_certificate</i> <i><b>file</b></i> </p><p><b>default:</b> <i>cert.pem</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Indicates file with the certificate in PEM format for this virtual server. The same file can contain other certificates, and also secret key in PEM format. </p><br><i>Module: MailSslModule</i>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpSslModule&amp;action=edit&amp;section=6" title="Edit section: ssl certificate">edit</a>]</span> <span class="mw-headline" id="ssl_certificate"> ssl_certificate </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>ssl_certificate</b> <i>file</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_certificate">ssl_certificate</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 49/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive specifies the file containing the certificate, in PEM format, for this virtual host. This file can contain also other certificates and the server private key. Since version 0.6.7 the file path is relative to the directory where nginx main configuration file, nginx.conf, resides. </p><br><i>Module: HttpSslModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=MailSslModule&amp;action=edit&amp;section=4" title="Edit section: ssl certificate">edit</a>]</span> <span class="mw-headline" id="ssl_certificate"> ssl_certificate </span></h2><p><b>syntax:</b> <i>ssl_certificate</i> <i><b>file</b></i> </p><p><b>default:</b> <i>cert.pem</i> </p><p><b>context:</b> <i>mail, server</i> </p><p>Indicates file with the certificate in PEM format for this virtual server. The same file can contain other certificates, and also secret key in PEM format. </p><br><i>Module: MailSslModule</i>

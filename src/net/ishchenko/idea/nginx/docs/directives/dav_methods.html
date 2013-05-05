@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="dav_methods"> dav_methods </span></h2><p><b>syntax:</b> <i>dav_methods [off|put|delete|mkcol|copy|move] ...</i> </p><p><b>default:</b> <i>dav_methods off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive enables specified HTTP and WebDAV methods. Setting it to <code>off</code> disables all methods, ignoring the remaining parameters. </p><p>For the PUT method the destination file must reside on the same partition as the directory where the temporary file is stored (given by directive <code>client_body_temp_path</code> in the <code>location</code> section). </p><p>When a file is created using the PUT method it is possible to assign the modification date by setting the <code>Date</code> header. </p><br><i>Module: HttpDavModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpDavModule&amp;action=edit&amp;section=4" title="Edit section: dav methods">edit</a>]</span> <span class="mw-headline" id="dav_methods"> dav_methods </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>dav_methods</b> <code>off</code> | <code>put</code> | <code>delete</code> | <code>mkcol</code> | <code>copy</code> | <code>move</code> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_dav_module.html#dav_methods">dav_methods</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 29/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive enables specified HTTP and WebDAV methods. Setting it to <code>off</code> disables all methods, ignoring the remaining parameters. </p><p>For the PUT method the destination file must reside on the same partition as the directory where the temporary file is stored (given by directive <code>client_body_temp_path</code> in the <code>location</code> section). </p><p>When a file is created using the PUT method it is possible to assign the modification date by setting the <code>Date</code> header. </p><br><i>Module: HttpDavModule</i>

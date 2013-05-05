@@ -1,0 +1,38 @@
+<h2><span class="editsection">[<a href="/index.php?title=HttpLimitReqModule&amp;action=edit&amp;section=4" title="Edit section: limit req">edit</a>]</span> <span class="mw-headline" id="limit_req"> limit_req </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>limit_req</b> <code>zone</code> = <i>name</i> [ <code>burst</code> = <i>number</i> ] [ <code>nodelay</code> ]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req">limit_req</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 14/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive specifies the zone (<b>zone</b>) and the maximum possible bursts of requests (burst). If the rate exceeds the demands outlined in the zone, the request is delayed, so that queries are processed at a given speed. Excess requests are delayed while their number does not exceed a specified number of bursts. If the number of waiting requests exceed burst, the request is completed with the code 503 &quot;Service Temporarily Unavailable&quot;. By default, the burst is zero. </p><p>For example, the directive </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">limit_req_zone  <span class="re0">$binary_remote_addr</span>  zone<span class="sy0">=</span>one:10m   rate<span class="sy0">=</span>1r/s<span class="sy0">;</span>
+&nbsp;
+    <a href="/NginxHttpCoreModule#server"><span class="kw3">server</span></a> <span class="br0">{</span>
+        <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /search/ <span class="br0">{</span>
+            limit_req   zone<span class="sy0">=</span>one  burst<span class="sy0">=</span><span class="nu0">5</span><span class="sy0">;</span>
+        <span class="br0">}</span></pre>
+ </div>
+</div><p>allows a user no more than 1 request per second on average, with bursts of no more than 5 requests. </p><p>If delaying excess requests within a burst is not necessary, you should use the option <b>nodelay</b>: </p><pre>
+            limit_req   zone=one  burst=5  nodelay;
+</pre><br><i>Module: HttpLimitReqModule</i>

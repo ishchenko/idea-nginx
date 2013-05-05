@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="proxy_cache_use_stale"> proxy_cache_use_stale </span></h2><p><b>syntax:</b> <i>proxy_cache_use_stale [error|timeout|updating|invalid_header|http_500|http_502|http_503|http_504|http_404|off] [...];</i> </p><p><b>default:</b> <i>proxy_cache_use_stale off;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive tells Nginx when to serve a stale item from the proxy cache. The parameters for this directive are similar to <a href="#proxy_next_upstream">proxy_next_upstream</a> with the addition of 'updating'. </p><p>To prevent cache stampedes (when multiple threads stampede in to try to update the cache simultaneously) you can specify the 'updating' parameter. This will cause one thread to update the cache and while the update is in progress all other threads will serve the stale version of what is in the cache. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=16" title="Edit section: proxy cache use stale">edit</a>]</span> <span class="mw-headline" id="proxy_cache_use_stale"> proxy_cache_use_stale </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_cache_use_stale</b> <code>error</code> | <code>timeout</code> | <code>invalid_header</code> | <code>updating</code> | <code>http_500</code> | <code>http_502</code> | <code>http_503</code> | <code>http_504</code> | <code>http_404</code> | <code>off</code> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_use_stale">proxy_cache_use_stale</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 119/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive tells Nginx when to serve a stale item from the proxy cache. The parameters for this directive are similar to <a href="#proxy_next_upstream">proxy_next_upstream</a> with the addition of 'updating'. </p><p>To prevent cache stampedes (when multiple threads stampede in to try to update the cache simultaneously) you can specify the 'updating' parameter. This will cause one thread to update the cache and while the update is in progress all other threads will serve the stale version of what is in the cache. </p><br><i>Module: HttpProxyModule</i>

@@ -1,4 +1,34 @@
-<h2> <span class="mw-headline" id="if_modified_since"> if_modified_since </span></h2><p><b>syntax:</b> <i>if_modified_since [off|exact|before]</i> </p><p><b>default:</b> <i>if_modified_since exact</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive (0.7.24) defines how to compare time of file modification and time in request header &quot;If-Modified-Since&quot;: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=20" title="Edit section: if modified since">edit</a>]</span> <span class="mw-headline" id="if_modified_since"> if_modified_since </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>if_modified_since</b> <code>off</code> | <code>exact</code> | <code>before</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>exact</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Appeared in:</b></td> 
+   <td> 0.7.24</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#if_modified_since">if_modified_since</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 165/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies how to compare time of file modification and time in request header &quot;If-Modified-Since&quot;: </p><ul>
  <li> off — don't check &quot;If-Modified-Since&quot; request header (0.7.34); </li>
  <li> exact — exact match; </li>
  <li> before — file modification time should be less than time in &quot;If-Modified-Since&quot; request header. </li>

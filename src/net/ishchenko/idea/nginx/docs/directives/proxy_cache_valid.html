@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="proxy_cache_valid"> proxy_cache_valid </span></h2><p><b>syntax:</b> <i>proxy_cache_valid reply_code [reply_code ...] time;</i> </p><p><b>default:</b> <i>None</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive sets the time for caching different replies. Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=17" title="Edit section: proxy cache valid">edit</a>]</span> <span class="mw-headline" id="proxy_cache_valid"> proxy_cache_valid </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_cache_valid</b> [ <i>code</i> ...] <i>time</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid">proxy_cache_valid</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 126/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive sets the time for caching different replies. Example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  <span class="nu0">200</span> <span class="nu0">302</span>  10m<span class="sy0">;</span>
 <a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  <span class="nu0">404</span>      1m<span class="sy0">;</span></pre>
@@ -13,4 +39,12 @@
 <a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  <span class="nu0">301</span> 1h<span class="sy0">;</span>
 <a href="/NginxHttpProxyModule#proxy_cache_valid"><span class="kw21">proxy_cache_valid</span></a>  any 1m<span class="sy0">;</span></pre>
  </div>
-</div><p>Note: you must set this option for any persistent caching to occur. </p><br><i>Module: HttpProxyModule</i>
+</div><p>Upstream cache-related directives have priority over proxy_cache_valid value, in particular the order is (<a rel="nofollow" class="external text" href="http://forum.nginx.org/read.php?2,2182,2185#msg-2185">from Igor</a>): </p><ol>
+ <li> X-Accel-Expires </li>
+ <li> Expires/Cache-Control </li>
+ <li> proxy_cache_valid </li>
+</ol><p>The order in which your backend return HTTP headers change cache behaviour. Read <a rel="nofollow" class="external text" href="http://www.ruby-forum.com/topic/3707266">this post</a> for details. </p><p>You may ignore the headers using </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+ <div class="nginx source-nginx">
+  <pre class="de1">proxy_ignore_headers X-Accel-<a href="/NginxHttpHeadersModule#Expires"><span class="kw14">Expires</span></a> <a href="/NginxHttpHeadersModule#Expires"><span class="kw14">Expires</span></a> Cache-Control<span class="sy0">;</span></pre>
+ </div>
+</div><p>Concerning If-Modified / Last-Modified since behaviour, please remember that by default nginx sends 304 only if L-M == I-M-S. Controlled by directive <a href="/HttpCoreModule#if_modified_since" title="HttpCoreModule">if_modified_since</a> [off|exact|before] </p><p>Note: you must set this option for any persistent caching to occur. </p><br><i>Module: HttpProxyModule</i>

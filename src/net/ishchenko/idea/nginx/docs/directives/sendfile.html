@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="sendfile"> sendfile </span></h2><p><b>syntax:</b> <i>sendfile [ on|off ] </i> </p><p><b>default:</b> <i>sendfile off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive activate or deactivate the usage of <code>sendfile()</code>. </p><p>sendfile() copies data between one file descriptor and another. Because this copying is done within the kernel, sendfile() is more efficient than the combination of read(2) and write(2), which would require transferring data to and from user space. </p><p>Read more at: <a href="https://www.kernel.org/doc/man-pages/online/pages/man2/sendfile.2.html" class="external free" rel="nofollow">https://www.kernel.org/doc/man-pages/online/pages/man2/sendfile.2.html</a> </p><p>How does sendfile helps&nbsp;: <a href="http://www.techrepublic.com/article/use-sendfile-to-optimize-data-transfer/1044112" class="external free" rel="nofollow">http://www.techrepublic.com/article/use-sendfile-to-optimize-data-transfer/1044112</a> </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=60" title="Edit section: sendfile">edit</a>]</span> <span class="mw-headline" id="sendfile"> sendfile </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>sendfile</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location<br />if in location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile">sendfile</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 496/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive activate or deactivate the usage of <code>sendfile()</code>. </p><p>sendfile() copies data between one file descriptor and another. Because this copying is done within the kernel, sendfile() is more efficient than the combination of read(2) and write(2), which would require transferring data to and from user space. </p><p>Read more at: <a rel="nofollow" class="external free" href="https://www.kernel.org/doc/man-pages/online/pages/man2/sendfile.2.html">https://www.kernel.org/doc/man-pages/online/pages/man2/sendfile.2.html</a> </p><p>How sendfile helps&nbsp;: <a rel="nofollow" class="external free" href="http://www.techrepublic.com/article/use-sendfile-to-optimize-data-transfer/1044112">http://www.techrepublic.com/article/use-sendfile-to-optimize-data-transfer/1044112</a> </p><br><i>Module: HttpCoreModule</i>

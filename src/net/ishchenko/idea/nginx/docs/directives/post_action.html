@@ -1,4 +1,4 @@
-<h2> <span class="mw-headline" id="post_action"> post_action </span></h2><p><b>syntax:</b> <i>post_action [ uri|off ] </i> </p><p><b>default:</b> <i>post_action off</i> </p><p><b>context:</b> <i>http, server, location, if-in-location</i> </p><p>Defines a URI to sub-request upon completion of current request. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=47" title="Edit section: post action">edit</a>]</span> <span class="mw-headline" id="post_action"> post_action </span></h2><p><b>syntax:</b> <i>post_action [ uri|off ] </i> </p><p><b>default:</b> <i>post_action off</i> </p><p><b>context:</b> <i>http, server, location, if-in-location</i> </p><p>Defines a URI to sub-request upon completion of current request. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> /protected_files <span class="br0">{</span> 
 	<a href="/NginxHttpCoreModule#internal"><span class="kw3">internal</span></a><span class="sy0">;</span>
@@ -13,4 +13,4 @@
 	<a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a> 127.0.0.1:<span class="nu0">9000</span><span class="sy0">;</span>
 <span class="br0">}</span></pre>
  </div>
-</div><br><i>Module: HttpCoreModule</i>
+</div><p><b>Note:</b> this directive &quot;has subtleties&quot; according to Maxim Dounin, so <b>use at your own risk.</b> </p><br><i>Module: HttpCoreModule</i>

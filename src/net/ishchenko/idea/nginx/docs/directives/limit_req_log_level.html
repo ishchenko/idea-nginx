@@ -1,0 +1,31 @@
+<h2><span class="editsection">[<a href="/index.php?title=HttpLimitReqModule&amp;action=edit&amp;section=5" title="Edit section: limit req log level">edit</a>]</span> <span class="mw-headline" id="limit_req_log_level"> limit_req_log_level </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>limit_req_log_level</b> <code>info</code> | <code>notice</code> | <code>warn</code> | <code>error</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>error</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Appeared in:</b></td> 
+   <td> 0.8.18</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_limit_req_module.html#limit_req_log_level">limit_req_log_level</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 27/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Controls the log level of the rejected requests. Delayed requests are logged at the next less severe level, though, for example when limit_req_log_level is set to &quot;error&quot;, delayed requests are logged at &quot;warn&quot;. </p><br><i>Module: HttpLimitReqModule</i>

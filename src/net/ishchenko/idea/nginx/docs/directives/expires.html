@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="expires"> expires </span></h2><p><b>syntax:</b> <i>expires [[modified] time|@time-of-day|epoch|max|off] </i> </p><p><b>default:</b> <i>expires off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Controls whether the response should be marked with an expiry time, and if so, what <a href="/ConfigurationSyntax" title="ConfigurationSyntax">time</a> that is. </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpHeadersModule&amp;action=edit&amp;section=4" title="Edit section: expires">edit</a>]</span> <span class="mw-headline" id="expires"> expires </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>expires</b> [ <code>modified</code> ] <i>time</i> <br /><b>expires</b> <code>epoch</code> | <code>max</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location<br />if in location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_headers_module.html#expires">expires</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 20/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Controls whether the response should be marked with an expiry time, and if so, what <a href="/ConfigurationSyntax" title="ConfigurationSyntax">time</a> that is. </p><ul>
  <li> <code>off</code> prevents changes to the <code>Expires</code> and <code>Cache-Control</code> headers. </li>
 </ul><ul>
  <li> <code>epoch</code> sets the <code>Expires</code> header to 1 January, 1970 00:00:01 GMT. </li>
@@ -8,9 +34,6 @@
  <li> A time without an <code>@</code> prefix specifies an expiry time relative to either the response time (if the time is not preceded with &quot;modified&quot;) or the file's modification time (when &quot;modified&quot; is present — available from versions 0.7.0 &amp; 0.6.32). A negative time can be specified, which sets the <code>Cache-Control</code> header to <code>no-cache</code>. </li>
 </ul><ul>
  <li> Times written with an <code>@</code> prefix represent an absolute time-of-day expiry, written in either the form Hh or Hh:Mm, where H ranges from 0 to 24, and M ranges from 0 to 59 (available from versions 0.7.9 &amp; 0.6.34). </li>
-</ul><p>A non-negative time or time-of-day sets the <code>Cache-Control</code> header to <code>max-age = #</code>, where # is the appropriate time in seconds. </p><p><br /> <b>Note:</b> <code>expires</code> works only for 200, 204, 301, 302, and 304 responses. </p><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_headers_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><h1> <span class="mw-headline" id="See_Also"> See Also </span></h1><ul>
+</ul><p>A non-negative time or time-of-day sets the <code>Cache-Control</code> header to <code>max-age = #</code>, where # is the appropriate time in seconds. </p><p><br /> <b>Note:</b> <code>expires</code> works only for 200, 204, 301, 302, and 304 responses. </p><h1><span class="editsection">[<a href="/index.php?title=HttpHeadersModule&amp;action=edit&amp;section=5" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_headers_module.html">Original Documentation</a> </p><h1><span class="editsection">[<a href="/index.php?title=HttpHeadersModule&amp;action=edit&amp;section=6" title="Edit section: See Also">edit</a>]</span> <span class="mw-headline" id="See_Also"> See Also </span></h1><ul>
  <li> The third-party <a href="/NginxHttpHeadersMoreModule" title="NginxHttpHeadersMoreModule" class="mw-redirect">headers_more</a> module for adding, replacing, and clearing both input and output headers. </li>
-</ul><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpHeadersModule">http://wiki.nginx.org/HttpHeadersModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpHeadersModule</i>
+</ul><br><i>Module: HttpHeadersModule</i>

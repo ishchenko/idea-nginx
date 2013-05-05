@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="fastcgi_next_upstream"> fastcgi_next_upstream </span></h2><p><b>syntax:</b> <i>fastcgi_next_upstream error|timeout|invalid_header|http_500|http_503|http_404|off</i> </p><p><b>default:</b> <i>fastcgi_next_upstream error timeout</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive defines in which cases request will be passed to the next server: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpFastcgiModule&amp;action=edit&amp;section=25" title="Edit section: fastcgi next upstream">edit</a>]</span> <span class="mw-headline" id="fastcgi_next_upstream"> fastcgi_next_upstream </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>fastcgi_next_upstream</b> <code>error</code> | <code>timeout</code> | <code>invalid_header</code> | <code>http_500</code> | <code>http_503</code> | <code>http_404</code> | <code>off</code> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>error timeout</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_fastcgi_module.html#fastcgi_next_upstream">fastcgi_next_upstream</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 191/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive defines in which cases request will be passed to the next server: </p><ul>
  <li> error — an error occurred during connection to the server, passing request to it or reading server respond header; </li>
  <li> timeout — a timeout occurred during connection to the server, passing request to it or reading server respond header; </li>
  <li> invalid_header — server returned empty or invalid answer; </li>
@@ -6,4 +32,4 @@
  <li> http_503 — server returned 503 respond; </li>
  <li> http_404 — server returned 404 respond; </li>
  <li> off — explicitly forbids passing request to the next server; </li>
-</ul><p>It should be clear that passing request to the next server is possible only if no data have been yet returned to the client. So, if the error or timeout occurred during the data transmission to the client it's too late to fix it. </p><br><i>Module: HttpFcgiModule</i>
+</ul><p>It should be clear that passing request to the next server is possible only if no data have been yet returned to the client. So, if the error or timeout occurred during the data transmission to the client it's too late to fix it. </p><br><i>Module: HttpFastcgiModule</i>

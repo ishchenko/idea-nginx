@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="client_body_in_single_buffer"> client_body_in_single_buffer </span></h2><p><b>syntax:</b> <i>client_body_in_single_buffer</i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive(0.7.58+) specifies whether to keep the whole body in a single client request buffer. The directive is recommended when using the variable <a href="#.24request_body">$request_body</a> to reduce the operations of copying. </p><p>Note that when the request body cannot be hold in a single buffer (see <a href="#client_body_buffer_size">client_body_buffer_size</a>), the body will still touch the disk. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=7" title="Edit section: client body in single buffer">edit</a>]</span> <span class="mw-headline" id="client_body_in_single_buffer"> client_body_in_single_buffer </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>client_body_in_single_buffer</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#client_body_in_single_buffer">client_body_in_single_buffer</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 53/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive(0.7.58+) specifies whether to keep the whole body in a single client request buffer. The directive is recommended when using the variable <a href="#.24request_body">$request_body</a> to reduce the operations of copying. </p><p>Note that when the request body cannot be hold in a single buffer (see <a href="#client_body_buffer_size">client_body_buffer_size</a>), the body will still touch the disk. </p><br><i>Module: HttpCoreModule</i>

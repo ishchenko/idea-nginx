@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="server_names_hash_bucket_size"> server_names_hash_bucket_size </span></h2><p><b>syntax:</b> <i>server_names_hash_bucket_size number</i> </p><p><b>default:</b> <i>server_names_hash_bucket_size 32/64/128</i> </p><p><b>context:</b> <i>http</i> </p><p>Directive assigns the size of basket in the hash-tables of the names of servers. This value by default depends on the size of the line of processor cache. For more detail see the description of tuning the hash tables in <a href="/Optimizations" title="Optimizations">Nginx Optimizations</a>. </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=66" title="Edit section: server names hash bucket size">edit</a>]</span> <span class="mw-headline" id="server_names_hash_bucket_size"> server_names_hash_bucket_size </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>server_names_hash_bucket_size</b> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>32|64|128</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#server_names_hash_bucket_size">server_names_hash_bucket_size</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 565/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive assigns the size of basket in the hash-tables of the names of servers. This value by default depends on the size of the line of processor cache. For more detail see the description of tuning the hash tables in <a href="/Optimizations" title="Optimizations">Nginx Optimizations</a>. </p><br><i>Module: HttpCoreModule</i>

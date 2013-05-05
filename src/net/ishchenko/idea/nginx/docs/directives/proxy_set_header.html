@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="proxy_set_header"> proxy_set_header </span></h2><p><b>syntax:</b> <i>proxy_set_header header value;</i> </p><p><b>default:</b> <i>Host and Connection</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive allows to redefine and to add some request header lines which will be transferred to the proxied server. </p><p>As the value it is possible to use a text, variables and their combination. </p><p><code>proxy_set_header</code> directives issued at higher levels are only inherited when no <code>proxy_set_header</code> directives have been issued at a given level. </p><p>By default only two lines will be redefined: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=42" title="Edit section: proxy set header">edit</a>]</span> <span class="mw-headline" id="proxy_set_header"> proxy_set_header </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_set_header</b> <i>field</i> <i>value</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>Host $proxy_host</i><br /><i>Connection close</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header">proxy_set_header</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 328/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive allows to redefine and to add some request header lines which will be transferred to the proxied server. </p><p>As the value it is possible to use a text, variables and their combination. </p><p><code>proxy_set_header</code> directives issued at higher levels are only inherited when no <code>proxy_set_header</code> directives have been issued at a given level. </p><p>By default only two lines will be redefined: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Host <span class="re0">$proxy_host</span><span class="sy0">;</span>
 <a href="/NginxHttpProxyModule#proxy_set_header"><span class="kw21">proxy_set_header</span></a> Connection Close<span class="sy0">;</span></pre>

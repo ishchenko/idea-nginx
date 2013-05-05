@@ -1,14 +1,40 @@
-<h2> <span class="mw-headline" id="error_log"> error_log </span></h2><p><b>Syntax:</b> <i>error_log file [ debug | info | notice | warn | error | crit ] </i> </p><p><b>Default:</b> <i>${prefix}/logs/error.log</i> </p><p>Specifies the file where server (and fastcgi) errors are logged. </p><p>Default values for the error level: </p><ol>
+<h2><span class="editsection">[<a href="/index.php?title=CoreModule&amp;action=edit&amp;section=6" title="Edit section: error log">edit</a>]</span> <span class="mw-headline" id="error_log"> error_log </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>error_log</b> <i>file</i> | <code>stderr</code> [ <code>debug</code> | <code>info</code> | <code>notice</code> | <code>warn</code> | <code>error</code> | <code>crit</code> | <code>alert</code> | <code>emerg</code> ]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>logs/error.log error</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> main<br />http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/ngx_core_module.html#error_log">error_log</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 34/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Specifies the file where server (and fastcgi) errors are logged. </p><p>Default values for the error level: </p><ol>
  <li> in the main section - <code>error</code> </li>
  <li> in the HTTP section - <code>crit</code> </li>
  <li> in the server section - <code>crit</code> </li>
-</ol><p>Nginx supports separate error logging per virtual host. This is a unique feature, which <a href="http://www.wikivs.com/wiki/Lighttpd_vs_nginx#Separated_error_logging_per_virtual_server" class="external text" rel="nofollow">lighttpd refuses to implement</a>. For an example of separate error logging per server, see <a href="/SeparateErrorLoggingPerVirtualHost" title="SeparateErrorLoggingPerVirtualHost">SeparateErrorLoggingPerVirtualHost</a> and this <a href="http://thread.gmane.org/gmane.comp.web.nginx.english/9097/focus=9099" class="external text" rel="nofollow">mailing list thread on separating error logging per virtual host</a>. </p><p>If you've built Nginx with <code>--with-debug</code>, you may also use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+</ol><p>If you've built Nginx with <code>--with-debug</code>, you may also use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#error_log"><span class="kw1">error_log</span></a> LOGFILE <span class="br0">[</span>debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap<span class="br0">]</span><span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#error_log"><span class="kw1">error_log</span></a> LOGFILE <span class="br0">[</span>debug_core | debug_alloc | debug_mutex | debug_event | debug_http | debug_imap<span class="br0">]</span><span class="sy0">;</span></pre>
  </div>
 </div><p>Note that <code>error_log off</code> does not disable logging - the log will be written to a file named &quot;off&quot;. To disable logging, you may use: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpMainModule#error_log"><span class="kw1">error_log</span></a> /dev/null crit<span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#error_log"><span class="kw1">error_log</span></a> /dev/null crit<span class="sy0">;</span></pre>
  </div>
 </div><p>Also note that as of version 0.7.53, nginx will use a compiled-in default error log location until it has read the config file. If the user running nginx doesn't have write permission to this log location, nginx will raise an alert like this: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="text source-text">

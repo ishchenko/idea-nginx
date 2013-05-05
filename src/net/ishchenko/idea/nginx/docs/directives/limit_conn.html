@@ -1,4 +1,56 @@
-<h2> <span class="mw-headline" id="limit_conn"> limit_conn </span></h2><p><b>syntax:</b> <i>limit_conn zone_name max_clients_per_ip</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive assigns the maximum number of simultaneous connections for one session. With exceeding of this number the request completes by the code &quot;Service unavailable&quot; (503). </p><p>For example, the directive: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpLimitConnModule&amp;action=edit&amp;section=3" title="Edit section: limit conn">edit</a>]</span> <span class="mw-headline" id="limit_conn"> limit_conn </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>limit_conn</b> <i>zone</i> <i>number</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_limit_conn_module.html#limit_conn">limit_conn</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Sets the maximum allowed number of connections for a given zone. When this limit is exceeded, the server will return a status error 503 (Service Temporarily Unavailable) in reply to the request. </p><p>Multiple limit directives for different zones can be used in the same context and each will apply. </p><p>Standard nginx inheritance applies. Lower contexts will inherit from higher context so long as there are no similar directives in the current context. </p><br><i>Module: HttpLimitConnModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=HttpLimitZoneModule&amp;action=edit&amp;section=4" title="Edit section: limit conn">edit</a>]</span> <span class="mw-headline" id="limit_conn"> limit_conn </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>limit_conn</b> <i>zone</i> <i>number</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_limit_conn_module.html#limit_conn">limit_conn</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 26/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive assigns the maximum number of simultaneous connections for one session. With exceeding of this number the request completes by the code &quot;Service unavailable&quot; (503). </p><p>For example, the directive: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpLimitZoneModule#limit_zone"><span class="kw17">limit_zone</span></a>   one  <span class="re0">$binary_remote_addr</span>  10m<span class="sy0">;</span>
 &nbsp;

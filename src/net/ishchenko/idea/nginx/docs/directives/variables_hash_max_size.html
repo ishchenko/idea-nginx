@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="variables_hash_max_size"> variables_hash_max_size </span></h2><p><b>syntax:</b> variables_hash_max_size <i>size</i> </p><p><b>default:</b> variables_hash_max_size 512 </p><p><b>context:</b> <i>http</i> </p><p><b>variables:</b> <i>no</i>&nbsp; </p><p><b>phase:</b> <i>configuration</i> </p><p><br /> The maximum size of the variables hash table. For more detail see the description of tuning the hash tables in <a href="/Optimizations" title="Optimizations">Nginx Optimizations</a>. </p><h1> <span class="mw-headline" id="Variables"> Variables </span></h1><p>The core module supports built-in variables, whose names correspond with the names of variables in Apache. </p><p>First of all, there are variables which represent header lines in the client request, for example, <code>$http_user_agent</code>, <code>$http_cookie</code>, and so forth. Note that because these correspond to what the client actually sends, they are not guaranteed to exist and their meaning is defined elsewhere (e.g. in relevant standards). </p><p>Furthermore, there are other variables: </p><br><i>Module: HttpCoreModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=76" title="Edit section: variables hash max size">edit</a>]</span> <span class="mw-headline" id="variables_hash_max_size"> variables_hash_max_size </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>variables_hash_max_size</b> <i>size</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>512</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#variables_hash_max_size">variables_hash_max_size</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 665/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The maximum size of the variables hash table. For more detail see the description of tuning the hash tables in <a href="/Optimizations" title="Optimizations">Nginx Optimizations</a>. </p><h1><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=77" title="Edit section: Variables">edit</a>]</span> <span class="mw-headline" id="Variables"> Variables </span></h1><p>The core module supports built-in variables, whose names correspond with the names of variables in Apache. </p><p>First of all, there are variables which represent header lines in the client request, for example, <code>$http_user_agent</code>, <code>$http_cookie</code>, and so forth. Note that because these correspond to what the client actually sends, they are not guaranteed to exist and their meaning is defined elsewhere (e.g. in relevant standards). </p><p>Furthermore, there are other variables: </p><br><i>Module: HttpCoreModule</i>

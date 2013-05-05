@@ -1,4 +1,30 @@
-<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2> <span class="mw-headline" id="gzip_proxied"> gzip_proxied </span></h2><p><b>syntax:</b> <i>gzip_proxied [off|expired|no-cache|no-store|private|no_last_modified|no_etag|auth|any] ...</i> </p><p><b>default:</b> <i>gzip_proxied off</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>It allows or disallows the compression of the response for the proxy request in the dependence on the request and the response. The fact that, request proxy, is determined on the basis of line &quot;Via&quot; in the headers of request. In the directive it is possible to indicate simultaneously several parameters: </p><ul>
+<h3>Directive can have multiple meanings. Each variant is separated with horizontal line</h3><hr><h2><span class="editsection">[<a href="/index.php?title=HttpGzipModule&amp;action=edit&amp;section=9" title="Edit section: gzip proxied">edit</a>]</span> <span class="mw-headline" id="gzip_proxied"> gzip_proxied </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>gzip_proxied</b> <code>off</code> | <code>expired</code> | <code>no-cache</code> | <code>no-store</code> | <code>private</code> | <code>no_last_modified</code> | <code>no_etag</code> | <code>auth</code> | <code>any</code> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_gzip_module.html#gzip_proxied">gzip_proxied</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 61/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> It allows or disallows the compression of the response for the proxy request in the dependence on the request and the response. The fact that, request proxy, is determined on the basis of line &quot;Via&quot; in the headers of request. In the directive it is possible to indicate simultaneously several parameters: </p><ul>
  <li> off - disables compression for all proxied requests </li>
  <li> expired - enables compression, if the &quot;Expires&quot; header prevents caching </li>
  <li> no-cache - enables compression if &quot;Cache-Control&quot; header is set to &quot;no-cache&quot; </li>
@@ -8,4 +34,4 @@
  <li> no_etag - enables compression if there is no &quot;ETag&quot; header </li>
  <li> auth - enables compression if there is an &quot;Authorization&quot; header </li>
  <li> any - enables compression for all requests </li>
-</ul><p><br /> </p><br><i>Module: HttpGzipModule</i><hr><h2> <span class="mw-headline" id="gzip_proxied"> gzip_proxied </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_proxied" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>
+</ul><br><i>Module: HttpGzipModule</i><hr><h2><span class="editsection">[<a href="/index.php?title=HttpGzipStaticModule&amp;action=edit&amp;section=5" title="Edit section: gzip proxied">edit</a>]</span> <span class="mw-headline" id="gzip_proxied"> gzip_proxied </span></h2><p>See <a href="/NginxHttpGzipModule#gzip_proxied" title="NginxHttpGzipModule" class="mw-redirect"> NginxHttpGzipModule</a> </p><br><i>Module: HttpGzipStaticModule</i>

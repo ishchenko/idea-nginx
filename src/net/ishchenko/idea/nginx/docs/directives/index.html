@@ -1,8 +1,31 @@
-<h2> <span class="mw-headline" id="index"> index </span></h2><p><b>syntax:</b> index <i>filename [filename... [fallback]]</i> </p><p><b>default:</b> index index.html </p><p><b>context:</b> <i>http, server, location</i> </p><p><b>variables:</b> <i>no</i> </p><p><br /> Sets the default file to serve if a directory is requested by the client. Multiple files can be specified. If the first file isn't found, the second will be used and so on. If the last entry begins with a /, and none of the earlier files are found, nginx will perform an internal redirect to this uri. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpIndexModule&amp;action=edit&amp;section=3" title="Edit section: index">edit</a>]</span> <span class="mw-headline" id="index"> index </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>index</b> <i>file</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>index.html</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_index_module.html#index">index</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 10/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Sets the default file to serve if a directory is requested by the client. Multiple files can be specified. If the first file isn't found, the second will be used and so on. If the last entry begins with a /, and none of the earlier files are found, nginx will perform an internal redirect to this uri. </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1">  <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a> <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.html <a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php<span class="sy0">;</span></pre>
  </div>
-</div><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_index_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpIndexModule">http://wiki.nginx.org/HttpIndexModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpIndexModule</i>
+</div><h1><span class="editsection">[<a href="/index.php?title=HttpIndexModule&amp;action=edit&amp;section=4" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_index_module.html">Original Documentation</a> </p><br><i>Module: HttpIndexModule</i>

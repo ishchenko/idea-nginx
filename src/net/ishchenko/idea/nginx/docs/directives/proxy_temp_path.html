@@ -1,1 +1,27 @@
-<h2> <span class="mw-headline" id="proxy_temp_path"> proxy_temp_path </span></h2><p><b>syntax:</b> <i>proxy_temp_path dir-path [ level1 [ level2 [ level3 ];</i> </p><p><b>default:</b> <i>$NGX_PREFIX/proxy_temp controlled by --http-proxy-temp-path at ./configure stage</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive works like <a href="/HttpCoreModule#client_body_temp_path" title="HttpCoreModule">client_body_temp_path</a> to specify a location to buffer large proxied requests to the filesystem. </p><br><i>Module: HttpProxyModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=47" title="Edit section: proxy temp path">edit</a>]</span> <span class="mw-headline" id="proxy_temp_path"> proxy_temp_path </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_temp_path</b> <i>path</i> [ <i>level1</i> [ <i>level2</i> [ <i>level3</i> ]]]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>proxy_temp</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_temp_path">proxy_temp_path</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 393/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive works like <a href="/HttpCoreModule#client_body_temp_path" title="HttpCoreModule">client_body_temp_path</a> to specify a location to buffer large proxied requests to the filesystem. </p><br><i>Module: HttpProxyModule</i>

@@ -1,4 +1,27 @@
-<h2> <span class="mw-headline" id="random_index"> random_index </span></h2><p><b>syntax:</b> <i>random_index [on|off] </i> </p><p><b>default:</b> <i>off</i> </p><p><b>context:</b> <i>location</i> </p><p>If enabled for a specific location, will scan the given directory for files on each access, and send a randomly picked one instead of the usual index.html. Only plain files not starting with a dot will be considered. </p><h1> <span class="mw-headline" id="References"> References </span></h1><p><a href="http://sysoev.ru/nginx/docs/http/ngx_http_random_index_module.html" class="external text" rel="nofollow">Original Documentation</a> </p><div class="printfooter">
-  Retrieved from &quot;
- <a href="http://wiki.nginx.org/HttpRandomIndexModule">http://wiki.nginx.org/HttpRandomIndexModule</a>&quot;
-</div><div class="visualClear"></div><br><i>Module: HttpRandomIndexModule</i>
+<h2><span class="editsection">[<a href="/index.php?title=HttpRandomIndexModule&amp;action=edit&amp;section=3" title="Edit section: random index">edit</a>]</span> <span class="mw-headline" id="random_index"> random_index </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>random_index</b> <code>on</code> | <code>off</code> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>off</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_random_index_module.html#random_index">random_index</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 13/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> When enabled will scan the directory for files on each request, and chose a randomly picked file instead of the usual index.html to use as the index file. Only plain-text files not starting with a dot will be considered. </p><h1><span class="editsection">[<a href="/index.php?title=HttpRandomIndexModule&amp;action=edit&amp;section=4" title="Edit section: References">edit</a>]</span> <span class="mw-headline" id="References"> References </span></h1><p><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_random_index_module.html">Original Documentation</a> </p><br><i>Module: HttpRandomIndexModule</i>

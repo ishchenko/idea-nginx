@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="internal"> internal </span></h2><p><b>syntax:</b> <i>internal</i> </p><p><b>default:</b> <i>no</i> </p><p><b>context:</b> <i>location</i> </p><p><b>internal</b> indicates that the matching location can be used only for so called &quot;internal&quot; requests. </p><p>For external requests it will return the error &quot;Not found&quot; (404). </p><p>Internal requests are the following: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=22" title="Edit section: internal">edit</a>]</span> <span class="mw-headline" id="internal"> internal </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>internal</b> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#internal">internal</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 179/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> <b>internal</b> indicates that the matching location can be used only for so called &quot;internal&quot; requests. </p><p>For external requests it will return the error &quot;Not found&quot; (404). </p><p>Internal requests are the following: </p><ul>
  <li> requests redirected by the instruction <b>error_page</b> </li>
  <li> subrequests created by the command <b>include virtual</b> of the &quot;ngx_http_ssi_module&quot; module </li>
  <li> requests changed by the instruction <b>rewrite</b> of the &quot;ngx_http_rewrite_module&quot; module </li>

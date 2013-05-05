@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="proxy_next_upstream"> proxy_next_upstream </span></h2><p><b>syntax:</b> <i>proxy_next_upstream [error|timeout|invalid_header|http_500|http_502|http_503|http_504|http_404|off];</i> </p><p><b>default:</b> <i>proxy_next_upstream error timeout;</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>Directive determines in what cases the request will be transmitted to the next server: </p><ul>
+<h2><span class="editsection">[<a href="/index.php?title=HttpProxyModule&amp;action=edit&amp;section=30" title="Edit section: proxy next upstream">edit</a>]</span> <span class="mw-headline" id="proxy_next_upstream"> proxy_next_upstream </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>proxy_next_upstream</b> <code>error</code> | <code>timeout</code> | <code>invalid_header</code> | <code>http_500</code> | <code>http_502</code> | <code>http_503</code> | <code>http_504</code> | <code>http_404</code> | <code>off</code> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>error timeout</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream">proxy_next_upstream</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 220/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Directive determines in what cases the request will be transmitted to the next server: </p><ul>
  <li> error — an error has occurred while connecting to the server, sending a request to it, or reading its response; </li>
  <li> timeout — occurred timeout during the connection with the server, transfer the request or while reading response from the server; </li>
  <li> invalid_header — server returned a empty or incorrect answer; </li>

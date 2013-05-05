@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="client_body_temp_path"> client_body_temp_path </span></h2><p><b>syntax:</b> <i>client_body_temp_path dir-path [ level1 [ level2 [ level3 ] </i> </p><p><b>default:</b> <i>client_body_temp</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>The directive assigns the directory for storing the temporary files in it with the body of the request. </p><p>In the <code>dir-path</code> a hierarchy of subdirectories up to three levels are possible. </p><p>For example </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=9" title="Edit section: client body temp path">edit</a>]</span> <span class="mw-headline" id="client_body_temp_path"> client_body_temp_path </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>client_body_temp_path</b> <i>path</i> [ <i>level1</i> [ <i>level2</i> [ <i>level3</i> ]]]</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>client_body_temp</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#client_body_temp_path">client_body_temp_path</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 67/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> The directive assigns the directory for storing the temporary files in it with the body of the request. </p><p>In the <code>dir-path</code> a hierarchy of subdirectories up to three levels are possible. </p><p>For example </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#client_body_temp_path"><span class="kw3">client_body_temp_path</span></a>  /spool/nginx/client_temp <span class="nu0">1</span> <span class="nu0">2</span><span class="sy0">;</span></pre>
  </div>

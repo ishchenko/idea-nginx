@@ -1,6 +1,32 @@
-<h2> <span class="mw-headline" id="dav_access"> dav_access </span></h2><p><b>syntax:</b> <i>dav_access user:permissions [users:permissions] ...</i> </p><p><b>default:</b> <i>dav_access user:rw</i> </p><p><b>context:</b> <i>http, server, location</i> </p><p>This directive assigns access rights for file and directories, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpDavModule&amp;action=edit&amp;section=3" title="Edit section: dav access">edit</a>]</span> <span class="mw-headline" id="dav_access"> dav_access </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>dav_access</b> <i>users</i>&nbsp;: <i>permissions</i> ...</td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> <i>user:rw</i></td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> http<br />server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_dav_module.html#dav_access">dav_access</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 16/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> This directive assigns access rights for file and directories, for example: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpDavModule#dav_access"><span class="kw34">dav_access</span></a> <a href="/NginxHttpMainModule#user"><span class="kw1">user</span></a>:rw group:rw all:r<span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpDavModule#dav_access"><span class="kw34">dav_access</span></a> <a href="/NginxHttpCoreModule#user"><span class="kw1">user</span></a>:rw group:rw all:r<span class="sy0">;</span></pre>
  </div>
 </div><p>If assigning any permissions for <code>groups</code> or <code>all</code>, then it's not necessary to indicate permissions for <code>user</code>: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">

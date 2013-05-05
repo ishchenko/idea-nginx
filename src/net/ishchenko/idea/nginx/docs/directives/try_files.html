@@ -1,4 +1,30 @@
-<h2> <span class="mw-headline" id="try_files"> try_files </span></h2><p><b>syntax:</b> <i>try_files path1 [path2] uri</i> </p><p><b>default:</b> <i>none</i> </p><p><b>context:</b> <i>server</i>, <i>location</i> </p><p><b>availability:</b> <i>0.7.27</i> </p><p>Checks for the existence of files in order, and returns the first file that is found. A trailing slash indicates a directory - <code>$uri /</code>. In the event that no file is found, an internal redirect to the last parameter is invoked. The last parameter is the fallback URI and *must* exist, or else an internal error will be raised. Unlike rewrite, $args are not automatically preserved if the fallback is not a named location. If you need args preserved, you must do so explicitly: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
+<h2><span class="editsection">[<a href="/index.php?title=HttpCoreModule&amp;action=edit&amp;section=70" title="Edit section: try files">edit</a>]</span> <span class="mw-headline" id="try_files"> try_files </span></h2><table class="directive-ref-table">
+ <tbody>
+  <tr>
+   <td class="drt-td1"><b>Syntax:</b></td> 
+   <td class="drt-td2"> <b>try_files</b> <i>file</i> ... <i>uri</i> <br /><b>try_files</b> <i>file</i> ... = <i>code</i> </td>
+  </tr> 
+  <tr>
+   <td><b>Default:</b></td> 
+   <td> </td>
+  </tr> 
+  <tr>
+   <td><b>Context:</b></td> 
+   <td> server<br />location</td>
+  </tr> 
+  <tr>
+   <td><b>Reference:</b></td>
+   <td><a rel="nofollow" class="external text" href="http://nginx.org/en/docs/http/ngx_http_core_module.html#try_files">try_files</a></td>
+  </tr>
+ </tbody>
+</table><p>
+ <!-- 
+NewPP limit report
+Preprocessor node count: 593/1000000
+Post-expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Expensive parser function count: 0/100
+--> </p><p><br /> Checks for the existence of files in order, and returns the first file that is found. A trailing slash indicates a directory - <code>$uri /</code>. In the event that no file is found, an internal redirect to the last parameter is invoked. Do note that only the last parameter causes an internal redirect, former ones just sets the internal URI pointer. The last parameter is the fallback URI and *must* exist, or else an internal error will be raised. Named locations can be used. Unlike with rewrite, $args are not automatically preserved if the fallback is not a named location. If you need args preserved, you must do so explicitly: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span></pre>
  </div>
@@ -18,16 +44,11 @@
  </div>
 </div><p>When all other attempts to serve the content corresponding to the request fail issue a <code>404 Not Found</code>. </p><p><br /> Example of use with Drupal / FastCGI: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><span class="co1"># for drupal 6:</span>
-<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span><span class="sy0">;</span>
-&nbsp;
-<span class="co1"># for drupal 7:</span>
+  <pre class="de1"><span class="co1"># for Drupal 6 or 7:</span>
 <a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span>
 &nbsp;
-<span class="co1"># only needed for Drupal 6 (or if you absolutely need a named location)</span>
-<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="re0">@drupal</span> <span class="br0">{</span>
-  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span> last<span class="sy0">;</span> <span class="co1"># for drupal 6</span>
-<span class="br0">}</span>
+<span class="co1"># a better version for Drupal 7 since it doesn't need q=$uri:</span>
+<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?<span class="re0">$args</span><span class="sy0">;</span>
 &nbsp;
 <a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="sy0">~</span> \.php$ <span class="br0">{</span>
   <a href="/NginxHttpFcgiModule#fastcgi_pass"><span class="kw11">fastcgi_pass</span></a> 127.0.0.1:<span class="nu0">8888</span><span class="sy0">;</span>
@@ -37,18 +58,23 @@
  </div>
 </div><p>In this example, the directive <code>try_files</code> </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ <span class="re0">@drupal</span><span class="sy0">;</span></pre>
+  <pre class="de1"><a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span></pre>
  </div>
 </div><p>Is basically the same as this: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
   <pre class="de1"><a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> / <span class="br0">{</span>
   <a href="/NginxHttpCoreModule#error_page"><span class="kw3">error_page</span></a>     <span class="nu0">404</span> <span class="sy0">=</span> <span class="re0">@drupal</span><span class="sy0">;</span>
-  <a href="/NginxHttpMainModule#log_not_found"><span class="kw1">log_not_found</span></a>  off<span class="sy0">;</span>
+  <a href="/NginxHttpCoreModule#log_not_found"><span class="kw1">log_not_found</span></a>  off<span class="sy0">;</span>
+<span class="br0">}</span>
+&nbsp;
+<a href="/NginxHttpCoreModule#location"><span class="kw3">location</span></a> <span class="re0">@drupal</span> <span class="br0">{</span>
+  <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span> last<span class="sy0">;</span> <span class="co1"># for drupal 6</span>
 <span class="br0">}</span></pre>
  </div>
 </div><p>Or this: </p><div dir="ltr" class="mw-geshi" style="text-align: left;">
  <div class="nginx source-nginx">
-  <pre class="de1"><a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span>!-e <span class="re0">$request_filename</span><span class="br0">)</span> <span class="br0">{</span>
+  <pre class="de1"><span class="co1"># DO NOT DO THIS! This is a terrible use of if.</span>
+<a href="/NginxHttpRewriteModule#if"><span class="kw22">if</span></a> <span class="br0">(</span>!-e <span class="re0">$request_filename</span><span class="br0">)</span> <span class="br0">{</span>
    <a href="/NginxHttpRewriteModule#rewrite"><span class="kw22">rewrite</span></a> ^ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span> last<span class="sy0">;</span>
 <span class="br0">}</span></pre>
  </div>
@@ -57,8 +83,11 @@
   <pre class="de1"><span class="co1"># wordpress (without WP Super Cache) - example 1</span>
 <a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span>
 &nbsp;
-<span class="co1"># wordpress (without WP Super Cache) - example 2 (it doesn't REALLY need the &quot;q&quot; parameter)</span>
-<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php<span class="sy0">;</span>
+<span class="co1"># wordpress (without WP Super Cache) - example 2 </span>
+<span class="co1"># It doesn't REALLY need the &quot;q&quot; parameter, but without an explicit $args php </span>
+<span class="co1"># gets an empty QUERY_STRING, breaking generated responses that don't use a </span>
+<span class="co1"># permalink, such as search results.</span>
+<a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?<span class="re0">$args</span><span class="sy0">;</span>
 &nbsp;
 <span class="co1"># joomla</span>
 <a href="/NginxHttpCoreModule#try_files"><span class="kw3">try_files</span></a> <span class="re0">$uri</span> <span class="re0">$uri</span>/ /<a href="/NginxHttpCoreModule#index"><span class="kw3">index</span></a>.php?q<span class="sy0">=</span><span class="re0">$uri</span>&amp;<span class="re0">$args</span><span class="sy0">;</span>
