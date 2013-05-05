@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support</name>
-    <version>0.0.12</version>
+    <version>0.0.13</version>
     <vendor url="https://github.com/ishchenko/idea-nginx" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
