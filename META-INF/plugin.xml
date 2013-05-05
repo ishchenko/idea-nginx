@@ -20,6 +20,7 @@
         <b>0.0.13</b>
         <ul>
             <li>Built for IDEA 12 and later</li>
+            <li>Documentation and autocompletion update for nginx 1.4</li>
         </ul>
         <b>0.0.12</b>
         <ul>
