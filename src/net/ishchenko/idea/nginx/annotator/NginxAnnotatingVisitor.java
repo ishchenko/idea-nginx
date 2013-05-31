@@ -22,8 +22,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.Range;
 import net.ishchenko.idea.nginx.NginxBundle;
 import net.ishchenko.idea.nginx.NginxKeywordsManager;
-import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
 import net.ishchenko.idea.nginx.configurator.NginxServerDescriptor;
+import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
 import net.ishchenko.idea.nginx.psi.*;
 
 /**
@@ -91,8 +91,21 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
 
     private void checkValueCount(NginxDirective node) {
 
+        String nameString = node.getNameString();
+
+        //here comes ugly workaround for ambiguous directives.
+        //todo: resolve ambiguity properly
+        if ("server".equals(nameString)) {
+            NginxContext parentContext = node.getParentContext();
+            if (parentContext != null && parentContext.getDirective() != null) {
+                if ("upstream".equals(parentContext.getDirective().getNameString())) {
+                    return;
+                }
+            }
+        }
+
         int realRange = node.getValues().size();
-        Range<Integer> expectedRange = keywords.getValueRange(node.getNameString());
+        Range<Integer> expectedRange = keywords.getValueRange(nameString);
 
         if (!expectedRange.isWithin(realRange)) {
 
@@ -102,7 +115,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
             } else {
                 rangeString = "[" + expectedRange.getFrom() + ", " + expectedRange.getTo() + "]";
             }
-            String message = NginxBundle.message("annotator.directive.wrongnumberofvalues", node.getNameString(), rangeString, realRange);
+            String message = NginxBundle.message("annotator.directive.wrongnumberofvalues", nameString, rangeString, realRange);
 
             int i = 0;
             for (NginxComplexValue nginxComplexValue : node.getValues()) {
