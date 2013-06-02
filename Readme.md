@@ -16,8 +16,6 @@
 * $variables support. Autocompletion, quick documentation lookup and highlighting are available. But no support in log_format value and no parent context checks yet.
 * Autoformatting
 * Opening included files with ctrl+b
-* Maia version is available as "nginx Support 9" in your plugin list.
-* Slightly outdated build for IDEA 8 can be found here http://plugins.intellij.net/plugin/?id=4411
 
 # Known issues
 * Sometimes nginx displays wrong line number on error message. This is a nginx bug.
