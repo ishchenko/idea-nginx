@@ -90,7 +90,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="120.00"/>
+    <idea-version since-build="130.00"/>
 
     <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 
