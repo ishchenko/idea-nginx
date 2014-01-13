@@ -206,7 +206,7 @@ public class NginxConfigurationPanel {
 
         public void addNewServerClicked() {
 
-            VirtualFile[] file = FileChooser.chooseFiles(serverList, new NginxExecutableFileChooserDescriptor(), null);
+            VirtualFile[] file = FileChooser.chooseFiles(new NginxExecutableFileChooserDescriptor(), serverList, null, null);
             if (file.length > 0) {
 
                 NginxServerDescriptor newDescriptor = getDescriptorFromFile(file[0]);
@@ -243,7 +243,7 @@ public class NginxConfigurationPanel {
         public void chooseExecutableClicked() {
 
             VirtualFile oldFile = LocalFileSystem.getInstance().findFileByPath(executableField.getText());
-            VirtualFile[] chosen = FileChooser.chooseFiles(serverList, new NginxExecutableFileChooserDescriptor(), oldFile);
+            VirtualFile[] chosen = FileChooser.chooseFiles(new NginxExecutableFileChooserDescriptor(), serverList, null, oldFile);
 
             if (chosen.length > 0) {
 
@@ -282,7 +282,7 @@ public class NginxConfigurationPanel {
 
         public void chooseConfigurationClicked() {
             VirtualFile oldFile = LocalFileSystem.getInstance().findFileByPath(configField.getText());
-            VirtualFile[] file = FileChooser.chooseFiles(serverList, FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor(), oldFile);
+            VirtualFile[] file = FileChooser.chooseFiles(FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor(), serverList, null, oldFile);
             if (file.length > 0) {
                 configField.setText(file[0].getPath());
                 sync();
@@ -291,7 +291,7 @@ public class NginxConfigurationPanel {
 
         public void choosePidClicked() {
             VirtualFile oldFile = LocalFileSystem.getInstance().findFileByPath(pidField.getText());
-            VirtualFile[] file = FileChooser.chooseFiles(serverList, FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor(), oldFile);
+            VirtualFile[] file = FileChooser.chooseFiles(FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor(), serverList, null, oldFile);
             if (file.length > 0) {
                 pidField.setText(file[0].getPath());
                 sync();

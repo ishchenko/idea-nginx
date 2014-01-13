@@ -29,7 +29,6 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -164,11 +163,11 @@ public class NginxRunConfiguration extends RunConfigurationBase {
         return new NginxRunSettingsEditor(this);
     }
 
-    public JDOMExternalizable createRunnerSettings(ConfigurationInfoProvider provider) {
+    public ConfigurationPerRunnerSettings createRunnerSettings(ConfigurationInfoProvider provider) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(ProgramRunner runner) {
+    public SettingsEditor<ConfigurationPerRunnerSettings> getRunnerSettingsEditor(ProgramRunner runner) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

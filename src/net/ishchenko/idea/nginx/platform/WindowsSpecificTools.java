@@ -52,19 +52,19 @@ public class WindowsSpecificTools implements PlatformDependentTools {
     public String[] getStartCommand(NginxServerDescriptor descriptor) {
         String[] commandWithoutGlobals = new String[]{descriptor.getExecutablePath(), "-c", descriptor.getConfigPath()};
         String[] globals = getGlobals(descriptor);
-        return ArrayUtil.mergeArrays(commandWithoutGlobals, globals, String.class);
+        return ArrayUtil.mergeArrays(commandWithoutGlobals, globals);
     }
 
     public String[] getStopCommand(NginxServerDescriptor descriptor) {
-        return ArrayUtil.mergeArrays(getStartCommand(descriptor), STOP_COMMAND, String.class);
+        return ArrayUtil.mergeArrays(getStartCommand(descriptor), STOP_COMMAND);
     }
 
     public String[] getReloadCommand(NginxServerDescriptor descriptor) {
-        return ArrayUtil.mergeArrays(getStartCommand(descriptor), RELOAD_COMMAND, String.class);
+        return ArrayUtil.mergeArrays(getStartCommand(descriptor), RELOAD_COMMAND);
     }
 
     public String[] getTestCommand(NginxServerDescriptor descriptor) {
-        return ArrayUtil.mergeArrays(getStartCommand(descriptor), TEST_COMMAND, String.class);
+        return ArrayUtil.mergeArrays(getStartCommand(descriptor), TEST_COMMAND);
     }
 
     public NginxServerDescriptor createDescriptorFromFile(VirtualFile file) throws ThisIsNotNginxExecutableException {

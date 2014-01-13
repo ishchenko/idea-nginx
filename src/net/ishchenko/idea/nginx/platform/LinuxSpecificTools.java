@@ -47,7 +47,7 @@ public class LinuxSpecificTools implements PlatformDependentTools {
     public String[] getStartCommand(NginxServerDescriptor descriptor) {
         String[] commandWithoutGlobals = {descriptor.getExecutablePath(), "-c", descriptor.getConfigPath()};
         String[] globals = getGlobals(descriptor);
-        return ArrayUtil.mergeArrays(commandWithoutGlobals, globals, String.class);
+        return ArrayUtil.mergeArrays(commandWithoutGlobals, globals);
     }
 
     public String[] getStopCommand(NginxServerDescriptor descriptor) {
@@ -59,7 +59,7 @@ public class LinuxSpecificTools implements PlatformDependentTools {
     }
 
     public String[] getTestCommand(NginxServerDescriptor descriptor) {
-        return ArrayUtil.mergeArrays(getStartCommand(descriptor), new String[]{"-t"}, String.class);
+        return ArrayUtil.mergeArrays(getStartCommand(descriptor), new String[]{"-t"});
     }
 
     public NginxServerDescriptor createDescriptorFromFile(VirtualFile file) throws ThisIsNotNginxExecutableException {
