@@ -18,6 +18,8 @@ package net.ishchenko.idea.nginx;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.fileTypes.FileTypeConsumer;
+import com.intellij.openapi.fileTypes.FileTypeFactory;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
 import org.jetbrains.annotations.NonNls;
@@ -44,7 +46,7 @@ public final class NginxFileTypeManager implements ApplicationComponent {
     }
 
     public void initComponent() {
-        fileType = new NginxFileType(NginxServersConfiguration.getInstance());
+        fileType = NginxFileType.INSTANCE;
         FileTypeManager.getInstance().registerFileType(fileType);
     }
 

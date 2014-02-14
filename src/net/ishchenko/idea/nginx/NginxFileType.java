@@ -36,6 +36,8 @@ public class NginxFileType extends LanguageFileType implements FileTypeIdentifia
 
     private NginxServersConfiguration configuration;
 
+	static public final NginxFileType INSTANCE = new NginxFileType(NginxServersConfiguration.getInstance());
+
     public NginxFileType(NginxServersConfiguration configuration) {
         super(new NginxLanguage());
         this.configuration = configuration;
