@@ -76,8 +76,7 @@
         </ul>
         <b>0.0.3</b>
         <ul>
-            <li>Log files can be shown in tabs next to console. Important: "Horizontal toolbars" layout mode must be turned on
-            (vote http://youtrack.jetbrains.net/issue/IDEA-44882 to fix)</li>
+            <li>Log files can be shown in tabs next to console</li>
         </ul>
         <b>0.0.2</b>
         <ul>
