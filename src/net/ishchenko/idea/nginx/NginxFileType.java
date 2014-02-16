@@ -19,7 +19,6 @@ package net.ishchenko.idea.nginx;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.util.IconLoader;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -34,11 +33,14 @@ import javax.swing.*;
  */
 public class NginxFileType extends LanguageFileType implements FileTypeIdentifiableByVirtualFile {
 
-    private NginxServersConfiguration configuration;
+    private static NginxFileType INSTANCE = new NginxFileType();
 
-    public NginxFileType(NginxServersConfiguration configuration) {
+    public NginxFileType() {
         super(new NginxLanguage());
-        this.configuration = configuration;
+    }
+
+    public static NginxFileType getInstance() {
+        return INSTANCE;
     }
 
     @NotNull
@@ -61,7 +63,7 @@ public class NginxFileType extends LanguageFileType implements FileTypeIdentifia
     }
 
     public boolean isMyFileType(VirtualFile virtualFile) {
-        return configuration.getFilepaths().contains(virtualFile.getPath());
+        return NginxServersConfiguration.getInstance().getFilepaths().contains(virtualFile.getPath());
     }
 
 }

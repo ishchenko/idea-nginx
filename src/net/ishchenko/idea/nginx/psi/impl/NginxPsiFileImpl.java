@@ -19,7 +19,7 @@ package net.ishchenko.idea.nginx.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import net.ishchenko.idea.nginx.NginxFileTypeManager;
+import net.ishchenko.idea.nginx.NginxFileType;
 import net.ishchenko.idea.nginx.psi.NginxPsiFile;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,12 +32,12 @@ import org.jetbrains.annotations.NotNull;
 public class NginxPsiFileImpl extends PsiFileBase implements NginxPsiFile {
 
     public NginxPsiFileImpl(FileViewProvider viewProvider) {
-        super(viewProvider, NginxFileTypeManager.getInstance().getFileType().getLanguage());
+        super(viewProvider, NginxFileType.getInstance().getLanguage());
     }
 
     @NotNull
     public FileType getFileType() {
-        return NginxFileTypeManager.getInstance().getFileType();
+        return NginxFileType.getInstance();
     }
 
 }

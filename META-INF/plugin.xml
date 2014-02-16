@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support</name>
-    <version>0.0.14</version>
+    <version>0.0.15</version>
     <vendor url="https://github.com/ishchenko/idea-nginx" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -17,6 +17,10 @@
     <depends>com.intellij.modules.lang</depends>
 
     <change-notes><![CDATA[
+        <b>0.0.15</b>
+        <ul>
+            <li>FileTypeFactory for type registration</li>
+        </ul>
         <b>0.0.14</b>
         <ul>
             <li>Deprecated FileChooser fixed</li>
@@ -107,12 +111,10 @@
         <completion.contributor language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
         <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
         <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
+        <fileTypeFactory implementation="net.ishchenko.idea.nginx.NginxFileTypeFactory"/>
     </extensions>
 
     <application-components>
-        <component>
-            <implementation-class>net.ishchenko.idea.nginx.NginxFileTypeManager</implementation-class>
-        </component>
         <component>
             <implementation-class>net.ishchenko.idea.nginx.NginxKeywordsManager</implementation-class>
         </component>
