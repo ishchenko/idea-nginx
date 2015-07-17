@@ -93,7 +93,7 @@
     ]]>
     </change-notes>
 
-    <idea-version since-build="130.00"/>
+    <idea-version since-build="142.3304"/>
 
     <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 
@@ -111,14 +111,14 @@
         <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
         <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
         <fileTypeFactory implementation="net.ishchenko.idea.nginx.NginxFileTypeFactory"/>
+
+        <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.LinuxSpecificTools" os="unix"/>
+        <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.WindowsSpecificTools" os="windows"/>
     </extensions>
 
     <application-components>
         <component>
             <implementation-class>net.ishchenko.idea.nginx.NginxKeywordsManager</implementation-class>
-        </component>
-        <component>
-            <implementation-class>net.ishchenko.idea.nginx.platform.PlatformDependentToolsInstaller</implementation-class>
         </component>
         <component>
             <implementation-class>net.ishchenko.idea.nginx.configurator.NginxConfigurationManager</implementation-class>
@@ -134,4 +134,3 @@
     </actions>
 
 </idea-plugin>
-        
