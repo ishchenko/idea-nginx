@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support</name>
-    <version>0.0.15</version>
+    <version>0.1.0</version>
     <vendor url="https://github.com/ishchenko/idea-nginx" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -17,6 +17,10 @@
     <depends>com.intellij.modules.lang</depends>
 
     <change-notes><![CDATA[
+        <b>0.1.0</b>
+        <ul>
+            <li>Idea 15 compatibility - PlatformDependentToolsInstaller could be app service now and appropriate implementation selected by "os" attribute</li>
+        </ul>
         <b>0.0.15</b>
         <ul>
             <li>FileTypeFactory for type registration</li>
