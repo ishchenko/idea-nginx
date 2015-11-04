@@ -47,7 +47,7 @@ public class NginxConfigurationManager extends BaseConfigurable implements Appli
     }
 
     public static NginxConfigurationManager getInstance() {
-        return ApplicationManager.getApplication().getComponent(NginxConfigurationManager.class);
+        return ApplicationManager.getApplication().getComponent(NginxConfigurationManager);
     }
 
     @NotNull
