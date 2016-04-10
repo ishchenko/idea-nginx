@@ -26,6 +26,9 @@ import net.ishchenko.idea.nginx.configurator.NginxServerDescriptor;
 import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
 import net.ishchenko.idea.nginx.psi.*;
 
+import java.util.Optional;
+import java.util.Set;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Max
@@ -105,7 +108,17 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
         }
 
         int realRange = node.getValues().size();
-        Range<Integer> expectedRange = keywords.getValueRange(nameString);
+        Set<Range<Integer>> expectedRanges= keywords.getValueRange(nameString);
+
+        Optional<Range<Integer>> possibleRanges = expectedRanges.stream()
+                .filter(range -> range.isWithin(realRange))
+                .findFirst();
+
+        Range<Integer> expectedRange = possibleRanges.orElse(
+                expectedRanges.stream()
+                .min((range1, range2) -> range1.getFrom() - range2.getFrom() - (range1.getTo() - range2.getTo()))
+                .get() // assume that there is always a value
+        );
 
         if (!expectedRange.isWithin(realRange)) {
 

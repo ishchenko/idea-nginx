@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by IntelliJ IDEA.
@@ -134,15 +135,13 @@ public class NginxKeywordsManager implements ApplicationComponent {
         return flags == null || flags.contains("NGX_CONF_BLOCK"); //true if directive not found
     }
 
-    public Range<Integer> getValueRange(String directive) {
+    public Set<Range<Integer>> getValueRange(String directive) {
         Set<String> rangeFlags = FLAG_TO_RANGE.keySet();
         Set<String> flags = keywords.get(directive);
-        for (String flag : flags) {
-            if (rangeFlags.contains(flag)) {
-                return FLAG_TO_RANGE.get(flag);
-            }
-        }
-        return RANGE_FOR_UNKNOWN_DIRECTIVE; //is that ever possible?
+        return flags.stream()
+                .filter(flag -> rangeFlags.contains(flag))
+                .map(flag -> FLAG_TO_RANGE.get(flag))
+                .collect(Collectors.toSet());
     }
 
     public boolean checkCanResideInMainContext(String string) {
