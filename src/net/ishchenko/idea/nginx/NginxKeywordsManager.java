@@ -35,17 +35,16 @@ import java.util.regex.Pattern;
 public class NginxKeywordsManager implements ApplicationComponent {
 
     //anything can happen inside these directive context
-    public static final Set<String> CHAOS_DIRECTIVES = new HashSet<String>();
+    public static final Set<String> CHAOS_DIRECTIVES = new HashSet<>();
 
     // e.g. server -> ["NGX_MAIL_SRV_CONF", "NGX_HTTP_SRV_CONF"] etc
     // used to check that a directive can reside in context
     // though checks should be more smart, distinguishing between "server in http" and "server in mail"
     public static final ContextToFlagMapping CONTEXT_TO_FLAG = new ContextToFlagMapping();
 
-    //used for detecting right number of arguments
-    public static final Map<String, Range<Integer>> FLAG_TO_RANGE = new HashMap<String, Range<Integer>>();
-    public static final Range<Integer> RANGE_FOR_UNKNOWN_DIRECTIVE = new Range<Integer>(0, Integer.MAX_VALUE);
-
+    // used for detecting right number of arguments
+    public static final Map<String, Range<Integer>> FLAG_TO_RANGE = new HashMap<>();
+    public static final Range<Integer> RANGE_FOR_UNKNOWN_DIRECTIVE = new Range<>(0, Integer.MAX_VALUE);
 
     static {
         CHAOS_DIRECTIVES.add("types");
@@ -61,41 +60,44 @@ public class NginxKeywordsManager implements ApplicationComponent {
         CONTEXT_TO_FLAG.add("mail", "NGX_MAIL_MAIN_CONF");
         CONTEXT_TO_FLAG.add("events", "NGX_EVENT_CONF");
 
-        FLAG_TO_RANGE.put("NGX_CONF_FLAG", new Range<Integer>(1, 1));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE1", new Range<Integer>(1, 1));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE23", new Range<Integer>(2, 3));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE12", new Range<Integer>(1, 2));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE13", new Range<Integer>(1, 3));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE123", new Range<Integer>(1, 3));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE1234", new Range<Integer>(1, 4));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE3", new Range<Integer>(3, 3));
-        FLAG_TO_RANGE.put("NGX_CONF_TAKE2", new Range<Integer>(2, 2));
-        FLAG_TO_RANGE.put("NGX_CONF_2MORE", new Range<Integer>(2, Integer.MAX_VALUE));
-        FLAG_TO_RANGE.put("NGX_CONF_1MORE", new Range<Integer>(1, Integer.MAX_VALUE));
-        FLAG_TO_RANGE.put("NGX_CONF_NOARGS", new Range<Integer>(0, 0));
+        FLAG_TO_RANGE.put("NGX_CONF_FLAG", new Range<>(1, 1));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE1", new Range<>(1, 1));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE23", new Range<>(2, 3));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE12", new Range<>(1, 2));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE13", new Range<>(1, 3));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE123", new Range<>(1, 3));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE1234", new Range<>(1, 4));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE3", new Range<>(3, 3));
+        FLAG_TO_RANGE.put("NGX_CONF_TAKE2", new Range<>(2, 2));
+        FLAG_TO_RANGE.put("NGX_CONF_2MORE", new Range<>(2, Integer.MAX_VALUE));
+        FLAG_TO_RANGE.put("NGX_CONF_1MORE", new Range<>(1, Integer.MAX_VALUE));
+        FLAG_TO_RANGE.put("NGX_CONF_NOARGS", new Range<>(0, 0));
 
     }
 
     // keyword -> flags
-    private Map<String, Set<String>> keywords = new HashMap<String, Set<String>>();
+    private Map<String, Set<String>> keywords = new HashMap<>();
 
     // inner variables like $host
-    private Set<String> variables = new HashSet<String>();
+    private Set<String> variables = new HashSet<>();
 
     private static Pattern COMPLEX_VARIABLES_PATTERN = Pattern.compile("(?:(?:arg)|(?:http)|(?:cookie)|(?:upstream_http))_\\w+");
 
     //keyword -> [flags, flags, ...]
-    private Map<String, List<Set<String>>> ambiguousKeywords = new HashMap<String, List<Set<String>>>();
+    private Map<String, List<Set<String>>> ambiguousKeywords = new HashMap<>();
     private final String ANY_CONTEXT_FLAG = "NGX_ANY_CONF";
 
     public void initComponent() {
-
         BufferedReader keywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("keywords.txt")));
         BufferedReader variablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("variables.txt")));
+        BufferedReader openrestyKeywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("openrestykeywords.txt")));
+        BufferedReader openrestyVariablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("openrestyvariables.txt")));
         Exception oops = null;
         try {
             readKeywords(keywordsReader);
             readVariables(variablesReader);
+            readKeywords(openrestyKeywordsReader);
+            readVariables(openrestyVariablesReader);
         } catch (IOException e) {
             oops = e;
         } finally {
@@ -113,7 +115,6 @@ public class NginxKeywordsManager implements ApplicationComponent {
         if (oops != null) {
             throw new RuntimeException(oops);
         }
-
     }
 
     public Set<String> getKeywords() {
@@ -128,11 +129,9 @@ public class NginxKeywordsManager implements ApplicationComponent {
         return doCheckFlag(directive, "NGX_CONF_FLAG");
     }
 
-
     public boolean checkCanHaveChildContext(String directive) {
         Set<String> flags = keywords.get(directive);
         return flags == null || flags.contains("NGX_CONF_BLOCK"); //true if directive not found
-
     }
 
     public Range<Integer> getValueRange(String directive) {
@@ -151,7 +150,6 @@ public class NginxKeywordsManager implements ApplicationComponent {
     }
 
     public boolean checkCanHaveParentContext(String directive, String context) {
-
         //checking if directive can reside anywhere
         if (doCheckFlag(directive, ANY_CONTEXT_FLAG)) {
             return true;
@@ -168,7 +166,6 @@ public class NginxKeywordsManager implements ApplicationComponent {
             }
             return yesWeCan;
         }
-
     }
 
     /**
@@ -189,7 +186,6 @@ public class NginxKeywordsManager implements ApplicationComponent {
      * @return possible directives for given context
      */
     public Set<String> getDirectivesThatCanResideIn(String context) {
-
         Set<String> flags = CONTEXT_TO_FLAG.getFlagsFor(context);
         if (flags == null) { //unknown parent - let's allow for any directove
             return keywords.keySet();
@@ -203,7 +199,6 @@ public class NginxKeywordsManager implements ApplicationComponent {
             }
         }
         return result;
-
     }
 
     public Set<String> getDirectivesThatCanResideInMainContext() {
@@ -226,33 +221,27 @@ public class NginxKeywordsManager implements ApplicationComponent {
     }
 
     private void readKeywords(BufferedReader reader) throws IOException {
-
         String line;
         while ((line = reader.readLine()) != null) {
-
             String[] splitLine = line.split(" ");
 
             String keyword = splitLine[0];
-            Set<String> flags = new HashSet<String>();
+            Set<String> flags = new HashSet<>();
             flags.addAll(Arrays.asList(splitLine).subList(1, splitLine.length));
             if (!keywords.containsKey(keyword)) {
                 keywords.put(keyword, flags);
             } else {
                 keywords.get(keyword).addAll(flags);
             }
-
         }
     }
 
     private void readVariables(BufferedReader variablesReader) throws IOException {
-
         String line;
         while ((line = variablesReader.readLine()) != null) {
             variables.add(line);
         }
-
     }
-
 
     public void disposeComponent() {
 
@@ -265,7 +254,6 @@ public class NginxKeywordsManager implements ApplicationComponent {
 
 
     private static class ContextToFlagMapping {
-
         Map<String, Set<String>> map = new HashMap<String, Set<String>>();
 
         void add(String context, String... flags) {
@@ -277,7 +265,6 @@ public class NginxKeywordsManager implements ApplicationComponent {
         Set<String> getFlagsFor(String context) {
             return map.get(context);
         }
-
     }
 
 }
