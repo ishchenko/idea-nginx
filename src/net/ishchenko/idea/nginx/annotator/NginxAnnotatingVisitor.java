@@ -117,13 +117,10 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
             }
             String message = NginxBundle.message("annotator.directive.wrongnumberofvalues", nameString, rangeString, realRange);
 
-            int i = 0;
             for (NginxComplexValue nginxComplexValue : node.getValues()) {
-                if (++i > expectedRange.getTo()) {
-                    holder.createErrorAnnotation(nginxComplexValue, message);
-                }
+                holder.createErrorAnnotation(nginxComplexValue, message);
             }
-            if (i == 0) {
+            if (node.getValues().isEmpty()) {
                 holder.createErrorAnnotation(node.getDirectiveName(), message);
             }
 

@@ -2,7 +2,6 @@ package net.ishchenko.idea.nginx.lexer;
 
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
-import net.ishchenko.idea.nginx.lexer.NginxElementTypes;
 
 %%
 
@@ -23,7 +22,6 @@ SpecialDirectives = "http" | "server" | "location" | "if" | "upstream" | "events
 ValueStart = [^{};\n\r \t\f#$']
 
 LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator})
-
 
 %state DIRECTIVE_VALUE
 
@@ -52,6 +50,7 @@ LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator})
                                             }
     ' ~'                                    {return NginxElementTypes.DIRECTIVE_STRING_VALUE;}
     {AnySpace}+ {ValueStart} {yypushback(1); return NginxElementTypes.VALUE_WHITE_SPACE;}
+    {AnySpace}+ [$]          {yypushback(1); return NginxElementTypes.VALUE_WHITE_SPACE;}
     "{"                      {yybegin(YYINITIAL); return NginxElementTypes.OPENING_BRACE; }
     "}"                      {yybegin(YYINITIAL); return NginxElementTypes.CLOSING_BRACE; }
     ";"                      {yybegin(YYINITIAL); return NginxElementTypes.SEMICOLON;}
