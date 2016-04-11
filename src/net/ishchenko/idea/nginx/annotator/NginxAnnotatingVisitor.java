@@ -48,6 +48,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
         this.configuration = configuration;
     }
 
+    @Override
     public synchronized void annotate(PsiElement psiElement, AnnotationHolder holder) {
         this.holder = holder;
         psiElement.accept(this);
@@ -65,6 +66,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
         }
 
         //ok, now we know that directive does exist. let's do some more advanced checks.
+        checkDeprecatedDirectives(node);
         checkParentContext(node);
         checkChildContext(node);
         checkValueCount(node);
@@ -90,6 +92,14 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
             holder.createWarningAnnotation(node, NginxBundle.message("annotator.variable.notexists", node.getText()));
         }
 
+    }
+
+    private void checkDeprecatedDirectives(NginxDirective node) {
+        String name = node.getNameString();
+
+        if (keywords.OPENRESTY_DEPRECATED_KEYWORDS.contains(name)) {
+            holder.createWarningAnnotation(node, NginxBundle.message("annotator.directive.openresty.deprecated", name));
+        }
     }
 
     private void checkValueCount(NginxDirective node) {

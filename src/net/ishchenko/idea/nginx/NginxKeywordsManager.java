@@ -47,10 +47,22 @@ public class NginxKeywordsManager implements ApplicationComponent {
     public static final Map<String, Range<Integer>> FLAG_TO_RANGE = new HashMap<>();
     public static final Range<Integer> RANGE_FOR_UNKNOWN_DIRECTIVE = new Range<>(0, Integer.MAX_VALUE);
 
+    // deprecated directives (mainly openresty keywords)
+    public static final Set<String> OPENRESTY_DEPRECATED_KEYWORDS = new HashSet<>();
+
     static {
         CHAOS_DIRECTIVES.add("types");
         CHAOS_DIRECTIVES.add("charset_map");
         CHAOS_DIRECTIVES.add("map");
+
+        OPENRESTY_DEPRECATED_KEYWORDS.add("access_by_lua");
+        OPENRESTY_DEPRECATED_KEYWORDS.add("body_filter_by_lua");
+        OPENRESTY_DEPRECATED_KEYWORDS.add("content_by_lua");
+        OPENRESTY_DEPRECATED_KEYWORDS.add("header_filter_by_lua");
+        OPENRESTY_DEPRECATED_KEYWORDS.add("init_by_lua");
+        OPENRESTY_DEPRECATED_KEYWORDS.add("init_worker_by_lua");
+        OPENRESTY_DEPRECATED_KEYWORDS.add("log_by_lua");
+        OPENRESTY_DEPRECATED_KEYWORDS.add("rewrite_by_lua");
 
         CONTEXT_TO_FLAG.add("http", "NGX_HTTP_MAIN_CONF");
         CONTEXT_TO_FLAG.add("location", "NGX_HTTP_LOC_CONF");
