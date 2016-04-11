@@ -53,12 +53,10 @@ public interface NginxElementTypes {
     IElementType OPENING_BRACE = new NginxElementType("OPENING_BRACE");
     IElementType CLOSING_BRACE = new NginxElementType("CLOSING_BRACE");
     IElementType SEMICOLON = new NginxElementType("SEMICOLON");
+    IElementType LUA_CONTEXT = new NginxElementType("LUA_CONTEXT");
 
     TokenSet WHITE_SPACES = TokenSet.create(WHITE_SPACE);
     TokenSet COMMENTS = TokenSet.create(COMMENT);
     TokenSet STRINGS = TokenSet.create(DIRECTIVE_STRING_VALUE);
 
-
 }
-
-

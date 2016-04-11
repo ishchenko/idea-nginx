@@ -168,6 +168,18 @@ public class NginxParser implements PsiParser {
 
                 parseDirective(builder);
 
+            } else if (token == NginxElementTypes.LUA_CONTEXT) {
+
+                while (token != NginxElementTypes.CLOSING_BRACE) {
+                    builder.advanceLexer();
+                    token = builder.getTokenType();
+                }
+
+                contextMarker.done(NginxElementTypes.LUA_CONTEXT);
+                directiveMark.done(NginxElementTypes.LUA_CONTEXT);
+                builder.advanceLexer();
+                return;
+
             } else if (token == NginxElementTypes.CLOSING_BRACE) {
 
                 contextMarker.done(NginxElementTypes.CONTEXT);

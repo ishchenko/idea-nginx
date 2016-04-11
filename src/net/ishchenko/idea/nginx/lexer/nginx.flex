@@ -19,6 +19,7 @@ WhiteSpace = [ \t]
 AnySpace = {LineTerminator} | {WhiteSpace} | [\f]
 //tokens to be highlighted
 SpecialDirectives = "http" | "server" | "location" | "if" | "upstream" | "events" | "types" | "charset_map" | "limit_except" | "geo" | "map" | "mail" | "imap"
+LuaDirectives = "init_by_lua_block" | "log_by_lua_block" | "upstream_by_lua_block" | "content_by_lua_block" | "access_by_lua_block" | "rewrite_by_lua_block" | "body_filter_by_lua_block" | "header_filter_by_lua_block" | "init_worker_by_lua_block" | "set_by_lua_block" | "ssl_by_lua_block"
 ValueStart = [^{};\n\r \t\f#$']
 
 LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator})
@@ -29,6 +30,7 @@ LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator})
 
 <YYINITIAL> {
     {SpecialDirectives}                        {yybegin(DIRECTIVE_VALUE); return NginxElementTypes.CONTEXT_NAME; }
+    {LuaDirectives}                            {yybegin(DIRECTIVE_VALUE); return NginxElementTypes.LUA_CONTEXT; }
     [^{};\n\r \t\f'#]+                         {yybegin(DIRECTIVE_VALUE); return NginxElementTypes.DIRECTIVE_NAME; }
     "}"                                        {return NginxElementTypes.CLOSING_BRACE; }
 }
