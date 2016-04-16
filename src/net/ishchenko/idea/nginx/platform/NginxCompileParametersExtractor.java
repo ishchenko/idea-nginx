@@ -20,8 +20,10 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import net.ishchenko.idea.nginx.NginxBundle;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,22 +46,28 @@ public class NginxCompileParametersExtractor {
 
         NginxCompileParameters result = new NginxCompileParameters();
 
-        Runtime rt = Runtime.getRuntime();
-        OutputStream os;
+        String output = "";
 
         try {
-            Process process = rt.exec(from.getPath() + " -V");
-            os = process.getOutputStream();
-        } catch (IOException e) {
+            ProcessBuilder pb = new ProcessBuilder(from.getPath(), "-V");
+            Process process = pb.start();
+            BufferedReader errorReader = new BufferedReader(
+                    new InputStreamReader(process.getErrorStream()));
+
+            process.waitFor();
+            String line = "";
+            while ((line = errorReader.readLine()) != null) {
+                output += line + "\n";
+            }
+        } catch (IOException | InterruptedException e) {
             throw new PlatformDependentTools.ThisIsNotNginxExecutableException(e);
         }
 
-        String output = os.toString();
-        Matcher versionMatcher = Pattern.compile("nginx version: nginx/([\\d\\.]+)").matcher(output);
+        Matcher versionMatcher = Pattern.compile("nginx version: (nginx|openresty)/([\\d\\.]+)").matcher(output);
         Matcher configureArgumentsMatcher = Pattern.compile("configure arguments: (.*)").matcher(output);
 
         if (versionMatcher.find() && configureArgumentsMatcher.find()) {
-            String version = versionMatcher.group(1);
+            String version = versionMatcher.group(2);
             String params = configureArgumentsMatcher.group(1);
 
             result.setVersion(version);
