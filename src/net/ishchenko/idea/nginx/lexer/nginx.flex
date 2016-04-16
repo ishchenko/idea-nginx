@@ -20,7 +20,7 @@ AnySpace = {LineTerminator} | {WhiteSpace} | [\f]
 //tokens to be highlighted
 SpecialDirectives = "http" | "server" | "location" | "if" | "upstream" | "events" | "types" | "charset_map" | "limit_except" | "geo" | "map" | "mail" | "imap"
 LuaDirectives = "init_by_lua_block" | "log_by_lua_block" | "upstream_by_lua_block" | "content_by_lua_block" | "access_by_lua_block" | "rewrite_by_lua_block" | "body_filter_by_lua_block" | "header_filter_by_lua_block" | "init_worker_by_lua_block" | "set_by_lua_block" | "ssl_by_lua_block"
-ValueStart = [^{};\n\r \t\f#$']
+ValueStart = [^{};\n\r \t\f#$'\"]
 
 LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator})
 
@@ -50,7 +50,7 @@ LineComment = {WhiteSpace}* "\#" (.* | {LineTerminator})
 
                                                 return NginxElementTypes.DIRECTIVE_VALUE;
                                             }
-    ' ~'                                    {return NginxElementTypes.DIRECTIVE_STRING_VALUE;}
+    ' ~' | \" ~\"                                    {return NginxElementTypes.DIRECTIVE_STRING_VALUE;}
     {AnySpace}+ {ValueStart} {yypushback(1); return NginxElementTypes.VALUE_WHITE_SPACE;}
     {AnySpace}+ [$]          {yypushback(1); return NginxElementTypes.VALUE_WHITE_SPACE;}
     "{"                      {yybegin(YYINITIAL); return NginxElementTypes.OPENING_BRACE; }
