@@ -115,6 +115,8 @@
         <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
         <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
         <fileTypeFactory implementation="net.ishchenko.idea.nginx.NginxFileTypeFactory"/>
+        <lang.findUsagesProvider language="nginx"
+                                 implementationClass="net.ishchenko.idea.nginx.NginxFindUsagesProvider"/>
 
         <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.LinuxSpecificTools" os="unix"/>
         <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.WindowsSpecificTools" os="windows"/>

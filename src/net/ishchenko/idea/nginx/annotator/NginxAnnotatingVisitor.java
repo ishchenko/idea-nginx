@@ -88,7 +88,10 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
     public void visitInnerVariable(NginxInnerVariable node) {
 
         //should I cut $ in NginxInnerVariable itself?
-        if (!keywords.isValidInnerVariable(node.getName())) {
+        // get references will return 1 for itself
+        if (!keywords.isValidInnerVariable(node.getName())
+                && ((node.getReference() != null && node.getReference().resolve() == null)
+                || node.getReference() == null)) {
             holder.createWarningAnnotation(node, NginxBundle.message("annotator.variable.notexists", node.getText()));
         }
 
@@ -97,7 +100,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
     private void checkDeprecatedDirectives(NginxDirective node) {
         String name = node.getNameString();
 
-        if (keywords.OPENRESTY_DEPRECATED_KEYWORDS.contains(name)) {
+        if (NginxKeywordsManager.OPENRESTY_DEPRECATED_KEYWORDS.contains(name)) {
             holder.createWarningAnnotation(node, NginxBundle.message("annotator.directive.openresty.deprecated", name));
         }
     }
