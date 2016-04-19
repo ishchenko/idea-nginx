@@ -3,6 +3,7 @@ package net.ishchenko.idea.nginx.psi;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
+import net.ishchenko.idea.nginx.NginxKeywordsManager;
 import net.ishchenko.idea.nginx.psi.NginxContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,29 +23,9 @@ public class NginxVariableReference extends PsiReferenceBase<PsiElement> impleme
     @Override
     public PsiElement resolve() {
         PsiElement parent = PsiTreeUtil.getParentOfType(myElement, NginxContext.class);
-        // Do initial check in the current context where there will be at least
-        // two children corresponding to the type if the variable is defined in
-        // this context.
-        Collection<PsiNamedElement> children = PsiTreeUtil.findChildrenOfType(parent, PsiNamedElement.class);
-        long numChild = children.stream()
-                .filter(child -> child.getName() != null && child.getName().equals(name))
-                .count();
-
-        if (numChild > 1) {
-            return findSource(parent);
-        }
-
-        parent = PsiTreeUtil.getParentOfType(parent, NginxContext.class);
-
         PsiElement source = null;
         while (source == null && parent != null && parent.getParent() != null) {
-            children = PsiTreeUtil.findChildrenOfType(parent, PsiNamedElement.class);
-            numChild = children.stream()
-                    .filter(child -> child.getName() != null && child.getName().equals(name))
-                    .count();
-            if (numChild > 1) {
-                source = findSource(parent);
-            }
+            source = findSource(parent);
             parent = PsiTreeUtil.getParentOfType(parent, NginxContext.class);
         }
 
@@ -52,9 +33,13 @@ public class NginxVariableReference extends PsiReferenceBase<PsiElement> impleme
     }
 
     private PsiElement findSource(PsiElement parent) {
-        Collection<PsiNamedElement> children = PsiTreeUtil.findChildrenOfType(parent, PsiNamedElement.class);
+        Collection<PsiNamedElement> children = PsiTreeUtil.findChildrenOfType(parent, NginxInnerVariable.class);
         return children.stream()
-                .filter(child -> child.getName() != null && child.getName().equals(name))
+                .filter(child -> child.getName() != null
+                        && child.getName().equals(name)
+                        && child.getParent().getParent() instanceof NginxDirective
+                        && NginxKeywordsManager.SET_DIRECTIVES.contains(
+                            ((NginxDirective)child.getParent().getParent()).getNameString()))
                 .findFirst()
                 .orElse(null);
     }
