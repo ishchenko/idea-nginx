@@ -31,7 +31,9 @@ import org.jetbrains.annotations.NotNull;
  */
 public class NginxLanguage extends Language {
 
-    public NginxLanguage() {
+    public static final NginxLanguage INSTANCE = new NginxLanguage();
+
+    private NginxLanguage() {
 
         super("nginx");
 
