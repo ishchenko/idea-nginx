@@ -3,7 +3,7 @@
 
     <id>ideanginx9</id>
     <name>nginx Support</name>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <vendor url="https://github.com/ishchenko/idea-nginx" logo="/net/ishchenko/idea/nginx/nginx.png">Max Ishchenko</vendor>
 
     <description>
@@ -17,6 +17,14 @@
     <depends>com.intellij.modules.lang</depends>
 
     <change-notes><![CDATA[
+        <b>0.1.1</b>
+        <ul>
+            <li>Updated keywords to Nginx 1.9.15</li>
+            <li>Added OpenResty keywords to 1.9.7.4</li>
+            <li>Fixed wrong number of argument annotations (e.g. server_name with multiple values</li>
+            <li>Add support for local variables using set directives</li>
+            <li>Double quote now denote strings as well as single quotes</li>
+        </ul>
         <b>0.1.0</b>
         <ul>
             <li>Idea 15 compatibility - PlatformDependentToolsInstaller could be app service now and appropriate implementation selected by "os" attribute</li>
@@ -115,6 +123,8 @@
         <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
         <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
         <fileTypeFactory implementation="net.ishchenko.idea.nginx.NginxFileTypeFactory"/>
+        <lang.findUsagesProvider language="nginx"
+                                 implementationClass="net.ishchenko.idea.nginx.NginxFindUsagesProvider"/>
 
         <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.LinuxSpecificTools" os="unix"/>
         <applicationService serviceInterface="net.ishchenko.idea.nginx.platform.PlatformDependentTools" serviceImplementation="net.ishchenko.idea.nginx.platform.WindowsSpecificTools" os="windows"/>

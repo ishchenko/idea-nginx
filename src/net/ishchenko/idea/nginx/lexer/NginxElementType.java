@@ -30,8 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class NginxElementType extends IElementType {
 
     public NginxElementType(@NotNull String s) {
-        super(s, Language.findInstance(NginxLanguage.class));
+        super(s, NginxLanguage.INSTANCE);
     }
-
 
 }

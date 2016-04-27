@@ -35,8 +35,8 @@ public class NginxFileType extends LanguageFileType implements FileTypeIdentifia
 
     private static NginxFileType INSTANCE = new NginxFileType();
 
-    public NginxFileType() {
-        super(new NginxLanguage());
+     NginxFileType() {
+        super(NginxLanguage.INSTANCE);
     }
 
     public static NginxFileType getInstance() {

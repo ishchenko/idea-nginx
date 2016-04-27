@@ -26,6 +26,9 @@ import net.ishchenko.idea.nginx.configurator.NginxServerDescriptor;
 import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
 import net.ishchenko.idea.nginx.psi.*;
 
+import java.util.Optional;
+import java.util.Set;
+
 /**
  * Created by IntelliJ IDEA.
  * User: Max
@@ -45,6 +48,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
         this.configuration = configuration;
     }
 
+    @Override
     public synchronized void annotate(PsiElement psiElement, AnnotationHolder holder) {
         this.holder = holder;
         psiElement.accept(this);
@@ -62,6 +66,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
         }
 
         //ok, now we know that directive does exist. let's do some more advanced checks.
+        checkDeprecatedDirectives(node);
         checkParentContext(node);
         checkChildContext(node);
         checkValueCount(node);
@@ -83,10 +88,21 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
     public void visitInnerVariable(NginxInnerVariable node) {
 
         //should I cut $ in NginxInnerVariable itself?
-        if (!keywords.isValidInnerVariable(node.getName())) {
+        // get references will return 1 for itself
+        if (!keywords.isValidInnerVariable(node.getName())
+                && ((node.getReference() != null && node.getReference().resolve() == null)
+                || node.getReference() == null)) {
             holder.createWarningAnnotation(node, NginxBundle.message("annotator.variable.notexists", node.getText()));
         }
 
+    }
+
+    private void checkDeprecatedDirectives(NginxDirective node) {
+        String name = node.getNameString();
+
+        if (NginxKeywordsManager.OPENRESTY_DEPRECATED_KEYWORDS.contains(name)) {
+            holder.createWarningAnnotation(node, NginxBundle.message("annotator.directive.openresty.deprecated", name));
+        }
     }
 
     private void checkValueCount(NginxDirective node) {
@@ -105,7 +121,17 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
         }
 
         int realRange = node.getValues().size();
-        Range<Integer> expectedRange = keywords.getValueRange(nameString);
+        Set<Range<Integer>> expectedRanges= keywords.getValueRange(nameString);
+
+        Optional<Range<Integer>> possibleRanges = expectedRanges.stream()
+                .filter(range -> range.isWithin(realRange))
+                .findFirst();
+
+        Range<Integer> expectedRange = possibleRanges.orElse(
+                expectedRanges.stream()
+                .min((range1, range2) -> range1.getFrom() - range2.getFrom() - (range1.getTo() - range2.getTo()))
+                .get() // assume that there is always a value
+        );
 
         if (!expectedRange.isWithin(realRange)) {
 
@@ -117,13 +143,10 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
             }
             String message = NginxBundle.message("annotator.directive.wrongnumberofvalues", nameString, rangeString, realRange);
 
-            int i = 0;
             for (NginxComplexValue nginxComplexValue : node.getValues()) {
-                if (++i > expectedRange.getTo()) {
-                    holder.createErrorAnnotation(nginxComplexValue, message);
-                }
+                holder.createErrorAnnotation(nginxComplexValue, message);
             }
-            if (i == 0) {
+            if (node.getValues().isEmpty()) {
                 holder.createErrorAnnotation(node.getDirectiveName(), message);
             }
 

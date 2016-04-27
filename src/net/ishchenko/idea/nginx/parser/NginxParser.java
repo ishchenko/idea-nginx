@@ -168,6 +168,10 @@ public class NginxParser implements PsiParser {
 
                 parseDirective(builder);
 
+            } else if (token == NginxElementTypes.LUA_CONTEXT) {
+
+                parseLuaContext(builder);
+
             } else if (token == NginxElementTypes.CLOSING_BRACE) {
 
                 contextMarker.done(NginxElementTypes.CONTEXT);
@@ -198,6 +202,19 @@ public class NginxParser implements PsiParser {
         contextMarker.done(NginxElementTypes.CONTEXT);
         directiveMark.done(NginxElementTypes.DIRECTIVE);
 
+    }
+
+    private void parseLuaContext(PsiBuilder builder) {
+        IElementType token = builder.getTokenType();
+        PsiBuilder.Marker contextMarker = builder.mark();
+
+        while (token != NginxElementTypes.CLOSING_BRACE) {
+            builder.advanceLexer();
+            token = builder.getTokenType();
+        }
+
+        contextMarker.done(NginxElementTypes.LUA_CONTEXT);
+        builder.advanceLexer();
     }
 
 }

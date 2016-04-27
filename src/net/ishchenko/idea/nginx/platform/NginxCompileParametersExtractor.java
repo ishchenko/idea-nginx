@@ -19,13 +19,11 @@ package net.ishchenko.idea.nginx.platform;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import net.ishchenko.idea.nginx.NginxBundle;
-import org.apache.commons.exec.CommandLine;
-import org.apache.commons.exec.DefaultExecutor;
-import org.apache.commons.exec.Executor;
-import org.apache.commons.exec.PumpStreamHandler;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,23 +46,28 @@ public class NginxCompileParametersExtractor {
 
         NginxCompileParameters result = new NginxCompileParameters();
 
-        Executor executor = new DefaultExecutor();
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        String output = "";
 
         try {
-            executor.setStreamHandler(new PumpStreamHandler(os, os));
-            executor.execute(CommandLine.parse(from.getPath() + " -V"));
-        } catch (IOException e) {
+            ProcessBuilder pb = new ProcessBuilder(from.getPath(), "-V");
+            Process process = pb.start();
+            BufferedReader errorReader = new BufferedReader(
+                    new InputStreamReader(process.getErrorStream()));
+
+            process.waitFor();
+            String line = "";
+            while ((line = errorReader.readLine()) != null) {
+                output += line + "\n";
+            }
+        } catch (IOException | InterruptedException e) {
             throw new PlatformDependentTools.ThisIsNotNginxExecutableException(e);
         }
 
-        String output = os.toString();
-        Matcher versionMatcher = Pattern.compile("nginx version: nginx/([\\d\\.]+)").matcher(output);
+        Matcher versionMatcher = Pattern.compile("nginx version: (nginx|openresty)/([\\d\\.]+)").matcher(output);
         Matcher configureArgumentsMatcher = Pattern.compile("configure arguments: (.*)").matcher(output);
 
         if (versionMatcher.find() && configureArgumentsMatcher.find()) {
-
-            String version = versionMatcher.group(1);
+            String version = versionMatcher.group(2);
             String params = configureArgumentsMatcher.group(1);
 
             result.setVersion(version);
@@ -78,18 +81,14 @@ public class NginxCompileParametersExtractor {
                     handleNameValue(result, namevalue.substring(0, eqPosition), namevalue.substring(eqPosition + 1));
                 }
             }
-
-
         } else {
             throw new PlatformDependentTools.ThisIsNotNginxExecutableException(NginxBundle.message("run.configuration.outputwontmatch"));
         }
 
         return result;
-
     }
 
     private static void handleNameValue(NginxCompileParameters result, String name, String value) {
-
         if (name.equals("--conf-path")) {
             result.setConfigurationPath(value);
         } else if (name.equals("--pid-path")) {
@@ -101,12 +100,9 @@ public class NginxCompileParametersExtractor {
         } else if (name.equals("--error-log-path")) {
             result.setErrorLogPath(value);
         }
-
     }
 
     private static void handleFlag(NginxCompileParameters result, String flag) {
-
         //no flags to handle at the moment
-
     }
 }
