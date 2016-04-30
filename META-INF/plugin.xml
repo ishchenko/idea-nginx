@@ -123,6 +123,7 @@
         <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
         <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
         <fileTypeFactory implementation="net.ishchenko.idea.nginx.NginxFileTypeFactory"/>
+        <languageInjector implementation="net.ishchenko.idea.nginx.injection.LuaInjector" />
         <lang.findUsagesProvider language="nginx"
                                  implementationClass="net.ishchenko.idea.nginx.NginxFindUsagesProvider"/>
 

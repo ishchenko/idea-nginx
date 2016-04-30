@@ -6,9 +6,9 @@ import com.intellij.testFramework.ParsingTestCase;
 import net.ishchenko.idea.nginx.parser.NginxParserDefinition;
 
 public class ParserTest extends ParsingTestCase {
-    // Needs to be called to add to Language.ourRegisteredClasses
-    // Other get an error "nginx doesn't participate in view provider"
-    // Caused by the view provider language being "ANY".
+    // Needs to be called to add to Language.ourRegisteredClasses.
+    // Otherwise we get an error "nginx doesn't participate in view provider",
+    // which is caused by the view provider language being "ANY".
     private static Language l = NginxLanguage.INSTANCE;
 
     public ParserTest() {

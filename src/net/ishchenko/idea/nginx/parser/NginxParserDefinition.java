@@ -88,6 +88,8 @@ public class NginxParserDefinition implements ParserDefinition {
             return new NginxComplexValueImpl(node);
         } else if (type == NginxElementTypes.CONTEXT) {
             return new NginxContextImpl(node);
+        } else if (type == NginxElementTypes.LUA_CONTEXT) {
+            return new NginxLuaContextImpl(node);
         }
 
         return new ASTWrapperPsiElement(node);
