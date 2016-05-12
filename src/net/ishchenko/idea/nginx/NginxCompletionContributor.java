@@ -19,7 +19,7 @@ package net.ishchenko.idea.nginx;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.lookup.LookupItem;
+import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
 import net.ishchenko.idea.nginx.psi.*;
 
@@ -33,37 +33,38 @@ import java.util.*;
  */
 public class NginxCompletionContributor extends CompletionContributor {
 
-    private List<LookupItem> allLookupElements = new ArrayList<LookupItem>();
-    private Map<String, Set<LookupItem>> contextToDirectiveNameElements = new HashMap<String, Set<LookupItem>>();
-    private List<LookupItem> mainContextDirectiveNameElements = new ArrayList<LookupItem>();
-
-    private static List<LookupItem> booleanVariants = new ArrayList<LookupItem>();
-    {
-        booleanVariants.add(new LookupItem<String>("on", "on"));
-        booleanVariants.add(new LookupItem<String>("off", "off"));
-    }
+    private static List<LookupElementBuilder> booleanVariants = new ArrayList<>();
 
     private NginxKeywordsManager keywords;
+
+    private List<LookupElementBuilder> allLookupElements = new ArrayList<>();
+    private Map<String, Set<LookupElementBuilder>> contextToDirectiveNameElements = new HashMap<>();
+    private List<LookupElementBuilder> mainContextDirectiveNameElements = new ArrayList<>();
+
+    static {
+        booleanVariants.add(LookupElementBuilder.create("on"));
+        booleanVariants.add(LookupElementBuilder.create("off"));
+    }
 
     public NginxCompletionContributor(NginxKeywordsManager keywords) {
 
         this.keywords = keywords;
 
         for (String keyword : keywords.getKeywords()) {
-            allLookupElements.add(new LookupItem<String>(keyword, keyword));
+            allLookupElements.add(LookupElementBuilder.create(keyword));
         }
 
         Map<String, Set<String>> contextToDirectives = keywords.getContextToDirectiveListMappings();
         for (Map.Entry<String, Set<String>> entry : contextToDirectives.entrySet()) {
-            Set<LookupItem> directives = new HashSet<LookupItem>();
+            Set<LookupElementBuilder> directives = new HashSet<>();
             for (String directive : entry.getValue()) {
-                directives.add(new LookupItem<String>(directive, directive));
+                directives.add(LookupElementBuilder.create(directive));
             }
             contextToDirectiveNameElements.put(entry.getKey(), directives);
         }
 
         for (String directive : keywords.getDirectivesThatCanResideInMainContext()) {
-            mainContextDirectiveNameElements.add(new LookupItem<String>(directive, directive));
+            mainContextDirectiveNameElements.add(LookupElementBuilder.create(directive));
         }
 
     }
@@ -108,19 +109,19 @@ public class NginxCompletionContributor extends CompletionContributor {
 
         NginxContext context = where.getDirective().getParentContext();
         if (context == null) {
-            for (LookupItem mainContextElement : mainContextDirectiveNameElements) {
+            for (LookupElementBuilder mainContextElement : mainContextDirectiveNameElements) {
                 result.addElement(mainContextElement);
             }
         } else {
             String contextName = context.getDirective().getNameString();
-            Set<LookupItem> elementsForContext = contextToDirectiveNameElements.get(contextName);
+            Set<LookupElementBuilder> elementsForContext = contextToDirectiveNameElements.get(contextName);
             if (elementsForContext == null) {
                 //parent directive might be unknown. suggest all.
-                for (LookupItem LookupItem : allLookupElements) {
+                for (LookupElementBuilder LookupItem : allLookupElements) {
                     result.addElement(LookupItem);
                 }
             } else {
-                for (LookupItem LookupItem : elementsForContext) {
+                for (LookupElementBuilder LookupItem : elementsForContext) {
                     result.addElement(LookupItem);
                 }
             }
@@ -130,7 +131,7 @@ public class NginxCompletionContributor extends CompletionContributor {
 
     private void suggestValue(CompletionResultSet result, NginxDirectiveValue where) {
         if (keywords.checkBooleanKeyword(where.getDirective().getNameString())) {
-            for (LookupItem booleanVariant : booleanVariants) {
+            for (LookupElementBuilder booleanVariant : booleanVariants) {
                 result.addElement(booleanVariant);
             }
         }
@@ -139,7 +140,7 @@ public class NginxCompletionContributor extends CompletionContributor {
     private void suggestVariable(CompletionResultSet result) {
 
         for (String variable : keywords.getVariables()) {
-            result.addElement(new LookupItem<String>(variable, variable));
+            result.addElement(LookupElementBuilder.create(variable));
         }
 
     }

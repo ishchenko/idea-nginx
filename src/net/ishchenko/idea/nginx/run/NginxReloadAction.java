@@ -21,9 +21,9 @@ import com.intellij.execution.process.*;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.execution.ui.RunContentManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -158,7 +158,7 @@ public class NginxReloadAction extends AnAction {
     private RunContentDescriptor getRunContentDescriptor(AnActionEvent e) {
 
         //magic copied from com.intellij.execution.actions.StopAction
-        RunContentDescriptor runContentDescriptor = RunContentManager.RUN_CONTENT_DESCRIPTOR.getData(e.getDataContext());
+        RunContentDescriptor runContentDescriptor = LangDataKeys.RUN_CONTENT_DESCRIPTOR.getData(e.getDataContext());
         if (runContentDescriptor == null) {
             Project project = PlatformDataKeys.PROJECT.getData(e.getDataContext());
             if (project != null) {
