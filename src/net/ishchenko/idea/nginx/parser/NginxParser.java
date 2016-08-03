@@ -207,10 +207,22 @@ public class NginxParser implements PsiParser {
     private void parseLuaContext(PsiBuilder builder) {
         IElementType token = builder.getTokenType();
         PsiBuilder.Marker contextMarker = builder.mark();
+        int braceCount = 0;
+        boolean closingBraceFound = false;
 
-        while (token != NginxElementTypes.CLOSING_BRACE) {
-            builder.advanceLexer();
-            token = builder.getTokenType();
+        while (!closingBraceFound) {
+            if (token == NginxElementTypes.OPENING_BRACE) {
+                braceCount++;
+            } else if (token == NginxElementTypes.CLOSING_BRACE) {
+                braceCount--;
+            }
+
+            if (token == NginxElementTypes.CLOSING_BRACE && braceCount == 0) {
+                closingBraceFound = true;
+            } else {
+                builder.advanceLexer();
+                token = builder.getTokenType();
+            }
         }
 
         contextMarker.done(NginxElementTypes.LUA_CONTEXT);
