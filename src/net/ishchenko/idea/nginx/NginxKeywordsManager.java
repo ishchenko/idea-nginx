@@ -71,6 +71,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
         set_directives.add("set_by_lua");
         set_directives.add("set_by_lua_block");
         set_directives.add("set_by_lua_file");
+        set_directives.add("map");
         SET_DIRECTIVES = Collections.unmodifiableSet(set_directives);
 
         CONTEXT_TO_FLAG.add("http", "NGX_HTTP_MAIN_CONF");
