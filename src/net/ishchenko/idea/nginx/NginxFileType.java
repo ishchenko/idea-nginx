@@ -35,7 +35,7 @@ public class NginxFileType extends LanguageFileType implements FileTypeIdentifia
 
     private static NginxFileType INSTANCE = new NginxFileType();
 
-     NginxFileType() {
+    NginxFileType() {
         super(NginxLanguage.INSTANCE);
     }
 
@@ -55,7 +55,7 @@ public class NginxFileType extends LanguageFileType implements FileTypeIdentifia
 
     @NotNull
     public String getDefaultExtension() {
-        return "";
+        return "nginx";
     }
 
     public Icon getIcon() {
