@@ -127,7 +127,7 @@ public class WindowsSpecificTools implements PlatformDependentTools {
 
 
     private String[] getGlobals(NginxServerDescriptor descriptor) {
-        String globals = "pid " + descriptor.getPidPath() + ";"; //we don't want nginx run as daemon process
+        String globals = "pid '" + descriptor.getPidPath() + "';"; //we don't want nginx run as daemon process
         if (descriptor.getGlobals().length() > 0) {
             globals = globals + " " + descriptor.getGlobals();
         }
