@@ -58,8 +58,10 @@ proxy_internal_body_length
 proxy_internal_chunked
 proxy_port
 proxy_protocol_addr
+proxy_protocol_port
 query_string
 realip_remote_addr
+realip_remote_port
 realpath_root
 remote_addr
 remote_port
@@ -69,6 +71,7 @@ request_body
 request_body_file
 request_completion
 request_filename
+request_id
 request_length
 request_method
 request_time
