@@ -2,7 +2,7 @@
 
   <id>ideanginx9</id>
   <name>nginx Support</name>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <vendor url="https://github.com/ishchenko/idea-nginx">Max Ishchenko</vendor>
 
   <description>
@@ -16,6 +16,13 @@
   <depends>com.intellij.modules.lang</depends>
 
   <change-notes><![CDATA[
+        <b>0.1.3</b>
+        <ul>
+            <li>Update NGINX and OpenResty keywords.</li>
+            <li>Add default extension .nginx. This enables use with scratch files.</li>
+            <li>Partial fix for Lua block parsing when Lua contains braces. This works as long as the Lua braces are balanced. Otherwise the Lua block get expanded to the next closing brace. In this case the Lua shouldn't be valid anyway.</li>
+            <li>Fix PID path with spaces failing.</li>
+        </ul>
         <b>0.1.2</b>
         <ul>
             <li>Added Lua language injection to *by_lua_block directives. The Lua plugin must be installed for this to work!</li>
