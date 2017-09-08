@@ -2,7 +2,7 @@
 
   <id>ideanginx9</id>
   <name>nginx Support</name>
-  <version>0.1.3</version>
+  <version>0.1.4-SNAPSHOT</version>
   <vendor url="https://github.com/ishchenko/idea-nginx">Max Ishchenko</vendor>
 
   <description>
@@ -118,7 +118,7 @@
 
   <idea-version since-build="142.3304"/>
 
-  <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
+  <resource-bundle>NginxBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
     <lang.parserDefinition language="nginx" implementationClass="net.ishchenko.idea.nginx.parser.NginxParserDefinition"/>

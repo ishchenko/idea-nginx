@@ -59,7 +59,7 @@ public class NginxFileType extends LanguageFileType implements FileTypeIdentifia
     }
 
     public Icon getIcon() {
-        return IconLoader.getIcon("/net/ishchenko/idea/nginx/nginx.png");
+        return IconLoader.getIcon("/nginx.png");
     }
 
     public boolean isMyFileType(VirtualFile virtualFile) {

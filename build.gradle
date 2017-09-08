@@ -1,0 +1,36 @@
+plugins {
+    id "org.jetbrains.intellij" version "0.2.17"
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+
+group 'net.ishchenko.idea.nginx'
+version '0.1.4-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+sourceSets {
+    main {
+        java.srcDirs 'src', 'gen'
+        resources.srcDir 'resources'
+    }
+    test {
+        java.srcDir 'tests'
+    }
+}
+
+intellij {
+    version '2017.1' //IntelliJ IDEA dependency
+    //updateSinceUntilBuild false
+    //plugins 'coverage' //Bundled plugin dependencies
+    pluginName 'idea-nginx-support'
+}
