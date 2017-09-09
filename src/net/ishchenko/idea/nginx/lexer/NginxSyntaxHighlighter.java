@@ -36,14 +36,10 @@ import java.util.Map;
  */
 public class NginxSyntaxHighlighter extends SyntaxHighlighterBase {
 
-    private Lexer lexer;
-
     private final TextAttributesKey[] BAD_CHARACTER_KEYS = new TextAttributesKey[]{HighlighterColors.BAD_CHARACTER};
     private final Map<IElementType, TextAttributesKey> colors = new HashMap<IElementType, TextAttributesKey>();
 
     public NginxSyntaxHighlighter() {
-
-        lexer = new FlexAdapter(new _NginxLexer((java.io.Reader) null));
 
         colors.put(NginxElementTypes.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
         colors.put(NginxElementTypes.COMMENT, DefaultLanguageHighlighterColors.BLOCK_COMMENT);
@@ -56,7 +52,7 @@ public class NginxSyntaxHighlighter extends SyntaxHighlighterBase {
 
     @NotNull
     public Lexer getHighlightingLexer() {
-        return lexer;
+        return new FlexAdapter(new _NginxLexer((java.io.Reader) null));
     }
 
     @NotNull
