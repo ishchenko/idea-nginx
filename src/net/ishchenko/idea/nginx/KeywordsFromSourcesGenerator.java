@@ -43,7 +43,7 @@ public class KeywordsFromSourcesGenerator {
         final Set<String> directives = new TreeSet<>();
         final Set<String> variables = new TreeSet<>();
 
-        try (Stream<Path> stream = Files.find(Paths.get(System.getProperty("user.home") + "/git/nginx/src"), 100, (path, attr) -> String.valueOf(path).endsWith(".c"))) {
+        try (Stream<Path> stream = Files.find(Paths.get("vendor/nginx/src"), 100, (path, attr) -> String.valueOf(path).endsWith(".c"))) {
             stream.forEach(path -> {
                 try {
                     getDirectives(path, directives);
@@ -55,10 +55,10 @@ public class KeywordsFromSourcesGenerator {
             });
         }
 
-        Files.write(Paths.get("keywords.txt"), String.join("\n", directives).getBytes());
-        Files.write(Paths.get("variables.txt"), String.join("\n", variables).getBytes());
+        Files.write(Paths.get("resources/keywords.txt"), String.join("\n", directives).getBytes());
+        Files.write(Paths.get("resources/variables.txt"), String.join("\n", variables).getBytes());
 
-        try (Stream<Path> stream = Files.find(Paths.get(System.getProperty("user.home") + "/git/lua-nginx-module/src"), 100, (path, attr) -> String.valueOf(path).endsWith(".c"))) {
+        try (Stream<Path> stream = Files.find(Paths.get("vendor/lua-nginx-module/src"), 100, (path, attr) -> String.valueOf(path).endsWith(".c"))) {
             stream.forEach(path -> {
                 try {
                     getDirectives(path, directives);
@@ -70,8 +70,8 @@ public class KeywordsFromSourcesGenerator {
             });
         }
 
-        Files.write(Paths.get("openrestykeywords.txt"), String.join("\n", directives).getBytes());
-        Files.write(Paths.get("openrestyvariables.txt"), String.join("\n", variables).getBytes());
+        Files.write(Paths.get("resources/openrestykeywords.txt"), String.join("\n", directives).getBytes());
+        Files.write(Paths.get("resources/openrestyvariables.txt"), String.join("\n", variables).getBytes());
 
         System.out.println("All done!");
     }
@@ -119,7 +119,8 @@ public class KeywordsFromSourcesGenerator {
             String variableBlock = variableBlockMatcher.group(1);
 
             variableBlock = variableBlock.substring(variableBlock.indexOf('{') + 1, variableBlock.lastIndexOf('}') - 1);
-            variableBlock = variableBlock.substring(0, variableBlock.lastIndexOf("ngx_null_string") - 1).trim();
+            int end = Math.max(variableBlock.lastIndexOf("ngx_stream_null_variable"),variableBlock.lastIndexOf("ngx_http_null_variable"));
+            variableBlock = variableBlock.substring(0, end - 1).trim();
 
             variableBlock = PREPROCESSOR_DIRECTIVE_PATTERN.matcher(variableBlock).replaceAll("").trim();
 

@@ -1,9 +1,11 @@
+import org.ajoberstar.grgit.Grgit
+
 plugins {
     id "org.jetbrains.intellij" version "0.2.17"
+    id "org.ajoberstar.grgit" version "2.0.0"
+    id "java"
+    id "idea"
 }
-
-apply plugin: 'idea'
-apply plugin: 'java'
 
 group 'net.ishchenko.idea.nginx'
 version '0.1.4-SNAPSHOT'
@@ -33,4 +35,26 @@ intellij {
     //updateSinceUntilBuild false
     //plugins 'coverage' //Bundled plugin dependencies
     pluginName 'idea-nginx-support'
+}
+
+task generateDocumentation(type: JavaExec) {
+    main = 'net.ishchenko.idea.nginx.KeywordsFromSourcesGenerator'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task getRepos() {
+    doLast {
+        def path = 'vendor/nginx'
+        if (!file(path).exists()) {
+            Grgit.clone(dir: file(path), uri: 'https://github.com/nginx/nginx.git')
+        } else {
+            Grgit.open(dir: file(path)).pull()
+        }
+        def luaPath = 'vendor/lua-nginx-module'
+        if (!file(luaPath).exists()) {
+            Grgit.clone(dir: file(luaPath), uri: 'https://github.com/openresty/lua-nginx-module.git')
+        } else {
+            Grgit.open(dir: file(luaPath)).pull()
+        }
+    }
 }
