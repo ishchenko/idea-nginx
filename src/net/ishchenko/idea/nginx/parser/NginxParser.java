@@ -210,13 +210,20 @@ public class NginxParser implements PsiParser {
         PsiBuilder.Marker contextMarker = builder.mark();
         int braceCount = 0;
         boolean closingBraceFound = false;
+        builder.advanceLexer();
 
-        // If the next token is not a opening brace there will be an infinite loop.
-        while ((token = builder.getTokenType()) == NginxElementTypes.WHITE_SPACE) {
+        // for set_by_lua
+        while (builder.getTokenType() == NginxElementTypes.VALUE_WHITE_SPACE) {
             builder.advanceLexer();
         }
 
-        builder.advanceLexer();
+        parseDirectiveValues(builder);
+
+        // If the next token is not a opening brace there will be an infinite loop.
+        while (builder.getTokenType() == NginxElementTypes.WHITE_SPACE) {
+            builder.advanceLexer();
+        }
+
         token = builder.getTokenType();
 
         if (token != NginxElementTypes.OPENING_BRACE) {
