@@ -10,6 +10,10 @@
         nginx server support for IntelliJ IDEA<br>
         Runs/reloads configuration/stops nginx server from IDEA.<br>
         Configuration file syntax highlighting, auto-completion and inspections.
+
+        By default .nginx files are registered as nginx files. To use other extensions you will need to associate those files with the correct file type.
+
+        If you have the Lua extension installed Lua syntax highlighting will be enabled for *_by_lua_block directives used by the lua-nginx-module.
     ]]>
   </description>
 
