@@ -2,7 +2,6 @@
 
   <id>ideanginx9</id>
   <name>nginx Support</name>
-  <version>0.1.4-SNAPSHOT</version>
   <vendor url="https://github.com/ishchenko/idea-nginx">Max Ishchenko</vendor>
 
   <description>
