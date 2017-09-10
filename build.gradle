@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'net.ishchenko.idea.nginx'
-version '0.1.4'
+version '0.1.5-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -35,6 +35,11 @@ intellij {
     //updateSinceUntilBuild false
     //plugins 'coverage' //Bundled plugin dependencies
     pluginName 'idea-nginx-support'
+
+    publishPlugin {
+        username user
+        password pass
+    }
 }
 
 task generateDocumentation(type: JavaExec) {
