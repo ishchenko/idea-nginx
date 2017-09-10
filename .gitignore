@@ -2,3 +2,7 @@
 /out
 *~
 idea-nginx.jar
+.gradle/
+build/
+vendor/
+*.iml

@@ -73,7 +73,7 @@ public class NginxConfigurationManager extends BaseConfigurable implements Appli
     }
 
     public Icon getIcon() {
-        return IconLoader.getIcon("/net/ishchenko/idea/nginx/nginx.png");
+        return IconLoader.getIcon("/nginx.png");
     }
 
     public void reset() {

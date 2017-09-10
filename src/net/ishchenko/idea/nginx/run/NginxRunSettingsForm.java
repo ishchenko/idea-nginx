@@ -232,7 +232,7 @@ public class NginxRunSettingsForm {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
             BasicComboBoxRenderer result = (BasicComboBoxRenderer) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
             if (value != null) {
-                result.setIcon(IconLoader.getIcon("/net/ishchenko/idea/nginx/nginx.png"));
+                result.setIcon(IconLoader.getIcon("/nginx.png"));
                 result.setText(((NginxServerDescriptor) value).getName());
             }
             return result;

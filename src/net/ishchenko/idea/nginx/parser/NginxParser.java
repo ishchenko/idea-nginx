@@ -22,6 +22,7 @@ import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import net.ishchenko.idea.nginx.NginxBundle;
+import net.ishchenko.idea.nginx.lexer.NginxElementType;
 import net.ishchenko.idea.nginx.lexer.NginxElementTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -207,10 +208,43 @@ public class NginxParser implements PsiParser {
     private void parseLuaContext(PsiBuilder builder) {
         IElementType token = builder.getTokenType();
         PsiBuilder.Marker contextMarker = builder.mark();
+        int braceCount = 0;
+        boolean closingBraceFound = false;
+        builder.advanceLexer();
 
-        while (token != NginxElementTypes.CLOSING_BRACE) {
+        // for set_by_lua
+        while (builder.getTokenType() == NginxElementTypes.VALUE_WHITE_SPACE) {
             builder.advanceLexer();
-            token = builder.getTokenType();
+        }
+
+        parseDirectiveValues(builder);
+
+        // If the next token is not a opening brace there will be an infinite loop.
+        while (builder.getTokenType() == NginxElementTypes.WHITE_SPACE) {
+            builder.advanceLexer();
+        }
+
+        token = builder.getTokenType();
+
+        if (token != NginxElementTypes.OPENING_BRACE) {
+            contextMarker.done(NginxElementTypes.LUA_CONTEXT);
+            builder.advanceLexer();
+	        return;
+        }
+
+        while (!closingBraceFound) {
+            if (token == NginxElementTypes.OPENING_BRACE) {
+                braceCount++;
+            } else if (token == NginxElementTypes.CLOSING_BRACE) {
+                braceCount--;
+            }
+
+            if (token == NginxElementTypes.CLOSING_BRACE && braceCount == 0) {
+                closingBraceFound = true;
+            } else {
+                builder.advanceLexer();
+                token = builder.getTokenType();
+            }
         }
 
         contextMarker.done(NginxElementTypes.LUA_CONTEXT);

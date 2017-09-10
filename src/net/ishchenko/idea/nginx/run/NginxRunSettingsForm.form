@@ -31,7 +31,7 @@
         </constraints>
         <properties>
           <hideActionText value="true"/>
-          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.configureButton"/>
+          <text resource-bundle="NginxBundle" key="run.configureButton"/>
         </properties>
       </component>
       <grid id="8bd58" layout-manager="FormLayout">
@@ -52,7 +52,7 @@
           <forms/>
         </constraints>
         <properties/>
-        <border type="etched" title-resource-bundle="net/ishchenko/idea/nginx/NginxBundle" title-key="run.serverinfo"/>
+        <border type="etched" title-resource-bundle="NginxBundle" title-key="run.serverinfo"/>
         <children>
           <component id="7d057" class="javax.swing.JLabel">
             <constraints>
@@ -60,7 +60,7 @@
               <forms/>
             </constraints>
             <properties>
-              <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.executable"/>
+              <text resource-bundle="NginxBundle" key="run.executable"/>
             </properties>
           </component>
           <component id="e4f43" class="javax.swing.JLabel">
@@ -69,7 +69,7 @@
               <forms/>
             </constraints>
             <properties>
-              <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.configuration"/>
+              <text resource-bundle="NginxBundle" key="run.configuration"/>
             </properties>
           </component>
           <component id="e328b" class="javax.swing.JTextField" binding="executableField">
@@ -102,7 +102,7 @@
               <forms/>
             </constraints>
             <properties>
-              <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.globals"/>
+              <text resource-bundle="NginxBundle" key="run.globals"/>
             </properties>
           </component>
           <component id="181dc" class="javax.swing.JTextField" binding="globalsField">
@@ -123,7 +123,7 @@
               <forms/>
             </constraints>
             <properties>
-              <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.pidpath"/>
+              <text resource-bundle="NginxBundle" key="run.pidpath"/>
             </properties>
           </component>
           <component id="888c3" class="javax.swing.JTextField" binding="pidField">
@@ -154,7 +154,7 @@
           <forms/>
         </constraints>
         <properties/>
-        <border type="etched" title-resource-bundle="net/ishchenko/idea/nginx/NginxBundle" title-key="run.logFiles"/>
+        <border type="etched" title-resource-bundle="NginxBundle" title-key="run.logFiles"/>
         <children>
           <component id="bb8ad" class="javax.swing.JCheckBox" binding="showHttpLogCheckBox" default-binding="true">
             <constraints>
@@ -162,7 +162,7 @@
               <forms/>
             </constraints>
             <properties>
-              <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.showAccessLog"/>
+              <text resource-bundle="NginxBundle" key="run.showAccessLog"/>
             </properties>
           </component>
           <component id="378e9" class="javax.swing.JTextField" binding="httpLogPathField">
@@ -183,7 +183,7 @@
               <forms/>
             </constraints>
             <properties>
-              <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.showErrorLog"/>
+              <text resource-bundle="NginxBundle" key="run.showErrorLog"/>
             </properties>
           </component>
           <component id="b90c" class="javax.swing.JTextField" binding="errorLogPathField">
@@ -204,7 +204,7 @@
               <forms/>
             </constraints>
             <properties>
-              <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.layoutExplanation"/>
+              <text resource-bundle="NginxBundle" key="run.layoutExplanation"/>
             </properties>
           </component>
         </children>

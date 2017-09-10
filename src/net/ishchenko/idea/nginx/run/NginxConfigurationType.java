@@ -45,7 +45,7 @@ public class NginxConfigurationType implements ConfigurationType {
     }
 
     public Icon getIcon() {
-        return IconLoader.getIcon("/net/ishchenko/idea/nginx/nginx.png");
+        return IconLoader.getIcon("/nginx.png");
     }
 
     @NotNull

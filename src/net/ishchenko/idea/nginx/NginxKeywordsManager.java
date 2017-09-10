@@ -71,6 +71,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
         set_directives.add("set_by_lua");
         set_directives.add("set_by_lua_block");
         set_directives.add("set_by_lua_file");
+        set_directives.add("map");
         SET_DIRECTIVES = Collections.unmodifiableSet(set_directives);
 
         CONTEXT_TO_FLAG.add("http", "NGX_HTTP_MAIN_CONF");
@@ -110,10 +111,10 @@ public class NginxKeywordsManager implements ApplicationComponent {
     private final String ANY_CONTEXT_FLAG = "NGX_ANY_CONF";
 
     public void initComponent() {
-        BufferedReader keywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("keywords.txt")));
-        BufferedReader variablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("variables.txt")));
-        BufferedReader openrestyKeywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("openrestykeywords.txt")));
-        BufferedReader openrestyVariablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("openrestyvariables.txt")));
+        BufferedReader keywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/keywords.txt")));
+        BufferedReader variablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/variables.txt")));
+        BufferedReader openrestyKeywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/openrestykeywords.txt")));
+        BufferedReader openrestyVariablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/openrestyvariables.txt")));
         Exception oops = null;
         try {
             readKeywords(keywordsReader);

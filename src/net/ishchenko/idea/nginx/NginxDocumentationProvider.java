@@ -56,7 +56,7 @@ public class NginxDocumentationProvider implements DocumentationProvider {
     private String generateDocForDirectiveName(NginxDirectiveName element) {
 
         StringBuilder result = new StringBuilder();
-        InputStream docStream = getClass().getResourceAsStream("docs/directives/" + element.getText() + ".html");
+        InputStream docStream = getClass().getResourceAsStream("/docs/directives/" + element.getText() + ".html");
         if (docStream == null) {
             result.append(NginxBundle.message("docs.directive.notfound", element.getText()));
         } else {
@@ -84,7 +84,7 @@ public class NginxDocumentationProvider implements DocumentationProvider {
     private String generateDocForInnerVariable(NginxInnerVariable element) {
 
         StringBuilder result = new StringBuilder();
-        InputStream docStream = getClass().getResourceAsStream("docs/variables/" + element.getName() + ".html");
+        InputStream docStream = getClass().getResourceAsStream("/docs/variables/" + element.getName() + ".html");
         if (docStream == null) {
             result.append(NginxBundle.message("docs.variable.notfound", element.getName()));
         } else {

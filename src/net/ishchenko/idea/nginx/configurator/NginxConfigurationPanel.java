@@ -84,7 +84,7 @@ public class NginxConfigurationPanel {
             public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 Component rendered = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 setText(((NginxServerDescriptor) value).getName());
-                setIcon(IconLoader.getIcon("/net/ishchenko/idea/nginx/nginx.png"));
+                setIcon(IconLoader.getIcon("/nginx.png"));
                 return rendered;
             }
         });
@@ -313,7 +313,7 @@ public class NginxConfigurationPanel {
         private boolean userAgreesThatItIsNotNginx() {
             final DialogBuilder builder = new DialogBuilder(serverList);
 
-            JLabel label = new JLabel(NginxBundle.message("run.notnginx"), IconLoader.getIcon("/net/ishchenko/idea/nginx/notnginx.png"), SwingConstants.LEFT);
+            JLabel label = new JLabel(NginxBundle.message("run.notnginx"), IconLoader.getIcon("/notnginx.png"), SwingConstants.LEFT);
             label.setUI(new MultiLineLabelUI());
 
             builder.setTitle(NginxBundle.message("run.notnginx.warning"));
