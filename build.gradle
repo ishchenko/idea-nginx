@@ -31,14 +31,13 @@ sourceSets {
 }
 
 intellij {
-    version '2017.1' //IntelliJ IDEA dependency
-    //updateSinceUntilBuild false
-    //plugins 'coverage' //Bundled plugin dependencies
+    version '2016.1' //IntelliJ IDEA dependency
+    updateSinceUntilBuild false
     pluginName 'idea-nginx-support'
 
     publishPlugin {
-        username user
-        password pass
+        username project.hasProperty('user') ? user : ''
+        password project.hasProperty('pass') ? pass : ''
     }
 }
 
