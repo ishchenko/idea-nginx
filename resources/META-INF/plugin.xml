@@ -19,6 +19,9 @@
   <depends>com.intellij.modules.lang</depends>
 
   <change-notes><![CDATA[
+        <b>0.1.6</b>
+        <ul>
+            <li>Fix bundle not found exception (issue <a href="https://github.com/ishchenko/idea-nginx/issues/63">63</a>).</li>
         <b>0.1.5</b>
         <ul>
             <li>Fix compatible builds to 142.3304+</li>
