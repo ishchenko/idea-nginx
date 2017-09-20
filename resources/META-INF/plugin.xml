@@ -131,7 +131,7 @@
 
   <idea-version since-build="142.3304"/>
 
-  <resource-bundle>NginxBundle</resource-bundle>
+  <resource-bundle>net.ishchenko.idea.nginx.NginxBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
     <lang.parserDefinition language="nginx" implementationClass="net.ishchenko.idea.nginx.parser.NginxParserDefinition"/>

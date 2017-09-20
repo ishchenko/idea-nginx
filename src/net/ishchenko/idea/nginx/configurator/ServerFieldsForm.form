@@ -38,7 +38,7 @@
           <forms/>
         </constraints>
         <properties>
-          <text resource-bundle="NginxBundle" key="run.servername"/>
+          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.servername"/>
         </properties>
       </component>
       <component id="5ea70" class="javax.swing.JLabel">
@@ -47,7 +47,7 @@
           <forms/>
         </constraints>
         <properties>
-          <text resource-bundle="NginxBundle" key="run.executable"/>
+          <text resource-bundle="net/ishchenko/idea/nginx/NginxBundle" key="run.executable"/>
         </properties>
       </component>
       <component id="563ab" class="com.intellij.openapi.ui.ComponentWithBrowseButton" binding="executableField" custom-create="true">

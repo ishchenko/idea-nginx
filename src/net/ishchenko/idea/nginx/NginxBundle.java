@@ -35,7 +35,7 @@ public class NginxBundle {
     private static Reference<ResourceBundle> ourBundle;
 
     @NonNls
-    private static final String BUNDLE = "NginxBundle";
+    private static final String BUNDLE = "net.ishchenko.idea.nginx.NginxBundle";
 
     private NginxBundle() {
     }
