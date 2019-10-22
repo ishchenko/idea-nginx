@@ -16,6 +16,7 @@
 
 package net.ishchenko.idea.nginx;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.util.Range;
 import org.jetbrains.annotations.NotNull;
@@ -264,11 +265,13 @@ public class NginxKeywordsManager implements ApplicationComponent {
         }
     }
 
+    @Override
     public void disposeComponent() {
-
+        //do nothing
     }
 
     @NotNull
+    @Override
     public String getComponentName() {
         return "nginx.keywords";
     }
@@ -288,6 +291,9 @@ public class NginxKeywordsManager implements ApplicationComponent {
         }
     }
 
+    public static NginxKeywordsManager getInstance() {
+        return ApplicationManager.getApplication().getComponent(NginxKeywordsManager.class);
+    }
 }
 
 

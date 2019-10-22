@@ -1,14 +1,12 @@
-import org.ajoberstar.grgit.Grgit
-
 plugins {
-    id "org.jetbrains.intellij" version "0.2.17"
-    id "org.ajoberstar.grgit" version "2.0.0"
+    id "org.jetbrains.intellij" version "0.4.1"
+    id "org.ajoberstar.grgit" version "3.1.1"
     id "java"
     id "idea"
 }
 
 group 'net.ishchenko.idea.nginx'
-version '0.1.6'
+version '0.1.7'
 
 sourceCompatibility = 1.8
 
@@ -31,7 +29,7 @@ sourceSets {
 }
 
 intellij {
-    version '2016.1' //IntelliJ IDEA dependency
+    version '2019.2' //IntelliJ IDEA dependency
     updateSinceUntilBuild false
     pluginName 'idea-nginx-support'
 

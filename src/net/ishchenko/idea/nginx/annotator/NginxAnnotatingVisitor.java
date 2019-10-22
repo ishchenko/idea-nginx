@@ -20,14 +20,17 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.Range;
+import java.util.Optional;
+import java.util.Set;
 import net.ishchenko.idea.nginx.NginxBundle;
 import net.ishchenko.idea.nginx.NginxKeywordsManager;
 import net.ishchenko.idea.nginx.configurator.NginxServerDescriptor;
 import net.ishchenko.idea.nginx.configurator.NginxServersConfiguration;
-import net.ishchenko.idea.nginx.psi.*;
-
-import java.util.Optional;
-import java.util.Set;
+import net.ishchenko.idea.nginx.psi.NginxComplexValue;
+import net.ishchenko.idea.nginx.psi.NginxContext;
+import net.ishchenko.idea.nginx.psi.NginxDirective;
+import net.ishchenko.idea.nginx.psi.NginxDirectiveName;
+import net.ishchenko.idea.nginx.psi.NginxInnerVariable;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,9 +46,9 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
     private NginxKeywordsManager keywords;
     private NginxServersConfiguration configuration;
 
-    public NginxAnnotatingVisitor(NginxKeywordsManager keywords, NginxServersConfiguration configuration) {
-        this.keywords = keywords;
-        this.configuration = configuration;
+    public NginxAnnotatingVisitor() {
+        this.keywords = NginxKeywordsManager.getInstance();
+        this.configuration = NginxServersConfiguration.getInstance();
     }
 
     @Override
@@ -121,7 +124,7 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
         }
 
         int realRange = node.getValues().size();
-        Set<Range<Integer>> expectedRanges= keywords.getValueRange(nameString);
+        Set<Range<Integer>> expectedRanges = keywords.getValueRange(nameString);
 
         Optional<Range<Integer>> possibleRanges = expectedRanges.stream()
                 .filter(range -> range.isWithin(realRange))
@@ -129,8 +132,8 @@ public class NginxAnnotatingVisitor extends NginxElementVisitor implements Annot
 
         Range<Integer> expectedRange = possibleRanges.orElse(
                 expectedRanges.stream()
-                .min((range1, range2) -> range1.getFrom() - range2.getFrom() - (range1.getTo() - range2.getTo()))
-                .get() // assume that there is always a value
+                        .min((range1, range2) -> range1.getFrom() - range2.getFrom() - (range1.getTo() - range2.getTo()))
+                        .get() // assume that there is always a value
         );
 
         if (!expectedRange.isWithin(realRange)) {
