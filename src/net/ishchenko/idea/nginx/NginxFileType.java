@@ -33,7 +33,7 @@ import javax.swing.*;
  */
 public class NginxFileType extends LanguageFileType implements FileTypeIdentifiableByVirtualFile {
 
-    private static NginxFileType INSTANCE = new NginxFileType();
+    public static final NginxFileType INSTANCE = new NginxFileType();
 
     NginxFileType() {
         super(NginxLanguage.INSTANCE);
