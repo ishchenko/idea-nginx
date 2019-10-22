@@ -168,8 +168,8 @@ public class NginxKeywordsManager implements BaseComponent {
         Set<String> rangeFlags = FLAG_TO_RANGE.keySet();
         Set<String> flags = keywords.get(directive);
         return flags.stream()
-                .filter(flag -> rangeFlags.contains(flag))
-                .map(flag -> FLAG_TO_RANGE.get(flag))
+                .filter(rangeFlags::contains)
+                .map(FLAG_TO_RANGE::get)
                 .collect(Collectors.toSet());
     }
 
@@ -200,7 +200,7 @@ public class NginxKeywordsManager implements BaseComponent {
      * @return server -> [location, listen, ...], http -> [server, allow, ...], ...
      */
     public Map<String, Set<String>> getContextToDirectiveListMappings() {
-        Map<String, Set<String>> result = new HashMap<String, Set<String>>();
+        Map<String, Set<String>> result = new HashMap<>();
         for (Map.Entry<String, Set<String>> item : CONTEXT_TO_FLAG.map.entrySet()) {
             String context = item.getKey();
             Set<String> directivesForContext = getDirectivesThatCanResideIn(context);
@@ -218,7 +218,7 @@ public class NginxKeywordsManager implements BaseComponent {
         if (flags == null) { //unknown parent - let's allow for any directove
             return keywords.keySet();
         }
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new HashSet<>();
         for (Map.Entry<String, Set<String>> entry : keywords.entrySet()) {
             for (String flag : flags) {
                 if (entry.getValue().contains(flag) || entry.getValue().contains(ANY_CONTEXT_FLAG)) {
@@ -230,7 +230,7 @@ public class NginxKeywordsManager implements BaseComponent {
     }
 
     public Set<String> getDirectivesThatCanResideInMainContext() {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new HashSet<>();
         for (Map.Entry<String, Set<String>> entry : keywords.entrySet()) {
             if (checkCanResideInMainContext(entry.getKey())) {
                 result.add(entry.getKey());
@@ -284,10 +284,10 @@ public class NginxKeywordsManager implements BaseComponent {
 
 
     private static class ContextToFlagMapping {
-        Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+        Map<String, Set<String>> map = new HashMap<>();
 
         void add(String context, String... flags) {
-            Set<String> set = new HashSet<String>();
+            Set<String> set = new HashSet<>();
             set.addAll(Arrays.asList(flags));
             map.put(context, set);
         }

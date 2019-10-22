@@ -20,15 +20,12 @@ import com.intellij.openapi.ui.MultiLineLabelUI;
 import com.intellij.openapi.util.IconLoader;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import net.ishchenko.idea.nginx.NginxBundle;
-import net.ishchenko.idea.nginx.configurator.NginxServerDescriptor;
-
+import java.awt.*;
+import java.util.ResourceBundle;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
+import net.ishchenko.idea.nginx.NginxBundle;
+import net.ishchenko.idea.nginx.configurator.NginxServerDescriptor;
 
 /**
  * Created by IntelliJ IDEA.
@@ -57,31 +54,15 @@ public class NginxRunSettingsForm {
 
         $$$setupUI$$$();
         serverCombo.setRenderer(new NginxServerComboboxRenderer());
-        serverCombo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mediator.onChooseDescriptor((NginxServerDescriptor) serverCombo.getSelectedItem());
-            }
-        });
+        serverCombo.addActionListener(e -> mediator.onChooseDescriptor((NginxServerDescriptor) serverCombo.getSelectedItem()));
 
         configureButton.addActionListener(
-                new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        mediator.showServerManagerDialog();
-                    }
-                }
+                e -> mediator.showServerManagerDialog()
         );
 
-        showHttpLogCheckBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mediator.onHttpLogCheckboxAction();
-            }
-        });
+        showHttpLogCheckBox.addActionListener(e -> mediator.onHttpLogCheckboxAction());
 
-        showErrorLogCheckBox.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                mediator.onErrorLogCheckboxAction();
-            }
-        });
+        showErrorLogCheckBox.addActionListener(e -> mediator.onErrorLogCheckboxAction());
 
     }
 

@@ -21,9 +21,17 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.psi.PsiElement;
-import net.ishchenko.idea.nginx.psi.*;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import net.ishchenko.idea.nginx.psi.NginxContext;
+import net.ishchenko.idea.nginx.psi.NginxDirectiveName;
+import net.ishchenko.idea.nginx.psi.NginxDirectiveValue;
+import net.ishchenko.idea.nginx.psi.NginxInnerVariable;
+import net.ishchenko.idea.nginx.psi.NginxPsiFile;
 
 /**
  * Created by IntelliJ IDEA.
@@ -46,9 +54,9 @@ public class NginxCompletionContributor extends CompletionContributor {
         booleanVariants.add(LookupElementBuilder.create("off"));
     }
 
-    public NginxCompletionContributor(NginxKeywordsManager keywords) {
+    public NginxCompletionContributor() {
 
-        this.keywords = keywords;
+        this.keywords = NginxKeywordsManager.getInstance();
 
         for (String keyword : keywords.getKeywords()) {
             allLookupElements.add(LookupElementBuilder.create(keyword));

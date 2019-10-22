@@ -88,7 +88,7 @@ public class NginxDirectiveImpl extends NginxElementImpl implements NginxDirecti
 
     @NotNull
     public List<NginxComplexValue> getValues() {
-        ArrayList<NginxComplexValue> result = new ArrayList<NginxComplexValue>();
+        ArrayList<NginxComplexValue> result = new ArrayList<>();
         for (ASTNode value : getNode().getChildren(DIRECTIVE_VALUE_TOKENS)) {
             result.add((NginxComplexValue) value.getPsi());
         }

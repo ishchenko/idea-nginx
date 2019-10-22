@@ -18,14 +18,12 @@ package net.ishchenko.idea.nginx.platform;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import net.ishchenko.idea.nginx.NginxBundle;
-
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.ishchenko.idea.nginx.NginxBundle;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,10 +35,11 @@ public class NginxCompileParametersExtractor {
 
     /**
      * Runs file with -V argument and matches the output against OUTPUT_PATTERN.
+     *
      * @param from executable to be run with -V command line argument
      * @return Parameters parsed out from process output
      * @throws PlatformDependentTools.ThisIsNotNginxExecutableException if file could not be run, or
-     * output would not match against expected pattern
+     *                                                                  output would not match against expected pattern
      */
     public static NginxCompileParameters extract(VirtualFile from) throws PlatformDependentTools.ThisIsNotNginxExecutableException {
 
@@ -63,7 +62,7 @@ public class NginxCompileParametersExtractor {
             throw new PlatformDependentTools.ThisIsNotNginxExecutableException(e);
         }
 
-        Matcher versionMatcher = Pattern.compile("nginx version: (nginx|openresty)/([\\d\\.]+)").matcher(output);
+        Matcher versionMatcher = Pattern.compile("nginx version: (nginx|openresty)/([\\d.]+)").matcher(output);
         Matcher configureArgumentsMatcher = Pattern.compile("configure arguments: (.*)").matcher(output);
 
         if (versionMatcher.find() && configureArgumentsMatcher.find()) {
@@ -89,16 +88,22 @@ public class NginxCompileParametersExtractor {
     }
 
     private static void handleNameValue(NginxCompileParameters result, String name, String value) {
-        if (name.equals("--conf-path")) {
-            result.setConfigurationPath(value);
-        } else if (name.equals("--pid-path")) {
-            result.setPidPath(value);
-        } else if (name.equals("--prefix")) {
-            result.setPrefix(value);
-        } else if (name.equals("--http-log-path")) {
-            result.setHttpLogPath(value);
-        } else if (name.equals("--error-log-path")) {
-            result.setErrorLogPath(value);
+        switch (name) {
+            case "--conf-path":
+                result.setConfigurationPath(value);
+                break;
+            case "--pid-path":
+                result.setPidPath(value);
+                break;
+            case "--prefix":
+                result.setPrefix(value);
+                break;
+            case "--http-log-path":
+                result.setHttpLogPath(value);
+                break;
+            case "--error-log-path":
+                result.setErrorLogPath(value);
+                break;
         }
     }
 

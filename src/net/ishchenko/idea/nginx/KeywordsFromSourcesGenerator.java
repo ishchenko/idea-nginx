@@ -31,11 +31,11 @@ public class KeywordsFromSourcesGenerator {
 
     private static final Pattern PREPROCESSOR_DIRECTIVE_PATTERN = Pattern.compile("#.+");
 
-    private static final Pattern DIRECTIVE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_command_t\\s+[^\\[]+\\[\\]\\s*=\\s*(\\{[^;]+);");
+    private static final Pattern DIRECTIVE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_command_t\\s+[^\\[]+\\[]\\s*=\\s*(\\{[^;]+);");
     private static final Pattern DIRECTIVE_PATTERN = Pattern.compile("(\\{[^}]*},)+");
     private static final Pattern DIRECTIVE_NAME_PATTERN = Pattern.compile("ngx_string\\(\"([\\w_]+)\"\\)");
 
-    private static final Pattern VARIABLE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_\\w+_variable_t\\s+[^\\[]+\\[\\]\\s*=\\s*(\\{[^;]+);");
+    private static final Pattern VARIABLE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_\\w+_variable_t\\s+[^\\[]+\\[]\\s*=\\s*(\\{[^;]+);");
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("(\\{[^}]*},)+");
     private static final Pattern VARIABLE_NAME_PATTERN = Pattern.compile("ngx_string\\(\"([\\w_]+)\"\\)");
 

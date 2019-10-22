@@ -37,7 +37,7 @@ public class NginxFoldingBuilder implements FoldingBuilder {
 
     public FoldingDescriptor[] buildFoldRegions(ASTNode node, Document document) {
 
-        List<FoldingDescriptor> descriptors = new ArrayList<FoldingDescriptor>();
+        List<FoldingDescriptor> descriptors = new ArrayList<>();
         doAppend(node, document, descriptors);
         return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
     }
