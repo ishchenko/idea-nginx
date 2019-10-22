@@ -17,16 +17,21 @@
 package net.ishchenko.idea.nginx;
 
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.util.Range;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -34,7 +39,7 @@ import java.util.stream.Collectors;
  * Date: 17.07.2009
  * Time: 16:35:47
  */
-public class NginxKeywordsManager implements ApplicationComponent {
+public class NginxKeywordsManager implements BaseComponent {
 
     //anything can happen inside these directive context
     public static final Set<String> CHAOS_DIRECTIVES = new HashSet<>();
@@ -111,6 +116,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
     private Map<String, List<Set<String>>> ambiguousKeywords = new HashMap<>();
     private final String ANY_CONTEXT_FLAG = "NGX_ANY_CONF";
 
+    @Override
     public void initComponent() {
         BufferedReader keywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/keywords.txt")));
         BufferedReader variablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/variables.txt")));
