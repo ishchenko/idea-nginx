@@ -40,7 +40,7 @@ import java.util.*;
 
 @State(name = NginxServersConfiguration.COMPONENT_NAME,
         storages = {
-                @Storage(id = "nginx", file = "$APP_CONFIG$/nginx.xml")
+                @Storage(file = "$APP_CONFIG$/nginx.xml")
         }
 )
 public class NginxServersConfiguration implements ApplicationComponent, PersistentStateComponent<Element>, Disposable {
