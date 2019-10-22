@@ -37,7 +37,7 @@ import java.util.Map;
 public class NginxSyntaxHighlighter extends SyntaxHighlighterBase {
 
     private final TextAttributesKey[] BAD_CHARACTER_KEYS = new TextAttributesKey[]{HighlighterColors.BAD_CHARACTER};
-    private final Map<IElementType, TextAttributesKey> colors = new HashMap<IElementType, TextAttributesKey>();
+    private final Map<IElementType, TextAttributesKey> colors = new HashMap<>();
 
     public NginxSyntaxHighlighter() {
 
@@ -52,17 +52,13 @@ public class NginxSyntaxHighlighter extends SyntaxHighlighterBase {
 
     @NotNull
     public Lexer getHighlightingLexer() {
-        return new FlexAdapter(new _NginxLexer((java.io.Reader) null));
+        return new FlexAdapter(new _NginxLexer(null));
     }
 
     @NotNull
     public TextAttributesKey[] getTokenHighlights(IElementType iElementType) {
 
-        TextAttributesKey[] textAttributesKeys = {colors.get(iElementType)};
-        if (textAttributesKeys == null) {
-            textAttributesKeys = BAD_CHARACTER_KEYS;
-        }
-        return textAttributesKeys;
+        return new TextAttributesKey[]{colors.get(iElementType)};
 
     }
 

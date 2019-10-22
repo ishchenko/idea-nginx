@@ -254,8 +254,7 @@ public class NginxKeywordsManager implements BaseComponent {
             String[] splitLine = line.split(" ");
 
             String keyword = splitLine[0];
-            Set<String> flags = new HashSet<>();
-            flags.addAll(Arrays.asList(splitLine).subList(1, splitLine.length));
+            Set<String> flags = new HashSet<>(Arrays.asList(splitLine).subList(1, splitLine.length));
             if (!keywords.containsKey(keyword)) {
                 keywords.put(keyword, flags);
             } else {
@@ -287,8 +286,7 @@ public class NginxKeywordsManager implements BaseComponent {
         Map<String, Set<String>> map = new HashMap<>();
 
         void add(String context, String... flags) {
-            Set<String> set = new HashSet<>();
-            set.addAll(Arrays.asList(flags));
+            Set<String> set = new HashSet<>(Arrays.asList(flags));
             map.put(context, set);
         }
 

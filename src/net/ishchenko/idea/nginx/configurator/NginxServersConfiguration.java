@@ -43,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 @State(name = NginxServersConfiguration.COMPONENT_NAME,
         storages = {
-                @Storage(file = "$APP_CONFIG$/nginx.xml")
+                @Storage(value = "$APP_CONFIG$/nginx.xml")
         }
 )
 public class NginxServersConfiguration implements BaseComponent, PersistentStateComponent<Element>, Disposable {
@@ -162,9 +162,7 @@ public class NginxServersConfiguration implements BaseComponent, PersistentState
         Set<String> result = new HashSet<>();
         Map<String, Set<String>> nameToPathsMapping = getNameToPathsMapping();
         for (Map.Entry<String, Set<String>> entry : nameToPathsMapping.entrySet()) {
-            for (String path : entry.getValue()) {
-                result.add(path);
-            }
+            result.addAll(entry.getValue());
         }
         return result;
     }

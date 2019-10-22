@@ -45,7 +45,7 @@ public class NginxCompileParametersExtractor {
 
         NginxCompileParameters result = new NginxCompileParameters();
 
-        String output = "";
+        StringBuilder output = new StringBuilder();
 
         try {
             ProcessBuilder pb = new ProcessBuilder(from.getPath(), "-V");
@@ -56,14 +56,14 @@ public class NginxCompileParametersExtractor {
             process.waitFor();
             String line = "";
             while ((line = errorReader.readLine()) != null) {
-                output += line + "\n";
+                output.append(line).append("\n");
             }
         } catch (IOException | InterruptedException e) {
             throw new PlatformDependentTools.ThisIsNotNginxExecutableException(e);
         }
 
-        Matcher versionMatcher = Pattern.compile("nginx version: (nginx|openresty)/([\\d.]+)").matcher(output);
-        Matcher configureArgumentsMatcher = Pattern.compile("configure arguments: (.*)").matcher(output);
+        Matcher versionMatcher = Pattern.compile("nginx version: (nginx|openresty)/([\\d.]+)").matcher(output.toString());
+        Matcher configureArgumentsMatcher = Pattern.compile("configure arguments: (.*)").matcher(output.toString());
 
         if (versionMatcher.find() && configureArgumentsMatcher.find()) {
             String version = versionMatcher.group(2);

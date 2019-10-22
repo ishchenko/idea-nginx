@@ -28,6 +28,6 @@ import com.intellij.lexer.MergingLexerAdapter;
 public class NginxHighlightingLexer extends MergingLexerAdapter {
 
     public NginxHighlightingLexer() {
-        super(new FlexAdapter(new _NginxLexer((java.io.Reader) null)), NginxElementTypes.WHITE_SPACES);
+        super(new FlexAdapter(new _NginxLexer(null)), NginxElementTypes.WHITE_SPACES);
     }
 }

@@ -26,6 +26,8 @@ import com.intellij.openapi.ui.MultiLineLabelUI;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.components.JBList;
+import com.intellij.ui.components.JBScrollPane;
 import java.awt.*;
 import javax.swing.*;
 import net.ishchenko.idea.nginx.NginxBundle;
@@ -42,7 +44,7 @@ public class NginxConfigurationPanel {
     private NginxServersConfiguration config;
 
     private JSplitPane panel;
-    private JList serverList;
+    private JBList<NginxServerDescriptor> serverList;
 
     private TrickyMediator mediator = new TrickyMediator();
 
@@ -60,7 +62,7 @@ public class NginxConfigurationPanel {
         serverList = createServerList();
         mediator.serverList = serverList;
 
-        JScrollPane scrollPane = new JScrollPane();
+        JBScrollPane scrollPane = new JBScrollPane();
         scrollPane.setViewportView(serverList);
 
         leftComponent.add(buttonsPanel, BorderLayout.NORTH);
@@ -73,20 +75,14 @@ public class NginxConfigurationPanel {
 
     }
 
-    private JList createServerList() {
-        JList result = new JList();
+    private JBList<NginxServerDescriptor> createServerList() {
+        JBList<NginxServerDescriptor> result = new JBList<>();
         result.setCellRenderer(new DefaultListCellRenderer() {
-            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                Component rendered = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                setText(((NginxServerDescriptor) value).getName());
-                setIcon(IconLoader.getIcon("/nginx.png"));
-                return rendered;
-            }
         });
         result.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         result.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
-                final NginxServerDescriptor selectedDescriptor = (NginxServerDescriptor) serverList.getSelectedValue();
+                final NginxServerDescriptor selectedDescriptor = serverList.getSelectedValue();
                 if (selectedDescriptor != null) {
                     SwingUtilities.invokeLater(() -> mediator.showDescriptor(selectedDescriptor));
                 }
@@ -106,7 +102,7 @@ public class NginxConfigurationPanel {
     private JButton createRemoveButton() {
         JButton button = new JButton(NginxBundle.message("run.removeserver"));
         button.addActionListener(e -> {
-            final NginxServerDescriptor selectedDescriptor = (NginxServerDescriptor) serverList.getSelectedValue();
+            final NginxServerDescriptor selectedDescriptor = serverList.getSelectedValue();
             if (selectedDescriptor != null) {
                 SwingUtilities.invokeLater(() -> mediator.removeDescriptor(selectedDescriptor));
             }
@@ -117,7 +113,7 @@ public class NginxConfigurationPanel {
     }
 
     public synchronized void reset() {
-        DefaultListModel model = new DefaultListModel();
+        DefaultListModel<NginxServerDescriptor> model = new DefaultListModel<>();
         for (NginxServerDescriptor descriptor : this.config.getServersDescriptors()) {
             model.addElement(descriptor.clone());
         }
@@ -128,7 +124,7 @@ public class NginxConfigurationPanel {
 
         PlatformDependentTools pdt = ServiceManager.getService(PlatformDependentTools.class);
         for (int i = 0; i < serverList.getModel().getSize(); i++) {
-            NginxServerDescriptor descriptor = (NginxServerDescriptor) serverList.getModel().getElementAt(i);
+            NginxServerDescriptor descriptor = serverList.getModel().getElementAt(i);
             if (!pdt.checkExecutable(descriptor.getExecutablePath())) {
                 serverList.setSelectedIndex(i);
                 throw new ConfigurationException(NginxBundle.message("run.error.badpath"));
@@ -137,7 +133,7 @@ public class NginxConfigurationPanel {
 
         config.removeAllServerDescriptors();
         for (int i = 0; i < serverList.getModel().getSize(); i++) {
-            NginxServerDescriptor descriptor = (NginxServerDescriptor) serverList.getModel().getElementAt(i);
+            NginxServerDescriptor descriptor = serverList.getModel().getElementAt(i);
             config.addServerDescriptor(descriptor.clone());
         }
     }
@@ -153,7 +149,7 @@ public class NginxConfigurationPanel {
         }
 
         for (int i = 0; i < serverList.getModel().getSize(); i++) {
-            NginxServerDescriptor descriptor = (NginxServerDescriptor) serverList.getModel().getElementAt(i);
+            NginxServerDescriptor descriptor = serverList.getModel().getElementAt(i);
             if (!descriptor.equals(config.getServersDescriptors()[i])) {
                 return true;
             }
@@ -164,7 +160,7 @@ public class NginxConfigurationPanel {
 
     static class TrickyMediator {
 
-        JList serverList;
+        JBList serverList;
         JButton addButton;
         JButton removeButton;
         JTextField nameField;

@@ -99,11 +99,11 @@ public class KeywordsFromSourcesGenerator {
                 String[] items = directive.split(",\n");
                 Matcher directiveNameMatcher = DIRECTIVE_NAME_PATTERN.matcher(items[0]);
                 if (directiveNameMatcher.find()) {
-                    String directiveName = directiveNameMatcher.group(1);
+                    StringBuilder directiveName = new StringBuilder(directiveNameMatcher.group(1));
                     for (String flag : items[1].split("\\|")) {
-                        directiveName += " " + flag.trim();
+                        directiveName.append(" ").append(flag.trim());
                     }
-                    directives.add(directiveName);
+                    directives.add(directiveName.toString());
                 } else {
                     System.out.println("Oops! " + items[0] + " won't match a directive name pattern");
                 }

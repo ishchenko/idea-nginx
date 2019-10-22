@@ -27,6 +27,6 @@ import com.intellij.lexer.FlexAdapter;
 public class NginxParsingLexer extends FlexAdapter {
 
     public NginxParsingLexer() {
-        super(new _NginxLexer((java.io.Reader) null));
+        super(new _NginxLexer(null));
     }
 }
