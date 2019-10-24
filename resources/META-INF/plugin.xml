@@ -152,7 +152,7 @@
     <completion.contributor language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
     <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
     <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
-    <fileType name="nainx" implementationClass="net.ishchenko.idea.nginx.NginxFileType" language="nginx" extensions="nginx" fieldName="INSTANCE" />
+    <fileType name="nginx" implementationClass="net.ishchenko.idea.nginx.NginxFileType" language="nginx" extensions="nginx" fieldName="INSTANCE" />
     <languageInjector implementation="net.ishchenko.idea.nginx.injection.LuaInjector" />
     <lang.findUsagesProvider language="nginx"
                              implementationClass="net.ishchenko.idea.nginx.NginxFindUsagesProvider"/>
