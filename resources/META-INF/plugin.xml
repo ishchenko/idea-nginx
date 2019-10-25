@@ -19,9 +19,14 @@
   <depends>com.intellij.modules.lang</depends>
 
   <change-notes><![CDATA[
+        <b>0.1.8</b>
+        <ul>
+            <li>Update list of keysword with latest from NGINX repository.</li>
+        </ul>
         <b>0.1.7</b>
         <ul>
             <li>Fix NoSuchMethodException (issue <a href="https://github.com/ishchenko/idea-nginx/issues/69">69</a>).</li>
+        </ul>
         <b>0.1.6</b>
         <ul>
             <li>Fix bundle not found exception (issue <a href="https://github.com/ishchenko/idea-nginx/issues/63">63</a>).</li>

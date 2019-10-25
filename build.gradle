@@ -1,3 +1,5 @@
+import org.ajoberstar.grgit.Grgit
+
 plugins {
     id "org.jetbrains.intellij" version "0.4.1"
     id "org.ajoberstar.grgit" version "3.1.1"
@@ -6,7 +8,7 @@ plugins {
 }
 
 group 'net.ishchenko.idea.nginx'
-version '0.1.7'
+version '0.1.8'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
