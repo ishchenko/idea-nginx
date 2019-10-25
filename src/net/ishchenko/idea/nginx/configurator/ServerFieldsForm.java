@@ -17,15 +17,12 @@
 package net.ishchenko.idea.nginx.configurator;
 
 import com.intellij.openapi.ui.ComponentWithBrowseButton;
-import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.CellConstraints;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import com.jgoodies.forms.layout.FormLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
+import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -48,11 +45,7 @@ public class ServerFieldsForm {
         KeyAdapter syncListener = new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        mediator.sync();
-                    }
-                });
+                SwingUtilities.invokeLater(mediator::sync);
             }
         };
 
@@ -62,35 +55,11 @@ public class ServerFieldsForm {
         pidField.getChildComponent().addKeyListener(syncListener);
         globalsField.addKeyListener(syncListener);
 
-        executableField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        mediator.chooseExecutableClicked();
-                    }
-                });
-            }
-        });
+        executableField.addActionListener(e -> SwingUtilities.invokeLater(mediator::chooseExecutableClicked));
 
-        configurationField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        mediator.chooseConfigurationClicked();
-                    }
-                });
-            }
-        });
+        configurationField.addActionListener(e -> SwingUtilities.invokeLater(mediator::chooseConfigurationClicked));
 
-        pidField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        mediator.choosePidClicked();
-                    }
-                });
-            }
-        });
+        pidField.addActionListener(e -> SwingUtilities.invokeLater(mediator::choosePidClicked));
 
         mediator.nameField = nameField;
         mediator.executableField = executableField.getChildComponent();
@@ -106,9 +75,9 @@ public class ServerFieldsForm {
     }
 
     private void createUIComponents() {
-        executableField = new ComponentWithBrowseButton<JTextField>(new JTextField(), null);
-        configurationField = new ComponentWithBrowseButton<JTextField>(new JTextField(), null);
-        pidField = new ComponentWithBrowseButton<JTextField>(new JTextField(), null);
+        executableField = new ComponentWithBrowseButton<>(new JTextField(), null);
+        configurationField = new ComponentWithBrowseButton<>(new JTextField(), null);
+        pidField = new ComponentWithBrowseButton<>(new JTextField(), null);
     }
 
     /**

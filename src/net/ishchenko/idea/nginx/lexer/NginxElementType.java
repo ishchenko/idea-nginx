@@ -16,7 +16,6 @@
 
 package net.ishchenko.idea.nginx.lexer;
 
-import com.intellij.lang.Language;
 import com.intellij.psi.tree.IElementType;
 import net.ishchenko.idea.nginx.NginxLanguage;
 import org.jetbrains.annotations.NotNull;

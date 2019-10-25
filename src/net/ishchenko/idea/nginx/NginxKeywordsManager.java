@@ -16,16 +16,22 @@
 
 package net.ishchenko.idea.nginx;
 
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.util.Range;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +39,7 @@ import java.util.stream.Collectors;
  * Date: 17.07.2009
  * Time: 16:35:47
  */
-public class NginxKeywordsManager implements ApplicationComponent {
+public class NginxKeywordsManager implements BaseComponent {
 
     //anything can happen inside these directive context
     public static final Set<String> CHAOS_DIRECTIVES = new HashSet<>();
@@ -110,6 +116,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
     private Map<String, List<Set<String>>> ambiguousKeywords = new HashMap<>();
     private final String ANY_CONTEXT_FLAG = "NGX_ANY_CONF";
 
+    @Override
     public void initComponent() {
         BufferedReader keywordsReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/keywords.txt")));
         BufferedReader variablesReader = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream("/variables.txt")));
@@ -161,8 +168,8 @@ public class NginxKeywordsManager implements ApplicationComponent {
         Set<String> rangeFlags = FLAG_TO_RANGE.keySet();
         Set<String> flags = keywords.get(directive);
         return flags.stream()
-                .filter(flag -> rangeFlags.contains(flag))
-                .map(flag -> FLAG_TO_RANGE.get(flag))
+                .filter(rangeFlags::contains)
+                .map(FLAG_TO_RANGE::get)
                 .collect(Collectors.toSet());
     }
 
@@ -193,7 +200,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
      * @return server -> [location, listen, ...], http -> [server, allow, ...], ...
      */
     public Map<String, Set<String>> getContextToDirectiveListMappings() {
-        Map<String, Set<String>> result = new HashMap<String, Set<String>>();
+        Map<String, Set<String>> result = new HashMap<>();
         for (Map.Entry<String, Set<String>> item : CONTEXT_TO_FLAG.map.entrySet()) {
             String context = item.getKey();
             Set<String> directivesForContext = getDirectivesThatCanResideIn(context);
@@ -211,7 +218,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
         if (flags == null) { //unknown parent - let's allow for any directove
             return keywords.keySet();
         }
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new HashSet<>();
         for (Map.Entry<String, Set<String>> entry : keywords.entrySet()) {
             for (String flag : flags) {
                 if (entry.getValue().contains(flag) || entry.getValue().contains(ANY_CONTEXT_FLAG)) {
@@ -223,7 +230,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
     }
 
     public Set<String> getDirectivesThatCanResideInMainContext() {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new HashSet<>();
         for (Map.Entry<String, Set<String>> entry : keywords.entrySet()) {
             if (checkCanResideInMainContext(entry.getKey())) {
                 result.add(entry.getKey());
@@ -247,8 +254,7 @@ public class NginxKeywordsManager implements ApplicationComponent {
             String[] splitLine = line.split(" ");
 
             String keyword = splitLine[0];
-            Set<String> flags = new HashSet<>();
-            flags.addAll(Arrays.asList(splitLine).subList(1, splitLine.length));
+            Set<String> flags = new HashSet<>(Arrays.asList(splitLine).subList(1, splitLine.length));
             if (!keywords.containsKey(keyword)) {
                 keywords.put(keyword, flags);
             } else {
@@ -264,22 +270,23 @@ public class NginxKeywordsManager implements ApplicationComponent {
         }
     }
 
+    @Override
     public void disposeComponent() {
-
+        //do nothing
     }
 
     @NotNull
+    @Override
     public String getComponentName() {
         return "nginx.keywords";
     }
 
 
     private static class ContextToFlagMapping {
-        Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+        Map<String, Set<String>> map = new HashMap<>();
 
         void add(String context, String... flags) {
-            Set<String> set = new HashSet<String>();
-            set.addAll(Arrays.asList(flags));
+            Set<String> set = new HashSet<>(Arrays.asList(flags));
             map.put(context, set);
         }
 
@@ -288,6 +295,9 @@ public class NginxKeywordsManager implements ApplicationComponent {
         }
     }
 
+    public static NginxKeywordsManager getInstance() {
+        return ApplicationManager.getApplication().getComponent(NginxKeywordsManager.class);
+    }
 }
 
 

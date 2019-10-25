@@ -18,18 +18,21 @@ package net.ishchenko.idea.nginx.configurator;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializer;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -40,14 +43,14 @@ import java.util.*;
 
 @State(name = NginxServersConfiguration.COMPONENT_NAME,
         storages = {
-                @Storage(id = "nginx", file = "$APP_CONFIG$/nginx.xml")
+                @Storage(value = "$APP_CONFIG$/nginx.xml")
         }
 )
-public class NginxServersConfiguration implements ApplicationComponent, PersistentStateComponent<Element>, Disposable {
+public class NginxServersConfiguration implements BaseComponent, PersistentStateComponent<Element>, Disposable {
 
     public final static String COMPONENT_NAME = "nginxServers";
 
-    private Set<NginxServerDescriptor> descriptors = new LinkedHashSet<NginxServerDescriptor>();
+    private Set<NginxServerDescriptor> descriptors = new LinkedHashSet<>();
     private NginxServerDescriptor[] cachedDescriptors = null;
     private Map<String, Set<String>> cachedNameToPathsMapping;
     private Set<String> cachedFilepaths;
@@ -79,10 +82,12 @@ public class NginxServersConfiguration implements ApplicationComponent, Persiste
         cachedFilepaths = null;
     }
 
+    @Override
     public void dispose() {
 
     }
 
+    @Override
     public synchronized Element getState() {
         Element element = new Element("servers");
         for (final NginxServerDescriptor description : getServersDescriptors()) {
@@ -91,6 +96,7 @@ public class NginxServersConfiguration implements ApplicationComponent, Persiste
         return element;
     }
 
+    @Override
     public synchronized void loadState(final Element state) {
         removeAllServerDescriptors();
         for (final Object o : state.getChildren()) {
@@ -135,11 +141,11 @@ public class NginxServersConfiguration implements ApplicationComponent, Persiste
 
         cachedFilepaths = null;
         getFilepaths();
-        
+
     }
 
     private Map<String, Set<String>> extractNameToPaths() {
-        Map<String, Set<String>> result = new HashMap<String, Set<String>>();
+        Map<String, Set<String>> result = new HashMap<>();
         for (NginxServerDescriptor descriptor : getServersDescriptors()) {
             VirtualFile vfile = LocalFileSystem.getInstance().findFileByPath(descriptor.getConfigPath());
             if (vfile != null) {
@@ -153,12 +159,10 @@ public class NginxServersConfiguration implements ApplicationComponent, Persiste
     }
 
     private Set<String> extractFilepaths() {
-        Set<String> result = new HashSet<String>();
+        Set<String> result = new HashSet<>();
         Map<String, Set<String>> nameToPathsMapping = getNameToPathsMapping();
         for (Map.Entry<String, Set<String>> entry : nameToPathsMapping.entrySet()) {
-            for (String path : entry.getValue()) {
-                result.add(path);
-            }
+            result.addAll(entry.getValue());
         }
         return result;
     }
@@ -178,7 +182,7 @@ public class NginxServersConfiguration implements ApplicationComponent, Persiste
             String path = file.getPath();
             String name = path.substring(path.lastIndexOf('/') + 1);
             if (!result.containsKey(name)) {
-                result.put(name, new HashSet<String>());
+                result.put(name, new HashSet<>());
             }
             result.get(name).add(path);
         }
@@ -186,14 +190,16 @@ public class NginxServersConfiguration implements ApplicationComponent, Persiste
     }
 
     @NotNull
+    @Override
     public String getComponentName() {
         return COMPONENT_NAME;
     }
 
+    @Override
     public void initComponent() {
     }
 
-
+    @Override
     public void disposeComponent() {
     }
 }

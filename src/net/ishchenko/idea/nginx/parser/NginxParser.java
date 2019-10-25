@@ -22,7 +22,6 @@ import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import net.ishchenko.idea.nginx.NginxBundle;
-import net.ishchenko.idea.nginx.lexer.NginxElementType;
 import net.ishchenko.idea.nginx.lexer.NginxElementTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -229,7 +228,7 @@ public class NginxParser implements PsiParser {
         if (token != NginxElementTypes.OPENING_BRACE) {
             contextMarker.done(NginxElementTypes.LUA_CONTEXT);
             builder.advanceLexer();
-	        return;
+            return;
         }
 
         while (!closingBraceFound) {

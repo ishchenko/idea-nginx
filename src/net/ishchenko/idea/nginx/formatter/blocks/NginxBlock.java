@@ -60,7 +60,7 @@ public class NginxBlock implements ASTBlock {
 
         if (blocks == null) {
 
-            blocks = new ArrayList<Block>();
+            blocks = new ArrayList<>();
 
             boolean isFileNode = getNode().getPsi() instanceof NginxPsiFile;
 

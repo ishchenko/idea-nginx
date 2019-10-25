@@ -31,11 +31,11 @@ public class KeywordsFromSourcesGenerator {
 
     private static final Pattern PREPROCESSOR_DIRECTIVE_PATTERN = Pattern.compile("#.+");
 
-    private static final Pattern DIRECTIVE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_command_t\\s+[^\\[]+\\[\\]\\s*=\\s*(\\{[^;]+);");
+    private static final Pattern DIRECTIVE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_command_t\\s+[^\\[]+\\[]\\s*=\\s*(\\{[^;]+);");
     private static final Pattern DIRECTIVE_PATTERN = Pattern.compile("(\\{[^}]*},)+");
     private static final Pattern DIRECTIVE_NAME_PATTERN = Pattern.compile("ngx_string\\(\"([\\w_]+)\"\\)");
 
-    private static final Pattern VARIABLE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_\\w+_variable_t\\s+[^\\[]+\\[\\]\\s*=\\s*(\\{[^;]+);");
+    private static final Pattern VARIABLE_BLOCK_PATTERN = Pattern.compile("static\\s+ngx_\\w+_variable_t\\s+[^\\[]+\\[]\\s*=\\s*(\\{[^;]+);");
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("(\\{[^}]*},)+");
     private static final Pattern VARIABLE_NAME_PATTERN = Pattern.compile("ngx_string\\(\"([\\w_]+)\"\\)");
 
@@ -99,11 +99,11 @@ public class KeywordsFromSourcesGenerator {
                 String[] items = directive.split(",\n");
                 Matcher directiveNameMatcher = DIRECTIVE_NAME_PATTERN.matcher(items[0]);
                 if (directiveNameMatcher.find()) {
-                    String directiveName = directiveNameMatcher.group(1);
+                    StringBuilder directiveName = new StringBuilder(directiveNameMatcher.group(1));
                     for (String flag : items[1].split("\\|")) {
-                        directiveName += " " + flag.trim();
+                        directiveName.append(" ").append(flag.trim());
                     }
-                    directives.add(directiveName);
+                    directives.add(directiveName.toString());
                 } else {
                     System.out.println("Oops! " + items[0] + " won't match a directive name pattern");
                 }

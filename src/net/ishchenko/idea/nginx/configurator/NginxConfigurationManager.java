@@ -17,15 +17,14 @@
 package net.ishchenko.idea.nginx.configurator;
 
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.options.BaseConfigurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.IconLoader;
+import javax.swing.*;
 import net.ishchenko.idea.nginx.NginxBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,7 +32,7 @@ import javax.swing.*;
  * Date: 21.07.2009
  * Time: 15:10:16
  */
-public class NginxConfigurationManager extends BaseConfigurable implements ApplicationComponent {
+public class NginxConfigurationManager extends BaseConfigurable implements BaseComponent {
 
     private NginxServersConfiguration configuration;
     private NginxConfigurationPanel panel;
@@ -51,14 +50,17 @@ public class NginxConfigurationManager extends BaseConfigurable implements Appli
     }
 
     @NotNull
+    @Override
     public String getComponentName() {
         return "nginx.configuration.manager";
     }
 
+    @Override
     public void disposeComponent() {
 
     }
 
+    @Override
     public void initComponent() {
 
     }
@@ -76,18 +78,22 @@ public class NginxConfigurationManager extends BaseConfigurable implements Appli
         return IconLoader.getIcon("/nginx.png");
     }
 
+    @Override
     public void reset() {
         panel.reset();
     }
 
+    @Override
     public void apply() throws ConfigurationException {
         panel.apply();
     }
 
+    @Override
     public boolean isModified() {
         return panel.isModified();
     }
 
+    @Override
     public JComponent createComponent() {
         if (panel == null) {
             panel = new NginxConfigurationPanel(configuration);

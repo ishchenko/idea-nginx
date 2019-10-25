@@ -40,15 +40,15 @@ public class NginxChooseByNameContributor implements ChooseByNameContributor {
 
     private NginxServersConfiguration configuration;
 
-    public NginxChooseByNameContributor(NginxServersConfiguration configuration) {
-        this.configuration = configuration;
+    public NginxChooseByNameContributor() {
+        this.configuration = NginxServersConfiguration.getInstance();
     }
 
     public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
 
         LocalFileSystem localFileSystem = LocalFileSystem.getInstance();
         PsiManager psiManager = PsiManager.getInstance(project);
-        List<PsiFile> result = new ArrayList<PsiFile>();
+        List<PsiFile> result = new ArrayList<>();
         Map<String, Set<String>> names = configuration.getNameToPathsMapping();
         Set<String> fullPathsForName = names.get(name);
         if (fullPathsForName != null) {

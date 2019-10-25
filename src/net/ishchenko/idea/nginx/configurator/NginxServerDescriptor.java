@@ -23,6 +23,8 @@ package net.ishchenko.idea.nginx.configurator;
  * Time: 15:29:24
  */
 
+import java.util.Objects;
+
 /**
  * Server descriptor that is created in "nginx Configuration files" menu.
  * All paths are absolute.
@@ -116,15 +118,15 @@ public class NginxServerDescriptor implements Cloneable {
 
         NginxServerDescriptor that = (NginxServerDescriptor) o;
 
-        if (configPath != null ? !configPath.equals(that.configPath) : that.configPath != null) return false;
-        if (errorLogPath != null ? !errorLogPath.equals(that.errorLogPath) : that.errorLogPath != null) return false;
-        if (executablePath != null ? !executablePath.equals(that.executablePath) : that.executablePath != null)
+        if (!Objects.equals(configPath, that.configPath)) return false;
+        if (!Objects.equals(errorLogPath, that.errorLogPath)) return false;
+        if (!Objects.equals(executablePath, that.executablePath))
             return false;
-        if (globals != null ? !globals.equals(that.globals) : that.globals != null) return false;
-        if (httpLogPath != null ? !httpLogPath.equals(that.httpLogPath) : that.httpLogPath != null) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (pidPath != null ? !pidPath.equals(that.pidPath) : that.pidPath != null) return false;
+        if (!Objects.equals(globals, that.globals)) return false;
+        if (!Objects.equals(httpLogPath, that.httpLogPath)) return false;
+        if (!Objects.equals(id, that.id)) return false;
+        if (!Objects.equals(name, that.name)) return false;
+        if (!Objects.equals(pidPath, that.pidPath)) return false;
 
         return true;
     }

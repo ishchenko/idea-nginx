@@ -53,7 +53,7 @@ public interface PlatformDependentTools {
      */
     NginxServerDescriptor getDefaultDescriptorFromFile(VirtualFile virtualFile);
 
-    static class ThisIsNotNginxExecutableException extends Exception {
+    class ThisIsNotNginxExecutableException extends Exception {
 
         public ThisIsNotNginxExecutableException(String message) {
             super(message);

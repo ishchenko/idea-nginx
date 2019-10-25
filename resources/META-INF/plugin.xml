@@ -19,6 +19,9 @@
   <depends>com.intellij.modules.lang</depends>
 
   <change-notes><![CDATA[
+        <b>0.1.7</b>
+        <ul>
+            <li>Fix NoSuchMethodException (issue <a href="https://github.com/ishchenko/idea-nginx/issues/69">69</a>).</li>
         <b>0.1.6</b>
         <ul>
             <li>Fix bundle not found exception (issue <a href="https://github.com/ishchenko/idea-nginx/issues/63">63</a>).</li>
@@ -149,7 +152,7 @@
     <completion.contributor language="nginx" implementationClass="net.ishchenko.idea.nginx.NginxCompletionContributor"/>
     <gotoFileContributor implementation="net.ishchenko.idea.nginx.NginxChooseByNameContributor"/>
     <programRunner implementation="net.ishchenko.idea.nginx.run.NginxRunner"/>
-    <fileTypeFactory implementation="net.ishchenko.idea.nginx.NginxFileTypeFactory"/>
+    <fileType name="nginx" implementationClass="net.ishchenko.idea.nginx.NginxFileType" language="nginx" extensions="nginx" fieldName="INSTANCE" />
     <languageInjector implementation="net.ishchenko.idea.nginx.injection.LuaInjector" />
     <lang.findUsagesProvider language="nginx"
                              implementationClass="net.ishchenko.idea.nginx.NginxFindUsagesProvider"/>
