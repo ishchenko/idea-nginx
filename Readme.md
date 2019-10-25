@@ -4,7 +4,7 @@
 * Detailed plugin description in Russian http://habrahabr.ru/blogs/nginx/66255
 * The plugin in Jetbrains plugin repo http://plugins.intellij.net/plugin/?id=4415
 
-![nginx plugin features](http://img571.imageshack.us/img571/4932/pluginfeatures.png)
+![nginx plugin features](https://plugins.jetbrains.com/files/4415/screenshot_3930.png)
 
 # Features
 
