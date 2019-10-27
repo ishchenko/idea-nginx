@@ -45,7 +45,7 @@ public class NginxFileType extends LanguageFileType implements FileTypeIdentifia
 
     @NotNull
     public String getName() {
-        return "nginx file type";
+        return "nginx";
     }
 
     @NotNull
