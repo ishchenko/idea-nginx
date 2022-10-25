@@ -66,5 +66,10 @@ public class NginxConfigurationType implements ConfigurationType {
         public RunConfiguration createTemplateConfiguration(Project project) {
             return new NginxRunConfiguration(project, this, NginxBundle.message("cofigurationtype.displayname"));
         }
+        
+        @Override
+        public String getId() {
+            return "net.ishchenko.idea.nginx.run";
+        }
     }
 }
