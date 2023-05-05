@@ -66,10 +66,11 @@ public class NginxConfigurationManager extends BaseConfigurable implements BaseC
     }
 
     @Nls
+    @Override
     public String getDisplayName() {
         return NginxBundle.message("config.title");
     }
-
+    @Override
     public String getHelpTopic() {
         return null;
     }
