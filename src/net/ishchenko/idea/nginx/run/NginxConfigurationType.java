@@ -22,7 +22,6 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.IconLoader;
 import net.ishchenko.idea.nginx.NginxBundle;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -61,7 +60,7 @@ public class NginxConfigurationType implements ConfigurationType {
 
     @Override
     public ConfigurationFactory[] getConfigurationFactories() {
-        return new ConfigurationFactory[]{this.ncf};
+        return new ConfigurationFactory[] {this.ncf};
     }
 
     private static class NginxConfigurationFactory extends ConfigurationFactory {
@@ -70,18 +69,14 @@ public class NginxConfigurationType implements ConfigurationType {
             super(type);
         }
 
-        @Override
-        public @NotNull
-        @NonNls
-        String getId() {
-            return this.getName();
-        }
 
         @Override
         public RunConfiguration createTemplateConfiguration(Project project) {
             return new NginxRunConfiguration(project, this, NginxBundle.message("cofigurationtype.displayname"));
         }
-        
+
+
+        @NotNull
         @Override
         public String getId() {
             return "net.ishchenko.idea.nginx.run";

@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'net.ishchenko.idea.nginx'
-version '0.1.10'
+version '0.1.11'
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
