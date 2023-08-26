@@ -21,10 +21,11 @@ import com.intellij.openapi.components.BaseComponent;
 import com.intellij.openapi.options.BaseConfigurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.util.IconLoader;
-import javax.swing.*;
 import net.ishchenko.idea.nginx.NginxBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -37,8 +38,9 @@ public class NginxConfigurationManager extends BaseConfigurable implements BaseC
     private NginxServersConfiguration configuration;
     private NginxConfigurationPanel panel;
 
-    public NginxConfigurationManager(NginxServersConfiguration configuration) {
-        this.configuration = configuration;
+    public NginxConfigurationManager() {
+
+        this.configuration = NginxServersConfiguration.getInstance();
     }
 
     public NginxServersConfiguration getConfiguration() {
@@ -66,10 +68,12 @@ public class NginxConfigurationManager extends BaseConfigurable implements BaseC
     }
 
     @Nls
+    @Override
     public String getDisplayName() {
         return NginxBundle.message("config.title");
     }
 
+    @Override
     public String getHelpTopic() {
         return null;
     }
@@ -100,7 +104,7 @@ public class NginxConfigurationManager extends BaseConfigurable implements BaseC
         }
         return panel.getPanel();
     }
-
+    @Override
     public void disposeUIResources() {
         panel = null;
     }

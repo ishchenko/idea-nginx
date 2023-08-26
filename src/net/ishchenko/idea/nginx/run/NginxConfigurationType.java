@@ -36,25 +36,31 @@ public class NginxConfigurationType implements ConfigurationType {
 
     NginxConfigurationFactory ncf = new NginxConfigurationFactory(this);
 
+    @NotNull
+    @Override
     public String getDisplayName() {
         return NginxBundle.message("cofigurationtype.displayname");
     }
 
+    @Override
     public String getConfigurationTypeDescription() {
         return NginxBundle.message("configurationtype.description");
     }
 
+    @Override
     public Icon getIcon() {
         return IconLoader.getIcon("/nginx.png");
     }
 
+    @Override
     @NotNull
     public String getId() {
         return "nginx.configuration.type";
     }
 
+    @Override
     public ConfigurationFactory[] getConfigurationFactories() {
-        return new ConfigurationFactory[]{ncf};
+        return new ConfigurationFactory[] {this.ncf};
     }
 
     private static class NginxConfigurationFactory extends ConfigurationFactory {
@@ -63,10 +69,14 @@ public class NginxConfigurationType implements ConfigurationType {
             super(type);
         }
 
+
+        @Override
         public RunConfiguration createTemplateConfiguration(Project project) {
             return new NginxRunConfiguration(project, this, NginxBundle.message("cofigurationtype.displayname"));
         }
-        
+
+
+        @NotNull
         @Override
         public String getId() {
             return "net.ishchenko.idea.nginx.run";

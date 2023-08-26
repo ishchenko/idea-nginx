@@ -1,4 +1,4 @@
-<idea-plugin url="https://github.com/ishchenko/idea-nginx">
+<idea-plugin url="https://github.com/ishchenko/idea-nginx"  require-restart="true">
 
   <id>ideanginx9</id>
   <name>nginx Support</name>
